@@ -1,0 +1,19 @@
+div.taby-menu {
+  display: none;
+  position: fixed;
+  width: 70%;
+  height: 65%;
+  top: 20%;
+  left: 15%;
+  background: blue;
+
+  z-index: 100000;
+}
+
+div.taby-display {
+  display: block;
+}
+
+input.taby-searchInput {
+  background-color: white;
+}

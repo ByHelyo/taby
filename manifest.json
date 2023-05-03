@@ -18,7 +18,7 @@
     }
   ],
   "background": {
-    "service_worker": "src/index.js",
+    "service_worker": "background/service-worker.js",
     "type": "module"
   },
   "action": {
