@@ -3,6 +3,7 @@ export const buildMenu = () => {
   menu.classList.add("taby-menu");
 
   menu.append(buildSearch());
+  menu.appendChild(buildSearchList());
   return menu;
 };
 
@@ -29,4 +30,38 @@ const buildSearchButton = () => {
   searchButton.type = "submit";
 
   return searchButton;
+};
+
+const buildSearchList = () => {
+  const searchList = document.createElement("ul");
+  searchList.classList.add("taby-searchList");
+
+  searchList.appendChild(buildSearchItem("Hello"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(
+    buildSearchItem(
+      "Hello there aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    )
+  );
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  searchList.appendChild(buildSearchItem("Hello there"));
+  return searchList;
+};
+
+const buildSearchItem = (itemContent) => {
+  const searchItem = document.createElement("li");
+  searchItem.classList.add("taby-searchItem");
+  searchItem.innerText = itemContent;
+
+  return searchItem;
 };
