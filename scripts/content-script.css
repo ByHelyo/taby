@@ -1,8 +1,14 @@
-div.taby-menu {
+[class^=taby-],
+[class^=taby-]::after,
+[class^=taby-]::after {
+  box-sizing: border-box;
+}
+
+.taby-menu {
   display: none; /* Do not display menu by default */
   position: fixed;
   width: 70%;
-  height: 65%;
+  height: 66%;
   top: 20%;
   left: 15%;
   z-index: 100000;
@@ -13,16 +19,16 @@ div.taby-menu {
   color: #ffffff;
 }
 
-div.taby-display {
+.taby-display {
   /* Display menu */
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .taby-searchInput {
   border-width: 0 0 2px 0; /* Remove default border width */
   border-radius: unset; /* Remove default border radius */
 
-  box-sizing: border-box;
   width: 100%;
   padding: 16px 16px 16px 48px;
   font-size: 40px;
@@ -33,14 +39,30 @@ div.taby-display {
   font-family: inherit;
 }
 
-.taby-searchList {
+.taby-searchInput:focus {
+  outline: none;
+}
+
+.taby-menu .taby-searchList {
   list-style-type: none; /* Remove bullets */
 
   padding: 16px 16px 16px 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: scroll;        /* NEW */
+  height: 100%;
 
   /* Children */
   font-size: 30px;
+}
+
+.taby-searchList::-webkit-scrollbar {
+  display: none;
+}
+
+.taby-searchItem {
+  white-space: nowrap;
+  overflow-x: clip;
+  text-overflow: ellipsis;
 }

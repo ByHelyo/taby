@@ -51,10 +51,6 @@ const buildSearchList = () => {
   searchList.appendChild(buildSearchItem("Hello there"));
   searchList.appendChild(buildSearchItem("Hello there"));
   searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
   return searchList;
 };
 
