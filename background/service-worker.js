@@ -1,4 +1,4 @@
-chrome.commands.onCommand.addListener(async (command) => {
+chrome.commands.onCommand.addListener(async function (command) {
   const [tab] = await chrome.tabs.query({
     active: true,
     lastFocusedWindow: true,
@@ -9,7 +9,7 @@ chrome.commands.onCommand.addListener(async (command) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((request, sender, sendMessage) => {
+chrome.runtime.onMessage.addListener(function (request, sender, sendMessage) {
   chrome.tabs.query({}).then((tabs) => {
     const urls = tabs.map((tab) => {
       return {

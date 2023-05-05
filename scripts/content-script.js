@@ -1,12 +1,12 @@
-import { buildMenu } from "./dom/menu/build";
 import { handleMenu } from "./handler/handler";
 import "./content-script.css";
+import { Menu } from "./menu/menu";
 
 const body = document.querySelector("body");
-const menu = buildMenu();
+const menu = new Menu();
 
 if (body) {
-  body.appendChild(menu);
+  body.appendChild(menu.dom.menu);
 }
 
 chrome.runtime.onMessage.addListener(async (request, sender) => {

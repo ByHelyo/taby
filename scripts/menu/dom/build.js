@@ -1,44 +1,49 @@
-export const buildMenu = () => {
+export const buildMenu = function () {
   const menu = document.createElement("div");
   menu.classList.add("taby-menu");
 
-  menu.append(buildSearch());
-  menu.appendChild(buildSearchList());
-  return menu;
+  const { search, searchInput } = buildSearch();
+  const searchList = buildSearchList();
+
+  menu.append(search);
+  menu.appendChild(searchList);
+
+  return {
+    menu,
+    search,
+    searchInput,
+    searchList,
+  };
 };
 
-const buildSearch = () => {
+const buildSearch = function () {
   const search = document.createElement("div");
   search.classList.add("taby-search");
 
-  search.appendChild(buildSearchInput());
-  return search;
+  const searchInput = buildSearchInput();
+
+  search.appendChild(searchInput);
+  return {
+    search,
+    searchInput,
+  };
 };
 
-const buildSearchInput = () => {
+const buildSearchInput = function () {
   const searchInput = document.createElement("input");
   searchInput.classList.add("taby-searchInput");
   searchInput.placeholder = "Search";
 
-  searchInput.appendChild(buildSearchButton());
   return searchInput;
 };
 
-const buildSearchButton = () => {
-  const searchButton = document.createElement("button");
-  searchButton.classList.add("taby-searchButton");
-  searchButton.type = "submit";
-
-  return searchButton;
-};
-
-const buildSearchList = () => {
+const buildSearchList = function () {
   const searchList = document.createElement("ul");
   searchList.classList.add("taby-searchList");
   return searchList;
 };
 
-export const buildSearchItem = (itemContent) => {
+export const buildSearchItem = function (itemContent) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
   searchItem.innerText = itemContent;

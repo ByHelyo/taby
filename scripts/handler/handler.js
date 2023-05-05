@@ -1,18 +1,14 @@
-import { resetSearchList } from "../dom/menu/delete";
-import { addSearchList } from "../dom/menu/add";
-import { focusSearchInput } from "../dom/menu/misc";
-
-export const handleMenu = (menu, urls) => {
-  if (menu.classList.contains("taby-display")) {
-    menu.classList.remove("taby-display");
+export const handleMenu = function (menu, urls) {
+  if (menu.isDisplayed()) {
+    menu.display(false);
     return;
   }
 
-  menu.classList.add("taby-display");
-  focusSearchInput(menu);
-  resetSearchList(menu);
+  menu.display(true);
+  menu.focusSearchInput();
+  menu.resetSearchList();
 
   urls.forEach((url, idx) => {
-    addSearchList(menu, idx + ". " + url.title);
+    menu.addSearchList(idx + ". " + url.title);
   });
 };
