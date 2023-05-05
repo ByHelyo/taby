@@ -1,4 +1,4 @@
-import { buildMenu } from "./build/menu";
+import { buildMenu } from "./dom/menu/build";
 import { handleMenu } from "./handler/handler";
 import "./content-script.css";
 
@@ -11,7 +11,7 @@ if (body) {
 
 chrome.runtime.onMessage.addListener(async (request, sender) => {
   if (!sender.tab && request.type === "TOGGLE_MENU") {
-    const urls = await chrome.runtime.sendMessage({ type: "ASK_TAB_URLS" });
+    const { urls } = await chrome.runtime.sendMessage({ type: "ASK_TAB_URLS" });
 
     handleMenu(menu, urls);
   }

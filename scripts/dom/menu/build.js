@@ -35,26 +35,10 @@ const buildSearchButton = () => {
 const buildSearchList = () => {
   const searchList = document.createElement("ul");
   searchList.classList.add("taby-searchList");
-
-  searchList.appendChild(buildSearchItem("Hello"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(
-    buildSearchItem(
-      "Hello there aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    )
-  );
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
-  searchList.appendChild(buildSearchItem("Hello there"));
   return searchList;
 };
 
-const buildSearchItem = (itemContent) => {
+export const buildSearchItem = (itemContent) => {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
   searchItem.innerText = itemContent;
