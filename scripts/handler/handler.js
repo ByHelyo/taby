@@ -1,5 +1,6 @@
 import { resetSearchList } from "../dom/menu/delete";
 import { addSearchList } from "../dom/menu/add";
+import { focusSearchInput } from "../dom/menu/misc";
 
 export const handleMenu = (menu, urls) => {
   if (menu.classList.contains("taby-display")) {
@@ -8,7 +9,7 @@ export const handleMenu = (menu, urls) => {
   }
 
   menu.classList.add("taby-display");
-
+  focusSearchInput(menu);
   resetSearchList(menu);
 
   urls.forEach((url, idx) => {

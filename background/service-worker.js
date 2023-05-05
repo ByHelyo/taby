@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendMessage) => {
     const urls = tabs.map((tab) => {
       return {
         title: tab.title,
-        url: tab.url
+        url: tab.url,
       };
     });
 
