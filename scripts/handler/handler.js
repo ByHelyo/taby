@@ -12,6 +12,6 @@ export const handleMenu = (menu, urls) => {
   resetSearchList(menu);
 
   urls.forEach((url, idx) => {
-    addSearchList(menu, idx + ". " + url);
+    addSearchList(menu, idx + ". " + url.title);
   });
 };

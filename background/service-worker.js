@@ -11,7 +11,12 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendMessage) => {
   chrome.tabs.query({}).then((tabs) => {
-    const urls = tabs.map((tab) => tab.url);
+    const urls = tabs.map((tab) => {
+      return {
+        title: tab.title,
+        url: tab.url
+      };
+    });
 
     sendMessage({ urls });
   });
