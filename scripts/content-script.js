@@ -1,5 +1,7 @@
 import { buildMenu } from "./build/menu";
+
 import "./content-script.css";
+import { handleMenu } from "./handler/handler";
 
 const body = document.querySelector("body");
 const menu = buildMenu();
@@ -8,16 +10,8 @@ if (body) {
   body.appendChild(menu);
 }
 
-const handleMenu = () => {
-  if (menu.classList.contains("taby-display")) {
-    menu.classList.remove("taby-display");
-  } else {
-    menu.classList.add("taby-display");
-  }
-};
-
 chrome.runtime.onMessage.addListener(function (request, sender) {
-  if (request.type === "TOGGLE_MENU") {
-    handleMenu();
+  if (!sender.tab && request.type === "TOGGLE_MENU") {
+    handleMenu(menu);
   }
 });

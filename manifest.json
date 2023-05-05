@@ -4,7 +4,7 @@
   "description": "A tab switcher",
   "version": "1.0",
   "author": "Franck Hu",
-  "permissions": [],
+  "permissions": ["tabs"],
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",

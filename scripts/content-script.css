@@ -1,6 +1,6 @@
-[class^=taby-],
-[class^=taby-]::after,
-[class^=taby-]::after {
+[class^="taby-"],
+[class^="taby-"]::after,
+[class^="taby-"]::after {
   box-sizing: border-box;
 }
 
@@ -50,13 +50,14 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: scroll;        /* NEW */
   height: 100%;
+  overflow: scroll;
 
   /* Children */
   font-size: 30px;
 }
 
+/* Remove scroll bar */
 .taby-searchList::-webkit-scrollbar {
   display: none;
 }
