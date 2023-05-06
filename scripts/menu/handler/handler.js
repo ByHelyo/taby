@@ -1,10 +1,10 @@
 export const handleMenu = function (urls) {
   if (this.isDisplayed()) {
-    this.display(false);
+    this.displays(false);
     return;
   }
 
-  this.display(true);
+  this.displays(true);
   this.focusSearchInput();
   this.resetSearchList();
 
