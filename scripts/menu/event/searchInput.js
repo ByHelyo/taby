@@ -1,7 +1,17 @@
 export const eventSearchOnInput = function (menu) {
-  menu.dom.searchInput.addEventListener("input", () => {
-    const searchInputValue = menu.dom.searchInput.value;
+  const searchInput = menu.dom.searchInput;
 
-    menu.handleSearchBar(searchInputValue);
+  searchInput.addEventListener("input", () => {
+    menu.handleSearchBar(searchInput.value);
+  });
+};
+
+export const eventSearchOnKeyUp = function (menu) {
+  const searchInput = menu.dom.searchInput;
+
+  searchInput.addEventListener("keyup", () => {
+    chrome.runtime.sendMessage({
+      type: "CHANGE_TAB",
+    });
   });
 };

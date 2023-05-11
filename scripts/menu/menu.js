@@ -7,13 +7,14 @@ import {
   handleSearchBar,
   handleSearchItems,
 } from "./handler/handler";
-import { eventSearchOnInput } from "./event/searchInput";
+import { eventSearchOnInput, eventSearchOnKeyUp } from "./event/searchInput";
 
 export class Menu {
   constructor() {
     this.urls = [];
     this.dom = buildMenu();
     eventSearchOnInput(this);
+    eventSearchOnKeyUp(this);
   }
 
   focusSearchInput = focusSearchInput;
