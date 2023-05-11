@@ -26,11 +26,11 @@
 }
 
 .taby-searchInput {
-  border-width: 0 0 2px 0; /* Remove default border width */
+  border-width: 0; /* Remove default border width */
   border-radius: unset; /* Remove default border radius */
 
   width: 100%;
-  padding: 16px 16px 16px 48px;
+  padding: 16px 16px 16px 32px;
   font-size: 40px;
 
   /* Remove default input bar properties */
@@ -43,13 +43,11 @@
   outline: none;
 }
 
-.taby-menu .taby-searchList {
+.taby-searchList {
   list-style-type: none; /* Remove bullets */
 
-  padding: 16px 16px 16px 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   height: 100%;
   overflow: scroll;
 
@@ -66,4 +64,9 @@
   white-space: nowrap;
   overflow-x: clip;
   text-overflow: ellipsis;
+  padding: 8px 16px 8px 32px;
+}
+
+.taby-searchItem:first-child {
+  background: #0860f2;
 }

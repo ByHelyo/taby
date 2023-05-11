@@ -4,14 +4,22 @@ import { resetSearchList } from "./dom/delete";
 import { addSearchList } from "./dom/add";
 import { handleMenu } from "./handler/handler";
 
-export function Menu() {
-  this.dom = buildMenu();
+export class Menu {
+  constructor() {
+    this.dom = buildMenu();
+    this.setEvent();
+  };
 
-  this.focusSearchInput = focusSearchInput;
-  this.isDisplayed = isDisplayed;
-  this.displays = displays;
-  this.resetSearchList = resetSearchList;
-  this.addSearchList = addSearchList;
-  this.handleMenu = handleMenu;
-  this.contains = contains;
+  focusSearchInput = focusSearchInput;
+  isDisplayed = isDisplayed;
+  displays = displays;
+  resetSearchList = resetSearchList;
+  addSearchList = addSearchList;
+  handleMenu = handleMenu;
+  contains = contains;
+}
+
+Menu.prototype.setEvent = function() {
+  this.dom.searchInput.addEventListener("input", function () {
+  });
 }
