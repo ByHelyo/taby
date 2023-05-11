@@ -10,13 +10,13 @@ export const handleMenu = function (urls) {
   this.displays(true);
   this.focusSearchInput();
 
-  this.handleSearchItems();
+  this.handleSearchItems(urls);
 };
 
 export const handleSearchBar = function (searchInput) {
   const options = {
     // isCaseSensitive: false,
-    // includeScore: false,
+    includeScore: true,
     // shouldSort: true,
     // includeMatches: false,
     // findAllMatches: false,
@@ -33,13 +33,20 @@ export const handleSearchBar = function (searchInput) {
 
   const fuse = new Fuse(this.urls, options);
 
-  const res = fuse.search(searchInput);
+  const res = fuse.search(searchInput).map((url) => {
+    return {
+      url: url.item.url,
+      title: url.item.title,
+    };
+  });
+
+  this.handleSearchItems(res);
 };
 
-export const handleSearchItems = function (items) {
+export const handleSearchItems = function (urls) {
   this.resetSearchList();
 
-  this.urls.forEach((url, idx) => {
+  urls.forEach((url, idx) => {
     this.addSearchList(idx + ". " + url.title);
   });
 };
