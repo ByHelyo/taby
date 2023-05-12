@@ -30,7 +30,7 @@
   border-radius: unset; /* Remove default border radius */
 
   width: 100%;
-  padding: 16px 16px 16px 32px;
+  padding: 16px 16px 16px 48px;
   font-size: 40px;
 
   /* Remove default input bar properties */
@@ -64,11 +64,17 @@
   white-space: nowrap;
   overflow-x: clip;
   text-overflow: ellipsis;
-  padding: 8px 16px 8px 32px;
+  padding: 8px 16px 8px 16px;
 }
 
 .taby-searchTitle {
   margin-right: 20px;
+}
+
+.taby-searchIndex {
+  margin-right: 16px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
 .taby-searchUrl {

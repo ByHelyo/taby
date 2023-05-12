@@ -43,13 +43,22 @@ const buildSearchList = function () {
   return searchList;
 };
 
-export const buildSearchItem = function (title, url) {
+export const buildSearchItem = function (index, title, url) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
 
+  searchItem.appendChild(buildSearchIndex(index));
   searchItem.append(buildSearchTitle(title));
   searchItem.appendChild(buildSearchUrl(url));
   return searchItem;
+};
+
+const buildSearchIndex = function (index) {
+  const searchIndex = document.createElement("span");
+  searchIndex.innerText = index;
+  searchIndex.classList.add("taby-searchIndex");
+
+  return searchIndex;
 };
 
 const buildSearchTitle = function (title) {

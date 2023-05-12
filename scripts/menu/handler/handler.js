@@ -39,6 +39,6 @@ export const handleSearchItems = function (tabs) {
   }
 
   tabs.forEach((tab) => {
-    this.addSearchList(tab.title, tab.url);
+    this.addSearchList(tab.index, tab.title, tab.url);
   });
 };
