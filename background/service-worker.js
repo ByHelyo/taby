@@ -1,4 +1,4 @@
-import { handleAskTabUrls, handleChangeTab } from "./handler/handle";
+import { handleAskTabs, handleChangeTab } from "./handler/handle";
 
 chrome.commands.onCommand.addListener(async function () {
   const [tab] = await chrome.tabs.query({
@@ -14,7 +14,7 @@ chrome.commands.onCommand.addListener(async function () {
 chrome.runtime.onMessage.addListener(function (request, sender, sendMessage) {
   switch (request.type) {
     case "ASK_TABS":
-      handleAskTabUrls(sendMessage);
+      handleAskTabs(sendMessage);
       return true;
     case "CHANGE_TAB":
       handleChangeTab(request.tab);
