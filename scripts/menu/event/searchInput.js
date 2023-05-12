@@ -19,6 +19,7 @@ export const eventSearchOnKeyUp = function (menu) {
       });
 
       menu.handleMenu(); /* Close menu */
+      menu.setSelectedTab(null); /* Clear selected tab */
     }
   });
 };
