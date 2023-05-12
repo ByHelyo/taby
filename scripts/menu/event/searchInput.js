@@ -6,7 +6,7 @@ export const eventSearchOnInput = function (menu) {
   });
 };
 
-export const eventSearchOnKeyUp = function (menu) {
+export const eventSearchOnKeyDown = function (menu) {
   const searchInput = menu.dom.searchInput;
 
   searchInput.addEventListener("keydown", (e) => {

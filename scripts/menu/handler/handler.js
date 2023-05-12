@@ -36,6 +36,14 @@ export const handleSearchBar = function (searchInput) {
     };
   });
 
+  if (matched.length !== 0) {
+    this.setSelectedTab(matched[0]);
+  } else {
+    this.setSelectedTab(null);
+  }
+
+  console.log(this.getSelectedTab());
+
   this.handleSearchItems(matched);
 };
 
