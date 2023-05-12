@@ -21,6 +21,7 @@ export const handleSearchBar = function (searchInput) {
   };
 
   if (searchInput === "") {
+    this.setSelectedTab(this.tabs[0]);
     this.handleSearchItems(this.tabs);
     return;
   }
