@@ -1,5 +1,11 @@
 import { buildMenu } from "./dom/build";
-import { contains, displays, focusSearchInput, isDisplayed } from "./dom/misc";
+import {
+  clearSearchInput,
+  contains,
+  displays,
+  focusSearchInput,
+  isDisplayed,
+} from "./dom/misc";
 import { resetSearchList } from "./dom/delete";
 import { addSearchList } from "./dom/add";
 import {
@@ -27,6 +33,7 @@ export class Menu {
   contains = contains;
   handleSearchBar = handleSearchBar;
   handleSearchItems = handleSearchItems;
+  clearSearchInput = clearSearchInput;
 }
 
 Menu.prototype.setTabs = function (tabs) {

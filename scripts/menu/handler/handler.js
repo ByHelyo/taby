@@ -8,6 +8,7 @@ export const handleMenu = function (tabs) {
 
   this.setTabs(tabs);
   this.displays(true);
+  this.clearSearchInput();
   this.focusSearchInput();
   this.handleSearchItems(tabs);
 };

@@ -18,7 +18,7 @@ export const eventSearchOnKeyUp = function (menu) {
         tab: selectedTab,
       });
 
-      menu.handleMenu();
+      menu.handleMenu(); /* Close menu */
     }
   });
 };

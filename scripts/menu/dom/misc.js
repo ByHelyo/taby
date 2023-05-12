@@ -19,3 +19,9 @@ export const displays = function (show) {
 export const contains = function (domElement) {
   return this.dom.menu.contains(domElement);
 };
+
+export const clearSearchInput = function () {
+  const searchInput = this.dom.searchInput;
+
+  searchInput.value = "";
+};
