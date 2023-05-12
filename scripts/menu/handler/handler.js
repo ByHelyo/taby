@@ -14,7 +14,7 @@ export const handleMenu = function (tabs) {
 
 export const handleSearchBar = function (searchInput) {
   const options = {
-    keys: ["title", "url"],
+    keys: ["title", "url", "index"],
   };
 
   const fuse = new Fuse(this.tabs, options);
@@ -24,6 +24,7 @@ export const handleSearchBar = function (searchInput) {
       url: tab.item.url,
       title: tab.item.title,
       id: tab.item.id,
+      index: tab.item.index,
     };
   });
 
@@ -37,7 +38,7 @@ export const handleSearchItems = function (tabs) {
     this.setSelectedTab(tabs[0]);
   }
 
-  tabs.forEach((tab, idx) => {
-    this.addSearchList(idx + ". " + tab.title);
+  tabs.forEach((tab) => {
+    this.addSearchList(tab.index + ". " + tab.title);
   });
 };
