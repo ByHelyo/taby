@@ -19,9 +19,9 @@ export const eventSearchOnKeyDown = function (menu) {
             type: "CHANGE_TAB",
             tab: selectedTab,
           });
-
-          menu.handleMenu(); /* Close menu */
         }
+
+        menu.handleMenu(); /* Close menu */
         break;
       case "Escape":
         menu.handleMenu(); /* Close menu */
