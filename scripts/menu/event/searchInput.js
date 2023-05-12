@@ -9,10 +9,10 @@ export const eventSearchOnInput = function (menu) {
 export const eventSearchOnKeyUp = function (menu) {
   const searchInput = menu.dom.searchInput;
 
-  searchInput.addEventListener("keyup", () => {
+  searchInput.addEventListener("keyup", (e) => {
     const selectedTab = menu.getSelectedTab();
 
-    if (selectedTab !== null) {
+    if (e.key === "Enter" && selectedTab !== null) {
       chrome.runtime.sendMessage({
         type: "CHANGE_TAB",
         tab: selectedTab,

@@ -4,13 +4,13 @@ export const handleAskTabs = function (sendMessage) {
       return {
         title: tab.title,
         url: tab.url,
+        id: tab.id,
       };
     });
-
     sendMessage({ tabs: formattedTabs });
   });
 };
 
-export const handleChangeTab = function (tab) {
-  console.log(tab);
+export const handleChangeTab = function (tabId, tab) {
+  chrome.tabs.update(tab.id, { active: true });
 };

@@ -23,17 +23,19 @@ export const handleSearchBar = function (searchInput) {
     return {
       url: tab.item.url,
       title: tab.item.title,
+      id: tab.item.id,
     };
   });
 
-  if (matched.length !== 0) {
-    this.setSelectedTab(matched[0]);
-  }
   this.handleSearchItems(matched);
 };
 
 export const handleSearchItems = function (tabs) {
   this.resetSearchList();
+
+  if (tabs.length !== 0) {
+    this.setSelectedTab(tabs[0]);
+  }
 
   tabs.forEach((tab, idx) => {
     this.addSearchList(idx + ". " + tab.title);

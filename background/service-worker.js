@@ -17,6 +17,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendMessage) {
       handleAskTabs(sendMessage);
       return true;
     case "CHANGE_TAB":
-      handleChangeTab(request.tab);
+      handleChangeTab(sender.tab.id, request.tab);
   }
 });
