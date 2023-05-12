@@ -9,17 +9,23 @@ export const eventSearchOnInput = function (menu) {
 export const eventSearchOnKeyUp = function (menu) {
   const searchInput = menu.dom.searchInput;
 
-  searchInput.addEventListener("keyup", (e) => {
+  searchInput.addEventListener("keydown", (e) => {
     const selectedTab = menu.getSelectedTab();
 
-    if (e.key === "Enter" && selectedTab !== null) {
-      chrome.runtime.sendMessage({
-        type: "CHANGE_TAB",
-        tab: selectedTab,
-      });
+    switch (e.key) {
+      case "Enter":
+        if (selectedTab !== null) {
+          chrome.runtime.sendMessage({
+            type: "CHANGE_TAB",
+            tab: selectedTab,
+          });
 
-      menu.handleMenu(); /* Close menu */
-      menu.setSelectedTab(null); /* Clear selected tab */
+          menu.handleMenu(); /* Close menu */
+        }
+        break;
+      case "Escape":
+        menu.handleMenu(); /* Close menu */
+        break;
     }
   });
 };

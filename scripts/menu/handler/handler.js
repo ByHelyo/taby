@@ -1,6 +1,8 @@
 import Fuse from "fuse.js";
 
 export const handleMenu = function (tabs) {
+  this.setSelectedTab(null); /* Clear selected tab */
+
   if (this.isDisplayed()) {
     this.displays(false);
     return;
@@ -39,10 +41,6 @@ export const handleSearchBar = function (searchInput) {
 
 export const handleSearchItems = function (tabs) {
   this.resetSearchList();
-
-  if (tabs.length !== 0) {
-    this.setSelectedTab(tabs[0]);
-  }
 
   tabs.forEach((tab) => {
     this.addSearchList(tab.index, tab.title, tab.url);
