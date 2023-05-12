@@ -17,6 +17,11 @@ export const handleSearchBar = function (searchInput) {
     keys: ["title", "url", "index"],
   };
 
+  if (searchInput === "") {
+    this.handleSearchItems(this.tabs);
+    return;
+  }
+
   const fuse = new Fuse(this.tabs, options);
 
   const matched = fuse.search(searchInput).map((tab) => {
