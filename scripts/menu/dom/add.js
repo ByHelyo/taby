@@ -1,7 +1,7 @@
 import { buildSearchItem } from "./build";
 
-export const addSearchList = function (itemContent) {
+export const addSearchList = function (title, url) {
   const searchList = this.dom.searchList;
 
-  searchList.appendChild(buildSearchItem(itemContent));
+  searchList.appendChild(buildSearchItem(title, url));
 };

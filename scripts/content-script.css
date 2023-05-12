@@ -67,6 +67,15 @@
   padding: 8px 16px 8px 32px;
 }
 
+.taby-searchTitle {
+  margin-right: 20px;
+}
+
+.taby-searchUrl {
+  font-style: italic;
+  font-size: 18px;
+}
+
 .taby-searchItem:first-child {
   background: #0860f2;
 }
