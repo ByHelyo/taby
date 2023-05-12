@@ -11,7 +11,8 @@ import { eventSearchOnInput, eventSearchOnKeyUp } from "./event/searchInput";
 
 export class Menu {
   constructor() {
-    this.urls = [];
+    this.selectedTab = null;
+    this.tabs = [];
     this.dom = buildMenu();
     eventSearchOnInput(this);
     eventSearchOnKeyUp(this);
@@ -28,6 +29,14 @@ export class Menu {
   handleSearchItems = handleSearchItems;
 }
 
-Menu.prototype.setUrls = function (urls) {
-  this.urls = urls;
+Menu.prototype.setTabs = function (tabs) {
+  this.tabs = tabs;
+};
+
+Menu.prototype.getSelectedTab = function () {
+  return this.selectedTab;
+};
+
+Menu.prototype.setSelectedTab = function (selectedTab) {
+  this.selectedTab = selectedTab;
 };

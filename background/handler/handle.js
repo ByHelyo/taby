@@ -1,14 +1,17 @@
 export const handleAskTabUrls = function (sendMessage) {
   chrome.tabs.query({}).then((tabs) => {
-    const urls = tabs.map((tab) => {
+    const formattedTabs = tabs.map((tab) => {
       return {
         title: tab.title,
         url: tab.url,
+        id: tab.id,
       };
     });
 
-    sendMessage({ urls });
+    sendMessage({ tabs: formattedTabs });
   });
 };
 
-export const handleChangeTab = function () {};
+export const handleChangeTab = function (tab) {
+  console.log(tab);
+};

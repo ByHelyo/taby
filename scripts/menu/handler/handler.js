@@ -1,16 +1,15 @@
 import Fuse from "fuse.js";
 
-export const handleMenu = function (urls) {
+export const handleMenu = function (tabs) {
   if (this.isDisplayed()) {
     this.displays(false);
     return;
   }
 
-  this.setUrls(urls);
+  this.setTabs(tabs);
   this.displays(true);
   this.focusSearchInput();
-
-  this.handleSearchItems(urls);
+  this.handleSearchItems(tabs);
 };
 
 export const handleSearchBar = function (searchInput) {
@@ -18,22 +17,25 @@ export const handleSearchBar = function (searchInput) {
     keys: ["title", "url"],
   };
 
-  const fuse = new Fuse(this.urls, options);
+  const fuse = new Fuse(this.tabs, options);
 
-  const res = fuse.search(searchInput).map((url) => {
+  const matched = fuse.search(searchInput).map((tab) => {
     return {
-      url: url.item.url,
-      title: url.item.title,
+      url: tab.item.url,
+      title: tab.item.title,
     };
   });
 
-  this.handleSearchItems(res);
+  if (matched.length !== 0) {
+    this.setSelectedTab(matched[0]);
+  }
+  this.handleSearchItems(matched);
 };
 
-export const handleSearchItems = function (urls) {
+export const handleSearchItems = function (tabs) {
   this.resetSearchList();
 
-  urls.forEach((url, idx) => {
-    this.addSearchList(idx + ". " + url.title);
+  tabs.forEach((tab, idx) => {
+    this.addSearchList(idx + ". " + tab.title);
   });
 };

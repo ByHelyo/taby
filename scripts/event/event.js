@@ -3,7 +3,7 @@ export const eventToggleMenu = function (menu) {
   chrome.runtime.onMessage.addListener(async (request, sender) => {
     if (!sender.tab && request.type === "TOGGLE_MENU") {
       const { urls } = await chrome.runtime.sendMessage({
-        type: "ASK_TAB_URLS",
+        type: "ASK_TABS",
       });
 
       menu.handleMenu(urls);

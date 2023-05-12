@@ -10,8 +10,13 @@ export const eventSearchOnKeyUp = function (menu) {
   const searchInput = menu.dom.searchInput;
 
   searchInput.addEventListener("keyup", () => {
-    chrome.runtime.sendMessage({
-      type: "CHANGE_TAB",
-    });
+    const selectedTab = menu.getSelectedTab();
+
+    if (selectedTab !== null) {
+      chrome.runtime.sendMessage({
+        type: "CHANGE_TAB",
+        tab: selectedTab,
+      });
+    }
   });
 };
