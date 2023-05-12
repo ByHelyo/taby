@@ -17,6 +17,8 @@ export const eventSearchOnKeyUp = function (menu) {
         type: "CHANGE_TAB",
         tab: selectedTab,
       });
+
+      menu.handleMenu();
     }
   });
 };
