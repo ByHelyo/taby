@@ -2,6 +2,7 @@
 [class^="taby-"]::after,
 [class^="taby-"]::after {
   box-sizing: border-box;
+  all: unset;
 }
 
 .taby-menu {

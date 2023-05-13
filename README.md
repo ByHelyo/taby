@@ -16,7 +16,7 @@
 
 <h2>About</h2>
 
-``Taby`` is a simple, lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
+`Taby` is a simple, lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
 efficient way to navigate between tabs.
 
 ### Supports:
@@ -27,6 +27,6 @@ efficient way to navigate between tabs.
 
 <h3>Usage</h3>
 
-* ``Alt+C`` to open/close the menu.
-* ``Escape`` to close the menu.
-* ``Enter`` to switch to the selected tab.
+- `Alt+C` to open/close the menu.
+- `Escape` to close the menu.
+- `Enter` to switch to the selected tab.
