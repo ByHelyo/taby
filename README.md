@@ -1,13 +1,13 @@
 <h1 align="center">Taby</h1>
 
 <div align="center">
-  
-  ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-  ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-  ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-  ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-  
+
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+
 </div>
 
 <div align=center>
@@ -16,7 +16,8 @@
 
 <h1>About</h1>
 
-Taby is a lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an efficient way to navigate between tabs.
+Taby is a lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
+efficient way to navigate between tabs.
 
 ### Support:
 
@@ -26,3 +27,6 @@ Taby is a lightweight tab switcher extension designed to streamline your browsin
 
 <h2>Usage</h2>
 
+``Alt+C`` to open/close the menu.
+``Escape`` to close the menu.
+``Enter`` to switch to the selected tab.
