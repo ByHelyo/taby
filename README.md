@@ -14,19 +14,19 @@
   <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/c9b3e30d-3c26-45b1-b265-ae328812b7c0" />
 </div>
 
-<h1>About</h1>
+<h2>About</h2>
 
-Taby is a lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
+``Taby`` is a simple, lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
 efficient way to navigate between tabs.
 
-### Support:
+### Supports:
 
 ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
 
-<h1>Getting Started</h1>
+<h2>Getting Started</h2>
 
-<h2>Usage</h2>
+<h3>Usage</h3>
 
-``Alt+C`` to open/close the menu.
-``Escape`` to close the menu.
-``Enter`` to switch to the selected tab.
+* ``Alt+C`` to open/close the menu.
+* ``Escape`` to close the menu.
+* ``Enter`` to switch to the selected tab.
