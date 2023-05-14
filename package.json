@@ -14,7 +14,7 @@
     "url": "git+https://github.com/ByHelyo/taby.git"
   },
   "author": "Franck Hu",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ByHelyo/taby/issues"
   },
