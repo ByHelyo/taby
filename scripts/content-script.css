@@ -1,8 +1,8 @@
 [class^="taby-"],
 [class^="taby-"]::after,
 [class^="taby-"]::after {
-  box-sizing: border-box;
   all: unset;
+  box-sizing: border-box;
 }
 
 .taby-menu {
@@ -18,6 +18,9 @@
   background-color: #1b1212;
   font-family: sans-serif;
   color: #ffffff;
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .taby-display {
