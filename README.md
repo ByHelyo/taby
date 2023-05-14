@@ -11,7 +11,7 @@
 </div>
 
 <div align=center>
-  <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/ed454c03-6334-4d5b-b3b7-03d5315ab0cb" />
+  <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/e0485e2c-4d23-4665-9297-93387f6486d9" />
 </div>
 
 <h2>About</h2>
