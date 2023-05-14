@@ -9,13 +9,13 @@
   display: none; /* Do not display menu by default */
   position: fixed;
   width: 70%;
-  max-height: 66%;
-  top: 20%;
+  top: 30%;
   left: 15%;
   z-index: 100000;
+  border-radius: 6px;
 
   /* Children elements */
-  background-color: #28282b;
+  background-color: #1b1212;
   font-family: sans-serif;
   color: #ffffff;
 }
@@ -84,5 +84,5 @@
 }
 
 .taby-searchItem:first-child {
-  background: #0860f2;
+  background: #007fff;
 }
