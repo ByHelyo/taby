@@ -1,15 +1,19 @@
 export const handleAskTabs = function (sendMessage) {
-  chrome.tabs.query({}).then((tabs) => {
-    const formattedTabs = tabs.map((tab, index) => {
-      return {
-        title: tab.title,
-        url: tab.url,
-        id: tab.id,
-        index: index,
-      };
+  chrome.tabs
+    .query({
+      currentWindow: true,
+    })
+    .then((tabs) => {
+      const formattedTabs = tabs.map((tab, index) => {
+        return {
+          title: tab.title,
+          url: tab.url,
+          id: tab.id,
+          index,
+        };
+      });
+      sendMessage({ tabs: formattedTabs });
     });
-    sendMessage({ tabs: formattedTabs });
-  });
 };
 
 export const handleChangeTab = function (tabId, tab) {
