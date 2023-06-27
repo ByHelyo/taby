@@ -5,15 +5,18 @@ import {
   displays,
   focusSearchInput,
   isDisplayed,
-} from "./dom/misc";
+} from "./dom/misc.ts";
 import { resetSearchList } from "./dom/delete";
 import { addSearchList } from "./dom/add";
 import {
   handleMenu,
   handleSearchBar,
   handleSearchItems,
-} from "./handler/handler";
-import { eventSearchOnInput, eventSearchOnKeyDown } from "./event/searchInput";
+} from "./handler/handler.ts";
+import {
+  eventSearchOnInput,
+  eventSearchOnKeyDown,
+} from "./event/searchInput.ts";
 
 export class Menu {
   constructor() {
