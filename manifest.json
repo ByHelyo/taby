@@ -13,12 +13,12 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/content-script.js"],
+      "js": ["src/scripts/content-script.js"],
       "matches": ["<all_urls>"]
     }
   ],
   "background": {
-    "service_worker": "background/service-worker.js",
+    "service_worker": "src/background/service-worker.js",
     "type": "module"
   },
   "action": {
