@@ -1,22 +1,22 @@
-import { buildMenu } from "./dom/build";
+import { buildMenu } from "./dom/build.tsx";
 import {
   clearSearchInput,
   contains,
   displays,
   focusSearchInput,
   isDisplayed,
-} from "./dom/misc.ts";
-import { resetSearchList } from "./dom/delete";
-import { addSearchList } from "./dom/add";
+} from "./dom/misc.tsx";
+import { resetSearchList } from "./dom/delete.tsx";
+import { addSearchList } from "./dom/add.tsx";
 import {
   handleMenu,
   handleSearchBar,
   handleSearchItems,
-} from "./handler/handler.ts";
+} from "./handler/handler.tsx";
 import {
   eventSearchOnInput,
   eventSearchOnKeyDown,
-} from "./event/searchInput.ts";
+} from "./event/searchInput.tsx";
 
 export class Menu {
   constructor() {

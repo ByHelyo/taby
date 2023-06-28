@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "js": ["src/scripts/content-script.ts"],
+      "js": ["src/scripts/content-script.tsx"],
       "matches": ["<all_urls>"]
     }
   ],
