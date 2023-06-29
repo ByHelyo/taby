@@ -1,4 +1,4 @@
-export const handleAskTabs = function (sendMessage) {
+export const handleAskTabs = function (sendMessage: any) {
   chrome.tabs
     .query({
       currentWindow: true,
@@ -16,6 +16,6 @@ export const handleAskTabs = function (sendMessage) {
     });
 };
 
-export const handleChangeTab = function (tabId, tab) {
+export const handleChangeTab = function (tab: any) {
   chrome.tabs.update(tab.id, { active: true });
 };
