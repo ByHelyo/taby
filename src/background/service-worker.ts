@@ -4,7 +4,7 @@ import {
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
-} from "../types/misc";
+} from "../types/misc.ts";
 
 chrome.commands.onCommand.addListener(async function () {
   const [tab] = await chrome.tabs.query({
@@ -23,8 +23,8 @@ chrome.commands.onCommand.addListener(async function () {
 
 chrome.runtime.onMessage.addListener(function (
   request: MessageFromScript,
-  _,
-  sendMessage
+  _: chrome.runtime.MessageSender,
+  sendMessage: any
 ) {
   switch (request.type) {
     case MessageFromScriptType.ASK_TABS:
