@@ -1,4 +1,4 @@
-import { handleAskTabs, handleChangeTab } from "./handler/handle";
+import { handleChangeTab } from "./handler/handle";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
@@ -6,30 +6,42 @@ import {
   MessageFromScriptType,
 } from "../types/misc.ts";
 
-chrome.commands.onCommand.addListener(async function () {
-  const [tab] = await chrome.tabs.query({
-    active: true,
-    lastFocusedWindow: true,
-  });
+chrome.commands.onCommand.addListener(async function (command: string) {
+  if (command === "TOGGLE_MENU") {
+    const [currentTab] = await chrome.tabs.query({
+      active: true,
+      lastFocusedWindow: true,
+    });
 
-  const message: MessageFromBackground = {
-    type: MessageFromBackgroundType.TOGGLE_MENU,
-  };
+    const tabs = await chrome.tabs
+      .query({
+        currentWindow: true,
+      })
+      .then((tabs) => {
+        const formattedTabs: any = tabs.map((tab, index) => {
+          return {
+            title: tab.title,
+            url: tab.url,
+            id: tab.id,
+            index,
+          };
+        });
+        return formattedTabs;
+      });
 
-  if (tab.id) {
-    await chrome.tabs.sendMessage(tab.id, message);
+    const message: MessageFromBackground = {
+      type: MessageFromBackgroundType.TOGGLE_MENU,
+      tabs,
+    };
+
+    if (currentTab.id) {
+      await chrome.tabs.sendMessage(currentTab.id, message);
+    }
   }
 });
 
-chrome.runtime.onMessage.addListener(function (
-  request: MessageFromScript,
-  _: chrome.runtime.MessageSender,
-  sendMessage: any
-) {
+chrome.runtime.onMessage.addListener(function (request: MessageFromScript) {
   switch (request.type) {
-    case MessageFromScriptType.ASK_TABS:
-      handleAskTabs(sendMessage);
-      return true;
     case MessageFromScriptType.CHANGE_TAB:
       handleChangeTab(request.tab);
   }

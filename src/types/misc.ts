@@ -14,4 +14,5 @@ export enum MessageFromBackgroundType {
 
 export interface MessageFromBackground {
   type: MessageFromBackgroundType;
+  tabs: any;
 }

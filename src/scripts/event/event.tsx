@@ -1,14 +1,14 @@
 /* Send message if TOGGLE_MENU shortcut is triggered */
-export const eventToggleMenu = function (menu) {
-  chrome.runtime.onMessage.addListener(async (request, sender) => {
-    if (!sender.tab && request.type === "TOGGLE_MENU") {
-      const { tabs } = await chrome.runtime.sendMessage({
-        type: "ASK_TABS",
-      });
+import { MessageFromBackground } from "../../types/misc.ts";
 
-      menu.handleMenu(tabs);
+export const eventToggleMenu = function (menu) {
+  chrome.runtime.onMessage.addListener(
+    async (request: MessageFromBackground, sender) => {
+      if (!sender.tab && request.type === "TOGGLE_MENU") {
+        menu.handleMenu(request.tabs);
+      }
     }
-  });
+  );
 };
 
 /* Remove menu if clicking outside */
