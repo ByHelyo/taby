@@ -1,5 +1,5 @@
 import "./content-script.css";
-import { Menu } from "./menu/menu.ts";
+import { Menu } from "./menu/menu";
 import "./event/event";
 import { eventOutsideMenu, eventToggleMenu } from "./event/event";
 

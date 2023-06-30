@@ -1,66 +1,56 @@
-import { buildMenu, buildSearchItem } from "./dom/build.ts";
 import Fuse from "fuse.js";
-import {
-  eventSearchOnInput,
-  eventSearchOnKeyDown,
-} from "./event/searchInput.ts";
+import { MenuDOM } from "./dom/menuDOM";
 
 export class Menu {
   selectedTab: any;
   tabs: any;
-  dom: any;
+  dom: MenuDOM;
+  display: boolean;
   constructor() {
     this.selectedTab = null;
     this.tabs = [];
-    this.dom = buildMenu();
-    eventSearchOnInput(this);
-    eventSearchOnKeyDown(this);
+    this.display = false;
+    this.dom = new MenuDOM();
+    this.dom.onInput(() => this.handleSearchBar(this.dom.searchInput.value));
+    this.dom.onKeyDown((e) => {
+      const selectedTab = this.getSelectedTab();
+
+      switch (e.key) {
+        case "Enter":
+          if (selectedTab !== null) {
+            chrome.runtime.sendMessage({
+              type: "CHANGE_TAB",
+              tab: selectedTab,
+            });
+          }
+          this.handleMenu(); /* Close menu */
+          break;
+        case "Escape":
+          this.handleMenu(); /* Close menu */
+          break;
+      }
+    });
   }
 
-  focusSearchInput = function () {
-    const searchInput = this.dom.searchInput;
-
-    searchInput.focus();
-  };
-  isDisplayed = function () {
-    return this.dom.menu.classList.contains("taby-display");
-  };
-  displays = function (show) {
-    if (show) {
-      this.dom.menu.classList.add("taby-display");
-    } else {
-      this.dom.menu.classList.remove("taby-display");
-    }
-  };
-  resetSearchList = function () {
-    const searchList = this.dom.searchList;
-
-    searchList.innerHTML = "";
-  };
-  addSearchList = function (index: string, title: string, url: string) {
-    const searchList = this.dom.searchList;
-
-    searchList.appendChild(buildSearchItem(index, title, url));
-  };
-
-  handleMenu = function (tabs) {
+  handleMenu(tabs) {
     this.setSelectedTab(null); /* Clear selected tab */
 
-    if (this.isDisplayed()) {
-      this.displays(false);
+    if (this.display) {
+      this.dom.displays(false);
+      this.display = !this.display;
       return;
     }
 
     this.setTabs(tabs);
-    this.displays(true);
-    this.clearSearchInput();
-    this.focusSearchInput();
+    this.dom.displays(true);
+    this.dom.clearSearchInput();
+    this.dom.focusSearchInput();
     this.handleSearchItems(tabs);
-  };
-  contains = function (domElement) {
-    return this.dom.menu.contains(domElement);
-  };
-  handleSearchBar = function (searchInput) {
+
+    this.display = !this.display;
+  }
+
+  handleSearchBar(searchInput: string) {
     const options = {
       keys: ["title", "url", "index"],
     };
@@ -88,32 +78,25 @@ export class Menu {
       this.setSelectedTab(null);
     }
 
-    console.log(this.getSelectedTab());
-
     this.handleSearchItems(matched);
-  };
-  handleSearchItems = function (tabs) {
-    this.resetSearchList();
+  }
+  handleSearchItems(tabs) {
+    this.dom.resetSearchList();
 
     tabs.forEach((tab) => {
-      this.addSearchList(tab.index, tab.title, tab.url);
+      this.dom.addSearchList(tab.index, tab.title, tab.url);
     });
-  };
-  clearSearchInput = function () {
-    const searchInput = this.dom.searchInput;
+  }
 
-    searchInput.value = "";
-  };
+  setTabs(tabs: any) {
+    this.tabs = tabs;
+  }
+
+  getSelectedTab() {
+    return this.selectedTab;
+  }
+
+  setSelectedTab(tab) {
+    this.selectedTab = tab;
+  }
 }
-
-Menu.prototype.setTabs = function (tabs) {
-  this.tabs = tabs;
-};
-
-Menu.prototype.getSelectedTab = function () {
-  return this.selectedTab;
-};
-
-Menu.prototype.setSelectedTab = function (selectedTab) {
-  this.selectedTab = selectedTab;
-};

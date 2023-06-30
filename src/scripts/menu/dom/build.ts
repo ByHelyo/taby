@@ -1,35 +1,26 @@
-export const buildMenu = function () {
+export const buildMenu = function (
+  search: HTMLDivElement,
+  searchList: HTMLUListElement
+): HTMLDivElement {
   const menu = document.createElement("div");
   menu.classList.add("taby-menu");
-
-  const { search, searchInput } = buildSearch();
-  const searchList = buildSearchList();
-
   menu.append(search);
   menu.appendChild(searchList);
 
-  return {
-    menu,
-    search,
-    searchInput,
-    searchList,
-  };
+  return menu;
 };
 
-const buildSearch = function () {
+export const buildSearch = function (
+  searchInput: HTMLInputElement
+): HTMLDivElement {
   const search = document.createElement("div");
   search.classList.add("taby-search");
-
-  const searchInput = buildSearchInput();
-
   search.appendChild(searchInput);
-  return {
-    search,
-    searchInput,
-  };
+
+  return search;
 };
 
-const buildSearchInput = function () {
+export const buildSearchInput = function (): HTMLInputElement {
   const searchInput = document.createElement("input");
   searchInput.classList.add("taby-searchInput");
   searchInput.placeholder = "Search";
@@ -37,7 +28,7 @@ const buildSearchInput = function () {
   return searchInput;
 };
 
-const buildSearchList = function () {
+export const buildSearchList = function (): HTMLUListElement {
   const searchList = document.createElement("ul");
   searchList.classList.add("taby-searchList");
   return searchList;
