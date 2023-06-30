@@ -19,11 +19,11 @@ chrome.commands.onCommand.addListener(async function (command: string) {
         currentWindow: true,
       })
       .then((tabs) => {
-        const formattedTabs: any = tabs.map((tab, index) => {
+        const formattedTabs: Tab[] = tabs.map((tab, index) => {
           return {
-            title: tab.title,
-            url: tab.url,
-            id: tab.id,
+            title: tab.title || "",
+            url: tab.url || "",
+            id: tab.id || 0,
             index,
           };
         });
