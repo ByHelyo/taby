@@ -1,24 +1,24 @@
 import Fuse from "fuse.js";
-import { MenuDOM } from "./dom/menuDOM";
 import {
   MessageFromScript,
   MessageFromScriptType,
   Tab,
 } from "../../types/misc.ts";
+import { MenuComponent } from "./component/menuComponent.ts";
 
 export class Menu {
   selectedTab: Tab | null;
   tabs: Tab[];
-  dom: MenuDOM;
+  menuComponent: MenuComponent;
   display: boolean;
 
   constructor() {
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.dom = new MenuDOM();
-    this.dom.onInput((e) => this.handleOnInput(e));
-    this.dom.onKeyDown((e) => this.handleOnKeyDown(e));
+    this.menuComponent = new MenuComponent();
+    this.menuComponent.onInput((e) => this.handleOnInput(e));
+    this.menuComponent.onKeyDown((e) => this.handleOnKeyDown(e));
   }
 
   setTabs(tabs: any) {
@@ -41,17 +41,12 @@ export class Menu {
     this.setSelectedTab(null);
 
     this.setTabs(tabs);
-    this.dom.displays(true);
-    this.dom.clearSearchInput();
-    this.dom.focusSearchInput();
-    this.dom.clearSearchList();
-    this.dom.addSearchItems(tabs);
-
     this.display = true;
+    this.menuComponent.openMenu(tabs);
   }
 
   closeMenu() {
-    this.dom.displays(false);
+    this.menuComponent.displays(false);
     this.display = false;
   }
 
@@ -87,8 +82,7 @@ export class Menu {
 
     if (searchInput === "") {
       this.setSelectedTab(this.tabs[0]);
-      this.dom.clearSearchList();
-      this.dom.addSearchItems(this.tabs);
+      this.menuComponent.updateSearchList(this.tabs);
       return;
     }
 
@@ -109,7 +103,6 @@ export class Menu {
       this.setSelectedTab(null);
     }
 
-    this.dom.clearSearchList();
-    this.dom.addSearchItems(matched);
+    this.menuComponent.updateSearchList(matched);
   }
 }

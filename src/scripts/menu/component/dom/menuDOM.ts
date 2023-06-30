@@ -4,8 +4,8 @@ import {
   buildSearchInput,
   buildSearchItem,
   buildSearchList,
-} from "./build";
-import { Tab } from "../../../types/misc.ts";
+} from "./build.ts";
+import { Tab } from "../../../../types/misc.ts";
 
 export class MenuDOM {
   menu: HTMLDivElement;
@@ -24,11 +24,9 @@ export class MenuDOM {
   }
 
   displays(show: boolean) {
-    if (show) {
-      this.menu.classList.add("taby-display");
-    } else {
-      this.menu.classList.remove("taby-display");
-    }
+    show
+      ? this.menu.classList.add("taby-display")
+      : this.menu.classList.remove("taby-display");
   }
 
   clearSearchList() {

@@ -21,7 +21,7 @@ export const eventToggleMenu = function (menu: Menu) {
 /* Remove menu if clicking outside */
 export const eventOutsideMenu = function (menu: Menu) {
   window.addEventListener("click", function (e) {
-    if (!menu.dom.contains(e.target as HTMLElement)) {
+    if (!menu.menuComponent.contains(e.target as HTMLElement)) {
       menu.closeMenu();
     }
   });
