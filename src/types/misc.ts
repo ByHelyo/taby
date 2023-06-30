@@ -5,7 +5,7 @@ export enum MessageFromScriptType {
 
 export interface MessageFromScript {
   type: MessageFromScriptType;
-  tab: any;
+  tab: Tab;
 }
 
 export enum MessageFromBackgroundType {
@@ -15,4 +15,11 @@ export enum MessageFromBackgroundType {
 export interface MessageFromBackground {
   type: MessageFromBackgroundType;
   tabs: any;
+}
+
+export interface Tab {
+  title: string;
+  url: string;
+  id: number;
+  index: number;
 }

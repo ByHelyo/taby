@@ -4,6 +4,7 @@ import {
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
+  Tab,
 } from "../types/misc.ts";
 
 chrome.commands.onCommand.addListener(async function (command: string) {
@@ -13,7 +14,7 @@ chrome.commands.onCommand.addListener(async function (command: string) {
       lastFocusedWindow: true,
     });
 
-    const tabs = await chrome.tabs
+    const tabs: Tab[] = await chrome.tabs
       .query({
         currentWindow: true,
       })

@@ -35,7 +35,7 @@ export const buildSearchList = function (): HTMLUListElement {
 };
 
 export const buildSearchItem = function (
-  index: string,
+  index: number,
   title: string,
   url: string
 ) {
@@ -48,9 +48,9 @@ export const buildSearchItem = function (
   return searchItem;
 };
 
-const buildSearchIndex = function (index: string) {
+const buildSearchIndex = function (index: number) {
   const searchIndex = document.createElement("span");
-  searchIndex.innerText = index;
+  searchIndex.innerText = String(index);
   searchIndex.classList.add("taby-searchIndex");
 
   return searchIndex;

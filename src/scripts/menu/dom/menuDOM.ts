@@ -5,6 +5,7 @@ import {
   buildSearchItem,
   buildSearchList,
 } from "./build";
+import { Tab } from "../../../types/misc.ts";
 
 export class MenuDOM {
   menu: HTMLDivElement;
@@ -30,11 +31,17 @@ export class MenuDOM {
     }
   }
 
-  resetSearchList() {
+  clearSearchList() {
     this.searchList.innerHTML = "";
   }
 
-  addSearchList(index: string, title: string, url: string) {
+  addSearchItems(tabs: Tab[]) {
+    tabs.forEach((tab: Tab) => {
+      this.addSearchItem(tab.index, tab.title, tab.url);
+    });
+  }
+
+  addSearchItem(index: number, title: string, url: string) {
     this.searchList.appendChild(buildSearchItem(index, title, url));
   }
 
@@ -46,7 +53,7 @@ export class MenuDOM {
     return this.menu.contains(elt);
   }
 
-  onInput(callback: () => void) {
+  onInput(callback: (event: Event) => void) {
     this.searchInput.addEventListener("input", callback);
   }
 
