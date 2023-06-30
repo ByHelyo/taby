@@ -12,6 +12,7 @@ export class MenuDOM {
   search: HTMLDivElement;
   searchInput: HTMLInputElement;
   searchList: HTMLUListElement;
+
   constructor() {
     this.searchList = buildSearchList();
     this.searchInput = buildSearchInput();

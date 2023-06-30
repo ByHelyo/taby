@@ -21,7 +21,7 @@ export class Menu {
     this.menuComponent.onKeyDown((e) => this.handleOnKeyDown(e));
   }
 
-  setTabs(tabs: any) {
+  setTabs(tabs: Tab[]) {
     this.tabs = tabs;
   }
 
