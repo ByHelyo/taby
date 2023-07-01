@@ -1,5 +1,5 @@
-import { MenuDOM } from "./dom/menuDOM.ts";
-import { Tab } from "../../../types/misc.ts";
+import { MenuDOM } from "../dom/menuDOM.ts";
+import { Tab } from "../../types/misc.ts";
 
 export class MenuComponent {
   dom: MenuDOM;

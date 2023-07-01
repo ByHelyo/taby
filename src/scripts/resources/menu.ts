@@ -4,7 +4,7 @@ import {
   MessageFromScriptType,
   Tab,
 } from "../../types/misc.ts";
-import { MenuComponent } from "./component/menuComponent.ts";
+import { MenuComponent } from "../component/menuComponent.ts";
 
 export class Menu {
   selectedTab: Tab | null;

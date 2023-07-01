@@ -3,7 +3,7 @@ import {
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../../types/misc";
-import { Menu } from "../menu/menu.ts";
+import { Menu } from "../resources/menu.ts";
 
 export const eventToggleMenu = function (menu: Menu) {
   chrome.runtime.onMessage.addListener(
