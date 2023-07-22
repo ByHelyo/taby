@@ -16,8 +16,10 @@
 
 <h2>About</h2>
 
-`Taby` is a simple, lightweight tab switcher extension designed to streamline your browsing experience. Taby offers users an
+`Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience. Taby offers users an
 efficient way to navigate between tabs.
+
+`Taby` provides an intuitive search menu that lets you quickly switch to other open tabs using only the keyboard.
 
 ### Supports:
 
