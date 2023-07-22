@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "check": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish": "chrome-webstore-upload-cli"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-react": "^4.0.1",
+    "chrome-webstore-upload-cli": "^2.2.2",
     "eslint": "^8.43.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",

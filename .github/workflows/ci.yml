@@ -32,3 +32,39 @@ jobs:
 
       - name: Run lint
         run: pnpm run lint
+
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Zip
+        run: zip -r chrome-extension.zip dist
+
+      - name: Publish
+        run: |
+          npx chrome-webstore-upload upload \\
+          --source chrome-extension.zip \\
+          --extension-id ${{ secrets.EXTENSION_ID }} \\
+          --client-id ${{ secrets.CLIENT_ID }} \\
+          --client-secret ${{ secrets.CLIENT_SECRET }} \\
+          --refresh-token ${{ secrets.REFRESH_TOKEN }}
