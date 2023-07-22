@@ -57,7 +57,7 @@ export class Menu {
       case "Enter":
         if (selectedTab !== null) {
           const message: MessageFromScript = {
-            type: MessageFromScriptType.CHANGE_TAB,
+            type: MessageFromScriptType.REQUEST_SWITCH_TAB,
             tab: selectedTab,
           };
 

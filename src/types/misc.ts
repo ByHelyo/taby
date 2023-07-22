@@ -1,5 +1,5 @@
 export enum MessageFromScriptType {
-  CHANGE_TAB,
+  REQUEST_SWITCH_TAB,
 }
 
 export interface MessageFromScript {
@@ -9,11 +9,12 @@ export interface MessageFromScript {
 
 export enum MessageFromBackgroundType {
   TOGGLE_MENU,
+  USER_SWITCHES_TAB,
 }
 
 export interface MessageFromBackground {
   type: MessageFromBackgroundType;
-  tabs: Tab[];
+  tabs?: Tab[];
 }
 
 export interface Tab {
