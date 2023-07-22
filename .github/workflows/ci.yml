@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
+    branches: [main, develop]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 env:
   node-version: 18
+  pnpm-version: 8
 
 jobs:
   checks:
@@ -13,10 +17,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up pnpm
+      - name: Set up pnpms ${{ env.pnpm-version }}
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: ${{ env.pnpm-version }}
 
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
@@ -41,10 +45,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up pnpm
+      - name: Set up pnpm ${{ env.pnpm-version }}
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: ${{ env.pnpm-version }}
 
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
