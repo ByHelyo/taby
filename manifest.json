@@ -6,9 +6,6 @@
   "author": "Franck Hu",
   "permissions": ["tabs"],
   "icons": {
-    "16": "icons/icon-16.png",
-    "32": "icons/icon-32.png",
-    "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
   "content_scripts": [
@@ -23,12 +20,8 @@
   },
   "action": {
     "default_icon": {
-      "16": "icons/icon-16.png",
-      "32": "icons/icon-32.png",
-      "48": "icons/icon-48.png",
       "128": "icons/icon-128.png"
-    },
-    "default_popup": "popup/popup.html"
+    }
   },
   "commands": {
     "TOGGLE_MENU": {
