@@ -1,4 +1,4 @@
-import { handleChangeTab } from "./handler/handle";
+import { handleRequestSwitchTab } from "./handler/handle";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
@@ -43,7 +43,22 @@ chrome.commands.onCommand.addListener(async function (command: string) {
 
 chrome.runtime.onMessage.addListener(function (request: MessageFromScript) {
   switch (request.type) {
-    case MessageFromScriptType.CHANGE_TAB:
-      handleChangeTab(request.tab);
+    case MessageFromScriptType.REQUEST_SWITCH_TAB:
+      handleRequestSwitchTab(request.tab);
+  }
+});
+
+chrome.tabs.onActivated.addListener(async function () {
+  const [currentTab] = await chrome.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
+
+  const message: MessageFromBackground = {
+    type: MessageFromBackgroundType.USER_SWITCHES_TAB,
+  };
+
+  if (currentTab.id) {
+    await chrome.tabs.sendMessage(currentTab.id, message);
   }
 });
