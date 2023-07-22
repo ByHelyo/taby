@@ -62,8 +62,8 @@ export class Menu {
           };
 
           chrome.runtime.sendMessage(message);
+          this.closeMenu(); /* Close menu */
         }
-        this.closeMenu(); /* Close menu */
         break;
       case "Escape":
         this.closeMenu(); /* Close menu */
