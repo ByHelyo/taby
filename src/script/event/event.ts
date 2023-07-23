@@ -2,8 +2,8 @@
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
-} from "../../types/misc";
-import { Menu } from "../resources/menu.ts";
+} from "../../type/misc";
+import { Menu } from "../resource/menu.ts";
 
 export const eventBackground = function (menu: Menu) {
   chrome.runtime.onMessage.addListener(
