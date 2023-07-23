@@ -3,7 +3,7 @@ import {
   MessageFromScript,
   MessageFromScriptType,
   Tab,
-} from "../../types/misc.ts";
+} from "../../type/misc.ts";
 import { MenuComponent } from "../component/menuComponent.ts";
 
 export class Menu {
