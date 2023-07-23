@@ -1,5 +1,5 @@
 import "./content-script.css";
-import { Menu } from "./resources/menu";
+import { Menu } from "./resource/menu";
 import "./event/event";
 import { eventOutsideMenu, eventBackground } from "./event/event";
 

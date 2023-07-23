@@ -1,11 +1,11 @@
-import { handleRequestSwitchTab } from "./handler/handle";
+import { handleRequestSwitchTab } from "./handler/handler.ts";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
   Tab,
-} from "../types/misc.ts";
+} from "../type/misc.ts";
 
 chrome.commands.onCommand.addListener(async function (command: string) {
   if (command === "TOGGLE_MENU") {
