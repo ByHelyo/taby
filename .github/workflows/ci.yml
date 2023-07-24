@@ -17,12 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up pnpms ${{ env.pnpm-version }}
+      - name: Setup pnpm ${{ env.pnpm-version }}
         uses: pnpm/action-setup@v2
         with:
           version: ${{ env.pnpm-version }}
 
-      - name: Use Node.js ${{ env.node-version }}
+      - name: Setup Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
@@ -38,23 +38,27 @@ jobs:
         run: pnpm run lint
 
   publish:
-    if: github.ref == 'refs/heads/main'
-    needs: [checks]
+    needs: checks
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up pnpm ${{ env.pnpm-version }}
+      - name: Setup pnpm ${{ env.pnpm-version }}
         uses: pnpm/action-setup@v2
         with:
           version: ${{ env.pnpm-version }}
 
-      - name: Use Node.js ${{ env.node-version }}
+      - name: Setup Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
           cache: "pnpm"
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./manifest.json').version")" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: pnpm install
@@ -63,13 +67,23 @@ jobs:
         run: pnpm run build
 
       - name: Zip
-        run: zip -r chrome-extension.zip dist
+        run: zip -r taby.zip dist
 
-      - name: Publish
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: taby.zip
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          body: "Take a look at the assets to download and install this app."
+          draft: false
+          prerelease: false
+
+      - name: Publish to chrome web store
         run: |
-          npx chrome-webstore-upload upload \\
-          --source chrome-extension.zip \\
-          --extension-id ${{ secrets.EXTENSION_ID }} \\
-          --client-id ${{ secrets.CLIENT_ID }} \\
-          --client-secret ${{ secrets.CLIENT_SECRET }} \\
+          npx chrome-webstore-upload upload \
+          --source taby.zip \
+          --extension-id ${{ secrets.EXTENSION_ID }} \
+          --client-id ${{ secrets.CLIENT_ID }} \
+          --client-secret ${{ secrets.CLIENT_SECRET }} \
           --refresh-token ${{ secrets.REFRESH_TOKEN }}
