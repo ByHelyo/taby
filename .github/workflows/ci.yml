@@ -40,6 +40,8 @@ jobs:
   publish:
     if: github.ref == 'refs/heads/main'
     needs: checks
+    environment:
+      name: production
     permissions:
       contents: write
     runs-on: ubuntu-latest
