@@ -31,17 +31,19 @@
 }
 
 .taby-searchInput {
-  border-width: 0; /* Remove default border width */
-  border-radius: unset; /* Remove default border radius */
+  border-width: 0 !important; /* Remove default border width */
+  border-radius: unset !important; /* Remove default border radius */
+  margin: 0 !important;
 
-  width: 100%;
-  padding: 16px 16px 16px 48px;
-  font-size: 40px;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 16px 16px 16px 48px !important;
+  font-size: 40px !important;
 
   /* Remove default input bar properties */
-  color: inherit;
-  background-color: inherit;
-  font-family: inherit;
+  color: inherit !important;
+  background-color: inherit !important;
+  font-family: inherit !important;
 }
 
 .taby-searchInput:focus {
