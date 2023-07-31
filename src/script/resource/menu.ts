@@ -72,10 +72,7 @@ export class Menu {
   }
 
   handleOnInput(e: Event) {
-    this.handleSearchBar((<HTMLInputElement>e.target).value);
-  }
-
-  handleSearchBar(searchInput: string) {
+    const searchInput = (<HTMLInputElement>e.target).value;
     const options = {
       keys: ["title", "url", "index"],
     };
