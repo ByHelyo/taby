@@ -24,7 +24,7 @@ chrome.commands.onCommand.addListener(async function (command: string) {
             title: tab.title || "",
             url: tab.url || "",
             id: tab.id || 0,
-            index,
+            index: index + 1,
           };
         });
         return formattedTabs;
