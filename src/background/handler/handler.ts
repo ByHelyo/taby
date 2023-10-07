@@ -1,5 +1,6 @@
 import { Tab } from "../../type/misc.ts";
+import browser from "webextension-polyfill";
 
 export const handleRequestSwitchTab = function (tab: Tab) {
-  chrome.tabs.update(tab.id, { active: true });
+  browser.tabs.update(tab.id, { active: true });
 };

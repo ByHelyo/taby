@@ -5,6 +5,7 @@ import {
   Tab,
 } from "../../type/misc.ts";
 import { MenuComponent } from "../component/menuComponent.ts";
+import browser from "webextension-polyfill";
 
 export class Menu {
   selectedTab: Tab | null;
@@ -61,7 +62,7 @@ export class Menu {
             tab: selectedTab,
           };
 
-          chrome.runtime.sendMessage(message);
+          browser.runtime.sendMessage(message);
           this.closeMenu(); /* Close menu */
         }
         break;

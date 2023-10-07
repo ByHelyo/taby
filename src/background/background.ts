@@ -1,4 +1,5 @@
-import { handleRequestSwitchTab } from "./handler/handler.ts";
+import browser from "webextension-polyfill";
+import { handleRequestSwitchTab } from "./handler/handler";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
@@ -7,14 +8,14 @@ import {
   Tab,
 } from "../type/misc.ts";
 
-chrome.commands.onCommand.addListener(async function (command: string) {
+browser.commands.onCommand.addListener(async function (command: string) {
   if (command === "TOGGLE_MENU") {
-    const [currentTab] = await chrome.tabs.query({
+    const [currentTab] = await browser.tabs.query({
       active: true,
       lastFocusedWindow: true,
     });
 
-    const tabs: Tab[] = await chrome.tabs
+    const tabs: Tab[] = await browser.tabs
       .query({
         currentWindow: true,
       })
@@ -36,20 +37,20 @@ chrome.commands.onCommand.addListener(async function (command: string) {
     };
 
     if (currentTab.id) {
-      await chrome.tabs.sendMessage(currentTab.id, message);
+      await browser.tabs.sendMessage(currentTab.id, message);
     }
   }
 });
 
-chrome.runtime.onMessage.addListener(function (request: MessageFromScript) {
+browser.runtime.onMessage.addListener(function (request: MessageFromScript) {
   switch (request.type) {
     case MessageFromScriptType.REQUEST_SWITCH_TAB:
       handleRequestSwitchTab(request.tab);
   }
 });
 
-chrome.tabs.onActivated.addListener(async function () {
-  const [currentTab] = await chrome.tabs.query({
+browser.tabs.onActivated.addListener(async function () {
+  const [currentTab] = await browser.tabs.query({
     active: true,
     lastFocusedWindow: true,
   });
@@ -59,6 +60,6 @@ chrome.tabs.onActivated.addListener(async function () {
   };
 
   if (currentTab.id) {
-    await chrome.tabs.sendMessage(currentTab.id, message);
+    await browser.tabs.sendMessage(currentTab.id, message);
   }
 });

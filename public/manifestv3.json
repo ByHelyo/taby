@@ -2,26 +2,26 @@
   "manifest_version": 3,
   "name": "Taby",
   "description": "A tab switcher",
-  "version": "1.1",
+  "version": "1.2",
   "author": "Franck Hu",
   "permissions": ["tabs"],
-  "icons": {
-    "128": "icons/icon-128.png"
+  "action": {
+    "default_popup": "./src/popup/popup.html",
+    "default_title": "Open the popup"
   },
   "content_scripts": [
     {
-      "js": ["src/script/content-script.ts"],
-      "matches": ["<all_urls>"]
+      "matches": ["<all_urls>"],
+      "run_at": "document_end",
+      "js": ["./index.global.js"],
+      "css": ["./style.css"]
     }
   ],
   "background": {
-    "service_worker": "src/background/service-worker.ts",
-    "type": "module"
+    "service_worker": "./background.global.js"
   },
-  "action": {
-    "default_icon": {
-      "128": "icons/icon-128.png"
-    }
+  "icons": {
+    "128": "icon-128.png"
   },
   "commands": {
     "TOGGLE_MENU": {
