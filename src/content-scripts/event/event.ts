@@ -4,9 +4,10 @@ import {
   MessageFromBackgroundType,
 } from "../../type/misc";
 import { Menu } from "../resource/menu.ts";
+import browser from "webextension-polyfill";
 
 export const eventBackground = function (menu: Menu) {
-  chrome.runtime.onMessage.addListener(
+  browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
         menu.isDisplayed()

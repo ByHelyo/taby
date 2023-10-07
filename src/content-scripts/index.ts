@@ -1,4 +1,4 @@
-import "./content-script.css";
+import "./index.css";
 import { Menu } from "./resource/menu";
 import "./event/event";
 import { eventOutsideMenu, eventBackground } from "./event/event";

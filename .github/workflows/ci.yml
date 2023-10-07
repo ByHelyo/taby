@@ -61,7 +61,7 @@ jobs:
           cache: "pnpm"
 
       - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./manifest.json').version")" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: pnpm install

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Taby",
+  "description": "A tab switcher",
+  "version": "1.2",
+  "author": "Franck Hu",
+  "permissions": ["tabs"],
+  "optional_permissions": ["<all_urls>"],
+  "browser_action": {
+    "default_popup": "./src/popup/popup.html",
+    "default_title": "Open the popup"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_end",
+      "js": ["./index.global.js"],
+      "css": ["./style.css"]
+    }
+  ],
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": false
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "commands": {
+    "TOGGLE_MENU": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "Toggle Taby menu"
+    }
+  }
+}
