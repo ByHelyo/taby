@@ -13,8 +13,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "check": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky install",
-    "publish": "chrome-webstore-upload-cli"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",

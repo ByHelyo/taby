@@ -33,3 +33,24 @@ efficient way to navigate between tabs.
 - `Alt+C` to open/close the menu.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
+
+<h2>Build</h2>
+
+Requirements:
+
+- pnpm 8
+- Node 18
+
+Once you've met the requirements and cloned the project, download the dependencies with `pnpm install`.
+
+<h3>Build for Chrome</h3>
+
+```bash
+ pnpm run build:chrome
+```
+
+<h3>Build for Firefox</h3>
+
+```bash
+ pnpm run build
+```
