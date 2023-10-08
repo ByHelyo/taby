@@ -1,7 +1,7 @@
 import { MenuDOM } from "../dom/menuDOM.ts";
 import { Tab } from "../../type/misc.ts";
 
-export class MenuComponent {
+export class MenuService {
   dom: MenuDOM;
 
   constructor() {

@@ -4,22 +4,22 @@ import {
   MessageFromScriptType,
   Tab,
 } from "../../type/misc.ts";
-import { MenuComponent } from "../component/menuComponent.ts";
+import { MenuService } from "../service/menuService.ts";
 import browser from "webextension-polyfill";
 
 export class Menu {
   selectedTab: Tab | null;
   tabs: Tab[];
-  menuComponent: MenuComponent;
+  menuService: MenuService;
   display: boolean;
 
   constructor() {
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.menuComponent = new MenuComponent();
-    this.menuComponent.onInput((e) => this.handleOnInput(e));
-    this.menuComponent.onKeyDown((e) => this.handleOnKeyDown(e));
+    this.menuService = new MenuService();
+    this.menuService.onInput((e) => this.handleOnInput(e));
+    this.menuService.onKeyDown((e) => this.handleOnKeyDown(e));
   }
 
   setTabs(tabs: Tab[]) {
@@ -43,11 +43,11 @@ export class Menu {
 
     this.setTabs(tabs);
     this.display = true;
-    this.menuComponent.openMenu(tabs);
+    this.menuService.openMenu(tabs);
   }
 
   closeMenu() {
-    this.menuComponent.displays(false);
+    this.menuService.displays(false);
     this.display = false;
   }
 
@@ -80,7 +80,7 @@ export class Menu {
 
     if (searchInput === "") {
       this.setSelectedTab(this.tabs[0]);
-      this.menuComponent.updateSearchList(this.tabs);
+      this.menuService.updateSearchList(this.tabs);
       return;
     }
 
@@ -101,6 +101,6 @@ export class Menu {
       this.setSelectedTab(null);
     }
 
-    this.menuComponent.updateSearchList(matched);
+    this.menuService.updateSearchList(matched);
   }
 }

@@ -67,9 +67,9 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run build
+        run: pnpm run build:chrome
 
-      - name: Zip
+      - name: Zip for chrome
         run: zip -r taby.zip dist
 
       - name: Publish release
@@ -90,3 +90,12 @@ jobs:
           --client-secret ${{ secrets.CLIENT_SECRET }} \
           --refresh-token ${{ secrets.REFRESH_TOKEN }} \
           --auto-publish
+
+      - name: Zip for firefox
+        run: zip -r taby.zip *
+
+      - name: Publish to firefox
+        run: |
+          npx web-ext sign 
+          --api-key ${{ secrets.JWT_ISSUER }} \
+          --api-secret ${{ secrets.JWT_SECRET }}
