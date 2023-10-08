@@ -53,6 +53,7 @@ export class Menu {
 
   handleOnKeyDown(e: KeyboardEvent) {
     const selectedTab = this.getSelectedTab();
+    console.log(e.key);
 
     switch (e.key) {
       case "Enter":
@@ -68,6 +69,10 @@ export class Menu {
         break;
       case "Escape":
         this.closeMenu(); /* Close menu */
+        break;
+      case "ArrowUp":
+        break;
+      case "ArrowDown":
         break;
     }
   }

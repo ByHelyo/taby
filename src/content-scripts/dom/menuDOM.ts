@@ -36,12 +36,12 @@ export class MenuDOM {
 
   addSearchItems(tabs: Tab[]) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.index, tab.title, tab.url);
+      this.addSearchItem(tab.index, tab.title);
     });
   }
 
-  addSearchItem(index: number, title: string, url: string) {
-    this.searchList.appendChild(buildSearchItem(index, title, url));
+  addSearchItem(index: number, title: string) {
+    this.searchList.appendChild(buildSearchItem(index, title));
   }
 
   clearSearchInput() {

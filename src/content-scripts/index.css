@@ -38,7 +38,7 @@
   width: 100% !important;
   height: 100% !important;
   padding: 16px 16px 16px 48px !important;
-  font-size: 40px !important;
+  font-size: 24px !important;
 
   /* Remove default input bar properties */
   color: inherit !important;
@@ -59,7 +59,7 @@
   overflow: scroll;
 
   /* Children */
-  font-size: 30px;
+  font-size: 16px;
 }
 
 /* Remove scroll bar */
@@ -80,13 +80,8 @@
 
 .taby-searchIndex {
   margin-right: 16px;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: bolder;
-}
-
-.taby-searchUrl {
-  font-style: italic;
-  font-size: 18px;
 }
 
 .taby-searchItem:first-child {
