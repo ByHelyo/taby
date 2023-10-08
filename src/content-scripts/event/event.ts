@@ -24,7 +24,7 @@ export const eventBackground = function (menu: Menu) {
 /* Remove menu if clicking outside */
 export const eventOutsideMenu = function (menu: Menu) {
   window.addEventListener("click", function (e) {
-    if (!menu.menuComponent.contains(e.target as HTMLElement)) {
+    if (!menu.menuService.contains(e.target as HTMLElement)) {
       menu.closeMenu();
     }
   });

@@ -7,7 +7,7 @@ const body = document.querySelector("body");
 const menu = new Menu();
 
 if (body) {
-  body.appendChild(menu.menuComponent.dom.menu);
+  body.appendChild(menu.menuService.dom.menu);
 }
 
 eventBackground(menu);
