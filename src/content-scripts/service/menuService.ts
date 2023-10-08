@@ -14,13 +14,17 @@ export class MenuService {
     this.dom.focusSearchInput();
   }
 
-  updateSearchList(tabs: Tab[]) {
+  setSearchList(tabs: Tab[]) {
     this.dom.clearSearchList();
     this.dom.addSearchItems(tabs);
   }
 
-  updateSelectedTab(tab: Tab) {
-    this.dom.replaceClassSearchList(tab.index + 1, "taby-active");
+  selectSearchList(tab: Tab) {
+    this.dom.selectSearchList(tab.index);
+  }
+
+  selectFirstSearchList() {
+    this.dom.selectFirstSearchList();
   }
 
   displays(show: boolean) {
