@@ -34,17 +34,12 @@ export const buildSearchList = function (): HTMLUListElement {
   return searchList;
 };
 
-export const buildSearchItem = function (
-  index: number,
-  title: string,
-  url: string
-) {
+export const buildSearchItem = function (index: number, title: string) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
 
   searchItem.appendChild(buildSearchIndex(index));
   searchItem.append(buildSearchTitle(title));
-  searchItem.appendChild(buildSearchUrl(url));
   return searchItem;
 };
 
@@ -62,12 +57,4 @@ const buildSearchTitle = function (title: string) {
   searchTitle.classList.add("taby-searchTitle");
 
   return searchTitle;
-};
-
-const buildSearchUrl = function (url: string) {
-  const searchUrl = document.createElement("span");
-  searchUrl.classList.add("taby-searchUrl");
-  searchUrl.innerText = url;
-
-  return searchUrl;
 };
