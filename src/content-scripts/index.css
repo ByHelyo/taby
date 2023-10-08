@@ -15,9 +15,12 @@
   border-radius: 8px;
 
   /* Children elements */
-  background-color: #1b1212;
+  background-color: #ffffff7d;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
+  backdrop-filter: blur(33px);
+  background-blend-mode: overlay;
   font-family: sans-serif;
-  color: #ffffff;
+  color: rgba(0,0,0,0.8);
   line-height: 1.5;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,6 +45,7 @@
 
   /* Remove default input bar properties */
   color: inherit !important;
+  font-weight: bold;
   background-color: inherit !important;
   font-family: inherit !important;
 }
