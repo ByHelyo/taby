@@ -20,7 +20,7 @@
   backdrop-filter: blur(33px);
   background-blend-mode: overlay;
   font-family: sans-serif;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
   line-height: 1.5;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

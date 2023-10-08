@@ -26,6 +26,10 @@ export class Menu {
     this.tabs = tabs;
   }
 
+  getTabs(): Tab[] {
+    return this.tabs;
+  }
+
   getSelectedTab() {
     return this.selectedTab;
   }
@@ -39,9 +43,9 @@ export class Menu {
   }
 
   openMenu(tabs: Tab[]) {
-    this.setSelectedTab(null);
-
     this.setTabs(tabs);
+    this.setSelectedTab(this.getTabs()[0]);
+
     this.display = true;
     this.menuService.openMenu(tabs);
   }
@@ -51,9 +55,30 @@ export class Menu {
     this.display = false;
   }
 
+  moveUp() {
+    const selectedTab = this.getSelectedTab();
+    if (!selectedTab) {
+      return;
+    }
+    const n = this.getTabs().length;
+    const nextIndex = (selectedTab.index - 1) % n;
+
+    this.setSelectedTab(this.getTabs()[nextIndex]);
+  }
+
+  moveDown() {
+    const selectedTab = this.getSelectedTab();
+    if (!selectedTab) {
+      return;
+    }
+    const n = this.getTabs().length;
+    const nextIndex = (selectedTab.index + 1) % n;
+
+    this.setSelectedTab(this.getTabs()[nextIndex]);
+  }
+
   handleOnKeyDown(e: KeyboardEvent) {
     const selectedTab = this.getSelectedTab();
-    console.log(e.key);
 
     switch (e.key) {
       case "Enter":
@@ -71,8 +96,10 @@ export class Menu {
         this.closeMenu(); /* Close menu */
         break;
       case "ArrowUp":
+        this.moveUp();
         break;
       case "ArrowDown":
+        this.moveDown();
         break;
     }
   }
@@ -84,12 +111,12 @@ export class Menu {
     };
 
     if (searchInput === "") {
-      this.setSelectedTab(this.tabs[0]);
-      this.menuService.updateSearchList(this.tabs);
+      this.setSelectedTab(this.getTabs()[0]);
+      this.menuService.updateSearchList(this.getTabs());
       return;
     }
 
-    const fuse = new Fuse(this.tabs, options);
+    const fuse = new Fuse(this.getTabs(), options);
 
     const matched: Tab[] = fuse.search(searchInput).map((tab) => {
       return {
