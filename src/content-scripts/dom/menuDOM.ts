@@ -70,6 +70,6 @@ export class MenuDOM {
   }
 
   onKeyDown(callback: (event: KeyboardEvent) => void) {
-    this.searchInput.addEventListener("keyup", callback);
+    this.searchInput.addEventListener("keydown", callback);
   }
 }
