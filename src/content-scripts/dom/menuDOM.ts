@@ -36,7 +36,7 @@ export class MenuDOM {
 
   addSearchItems(tabs: Tab[]) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.index, tab.title);
+      this.addSearchItem(tab.index + 1, tab.title);
     });
   }
 
@@ -46,6 +46,19 @@ export class MenuDOM {
 
   clearSearchInput() {
     this.searchInput.value = "";
+  }
+
+  replaceClassSearchList(nth: number, className: string) {
+    const previousSelectedTab = this.searchList.querySelector(".taby-active");
+    if (previousSelectedTab) {
+      previousSelectedTab.classList.remove(className);
+    }
+
+    const newSelectedTab = this.searchList.querySelector(
+      `li:nth-of-type(${nth})`
+    );
+
+    newSelectedTab?.classList.add(className);
   }
 
   contains(elt: HTMLElement): boolean {

@@ -88,6 +88,6 @@
   font-weight: bolder;
 }
 
-.taby-searchItem:first-child {
+.taby-active {
   background: #007fff;
 }

@@ -24,6 +24,7 @@ export class Menu {
 
   setTabs(tabs: Tab[]) {
     this.tabs = tabs;
+    this.menuService.updateSearchList(tabs);
   }
 
   getTabs(): Tab[] {
@@ -36,18 +37,19 @@ export class Menu {
 
   setSelectedTab(tab: Tab | null) {
     this.selectedTab = tab;
+
+    if (tab) {
+      this.menuService.updateSelectedTab(tab);
+    }
   }
 
   isDisplayed(): boolean {
     return this.display;
   }
 
-  openMenu(tabs: Tab[]) {
-    this.setTabs(tabs);
-    this.setSelectedTab(this.getTabs()[0]);
-
+  openMenu() {
     this.display = true;
-    this.menuService.openMenu(tabs);
+    this.menuService.openMenu();
   }
 
   closeMenu() {
@@ -61,7 +63,7 @@ export class Menu {
       return;
     }
     const n = this.getTabs().length;
-    const nextIndex = (selectedTab.index - 1) % n;
+    const nextIndex = (selectedTab.index - 1 + n) % n;
 
     this.setSelectedTab(this.getTabs()[nextIndex]);
   }

@@ -8,17 +8,19 @@ export class MenuService {
     this.dom = new MenuDOM();
   }
 
-  openMenu(tabs: Tab[]) {
+  openMenu() {
     this.dom.displays(true);
     this.dom.clearSearchInput();
     this.dom.focusSearchInput();
-    this.dom.clearSearchList();
-    this.dom.addSearchItems(tabs);
   }
 
   updateSearchList(tabs: Tab[]) {
     this.dom.clearSearchList();
     this.dom.addSearchItems(tabs);
+  }
+
+  updateSelectedTab(tab: Tab) {
+    this.dom.replaceClassSearchList(tab.index + 1, "taby-active");
   }
 
   displays(show: boolean) {
