@@ -11,7 +11,7 @@
 </div>
 
 <div align=center>
-  <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/7e8358c0-9307-4f43-bd37-54ca7f98aa1c" />
+  <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/10166fe0-adb3-427f-a296-ca70bdb91936" />
 </div>
 
 <h2>About</h2>
@@ -33,6 +33,7 @@ efficient way to navigate between tabs.
 - `Alt+C` to open/close the menu.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
+- `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.
 
 <h2>Build</h2>
 
