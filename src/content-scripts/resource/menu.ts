@@ -10,14 +10,14 @@ import browser from "webextension-polyfill";
 export class Menu {
   selectedTab: Tab | null;
   tabs: Tab[];
-  matchedTabs: Tab[];
+  displayedTabs: Tab[];
   menuService: MenuService;
   display: boolean;
 
   constructor() {
     this.selectedTab = null;
     this.tabs = [];
-    this.matchedTabs = [];
+    this.displayedTabs = [];
     this.display = false;
     this.menuService = new MenuService();
     this.menuService.onInput((e) => this.handleOnInput(e));
@@ -32,13 +32,13 @@ export class Menu {
     return this.tabs;
   }
 
-  setMatchedTabs(tabs: Tab[]) {
-    this.matchedTabs = tabs;
+  setDisplayedTabs(tabs: Tab[]) {
+    this.displayedTabs = tabs;
     this.menuService.setSearchList(tabs);
   }
 
-  getMatchedTabs(): Tab[] {
-    return this.matchedTabs;
+  getDisplayedTabs(): Tab[] {
+    return this.displayedTabs;
   }
 
   getSelectedTab() {
@@ -72,10 +72,10 @@ export class Menu {
       return;
     }
 
-    const n = this.getMatchedTabs().length;
+    const n = this.getDisplayedTabs().length;
     const nextIndex = (selectedTab.internalIndex - 1 + n) % n;
 
-    this.setSelectedTab(this.getMatchedTabs()[nextIndex]);
+    this.setSelectedTab(this.getDisplayedTabs()[nextIndex]);
   }
 
   moveDown() {
@@ -83,10 +83,10 @@ export class Menu {
     if (!selectedTab) {
       return;
     }
-    const n = this.getMatchedTabs().length;
+    const n = this.getDisplayedTabs().length;
     const nextIndex = (selectedTab.internalIndex + 1) % n;
 
-    this.setSelectedTab(this.getMatchedTabs()[nextIndex]);
+    this.setSelectedTab(this.getDisplayedTabs()[nextIndex]);
   }
 
   handleOnKeyDown(e: KeyboardEvent) {
@@ -123,7 +123,7 @@ export class Menu {
     };
 
     if (searchInput === "") {
-      this.menuService.setSearchList(this.getTabs());
+      this.setDisplayedTabs(this.getTabs());
       this.setSelectedTab(this.getTabs()[0]);
       return;
     }
@@ -140,7 +140,7 @@ export class Menu {
       };
     });
 
-    this.setMatchedTabs(matched);
+    this.setDisplayedTabs(matched);
 
     if (matched.length > 0) {
       this.setSelectedTab(matched[0]);

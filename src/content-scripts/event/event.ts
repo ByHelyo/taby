@@ -17,7 +17,7 @@ export const eventBackground = function (menu: Menu) {
           const tabs = request.tabs || [];
           menu.openMenu();
           menu.setTabs(tabs);
-          menu.setMatchedTabs(tabs);
+          menu.setDisplayedTabs(tabs);
           menu.setSelectedTab(tabs[0]);
         }
       }
