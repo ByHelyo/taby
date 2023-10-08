@@ -99,6 +99,6 @@ jobs:
 
       - name: Publish to firefox
         run: |
-          npx web-ext sign 
+          npx web-ext sign \
           --api-key ${{ secrets.JWT_ISSUER }} \
           --api-secret ${{ secrets.JWT_SECRET }}
