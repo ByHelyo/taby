@@ -24,7 +24,7 @@ export class Menu {
 
   setTabs(tabs: Tab[]) {
     this.tabs = tabs;
-    this.menuService.updateSearchList(tabs);
+    this.menuService.setSearchList(tabs);
   }
 
   getTabs(): Tab[] {
@@ -37,10 +37,13 @@ export class Menu {
 
   setSelectedTab(tab: Tab | null) {
     this.selectedTab = tab;
-
     if (tab) {
-      this.menuService.updateSelectedTab(tab);
+      this.menuService.selectSearchList(tab);
     }
+  }
+
+  selectFirstTab() {
+    this.menuService.selectFirstSearchList();
   }
 
   isDisplayed(): boolean {
@@ -63,7 +66,7 @@ export class Menu {
       return;
     }
     const n = this.getTabs().length;
-    const nextIndex = (selectedTab.index - 1 + n) % n;
+    const nextIndex = (selectedTab.index - 2 + n) % n;
 
     this.setSelectedTab(this.getTabs()[nextIndex]);
   }
@@ -74,7 +77,7 @@ export class Menu {
       return;
     }
     const n = this.getTabs().length;
-    const nextIndex = (selectedTab.index + 1) % n;
+    const nextIndex = selectedTab.index % n;
 
     this.setSelectedTab(this.getTabs()[nextIndex]);
   }
@@ -113,8 +116,8 @@ export class Menu {
     };
 
     if (searchInput === "") {
+      this.menuService.setSearchList(this.getTabs());
       this.setSelectedTab(this.getTabs()[0]);
-      this.menuService.updateSearchList(this.getTabs());
       return;
     }
 
@@ -129,12 +132,12 @@ export class Menu {
       };
     });
 
+    this.menuService.setSearchList(matched);
+
     if (matched.length !== 0) {
-      this.setSelectedTab(matched[0]);
+      this.selectFirstTab();
     } else {
       this.setSelectedTab(null);
     }
-
-    this.menuService.updateSearchList(matched);
   }
 }

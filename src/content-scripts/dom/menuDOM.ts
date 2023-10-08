@@ -36,7 +36,7 @@ export class MenuDOM {
 
   addSearchItems(tabs: Tab[]) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.index + 1, tab.title);
+      this.addSearchItem(tab.index, tab.title);
     });
   }
 
@@ -48,17 +48,28 @@ export class MenuDOM {
     this.searchInput.value = "";
   }
 
-  replaceClassSearchList(nth: number, className: string) {
+  selectSearchList(nth: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {
-      previousSelectedTab.classList.remove(className);
+      previousSelectedTab.classList.remove("taby-active");
     }
 
     const newSelectedTab = this.searchList.querySelector(
       `li:nth-of-type(${nth})`
     );
 
-    newSelectedTab?.classList.add(className);
+    newSelectedTab?.classList.add("taby-active");
+  }
+
+  selectFirstSearchList() {
+    const previousSelectedTab = this.searchList.querySelector(".taby-active");
+    if (previousSelectedTab) {
+      previousSelectedTab.classList.remove("taby-active");
+    }
+
+    const newSelectedTab = this.searchList.querySelector(`li:nth-of-type(1)`);
+
+    newSelectedTab?.classList.add("taby-active");
   }
 
   contains(elt: HTMLElement): boolean {
