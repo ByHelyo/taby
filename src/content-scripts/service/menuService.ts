@@ -20,11 +20,7 @@ export class MenuService {
   }
 
   selectSearchList(tab: Tab) {
-    this.dom.selectSearchList(tab.index);
-  }
-
-  selectFirstSearchList() {
-    this.dom.selectFirstSearchList();
+    this.dom.selectItemSearchList(tab.internalIndex);
   }
 
   displays(show: boolean) {

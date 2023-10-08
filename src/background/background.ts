@@ -25,7 +25,8 @@ browser.commands.onCommand.addListener(async function (command: string) {
             title: tab.title || "",
             url: tab.url || "",
             id: tab.id || 0,
-            index: index + 1,
+            key: index + 1,
+            internalIndex: index,
           };
         });
         return formattedTabs;
