@@ -21,5 +21,6 @@ export interface Tab {
   title: string;
   url: string;
   id: number;
-  index: number;
+  key: number;
+  internalIndex: number;
 }

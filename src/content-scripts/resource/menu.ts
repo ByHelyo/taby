@@ -10,12 +10,14 @@ import browser from "webextension-polyfill";
 export class Menu {
   selectedTab: Tab | null;
   tabs: Tab[];
+  matchedTabs: Tab[];
   menuService: MenuService;
   display: boolean;
 
   constructor() {
     this.selectedTab = null;
     this.tabs = [];
+    this.matchedTabs = [];
     this.display = false;
     this.menuService = new MenuService();
     this.menuService.onInput((e) => this.handleOnInput(e));
@@ -24,11 +26,19 @@ export class Menu {
 
   setTabs(tabs: Tab[]) {
     this.tabs = tabs;
-    this.menuService.setSearchList(tabs);
   }
 
   getTabs(): Tab[] {
     return this.tabs;
+  }
+
+  setMatchedTabs(tabs: Tab[]) {
+    this.matchedTabs = tabs;
+    this.menuService.setSearchList(tabs);
+  }
+
+  getMatchedTabs(): Tab[] {
+    return this.matchedTabs;
   }
 
   getSelectedTab() {
@@ -40,10 +50,6 @@ export class Menu {
     if (tab) {
       this.menuService.selectSearchList(tab);
     }
-  }
-
-  selectFirstTab() {
-    this.menuService.selectFirstSearchList();
   }
 
   isDisplayed(): boolean {
@@ -65,10 +71,11 @@ export class Menu {
     if (!selectedTab) {
       return;
     }
-    const n = this.getTabs().length;
-    const nextIndex = (selectedTab.index - 2 + n) % n;
 
-    this.setSelectedTab(this.getTabs()[nextIndex]);
+    const n = this.getMatchedTabs().length;
+    const nextIndex = (selectedTab.internalIndex - 1 + n) % n;
+
+    this.setSelectedTab(this.getMatchedTabs()[nextIndex]);
   }
 
   moveDown() {
@@ -76,10 +83,10 @@ export class Menu {
     if (!selectedTab) {
       return;
     }
-    const n = this.getTabs().length;
-    const nextIndex = selectedTab.index % n;
+    const n = this.getMatchedTabs().length;
+    const nextIndex = (selectedTab.internalIndex + 1) % n;
 
-    this.setSelectedTab(this.getTabs()[nextIndex]);
+    this.setSelectedTab(this.getMatchedTabs()[nextIndex]);
   }
 
   handleOnKeyDown(e: KeyboardEvent) {
@@ -112,7 +119,7 @@ export class Menu {
   handleOnInput(e: Event) {
     const searchInput = (<HTMLInputElement>e.target).value;
     const options = {
-      keys: ["title", "url", "index"],
+      keys: ["title", "url", "key"],
     };
 
     if (searchInput === "") {
@@ -123,19 +130,20 @@ export class Menu {
 
     const fuse = new Fuse(this.getTabs(), options);
 
-    const matched: Tab[] = fuse.search(searchInput).map((tab) => {
+    const matched: Tab[] = fuse.search(searchInput).map((tab, ind) => {
       return {
         url: tab.item.url,
         title: tab.item.title,
         id: tab.item.id,
-        index: tab.item.index,
+        key: tab.item.key,
+        internalIndex: ind,
       };
     });
 
-    this.menuService.setSearchList(matched);
+    this.setMatchedTabs(matched);
 
-    if (matched.length !== 0) {
-      this.selectFirstTab();
+    if (matched.length > 0) {
+      this.setSelectedTab(matched[0]);
     } else {
       this.setSelectedTab(null);
     }

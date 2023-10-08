@@ -36,7 +36,7 @@ export class MenuDOM {
 
   addSearchItems(tabs: Tab[]) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.index, tab.title);
+      this.addSearchItem(tab.key, tab.title);
     });
   }
 
@@ -48,26 +48,15 @@ export class MenuDOM {
     this.searchInput.value = "";
   }
 
-  selectSearchList(nth: number) {
+  selectItemSearchList(nth: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {
       previousSelectedTab.classList.remove("taby-active");
     }
 
     const newSelectedTab = this.searchList.querySelector(
-      `li:nth-of-type(${nth})`
+      `li:nth-of-type(${nth + 1})`
     );
-
-    newSelectedTab?.classList.add("taby-active");
-  }
-
-  selectFirstSearchList() {
-    const previousSelectedTab = this.searchList.querySelector(".taby-active");
-    if (previousSelectedTab) {
-      previousSelectedTab.classList.remove("taby-active");
-    }
-
-    const newSelectedTab = this.searchList.querySelector(`li:nth-of-type(1)`);
 
     newSelectedTab?.classList.add("taby-active");
   }
@@ -81,6 +70,6 @@ export class MenuDOM {
   }
 
   onKeyDown(callback: (event: KeyboardEvent) => void) {
-    this.searchInput.addEventListener("keydown", callback);
+    this.searchInput.addEventListener("keyup", callback);
   }
 }
