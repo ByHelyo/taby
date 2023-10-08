@@ -1,6 +1,6 @@
 export const buildMenu = function (
   search: HTMLDivElement,
-  searchList: HTMLUListElement
+  searchList: HTMLUListElement,
 ): HTMLDivElement {
   const menu = document.createElement("div");
   menu.classList.add("taby-menu");
@@ -11,7 +11,7 @@ export const buildMenu = function (
 };
 
 export const buildSearch = function (
-  searchInput: HTMLInputElement
+  searchInput: HTMLInputElement,
 ): HTMLDivElement {
   const search = document.createElement("div");
   search.classList.add("taby-search");

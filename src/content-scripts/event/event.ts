@@ -24,7 +24,7 @@ export const eventBackground = function (menu: Menu) {
       if (request.type == MessageFromBackgroundType.USER_SWITCHES_TAB) {
         menu.isDisplayed() && menu.closeMenu();
       }
-    }
+    },
   );
 };
 

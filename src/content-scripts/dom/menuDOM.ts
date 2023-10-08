@@ -55,7 +55,7 @@ export class MenuDOM {
     }
 
     const newSelectedTab = this.searchList.querySelector(
-      `li:nth-of-type(${nth + 1})`
+      `li:nth-of-type(${nth + 1})`,
     );
 
     newSelectedTab?.classList.add("taby-active");
