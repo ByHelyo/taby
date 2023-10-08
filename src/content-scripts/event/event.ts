@@ -10,9 +10,15 @@ export const eventBackground = function (menu: Menu) {
   browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
-        menu.isDisplayed()
-          ? menu.closeMenu()
-          : menu.openMenu(request.tabs || []);
+        if (menu.isDisplayed()) {
+          menu.closeMenu();
+        } else {
+          // TODO set tabs and set selected tabs
+          const tabs = request.tabs || [];
+          menu.openMenu();
+          menu.setTabs(tabs);
+          menu.setSelectedTab(tabs[0]);
+        }
       }
       if (request.type == MessageFromBackgroundType.USER_SWITCHES_TAB) {
         menu.isDisplayed() && menu.closeMenu();
