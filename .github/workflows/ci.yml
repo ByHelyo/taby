@@ -82,23 +82,21 @@ jobs:
           prerelease: false
 
       - name: Publish to chrome web store
-        run: |
-          npx chrome-webstore-upload upload \
-          --source taby.zip \
-          --extension-id ${{ secrets.EXTENSION_ID }} \
-          --client-id ${{ secrets.CLIENT_ID }} \
-          --client-secret ${{ secrets.CLIENT_SECRET }} \
-          --refresh-token ${{ secrets.REFRESH_TOKEN }} \
-          --auto-publish
+        run: pnpm run publish:chrome
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          CLIENT_REFRESH: ${{ secrets.REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
 
       - name: Build for firefox
-        run: pnpm run build
+        run: pnpm run build:firefox
 
       - name: move to dist/
         run: cd dist/
 
       - name: Publish to firefox
-        run: |
-          npx web-ext sign \
-          --api-key ${{ secrets.JWT_ISSUER }} \
-          --api-secret ${{ secrets.JWT_SECRET }}
+        run: pnpm run publish:firefox
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}

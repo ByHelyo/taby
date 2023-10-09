@@ -8,12 +8,14 @@
     "build:background:chrome": "vite build --config vite.chrome.background.config.ts",
     "build:js": "vite build --config vite.content.config.ts",
     "build:web": "tsc && vite build",
-    "build": "NODE_ENV=production run-s build:js build:web",
+    "build:firefox": "NODE_ENV=production run-s build:js build:web",
     "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "check": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
+    "publish:firefox": "web-ext sign --use-submit-api --channel listed"
   },
   "repository": {
     "type": "git",
