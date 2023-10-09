@@ -86,7 +86,7 @@ jobs:
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          CLIENT_REFRESH: ${{ secrets.REFRESH_TOKEN }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
 
       - name: Build for firefox
