@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
-    "publish:firefox": "web-ext sign --use-submit-api --channel listed"
+    "publish:firefox": "cd dist/ && web-ext sign --use-submission-api --channel listed"
   },
   "repository": {
     "type": "git",

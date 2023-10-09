@@ -32,5 +32,10 @@
       },
       "description": "Toggle Taby menu"
     }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{48ab5564-d35c-4a64-bc4f-df2bd56f56f4}"
+    }
   }
 }
