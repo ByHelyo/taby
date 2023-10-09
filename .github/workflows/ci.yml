@@ -100,3 +100,4 @@ jobs:
         env:
           WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
           WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
+          WEB_EXT_ID: ${{ secrets.WEB_EXT_ID }}
