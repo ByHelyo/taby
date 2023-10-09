@@ -92,12 +92,8 @@ jobs:
       - name: Build for firefox
         run: pnpm run build:firefox
 
-      - name: move to dist/
-        run: cd dist/
-
       - name: Publish to firefox
         run: pnpm run publish:firefox
         env:
           WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
           WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
-          WEB_EXT_ID: ${{ secrets.WEB_EXT_ID }}
