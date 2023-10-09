@@ -53,5 +53,5 @@ Once you've met the requirements and cloned the project, download the dependenci
 <h3>Build for Firefox</h3>
 
 ```bash
- pnpm run build
+ pnpm run build:firefox
 ```
