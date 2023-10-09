@@ -36,12 +36,7 @@
 .taby-searchInput {
   all: unset !important;
   display: flex !important;
-  border-width: 0 !important; /* Remove default border width */
-  border-radius: unset !important; /* Remove default border radius */
-  margin: 0 !important;
 
-  width: 100% !important;
-  height: 100% !important;
   padding: 16px 16px 16px 48px !important;
   font-size: 24px !important;
 
