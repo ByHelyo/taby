@@ -3,10 +3,10 @@ import {
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../../type/misc";
-import { Menu } from "../resource/menu.ts";
+import { MenuService } from "../service/menuService.ts";
 import browser from "webextension-polyfill";
 
-export const eventBackground = function (menu: Menu) {
+export const eventBackground = function (menu: MenuService) {
   browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
@@ -29,9 +29,9 @@ export const eventBackground = function (menu: Menu) {
 };
 
 /* Remove menu if clicking outside */
-export const eventOutsideMenu = function (menu: Menu) {
+export const eventOutsideMenu = function (menu: MenuService) {
   window.addEventListener("click", function (e) {
-    if (!menu.menuService.contains(e.target as HTMLElement)) {
+    if (!menu.menuRepository.contains(e.target as HTMLElement)) {
       menu.closeMenu();
     }
   });

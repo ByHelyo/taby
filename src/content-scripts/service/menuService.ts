@@ -1,41 +1,168 @@
-import { MenuDOM } from "../dom/menuDOM.ts";
-import { Tab } from "../../type/misc.ts";
+import Fuse from "fuse.js";
+import {
+  MessageFromScript,
+  MessageFromScriptType,
+  Tab,
+} from "../../type/misc.ts";
+import { MenuRepository } from "../repository/menuRepository.ts";
+import browser from "webextension-polyfill";
 
 export class MenuService {
-  dom: MenuDOM;
+  selectedTab: Tab | null;
+  tabs: Tab[];
+  displayedTabs: Tab[];
+  menuRepository: MenuRepository;
+  display: boolean;
 
   constructor() {
-    this.dom = new MenuDOM();
+    this.selectedTab = null;
+    this.tabs = [];
+    this.displayedTabs = [];
+    this.display = false;
+    this.menuRepository = new MenuRepository();
+    this.menuRepository.onInput((e) => this.handleOnInput(e));
+    this.menuRepository.onKeyDown((e) => this.handleOnKeyDown(e));
+  }
+
+  setTabs(tabs: Tab[]) {
+    this.tabs = tabs;
+  }
+
+  getTabs(): Tab[] {
+    return this.tabs;
+  }
+
+  setDisplayedTabs(tabs: Tab[]) {
+    this.displayedTabs = tabs;
+    this.menuRepository.setSearchList(tabs, (internalIndex: number) =>
+      this.handleOnClick(internalIndex),
+    );
+  }
+
+  getDisplayedTabs(): Tab[] {
+    return this.displayedTabs;
+  }
+
+  getSelectedTab() {
+    return this.selectedTab;
+  }
+
+  setSelectedTab(tab: Tab | null) {
+    this.selectedTab = tab;
+    if (tab) {
+      this.menuRepository.selectSearchList(tab);
+    }
+  }
+
+  isDisplayed(): boolean {
+    return this.display;
   }
 
   openMenu() {
-    this.dom.displays(true);
-    this.dom.clearSearchInput();
-    this.dom.focusSearchInput();
+    this.display = true;
+    this.menuRepository.openMenu();
   }
 
-  setSearchList(tabs: Tab[], callback: (internalIndex: number) => void) {
-    this.dom.clearSearchList();
-    this.dom.addSearchItems(tabs, callback);
+  closeMenu() {
+    this.menuRepository.displays(false);
+    this.display = false;
   }
 
-  selectSearchList(tab: Tab) {
-    this.dom.selectItemSearchList(tab.internalIndex);
+  moveUp() {
+    const selectedTab = this.getSelectedTab();
+    if (!selectedTab) {
+      return;
+    }
+
+    const n = this.getDisplayedTabs().length;
+    const nextIndex = (selectedTab.internalIndex - 1 + n) % n;
+
+    this.setSelectedTab(this.getDisplayedTabs()[nextIndex]);
   }
 
-  displays(show: boolean) {
-    this.dom.displays(show);
+  moveDown() {
+    const selectedTab = this.getSelectedTab();
+    if (!selectedTab) {
+      return;
+    }
+    const n = this.getDisplayedTabs().length;
+    const nextIndex = (selectedTab.internalIndex + 1) % n;
+
+    this.setSelectedTab(this.getDisplayedTabs()[nextIndex]);
   }
 
-  contains(elt: HTMLElement): boolean {
-    return this.dom.contains(elt);
+  goToTab(tab: Tab) {
+    const message: MessageFromScript = {
+      type: MessageFromScriptType.REQUEST_SWITCH_TAB,
+      tab: tab,
+    };
+
+    this.closeMenu(); /* Close menu */
+    browser.runtime.sendMessage(message);
   }
 
-  onInput(callback: (event: Event) => void) {
-    this.dom.onInput(callback);
+  handleOnKeyDown(e: KeyboardEvent) {
+    const selectedTab = this.getSelectedTab();
+
+    switch (e.key) {
+      case "Enter":
+        if (selectedTab !== null) {
+          this.goToTab(selectedTab);
+        }
+        break;
+      case "Escape":
+        this.closeMenu(); /* Close menu */
+        break;
+      case "ArrowUp":
+        this.moveUp();
+        break;
+      case "ArrowDown":
+        this.moveDown();
+        break;
+    }
   }
 
-  onKeyDown(callback: (event: KeyboardEvent) => void) {
-    this.dom.onKeyDown(callback);
+  handleOnInput(e: Event) {
+    const searchInput = (<HTMLInputElement>e.target).value;
+    const options = {
+      keys: ["title", "url", "key"],
+    };
+
+    if (searchInput === "") {
+      this.setDisplayedTabs(this.getTabs());
+      this.setSelectedTab(this.getTabs()[0]);
+      return;
+    }
+
+    const fuse = new Fuse(this.getTabs(), options);
+
+    const matched: Tab[] = fuse.search(searchInput).map((tab, ind) => {
+      return {
+        url: tab.item.url,
+        title: tab.item.title,
+        id: tab.item.id,
+        key: tab.item.key,
+        internalIndex: ind,
+      };
+    });
+
+    this.setDisplayedTabs(matched);
+
+    if (matched.length > 0) {
+      this.setSelectedTab(matched[0]);
+    } else {
+      this.setSelectedTab(null);
+    }
+  }
+
+  handleOnClick(internalIndex: number) {
+    const selectedTab = this.getSelectedTab();
+    if (
+      selectedTab &&
+      this.getSelectedTab() === this.getDisplayedTabs()[internalIndex]
+    ) {
+      this.goToTab(selectedTab);
+    }
+    this.setSelectedTab(this.getDisplayedTabs()[internalIndex]);
   }
 }
