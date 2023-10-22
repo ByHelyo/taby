@@ -14,9 +14,9 @@ export class MenuService {
     this.dom.focusSearchInput();
   }
 
-  setSearchList(tabs: Tab[]) {
+  setSearchList(tabs: Tab[], callback: (internalIndex: number) => void) {
     this.dom.clearSearchList();
-    this.dom.addSearchItems(tabs);
+    this.dom.addSearchItems(tabs, callback);
   }
 
   selectSearchList(tab: Tab) {

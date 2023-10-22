@@ -34,7 +34,9 @@ export class Menu {
 
   setDisplayedTabs(tabs: Tab[]) {
     this.displayedTabs = tabs;
-    this.menuService.setSearchList(tabs);
+    this.menuService.setSearchList(tabs, (internalIndex: number) =>
+      this.handleOnClick(internalIndex),
+    );
   }
 
   getDisplayedTabs(): Tab[] {
@@ -89,19 +91,23 @@ export class Menu {
     this.setSelectedTab(this.getDisplayedTabs()[nextIndex]);
   }
 
+  goToTab(tab: Tab) {
+    const message: MessageFromScript = {
+      type: MessageFromScriptType.REQUEST_SWITCH_TAB,
+      tab: tab,
+    };
+
+    browser.runtime.sendMessage(message);
+    this.closeMenu(); /* Close menu */
+  }
+
   handleOnKeyDown(e: KeyboardEvent) {
     const selectedTab = this.getSelectedTab();
 
     switch (e.key) {
       case "Enter":
         if (selectedTab !== null) {
-          const message: MessageFromScript = {
-            type: MessageFromScriptType.REQUEST_SWITCH_TAB,
-            tab: selectedTab,
-          };
-
-          browser.runtime.sendMessage(message);
-          this.closeMenu(); /* Close menu */
+          this.goToTab(selectedTab);
         }
         break;
       case "Escape":
@@ -147,5 +153,16 @@ export class Menu {
     } else {
       this.setSelectedTab(null);
     }
+  }
+
+  handleOnClick(internalIndex: number) {
+    const selectedTab = this.getSelectedTab();
+    if (
+      selectedTab &&
+      this.getSelectedTab() === this.getDisplayedTabs()[internalIndex]
+    ) {
+      this.goToTab(selectedTab);
+    }
+    this.setSelectedTab(this.getDisplayedTabs()[internalIndex]);
   }
 }

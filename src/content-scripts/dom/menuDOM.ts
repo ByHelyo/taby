@@ -34,14 +34,21 @@ export class MenuDOM {
     this.searchList.innerHTML = "";
   }
 
-  addSearchItems(tabs: Tab[]) {
+  addSearchItems(tabs: Tab[], callback: (internalIndex: number) => void) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.key, tab.title);
+      this.addSearchItem(tab.key, tab.internalIndex, tab.title, callback);
     });
   }
 
-  addSearchItem(index: number, title: string) {
-    this.searchList.appendChild(buildSearchItem(index, title));
+  addSearchItem(
+    key: number,
+    internalIndex: number,
+    title: string,
+    callback: (internalIndex: number) => void,
+  ) {
+    this.searchList.appendChild(
+      buildSearchItem(key, internalIndex, title, callback),
+    );
   }
 
   clearSearchInput() {
