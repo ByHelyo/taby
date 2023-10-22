@@ -9,6 +9,7 @@ on:
 env:
   node-version: 18
   pnpm-version: 8
+  EXTENSION_ID: "phfppmfanjkdnnbjipmgjbfeijhfeobi"
 
 jobs:
   checks:
@@ -87,7 +88,6 @@ jobs:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
 
       - name: Build for firefox
         run: pnpm run build:firefox
