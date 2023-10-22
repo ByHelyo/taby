@@ -7,7 +7,7 @@ import {
 } from "./build.ts";
 import { Tab } from "../../type/misc.ts";
 
-export class MenuDOM {
+export class MenuDom {
   menu: HTMLDivElement;
   search: HTMLDivElement;
   searchInput: HTMLInputElement;
