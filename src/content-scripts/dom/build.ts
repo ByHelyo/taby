@@ -34,21 +34,27 @@ export const buildSearchList = function (): HTMLUListElement {
   return searchList;
 };
 
-export const buildSearchItem = function (index: number, title: string) {
+export const buildSearchItem = function (
+  key: number,
+  internalIndex: number,
+  title: string,
+  callback: (internalIndex: number) => void,
+) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
 
-  searchItem.appendChild(buildSearchIndex(index));
+  searchItem.appendChild(buildSearchKey(key));
   searchItem.append(buildSearchTitle(title));
+  searchItem.addEventListener("click", () => callback(internalIndex));
   return searchItem;
 };
 
-const buildSearchIndex = function (index: number) {
-  const searchIndex = document.createElement("span");
-  searchIndex.innerText = String(index);
-  searchIndex.classList.add("taby-searchIndex");
+const buildSearchKey = function (key: number) {
+  const searchKey = document.createElement("span");
+  searchKey.innerText = String(key);
+  searchKey.classList.add("taby-searchKey");
 
-  return searchIndex;
+  return searchKey;
 };
 
 const buildSearchTitle = function (title: string) {
