@@ -97,8 +97,8 @@ export class Menu {
       tab: tab,
     };
 
-    browser.runtime.sendMessage(message);
     this.closeMenu(); /* Close menu */
+    browser.runtime.sendMessage(message);
   }
 
   handleOnKeyDown(e: KeyboardEvent) {
