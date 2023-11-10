@@ -8,9 +8,9 @@
 .taby-menu {
   display: none; /* Do not display menu by default */
   position: fixed;
-  width: 70%;
-  top: 30%;
-  left: 15%;
+  width: 50%;
+  top: 40%;
+  left: 25%;
   z-index: 100000;
   border-radius: 8px;
   background-color: #ffffff7d;
