@@ -13,7 +13,6 @@ export const eventBackground = function (menu: MenuService) {
         if (menu.isDisplayed()) {
           menu.closeMenu();
         } else {
-          // TODO set tabs and set selected tabs
           const tabs = request.tabs || [];
           menu.openMenu();
           menu.setTabs(tabs);
