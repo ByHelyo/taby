@@ -17,6 +17,12 @@
       "css": ["./style.css"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["image/*.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "background": {
     "service_worker": "./background.global.js"
   },
