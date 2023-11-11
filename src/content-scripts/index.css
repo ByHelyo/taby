@@ -60,6 +60,7 @@
   flex-direction: column;
   height: 100%;
   overflow: scroll;
+  padding: 8px;
 
   /* Children */
   font-size: 16px;
@@ -76,6 +77,7 @@
   text-overflow: ellipsis;
   padding: 4px 16px 4px 16px;
   user-select: none;
+  border-radius: 4px;
 }
 
 .taby-searchTitle {
