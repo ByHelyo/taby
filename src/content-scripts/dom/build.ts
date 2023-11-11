@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 export const buildMenu = function (
   search: HTMLDivElement,
   searchList: HTMLUListElement,
@@ -15,9 +17,20 @@ export const buildSearch = function (
 ): HTMLDivElement {
   const search = document.createElement("div");
   search.classList.add("taby-search");
+  search.appendChild(buildGlassImage());
   search.appendChild(searchInput);
 
+  const glass = document.createElement("img");
+  search.append(glass);
+
   return search;
+};
+
+const buildGlassImage = function (): HTMLImageElement {
+  const image = document.createElement("img");
+  image.src = browser.runtime.getURL("image/glass.svg");
+  image.classList.add("taby-glass");
+  return image;
 };
 
 export const buildSearchInput = function (): HTMLInputElement {
