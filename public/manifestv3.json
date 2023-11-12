@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Taby",
   "description": "A tab switcher",
-  "version": "1.5",
+  "version": "1.6",
   "author": "Franck Hu",
   "permissions": ["tabs"],
   "action": {
