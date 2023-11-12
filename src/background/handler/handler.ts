@@ -61,10 +61,7 @@ export const handleRequestSearchTab = async function (
  *
  */
 export const handleToggleMenu = async function () {
-  const [currentTab] = await browser.tabs.query({
-    active: true,
-    lastFocusedWindow: true,
-  });
+  let activeTabId = 0;
 
   const tabs: Tab[] = await browser.tabs
     .query({
@@ -72,6 +69,9 @@ export const handleToggleMenu = async function () {
     })
     .then((browserTabs) => {
       const tabs: Tab[] = browserTabs.map((tab, index) => {
+        if (tab.active) {
+          activeTabId = tab.id || 0;
+        }
         return {
           title: tab.title || "",
           id: tab.id || 0,
@@ -87,7 +87,5 @@ export const handleToggleMenu = async function () {
     tabs,
   };
 
-  if (currentTab.id) {
-    await browser.tabs.sendMessage(currentTab.id, message);
-  }
+  await browser.tabs.sendMessage(activeTabId, message);
 };
