@@ -1,4 +1,3 @@
-/* Send message if TOGGLE_MENU shortcut is triggered */
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
