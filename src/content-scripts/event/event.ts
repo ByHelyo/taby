@@ -6,6 +6,11 @@ import {
 import { MenuService } from "../service/menuService.ts";
 import browser from "webextension-polyfill";
 
+/**
+ * Listens for messages from background.
+ *
+ * @param menu
+ */
 export const eventBackground = function (menu: MenuService) {
   browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
@@ -27,7 +32,11 @@ export const eventBackground = function (menu: MenuService) {
   );
 };
 
-/* Remove menu if clicking outside */
+/**
+ * Listens for 'click' events.
+ *
+ * @param menu
+ */
 export const eventOutsideMenu = function (menu: MenuService) {
   window.addEventListener("click", function (e) {
     if (!menu.menuRepository.contains(e.target as HTMLElement)) {

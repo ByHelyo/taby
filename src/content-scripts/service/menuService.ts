@@ -157,7 +157,8 @@ export class MenuService {
       this.getSelectedTab() === this.getDisplayedTabs()[internalIndex]
     ) {
       this.goToTab(selectedTab);
+    } else {
+      this.setSelectedTab(this.getDisplayedTabs()[internalIndex]);
     }
-    this.setSelectedTab(this.getDisplayedTabs()[internalIndex]);
   }
 }

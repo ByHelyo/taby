@@ -8,7 +8,6 @@ import browser from "webextension-polyfill";
 import Fuse from "fuse.js";
 
 /**
- *
  * Switches to the specified tab.
  *
  * @param tab The tab to switch to.
@@ -18,7 +17,6 @@ export const handleRequestSwitchTab = function (tab: Tab) {
 };
 
 /**
- *
  * Requests all open tabs in the current window and filters them based on the provided content.
  *
  * @param content The content to filter tabs by.
@@ -59,7 +57,6 @@ export const handleRequestSearchTab = async function (
 };
 
 /**
- *
  * Toggles the visibility state of the menu by requesting all tabs in the current window and sending a message to the content script.
  *
  */
