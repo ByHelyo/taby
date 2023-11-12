@@ -1,5 +1,8 @@
 import browser from "webextension-polyfill";
-import { handleRequestSwitchTab } from "./handler/handler";
+import {
+  handleRequestSearchTab,
+  handleRequestSwitchTab,
+} from "./handler/handler";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
@@ -23,7 +26,6 @@ browser.commands.onCommand.addListener(async function (command: string) {
         const formattedTabs: Tab[] = tabs.map((tab, index) => {
           return {
             title: tab.title || "",
-            url: tab.url || "",
             id: tab.id || 0,
             key: index + 1,
             internalIndex: index,
@@ -43,10 +45,20 @@ browser.commands.onCommand.addListener(async function (command: string) {
   }
 });
 
-browser.runtime.onMessage.addListener(function (request: MessageFromScript) {
+browser.runtime.onMessage.addListener(async function (
+  request: MessageFromScript,
+) {
   switch (request.type) {
     case MessageFromScriptType.REQUEST_SWITCH_TAB:
-      handleRequestSwitchTab(request.tab);
+      if (request.tab) {
+        handleRequestSwitchTab(request.tab);
+      }
+      break;
+    case MessageFromScriptType.REQUEST_SEARCH_TAB:
+      if (request.search) {
+        return await handleRequestSearchTab(request.search);
+      }
+      break;
   }
 });
 
