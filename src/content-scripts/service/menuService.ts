@@ -119,7 +119,7 @@ export class MenuService {
         }
         break;
       case "Escape":
-        this.closeMenu(); /* Close menu */
+        this.closeMenu();
         break;
       case "ArrowUp":
         this.moveUp();
