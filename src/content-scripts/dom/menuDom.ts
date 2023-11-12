@@ -55,6 +55,11 @@ export class MenuDom {
     this.searchInput.value = "";
   }
 
+  /**
+   * Removes the currently selected tab and selects the nth tab.
+   *
+   * @param nth The position of the tab to be selected
+   */
   selectItemSearchList(nth: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {

@@ -12,18 +12,17 @@ import {
 } from "../type/misc.ts";
 
 /**
- *
  * Listens for shortcuts.
  *
  */
 browser.commands.onCommand.addListener(async function (command: string) {
-  if (command === "TOGGLE_MENU") {
-    await handleToggleMenu();
+  switch (command) {
+    case "TOGGLE_MENU":
+      await handleToggleMenu();
   }
 });
 
 /**
- *
  * Listens for messages from content script.
  *
  */
@@ -45,7 +44,6 @@ browser.runtime.onMessage.addListener(async function (
 });
 
 /**
- *
  * Listens for events when the active tab changes within the current window.
  *
  */
