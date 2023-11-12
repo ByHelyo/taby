@@ -1,10 +1,12 @@
 export enum MessageFromScriptType {
   REQUEST_SWITCH_TAB,
+  REQUEST_SEARCH_TAB,
 }
 
 export interface MessageFromScript {
   type: MessageFromScriptType;
-  tab: Tab;
+  tab?: Tab;
+  search?: string;
 }
 
 export enum MessageFromBackgroundType {
@@ -19,8 +21,14 @@ export interface MessageFromBackground {
 
 export interface Tab {
   title: string;
-  url: string;
   id: number;
   key: number;
   internalIndex: number;
+}
+
+export interface SearchableTab {
+  title: string;
+  id: number;
+  url: string;
+  key: number;
 }

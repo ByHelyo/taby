@@ -1,4 +1,3 @@
-import Fuse from "fuse.js";
 import {
   MessageFromScript,
   MessageFromScriptType,
@@ -101,6 +100,15 @@ export class MenuService {
     browser.runtime.sendMessage(message);
   }
 
+  async searchTabs(content: string): Promise<Tab[]> {
+    const message: MessageFromScript = {
+      type: MessageFromScriptType.REQUEST_SEARCH_TAB,
+      search: content,
+    };
+
+    return await browser.runtime.sendMessage(message);
+  }
+
   handleOnKeyDown(e: KeyboardEvent) {
     const selectedTab = this.getSelectedTab();
 
@@ -122,11 +130,8 @@ export class MenuService {
     }
   }
 
-  handleOnInput(e: Event) {
+  async handleOnInput(e: Event) {
     const searchInput = (<HTMLInputElement>e.target).value;
-    const options = {
-      keys: ["title", "url", "key"],
-    };
 
     if (searchInput === "") {
       this.setDisplayedTabs(this.getTabs());
@@ -134,17 +139,7 @@ export class MenuService {
       return;
     }
 
-    const fuse = new Fuse(this.getTabs(), options);
-
-    const matched: Tab[] = fuse.search(searchInput).map((tab, ind) => {
-      return {
-        url: tab.item.url,
-        title: tab.item.title,
-        id: tab.item.id,
-        key: tab.item.key,
-        internalIndex: ind,
-      };
-    });
+    const matched = await this.searchTabs(searchInput);
 
     this.setDisplayedTabs(matched);
 
