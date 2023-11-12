@@ -2,49 +2,31 @@ import browser from "webextension-polyfill";
 import {
   handleRequestSearchTab,
   handleRequestSwitchTab,
+  handleToggleMenu,
 } from "./handler/handler";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
-  Tab,
 } from "../type/misc.ts";
 
+/**
+ *
+ * Listens for shortcuts.
+ *
+ */
 browser.commands.onCommand.addListener(async function (command: string) {
   if (command === "TOGGLE_MENU") {
-    const [currentTab] = await browser.tabs.query({
-      active: true,
-      lastFocusedWindow: true,
-    });
-
-    const tabs: Tab[] = await browser.tabs
-      .query({
-        currentWindow: true,
-      })
-      .then((tabs) => {
-        const formattedTabs: Tab[] = tabs.map((tab, index) => {
-          return {
-            title: tab.title || "",
-            id: tab.id || 0,
-            key: index + 1,
-            internalIndex: index,
-          };
-        });
-        return formattedTabs;
-      });
-
-    const message: MessageFromBackground = {
-      type: MessageFromBackgroundType.TOGGLE_MENU,
-      tabs,
-    };
-
-    if (currentTab.id) {
-      await browser.tabs.sendMessage(currentTab.id, message);
-    }
+    await handleToggleMenu();
   }
 });
 
+/**
+ *
+ * Listens for messages from content script.
+ *
+ */
 browser.runtime.onMessage.addListener(async function (
   request: MessageFromScript,
 ) {
@@ -62,6 +44,11 @@ browser.runtime.onMessage.addListener(async function (
   }
 });
 
+/**
+ *
+ * Listens for events when the active tab changes within the current window.
+ *
+ */
 browser.tabs.onActivated.addListener(async function () {
   const [currentTab] = await browser.tabs.query({
     active: true,
