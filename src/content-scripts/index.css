@@ -95,6 +95,7 @@
 }
 
 .taby-searchKey {
+  flex-shrink: 0;
   width: 20px;
   display: flex;
   justify-content: right;
