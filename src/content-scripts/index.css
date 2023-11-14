@@ -85,7 +85,7 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: clip;
-  padding: 6px 8px;
+  padding: 8px;
   user-select: none;
   border-radius: 4px;
 }
@@ -97,7 +97,7 @@
 
 .taby-searchKey {
   flex-shrink: 0;
-  width: 20px;
+  width: 18px;
   display: flex;
   justify-content: right;
   align-items: center;
