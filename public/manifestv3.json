@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Taby",
-  "description": "A tab switcher",
-  "version": "1.6",
+  "description": "Quickly move between tabs",
+  "version": "1.7",
   "author": "Franck Hu",
   "permissions": ["tabs"],
   "action": {
@@ -19,7 +19,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["image/*.svg"],
+      "resources": ["image/glass.svg"],
       "matches": ["<all_urls>"]
     }
   ],
