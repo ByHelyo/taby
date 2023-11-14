@@ -36,6 +36,7 @@ export const handleRequestSearchTab = async function (
           id: tab.id || 0,
           url: tab.url || "",
           key: ind + 1,
+          favIconUrl: tab.favIconUrl || "",
         };
       });
       return tabs;
@@ -52,6 +53,7 @@ export const handleRequestSearchTab = async function (
       id: tab.item.id,
       key: tab.item.key,
       internalIndex: ind,
+      favIconUrl: tab.item.favIconUrl,
     };
   });
 };
@@ -77,6 +79,7 @@ export const handleToggleMenu = async function () {
           id: tab.id || 0,
           key: index + 1,
           internalIndex: index,
+          favIconUrl: tab.favIconUrl || "",
         };
       });
       return tabs;

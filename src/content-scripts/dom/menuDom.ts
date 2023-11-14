@@ -36,7 +36,13 @@ export class MenuDom {
 
   addSearchItems(tabs: Tab[], callback: (internalIndex: number) => void) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(tab.key, tab.internalIndex, tab.title, callback);
+      this.addSearchItem(
+        tab.key,
+        tab.internalIndex,
+        tab.title,
+        tab.favIconUrl,
+        callback,
+      );
     });
   }
 
@@ -44,10 +50,11 @@ export class MenuDom {
     key: number,
     internalIndex: number,
     title: string,
+    favIconUrl: string,
     callback: (internalIndex: number) => void,
   ) {
     this.searchList.appendChild(
-      buildSearchItem(key, internalIndex, title, callback),
+      buildSearchItem(key, internalIndex, title, favIconUrl, callback),
     );
   }
 

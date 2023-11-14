@@ -9,7 +9,7 @@
   display: none; /* Do not display menu by default */
   position: fixed;
   width: 60%;
-  top: 10%;
+  top: 30%;
   left: 20%;
   z-index: 100000;
   border-radius: 6px;
@@ -34,12 +34,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 8px 0 6px;
+  padding: 16px 8px 8px 6px;
 }
 
 .taby-glass {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
 }
 
 .taby-searchInput {
@@ -79,16 +79,26 @@
 }
 
 .taby-searchItem {
+  display: flex;
+  gap: 16px;
+  align-items: center;
   white-space: nowrap;
   overflow-x: clip;
-  text-overflow: ellipsis;
   padding: 4px 8px;
   user-select: none;
   border-radius: 4px;
 }
 
+.taby-searchImg {
+  width: 24px;
+  height: 24px;
+}
+
 .taby-searchKey {
-  margin-right: 16px;
+  width: 20px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
   font-size: 16px;
   font-weight: bolder;
 }

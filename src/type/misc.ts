@@ -24,6 +24,7 @@ export interface Tab {
   id: number;
   key: number;
   internalIndex: number;
+  favIconUrl: string;
 }
 
 export interface SearchableTab {
@@ -31,4 +32,5 @@ export interface SearchableTab {
   id: number;
   url: string;
   key: number;
+  favIconUrl: string;
 }

@@ -51,29 +51,39 @@ export const buildSearchItem = function (
   key: number,
   internalIndex: number,
   title: string,
+  favIconUrl: string,
   callback: (internalIndex: number) => void,
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
 
-  searchItem.appendChild(buildSearchKey(key));
-  searchItem.append(buildSearchTitle(title));
+  searchItem.appendChild(buildItemKey(key));
+  searchItem.appendChild(buildItemImg(favIconUrl));
+  searchItem.append(buildItemTitle(title));
   searchItem.addEventListener("click", () => callback(internalIndex));
   return searchItem;
 };
 
-const buildSearchKey = function (key: number) {
-  const searchKey = document.createElement("span");
-  searchKey.innerText = String(key);
-  searchKey.classList.add("taby-searchKey");
+const buildItemKey = function (key: number) {
+  const keyElt = document.createElement("span");
+  keyElt.innerText = String(key);
+  keyElt.classList.add("taby-searchKey");
 
-  return searchKey;
+  return keyElt;
 };
 
-const buildSearchTitle = function (title: string) {
-  const searchTitle = document.createElement("span");
-  searchTitle.innerText = title;
-  searchTitle.classList.add("taby-searchTitle");
+const buildItemImg = function (url: string) {
+  const imgElt = document.createElement("img");
+  imgElt.src = url;
+  imgElt.classList.add("taby-searchImg");
 
-  return searchTitle;
+  return imgElt;
+};
+
+const buildItemTitle = function (title: string) {
+  const titleElt = document.createElement("span");
+  titleElt.innerText = title;
+  titleElt.classList.add("taby-searchTitle");
+
+  return titleElt;
 };
