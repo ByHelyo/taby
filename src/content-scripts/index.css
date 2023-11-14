@@ -17,6 +17,7 @@
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
 
   /* Children elements */
   font-family: sans-serif;
@@ -84,7 +85,7 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: clip;
-  padding: 8px;
+  padding: 6px 8px;
   user-select: none;
   border-radius: 4px;
 }
