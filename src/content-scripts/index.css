@@ -34,12 +34,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 8px 8px 6px;
+  padding: 16px 8px 8px 18px;
 }
 
 .taby-glass {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
 }
 
 .taby-searchInput {
