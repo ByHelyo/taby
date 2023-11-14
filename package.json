@@ -2,7 +2,7 @@
   "name": "taby",
   "private": false,
   "version": "1.0.0",
-  "description": "A tab switcher",
+  "description": "Quickly move between tabs",
   "scripts": {
     "build:manifest:chrome": "mv dist/manifestv3.json dist/manifest.json",
     "build:background:chrome": "vite build --config vite.chrome.background.config.ts",
