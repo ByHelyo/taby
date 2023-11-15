@@ -56,6 +56,7 @@ export const buildSearchItem = function (
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
+  searchItem.classList.add(`taby-${internalIndex}`);
 
   searchItem.appendChild(buildItemKey(key));
   searchItem.appendChild(buildItemImg(favIconUrl));

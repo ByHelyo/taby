@@ -58,6 +58,18 @@ export class MenuDom {
     );
   }
 
+  pushSearchItem(
+    key: number,
+    internalIndex: number,
+    title: string,
+    favIconUrl: string,
+    callback: (internalIndex: number) => void,
+  ) {
+    this.searchList.prepend(
+      buildSearchItem(key, internalIndex, title, favIconUrl, callback),
+    );
+  }
+
   clearSearchInput() {
     this.searchInput.value = "";
   }
@@ -74,7 +86,7 @@ export class MenuDom {
     }
 
     const newSelectedTab = this.searchList.querySelector(
-      `li:nth-of-type(${nth + 1})`,
+      `li[class~="taby-${nth}"]`,
     );
 
     newSelectedTab?.classList.add("taby-active");
@@ -90,5 +102,12 @@ export class MenuDom {
 
   onKeyDown(callback: (event: KeyboardEvent) => void) {
     this.searchInput.addEventListener("keydown", callback);
+  }
+
+  removeItem(selector: string) {
+    const tab = this.searchList.querySelector(selector);
+    if (tab) {
+      tab.remove();
+    }
   }
 }
