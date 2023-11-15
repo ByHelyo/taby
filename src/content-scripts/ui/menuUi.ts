@@ -115,9 +115,8 @@ export class MenuUi {
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
       case Move.MovedUp:
-        this.moveWindowUp(tabs[next.start], tabs[next.end], (idx: number) =>
-          this.handleOnClick(idx),
-        );
+        this.dom.removeItem(tabs[next.end].idx);
+        this.dom.pushItem(tabs[next.start], (idx) => this.handleOnClick(idx));
         break;
     }
 
@@ -137,36 +136,11 @@ export class MenuUi {
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
       case Move.MovedDown:
-        this.moveWindowDown(tabs[next.start], tabs[next.end], (idx: number) =>
-          this.handleOnClick(idx),
-        );
+        this.dom.removeItem(tabs[next.start].idx);
+        this.dom.addItem(tabs[next.end], (idx) => this.handleOnClick(idx));
         break;
     }
 
     this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
-  }
-
-  moveWindowUp(
-    tab1: Tab,
-    tab2: Tab,
-    callback: (internalIndex: number) => void,
-  ) {
-    this.dom.removeItem(`li[class~="taby-${tab2.idx}"]`);
-    this.dom.pushItem(
-      tab1.key,
-      tab1.idx,
-      tab1.title,
-      tab1.favIconUrl,
-      callback,
-    );
-  }
-
-  moveWindowDown(
-    tab1: Tab,
-    tab2: Tab,
-    callback: (internalIndex: number) => void,
-  ) {
-    this.dom.removeItem(`li[class~="taby-${tab1.idx}"]`);
-    this.dom.addItem(tab2.key, tab2.idx, tab2.title, tab2.favIconUrl, callback);
   }
 }

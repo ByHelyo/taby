@@ -36,31 +36,13 @@ export class MenuDom {
 
   addItems(tabs: Tab[], callback: (idx: number) => void) {
     tabs.forEach((tab: Tab) => {
-      this.addItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback);
+      this.addItem(tab, callback);
     });
   }
 
-  addItem(
-    key: number,
-    idx: number,
-    title: string,
-    favIconUrl: string,
-    callback: (idx: number) => void,
-  ) {
+  addItem(tab: Tab, callback: (idx: number) => void) {
     this.searchList.appendChild(
-      buildSearchItem(key, idx, title, favIconUrl, callback),
-    );
-  }
-
-  pushItem(
-    key: number,
-    idx: number,
-    title: string,
-    favIconUrl: string,
-    callback: (idx: number) => void,
-  ) {
-    this.searchList.prepend(
-      buildSearchItem(key, idx, title, favIconUrl, callback),
+      buildSearchItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback),
     );
   }
 
@@ -71,16 +53,16 @@ export class MenuDom {
   /**
    * Removes the currently selected tab and selects the nth tab.
    *
-   * @param nth The position of the tab to be selected
+   * @param idx The index of the tab to be selected
    */
-  selectItem(nth: number) {
+  selectItem(idx: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {
       previousSelectedTab.classList.remove("taby-active");
     }
 
     const newSelectedTab = this.searchList.querySelector(
-      `li[class~="taby-${nth}"]`,
+      `li[class~="taby-${idx}"]`,
     );
 
     newSelectedTab?.classList.add("taby-active");
@@ -98,10 +80,16 @@ export class MenuDom {
     this.searchInput.addEventListener("keydown", callback);
   }
 
-  removeItem(selector: string) {
-    const tab = this.searchList.querySelector(selector);
+  removeItem(idx: number) {
+    const tab = this.searchList.querySelector(`li[class~="taby-${idx}"]`);
     if (tab) {
       tab.remove();
     }
+  }
+
+  pushItem(tab: Tab, callback: (idx: number) => void) {
+    this.searchList.prepend(
+      buildSearchItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback),
+    );
   }
 }
