@@ -69,7 +69,7 @@ export class MenuService {
       tab: selectedTab,
     };
 
-    this.close(); /* Close menu */
+    this.close();
     browser.runtime.sendMessage(message);
   }
 
