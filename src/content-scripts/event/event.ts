@@ -17,11 +17,12 @@ export const eventBackground = function (menu: MenuService) {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
         if (menu.isDisplayed()) {
           menu.close();
+        } else {
+          const tabs = request.tabs || [];
+          menu.open();
+          menu.setTabs(tabs);
+          menu.setSelectedTab(tabs[0]);
         }
-        const tabs = request.tabs || [];
-        menu.open();
-        menu.setTabs(tabs);
-        menu.setSelectedTab(tabs[0]);
       } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
         menu.isDisplayed() && menu.close();
       }
