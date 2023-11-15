@@ -58,10 +58,15 @@ export class MenuService {
     this.display = false;
   }
 
-  goTo(tab: Tab) {
+  goTo() {
+    const selectedTab = this.selectedTab;
+    if (!selectedTab) {
+      return;
+    }
+
     const message: MessageFromScript = {
       type: MessageFromScriptType.REQUEST_SWITCH_TAB,
-      tab: tab,
+      tab: selectedTab,
     };
 
     this.close(); /* Close menu */

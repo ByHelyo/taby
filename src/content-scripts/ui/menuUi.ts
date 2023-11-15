@@ -60,7 +60,7 @@ export class MenuUi {
     const selectedTab = this.menuService.getSelectedTab();
 
     if (selectedTab && selectedTab === this.menuService.getTabs()[idx]) {
-      this.menuService.goTo(selectedTab);
+      this.menuService.goTo();
     } else {
       this.menuService.setSelectedTab(this.menuService.getTabs()[idx]);
     }
@@ -86,7 +86,7 @@ export class MenuUi {
     switch (e.key) {
       case "Enter":
         if (selectedTab !== null) {
-          this.menuService.goTo(selectedTab);
+          this.menuService.goTo();
         }
         break;
       case "Escape":
