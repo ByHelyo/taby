@@ -23,7 +23,7 @@ export interface Tab {
   title: string;
   id: number;
   key: number;
-  internalIndex: number;
+  idx: number;
   favIconUrl: string;
 }
 

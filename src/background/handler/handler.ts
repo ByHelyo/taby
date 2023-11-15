@@ -52,7 +52,7 @@ export const handleRequestSearchTab = async function (
       title: tab.item.title,
       id: tab.item.id,
       key: tab.item.key,
-      internalIndex: ind,
+      idx: ind,
       favIconUrl: tab.item.favIconUrl,
     };
   });
@@ -78,7 +78,7 @@ export const handleToggleMenu = async function () {
           title: tab.title || "",
           id: tab.id || 0,
           key: index + 1,
-          internalIndex: index,
+          idx: index,
           favIconUrl: tab.favIconUrl || "",
         };
       });

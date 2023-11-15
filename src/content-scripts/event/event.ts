@@ -4,6 +4,7 @@ import {
 } from "../../type/misc";
 import { MenuService } from "../service/menuService.ts";
 import browser from "webextension-polyfill";
+import { MenuUi } from "../ui/menuUi.ts";
 
 /**
  * Listens for messages from background.
@@ -15,17 +16,14 @@ export const eventBackground = function (menu: MenuService) {
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
         if (menu.isDisplayed()) {
-          menu.closeMenu();
-        } else {
-          const tabs = request.tabs || [];
-          menu.openMenu();
-          menu.setTabs(tabs);
-          menu.setDisplayedTabs(tabs);
-          menu.setSelectedTab(tabs[0]);
+          menu.close();
         }
-      }
-      if (request.type == MessageFromBackgroundType.USER_SWITCHES_TAB) {
-        menu.isDisplayed() && menu.closeMenu();
+        const tabs = request.tabs || [];
+        menu.open();
+        menu.setTabs(tabs);
+        menu.setSelectedTab(tabs[0]);
+      } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
+        menu.isDisplayed() && menu.close();
       }
     },
   );
@@ -34,12 +32,16 @@ export const eventBackground = function (menu: MenuService) {
 /**
  * Listens for 'click' events.
  *
- * @param menu
+ * @param menuService
+ * @param menuUi
  */
-export const eventOutsideMenu = function (menu: MenuService) {
+export const eventOutsideMenu = function (
+  menuService: MenuService,
+  menuUi: MenuUi,
+) {
   window.addEventListener("click", function (e) {
-    if (!menu.menuRepository.contains(e.target as HTMLElement)) {
-      menu.closeMenu();
+    if (!menuUi.contains(e.target as HTMLElement)) {
+      menuService.close();
     }
   });
 };

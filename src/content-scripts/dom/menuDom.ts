@@ -20,7 +20,7 @@ export class MenuDom {
     this.menu = buildMenu(this.search, this.searchList);
   }
 
-  focusSearchInput() {
+  focusInput() {
     this.searchInput.focus();
   }
 
@@ -30,47 +30,41 @@ export class MenuDom {
       : this.menu.classList.remove("taby-display");
   }
 
-  clearSearchList() {
+  clearList() {
     this.searchList.innerHTML = "";
   }
 
-  addSearchItems(tabs: Tab[], callback: (internalIndex: number) => void) {
+  addItems(tabs: Tab[], callback: (idx: number) => void) {
     tabs.forEach((tab: Tab) => {
-      this.addSearchItem(
-        tab.key,
-        tab.internalIndex,
-        tab.title,
-        tab.favIconUrl,
-        callback,
-      );
+      this.addItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback);
     });
   }
 
-  addSearchItem(
+  addItem(
     key: number,
-    internalIndex: number,
+    idx: number,
     title: string,
     favIconUrl: string,
-    callback: (internalIndex: number) => void,
+    callback: (idx: number) => void,
   ) {
     this.searchList.appendChild(
-      buildSearchItem(key, internalIndex, title, favIconUrl, callback),
+      buildSearchItem(key, idx, title, favIconUrl, callback),
     );
   }
 
-  pushSearchItem(
+  pushItem(
     key: number,
-    internalIndex: number,
+    idx: number,
     title: string,
     favIconUrl: string,
-    callback: (internalIndex: number) => void,
+    callback: (idx: number) => void,
   ) {
     this.searchList.prepend(
-      buildSearchItem(key, internalIndex, title, favIconUrl, callback),
+      buildSearchItem(key, idx, title, favIconUrl, callback),
     );
   }
 
-  clearSearchInput() {
+  clearInput() {
     this.searchInput.value = "";
   }
 
@@ -79,7 +73,7 @@ export class MenuDom {
    *
    * @param nth The position of the tab to be selected
    */
-  selectItemSearchList(nth: number) {
+  selectItem(nth: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {
       previousSelectedTab.classList.remove("taby-active");

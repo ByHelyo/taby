@@ -49,19 +49,19 @@ export const buildSearchList = function (): HTMLUListElement {
 
 export const buildSearchItem = function (
   key: number,
-  internalIndex: number,
+  idx: number,
   title: string,
   favIconUrl: string,
-  callback: (internalIndex: number) => void,
+  callback: (idx: number) => void,
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
-  searchItem.classList.add(`taby-${internalIndex}`);
+  searchItem.classList.add(`taby-${idx}`);
 
   searchItem.appendChild(buildItemKey(key));
   searchItem.appendChild(buildItemImg(favIconUrl));
   searchItem.append(buildItemTitle(title));
-  searchItem.addEventListener("click", () => callback(internalIndex));
+  searchItem.addEventListener("click", () => callback(idx));
   return searchItem;
 };
 
