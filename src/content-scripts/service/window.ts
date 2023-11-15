@@ -32,14 +32,6 @@ export class WindowService {
     this.size = 0;
   }
 
-  getStart() {
-    return this.start;
-  }
-
-  getEnd() {
-    return this.end;
-  }
-
   setSize(num: number) {
     this.size = num;
   }

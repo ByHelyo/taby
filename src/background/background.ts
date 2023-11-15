@@ -36,7 +36,7 @@ browser.runtime.onMessage.addListener(async function (
       }
       break;
     case MessageFromScriptType.REQUEST_SEARCH_TAB:
-      if (request.search) {
+      if (request.search !== undefined) {
         return await handleRequestSearchTab(request.search);
       }
       break;
