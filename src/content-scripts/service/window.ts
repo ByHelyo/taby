@@ -34,7 +34,7 @@ export class WindowService {
   }
 
   isValid(idx: number) {
-    return idx < this.start || idx >= this.end;
+    return idx >= this.start && idx < this.end;
   }
 
   moveEnd() {

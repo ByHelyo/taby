@@ -84,8 +84,7 @@ export class MenuUi {
 
     const matched = await this.menuService.search(searchInput);
 
-    this.setTabs(matched);
-    console.log(matched);
+    this.menuService.setTabs(matched);
 
     if (matched.length > 0) {
       this.menuService.setSelectedTab(matched[0]);
@@ -124,7 +123,7 @@ export class MenuUi {
     const n = this.getTabs().length;
     const nextIndex = (selectedTab.idx - 1 + n) % n;
 
-    if (this.window.isValid(nextIndex)) {
+    if (!this.window.isValid(nextIndex)) {
       const tabs = this.getTabs();
 
       if (nextIndex == n - 1) {
@@ -170,7 +169,7 @@ export class MenuUi {
     const n = this.getTabs().length;
     const nextIndex = (selectedTab.idx + 1) % n;
 
-    if (this.window.isValid(nextIndex)) {
+    if (!this.window.isValid(nextIndex)) {
       const tabs = this.getTabs();
 
       if (nextIndex == 0) {
