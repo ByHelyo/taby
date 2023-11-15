@@ -1,7 +1,7 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Tab } from "../../type/misc.ts";
-import { WindowService } from "../service/window.ts";
+import { Move, WindowService } from "../service/window.ts";
 
 export class MenuUi {
   dom: MenuDom;
@@ -114,28 +114,42 @@ export class MenuUi {
     }
 
     const tabs = this.menuService.getTabs();
-    const nextIndex = (selectedTab.idx - 1 + tabs.length) % tabs.length;
+    const next = this.window.moveUp(selectedTab.idx);
 
-    if (!this.window.isValid(nextIndex)) {
-      if (nextIndex == tabs.length - 1) {
-        this.window.moveEnd();
-
-        this.setTabs(
-          this.menuService.getTabs(),
-          this.window.getStart(),
-          this.window.getEnd(),
+    switch (next.move) {
+      case Move.MovedToEnd:
+        this.setTabs(this.menuService.getTabs(), next.start, next.end);
+        break;
+      case Move.MovedUp:
+        this.moveWindowUp(tabs[next.start], tabs[next.end], (idx: number) =>
+          this.handleOnClick(idx),
         );
-      } else {
-        this.window.moveUp();
-        this.moveWindowUp(
-          tabs[this.window.getStart()],
-          tabs[this.window.getEnd()],
-          (idx: number) => this.handleOnClick(idx),
-        );
-      }
+        break;
     }
 
-    this.menuService.setSelectedTab(this.menuService.getTabs()[nextIndex]);
+    this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
+  }
+
+  moveDown() {
+    const selectedTab = this.menuService.getSelectedTab();
+    if (!selectedTab) {
+      return;
+    }
+    const tabs = this.menuService.getTabs();
+    const next = this.window.moveDown(selectedTab.idx);
+
+    switch (next.move) {
+      case Move.MovedToStart:
+        this.setTabs(this.menuService.getTabs(), next.start, next.end);
+        break;
+      case Move.MovedDown:
+        this.moveWindowDown(tabs[next.start], tabs[next.end], (idx: number) =>
+          this.handleOnClick(idx),
+        );
+        break;
+    }
+
+    this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
   }
 
   moveWindowUp(
@@ -151,30 +165,6 @@ export class MenuUi {
       tab1.favIconUrl,
       callback,
     );
-  }
-
-  moveDown() {
-    const selectedTab = this.menuService.getSelectedTab();
-    if (!selectedTab) {
-      return;
-    }
-    const tabs = this.menuService.getTabs();
-    const nextIndex = (selectedTab.idx + 1) % tabs.length;
-
-    if (!this.window.isValid(nextIndex)) {
-      if (nextIndex == 0) {
-        this.window.moveStart();
-        this.setTabs(this.menuService.getTabs());
-      } else {
-        this.moveWindowDown(
-          tabs[this.window.getStart()],
-          tabs[this.window.getEnd()],
-          (idx: number) => this.handleOnClick(idx),
-        );
-        this.window.moveDown();
-      }
-    }
-    this.menuService.setSelectedTab(this.menuService.getTabs()[nextIndex]);
   }
 
   moveWindowDown(
