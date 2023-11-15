@@ -42,6 +42,18 @@ export const handleRequestSearchTab = async function (
       return tabs;
     });
 
+  if (content === "") {
+    return tabs.map((tab, ind) => {
+      return {
+        title: tab.title,
+        id: tab.id,
+        key: tab.key,
+        favIconUrl: tab.favIconUrl,
+        idx: ind,
+      };
+    });
+  }
+
   const options = {
     keys: ["title", "url", "key"],
   };

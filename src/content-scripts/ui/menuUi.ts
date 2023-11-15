@@ -69,12 +69,6 @@ export class MenuUi {
   async handleOnInput(e: Event) {
     const searchInput = (<HTMLInputElement>e.target).value;
 
-    if (searchInput === "") {
-      this.setTabs(this.menuService.getTabs());
-      this.menuService.setSelectedTab(this.menuService.getTabs()[0]);
-      return;
-    }
-
     const matched = await this.menuService.search(searchInput);
 
     this.menuService.setTabs(matched);
