@@ -83,8 +83,8 @@ export class MenuUi {
     const searchInput = (<HTMLInputElement>e.target).value;
 
     if (searchInput === "") {
-      this.setTabs(this.getTabs());
-      this.setSelectedTab(this.getTabs()[0]);
+      this.setTabs(this.menuService.getTabs());
+      this.menuService.setSelectedTab(this.menuService.getTabs()[0]);
       return;
     }
 
