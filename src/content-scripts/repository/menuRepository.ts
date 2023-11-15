@@ -38,4 +38,34 @@ export class MenuRepository {
   onKeyDown(callback: (event: KeyboardEvent) => void) {
     this.dom.onKeyDown(callback);
   }
+
+  moveWindowDown(
+    tab1: Tab,
+    tab2: Tab,
+    callback: (internalIndex: number) => void,
+  ) {
+    this.dom.removeItem(`li[class~="taby-${tab1.internalIndex}"]`);
+    this.dom.addSearchItem(
+      tab2.key,
+      tab2.internalIndex,
+      tab2.title,
+      tab2.favIconUrl,
+      callback,
+    );
+  }
+
+  moveWindowUp(
+    tab1: Tab,
+    tab2: Tab,
+    callback: (internalIndex: number) => void,
+  ) {
+    this.dom.removeItem(`li[class~="taby-${tab2.internalIndex}"]`);
+    this.dom.pushSearchItem(
+      tab1.key,
+      tab1.internalIndex,
+      tab1.title,
+      tab1.favIconUrl,
+      callback,
+    );
+  }
 }
