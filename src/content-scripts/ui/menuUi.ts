@@ -1,29 +1,19 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Tab } from "../../type/misc.ts";
-import { within } from "./misc.ts";
-
-const SEARCH_INPUT_SIZE: number = 60;
-const PADDINGS_SEARCH_LIST: number = 16;
-const SEARCH_ITEM_SIZE: number = 40;
+import { WindowService } from "../service/window.ts";
 
 export class MenuUi {
   tabs: Tab[];
   dom: MenuDom;
   menuService: MenuService;
-  size: number;
-  window_left: number;
-  window_right: number;
+  window: WindowService;
 
   constructor(menuService: MenuService) {
     this.menuService = menuService;
     this.tabs = [];
     this.dom = new MenuDom();
-    const menu_max_size =
-      window.innerHeight * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
-    this.size = Math.floor(menu_max_size / SEARCH_ITEM_SIZE);
-    this.window_left = 0;
-    this.window_right = this.size;
+    this.window = new WindowService();
     this.dom.onInput(async (e) => {
       await this.handleOnInput(e);
     });
@@ -34,6 +24,7 @@ export class MenuUi {
 
   setTabs(tabs: Tab[], start?: number, end?: number) {
     this.tabs = tabs;
+    this.window.setSize(tabs.length);
 
     this.dom.clearList();
     if (start && end) {
@@ -41,9 +32,12 @@ export class MenuUi {
         this.handleOnClick(idx);
       });
     } else {
-      this.dom.addItems(this.tabs.slice(0, this.size), (idx: number) => {
-        this.handleOnClick(idx);
-      });
+      this.dom.addItems(
+        this.tabs.slice(0, this.window.getCapacity()),
+        (idx: number) => {
+          this.handleOnClick(idx);
+        },
+      );
     }
   }
 
@@ -91,6 +85,7 @@ export class MenuUi {
     const matched = await this.menuService.search(searchInput);
 
     this.setTabs(matched);
+    console.log(matched);
 
     if (matched.length > 0) {
       this.menuService.setSelectedTab(matched[0]);
@@ -129,24 +124,21 @@ export class MenuUi {
     const n = this.getTabs().length;
     const nextIndex = (selectedTab.idx - 1 + n) % n;
 
-    if (within(nextIndex, this.window_left, this.window_right)) {
+    if (this.window.isValid(nextIndex)) {
       const tabs = this.getTabs();
 
       if (nextIndex == n - 1) {
-        console.log("asd");
-        this.window_left = this.getTabs().length - this.size;
-        this.window_right = this.getTabs().length;
+        this.window.moveEnd();
         this.setTabs(
           this.menuService.getTabs(),
-          this.window_left,
-          this.window_right,
+          this.window.getStart(),
+          this.window.getEnd(),
         );
       } else {
-        --this.window_left;
-        --this.window_right;
+        this.window.moveUp();
         this.moveWindowUp(
-          tabs[this.window_left],
-          tabs[this.window_right],
+          tabs[this.window.getStart()],
+          tabs[this.window.getEnd()],
           (idx: number) => this.handleOnClick(idx),
         );
       }
@@ -178,21 +170,19 @@ export class MenuUi {
     const n = this.getTabs().length;
     const nextIndex = (selectedTab.idx + 1) % n;
 
-    if (within(nextIndex, this.window_left, this.window_right)) {
+    if (this.window.isValid(nextIndex)) {
       const tabs = this.getTabs();
 
       if (nextIndex == 0) {
-        this.window_left = 0;
-        this.window_right = this.size;
+        this.window.moveStart();
         this.setTabs(this.menuService.getTabs());
       } else {
         this.moveWindowDown(
-          tabs[this.window_left],
-          tabs[this.window_right],
+          tabs[this.window.getStart()],
+          tabs[this.window.getEnd()],
           (idx: number) => this.handleOnClick(idx),
         );
-        ++this.window_left;
-        ++this.window_right;
+        this.window.moveDown();
       }
     }
     this.menuService.setSelectedTab(this.getTabs()[nextIndex]);
