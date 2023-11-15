@@ -1,14 +1,15 @@
 import "./index.css";
 import { MenuService } from "./service/menuService.ts";
 import "./event/event";
-import { eventOutsideMenu, eventBackground } from "./event/event";
+import { eventBackground, eventOutsideMenu } from "./event/event";
 
 const body = document.querySelector("body");
-const menu = new MenuService();
+const menuService = new MenuService();
+const menuUi = menuService.getMenuUi();
 
 if (body) {
-  body.appendChild(menu.menuRepository.dom.menu);
+  body.appendChild(menuUi.dom.menu);
 }
 
-eventBackground(menu);
-eventOutsideMenu(menu);
+eventBackground(menuService);
+eventOutsideMenu(menuService, menuUi);
