@@ -1,12 +1,13 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Tab } from "../../type/misc.ts";
-import { Move, WindowService } from "../service/window.ts";
+import { Action, WindowService } from "../service/window.ts";
 
 export class MenuUi {
   dom: MenuDom;
   menuService: MenuService;
   window: WindowService;
+  timeout: number | undefined;
 
   constructor(menuService: MenuService) {
     this.menuService = menuService;
@@ -110,11 +111,11 @@ export class MenuUi {
     const tabs = this.menuService.getTabs();
     const next = this.window.moveUp(selectedTab.idx);
 
-    switch (next.move) {
-      case Move.MovedToEnd:
+    switch (next.action) {
+      case Action.MovedToEnd:
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
-      case Move.MovedUp:
+      case Action.MovedUp:
         this.dom.removeItem(tabs[next.end].idx);
         this.dom.pushItem(tabs[next.start], (idx) => this.handleOnClick(idx));
         break;
@@ -131,16 +132,41 @@ export class MenuUi {
     const tabs = this.menuService.getTabs();
     const next = this.window.moveDown(selectedTab.idx);
 
-    switch (next.move) {
-      case Move.MovedToStart:
+    switch (next.action) {
+      case Action.MovedToStart:
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
-      case Move.MovedDown:
+      case Action.MovedDown:
         this.dom.removeItem(tabs[next.start].idx);
         this.dom.addItem(tabs[next.end], (idx) => this.handleOnClick(idx));
         break;
     }
 
     this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
+  }
+
+  handleResize() {
+    clearTimeout(this.timeout);
+    this.window.resize();
+    this.timeout = setTimeout(() => {
+      this.window.resize();
+
+      this.setTabs(
+        this.menuService.getTabs(),
+        this.window.start,
+        this.window.end,
+      );
+
+      const selectedTab = this.menuService.getSelectedTab();
+
+      if (!selectedTab) {
+        return;
+      }
+
+      let next = Math.max(this.window.start, selectedTab.idx);
+      next = Math.min(this.window.end - 1, next);
+
+      this.menuService.setSelectedTab(this.menuService.getTabs()[next]);
+    }, 100);
   }
 }

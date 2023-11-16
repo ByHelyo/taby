@@ -9,22 +9,22 @@ import { MenuUi } from "../ui/menuUi.ts";
 /**
  * Listens for messages from background.
  *
- * @param menu
+ * @param menuService
  */
-export const eventBackground = function (menu: MenuService) {
+export const eventBackground = function (menuService: MenuService) {
   browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
-        if (menu.isDisplayed()) {
-          menu.close();
+        if (menuService.isDisplayed()) {
+          menuService.close();
         } else {
           const tabs = request.tabs || [];
-          menu.open();
-          menu.setTabs(tabs);
-          menu.setSelectedTab(tabs[0]);
+          menuService.open();
+          menuService.setTabs(tabs);
+          menuService.setSelectedTab(tabs[0]);
         }
       } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
-        menu.isDisplayed() && menu.close();
+        menuService.isDisplayed() && menuService.close();
       }
     },
   );
@@ -44,5 +44,16 @@ export const eventOutsideMenu = function (
     if (!menuUi.contains(e.target as HTMLElement)) {
       menuService.close();
     }
+  });
+};
+
+/**
+ * Listens for 'resize' event.
+ *
+ * @param menuUi
+ */
+export const eventResize = function (menuUi: MenuUi) {
+  window.addEventListener("resize", function () {
+    menuUi.handleResize();
   });
 };

@@ -2,16 +2,18 @@ const SEARCH_INPUT_SIZE: number = 60;
 const PADDINGS_SEARCH_LIST: number = 16;
 const SEARCH_ITEM_SIZE: number = 40;
 
-export enum Move {
+export enum Action {
   MovedUp,
   MovedDown,
   MovedToStart,
   MovedToEnd,
   Unchanged,
+  OverflowTop,
+  OverflowBot,
 }
 
 export interface WindowResult {
-  move: Move;
+  action: Action;
   start: number;
   end: number;
   next: number;
@@ -24,12 +26,21 @@ export class WindowService {
   size: number;
 
   constructor() {
-    const menu_max_size =
-      window.innerHeight * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
-    this.capacity = Math.floor(menu_max_size / SEARCH_ITEM_SIZE);
+    this.capacity = this.computeCapacity();
     this.start = 0;
     this.end = this.capacity;
     this.size = 0;
+  }
+
+  resize() {
+    this.capacity = this.computeCapacity();
+    this.end = this.start + this.capacity;
+  }
+
+  computeCapacity() {
+    const menu_size =
+      window.innerHeight * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
+    return Math.floor(menu_size / SEARCH_ITEM_SIZE);
   }
 
   setSize(num: number) {
@@ -51,7 +62,7 @@ export class WindowService {
       if (next == this.size - 1) {
         this.moveEnd();
         return {
-          move: Move.MovedToEnd,
+          action: Action.MovedToEnd,
           start: this.start,
           end: this.end,
           next: next,
@@ -60,7 +71,7 @@ export class WindowService {
         --this.start;
         --this.end;
         return {
-          move: Move.MovedUp,
+          action: Action.MovedUp,
           start: this.start,
           end: this.end,
           next: next,
@@ -69,7 +80,7 @@ export class WindowService {
     }
 
     return {
-      move: Move.Unchanged,
+      action: Action.Unchanged,
       start: this.start,
       end: this.end,
       next: next,
@@ -83,14 +94,14 @@ export class WindowService {
       if (next == 0) {
         this.moveStart();
         return {
-          move: Move.MovedToStart,
+          action: Action.MovedToStart,
           start: this.start,
           end: this.end,
           next: next,
         };
       } else {
         const ret: WindowResult = {
-          move: Move.MovedDown,
+          action: Action.MovedDown,
           start: this.start,
           end: this.end,
           next: next,
@@ -102,7 +113,7 @@ export class WindowService {
     }
 
     return {
-      move: Move.Unchanged,
+      action: Action.Unchanged,
       start: this.start,
       end: this.end,
       next: next,

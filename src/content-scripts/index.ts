@@ -1,7 +1,7 @@
 import "./index.css";
 import { MenuService } from "./service/menuService.ts";
 import "./event/event";
-import { eventBackground, eventOutsideMenu } from "./event/event";
+import { eventBackground, eventOutsideMenu, eventResize } from "./event/event";
 
 const body = document.querySelector("body");
 const menuService = new MenuService();
@@ -13,3 +13,4 @@ if (body) {
 
 eventBackground(menuService);
 eventOutsideMenu(menuService, menuUi);
+eventResize(menuUi);
