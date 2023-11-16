@@ -1,15 +1,16 @@
 import browser from "webextension-polyfill";
-import {
-  handleRequestSearchTab,
-  handleRequestSwitchTab,
-  handleToggleMenu,
-} from "./handler/handler";
+
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
 } from "../type/misc.ts";
+import {
+  handleRequestSearchTab,
+  handleRequestSwitchTab,
+  handleToggleMenu,
+} from "./handler.ts";
 
 /**
  * Listens for shortcuts.
