@@ -51,9 +51,9 @@ export class MenuDom {
   }
 
   /**
-   * Removes the currently selected tab and selects the nth tab.
+   * Removes the currently selected tab and selects the idx tab.
    *
-   * @param idx The index of the tab to be selected
+   * @param idx The idx of the tab to be selected
    */
   selectItem(idx: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");

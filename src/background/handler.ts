@@ -1,11 +1,10 @@
+import browser from "webextension-polyfill";
+import Fuse from "fuse.js";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
-  SearchableTab,
   Tab,
-} from "../../type/misc.ts";
-import browser from "webextension-polyfill";
-import Fuse from "fuse.js";
+} from "../type/misc.ts";
 
 /**
  * Switches to the specified tab.
@@ -25,33 +24,14 @@ export const handleRequestSwitchTab = function (tab: Tab) {
 export const handleRequestSearchTab = async function (
   content: string,
 ): Promise<Tab[]> {
-  const tabs: SearchableTab[] = await browser.tabs
-    .query({
-      currentWindow: true,
-    })
-    .then((browserTabs) => {
-      const tabs: SearchableTab[] = browserTabs.map((tab, ind) => {
-        return {
-          title: tab.title || "",
-          id: tab.id || 0,
-          url: tab.url || "",
-          key: ind + 1,
-          favIconUrl: tab.favIconUrl || "",
-        };
-      });
-      return tabs;
-    });
+  const tabs = await browser.tabs.query({
+    currentWindow: true,
+  });
+
+  console.log(tabs);
 
   if (content === "") {
-    return tabs.map((tab, ind) => {
-      return {
-        title: tab.title,
-        id: tab.id,
-        key: tab.key,
-        favIconUrl: tab.favIconUrl,
-        idx: ind,
-      };
-    });
+    return tabs.map((tab, ind) => Tab.from(tab, ind));
   }
 
   const options = {
@@ -61,11 +41,11 @@ export const handleRequestSearchTab = async function (
 
   return fuse.search(content).map((tab, ind) => {
     return {
-      title: tab.item.title,
-      id: tab.item.id,
-      key: tab.item.key,
+      title: tab.item.title || "",
+      id: tab.item.id || 0,
+      key: ind + 1,
       idx: ind,
-      favIconUrl: tab.item.favIconUrl,
+      favIconUrl: tab.item.favIconUrl || "",
     };
   });
 };
