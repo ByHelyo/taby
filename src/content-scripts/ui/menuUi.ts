@@ -153,18 +153,30 @@ export class MenuUi {
 
       this.setTabs(
         this.menuService.getTabs(),
-        this.window.start,
-        this.window.end,
+        this.window.getStart(),
+        this.window.getEnd(),
       );
 
       const selectedTab = this.menuService.getSelectedTab();
+
+      if (this.window.getCapacity() == 0) {
+        this.menuService.setSelectedTab(null);
+        return;
+      }
+
+      if (!selectedTab && this.window.getCapacity() > 0) {
+        this.menuService.setSelectedTab(
+          this.menuService.getTabs()[this.window.getStart()],
+        );
+        return;
+      }
 
       if (!selectedTab) {
         return;
       }
 
-      let next = Math.max(this.window.start, selectedTab.idx);
-      next = Math.min(this.window.end - 1, next);
+      let next = Math.max(this.window.getStart(), selectedTab.idx);
+      next = Math.min(this.window.getEnd() - 1, next);
 
       this.menuService.setSelectedTab(this.menuService.getTabs()[next]);
     }, 100);
