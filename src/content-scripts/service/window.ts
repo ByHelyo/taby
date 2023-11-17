@@ -8,8 +8,6 @@ export enum Action {
   MovedToStart,
   MovedToEnd,
   Unchanged,
-  OverflowTop,
-  OverflowBot,
 }
 
 export interface WindowResult {
@@ -30,6 +28,14 @@ export class WindowService {
     this.start = 0;
     this.end = this.capacity;
     this.size = 0;
+  }
+
+  getStart() {
+    return this.start;
+  }
+
+  getEnd() {
+    return this.end;
   }
 
   resize() {
