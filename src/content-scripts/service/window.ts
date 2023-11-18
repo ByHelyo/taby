@@ -1,6 +1,6 @@
 const SEARCH_INPUT_SIZE: number = 60;
 const PADDINGS_SEARCH_LIST: number = 16;
-const SEARCH_ITEM_SIZE: number = 40;
+const SEARCH_ITEM_SIZE: number = 36;
 
 export enum Action {
   MovedUp,

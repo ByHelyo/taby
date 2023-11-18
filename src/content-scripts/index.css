@@ -8,18 +8,16 @@
 .taby-menu {
   display: none; /* Do not display menu by default */
   position: fixed;
-  width: 60%;
+  width: 50%;
   top: 30%;
-  left: 20%;
+  left: 25%;
   z-index: 100000;
   border-radius: 6px;
-  background-color: #ffffff7d;
+  background-color: #f2f3f4;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
-  backdrop-filter: blur(33px);
-  background-blend-mode: overlay;
 
   /* Children elements */
   font-family: sans-serif;
@@ -37,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 8px 8px 18px;
+  padding: 16px 8px 8px 14px;
 }
 
 .taby-glass {
@@ -87,14 +85,16 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: clip;
-  padding: 8px;
+  padding: 6px;
   user-select: none;
   border-radius: 4px;
 }
 
 .taby-searchImg {
-  width: 24px;
-  height: 24px;
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
 }
 
 .taby-searchKey {
