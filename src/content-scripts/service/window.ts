@@ -40,7 +40,8 @@ export class WindowService {
 
   resize() {
     this.capacity = this.computeCapacity();
-    this.end = this.start + this.capacity;
+    this.start = 0;
+    this.end = this.capacity;
   }
 
   computeCapacity() {
