@@ -28,8 +28,6 @@ export const handleRequestSearchTab = async function (
     currentWindow: true,
   });
 
-  console.log(tabs);
-
   if (content === "") {
     return tabs.map((tab, ind) => Tab.from(tab, ind));
   }

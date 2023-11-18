@@ -30,12 +30,9 @@ export class MenuUi {
         this.handleOnClick(idx);
       });
     } else {
-      this.dom.addItems(
-        tabs.slice(0, this.window.getCapacity()),
-        (idx: number) => {
-          this.handleOnClick(idx);
-        },
-      );
+      this.dom.addItems(tabs.slice(0, this.window.getEnd()), (idx: number) => {
+        this.handleOnClick(idx);
+      });
     }
   }
 
@@ -116,8 +113,10 @@ export class MenuUi {
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
       case Action.MovedUp:
-        this.dom.removeItem(tabs[next.end].idx);
-        this.dom.pushItem(tabs[next.start], (idx) => this.handleOnClick(idx));
+        if (this.window.getCapacity() > 0) {
+          this.dom.removeItem(tabs[next.end].idx);
+          this.dom.pushItem(tabs[next.start], (idx) => this.handleOnClick(idx));
+        }
         break;
     }
 
@@ -137,8 +136,10 @@ export class MenuUi {
         this.setTabs(this.menuService.getTabs(), next.start, next.end);
         break;
       case Action.MovedDown:
-        this.dom.removeItem(tabs[next.start].idx);
-        this.dom.addItem(tabs[next.end], (idx) => this.handleOnClick(idx));
+        if (this.window.getCapacity() > 0) {
+          this.dom.removeItem(tabs[next.start].idx);
+          this.dom.addItem(tabs[next.end], (idx) => this.handleOnClick(idx));
+        }
         break;
     }
 
@@ -147,7 +148,6 @@ export class MenuUi {
 
   handleResize() {
     clearTimeout(this.timeout);
-    this.window.resize();
     this.timeout = setTimeout(() => {
       this.window.resize();
 
@@ -159,26 +159,11 @@ export class MenuUi {
 
       const selectedTab = this.menuService.getSelectedTab();
 
-      if (this.window.getCapacity() == 0) {
-        this.menuService.setSelectedTab(null);
-        return;
-      }
-
-      if (!selectedTab && this.window.getCapacity() > 0) {
-        this.menuService.setSelectedTab(
-          this.menuService.getTabs()[this.window.getStart()],
-        );
-        return;
-      }
-
       if (!selectedTab) {
         return;
       }
 
-      let next = Math.max(this.window.getStart(), selectedTab.idx);
-      next = Math.min(this.window.getEnd() - 1, next);
-
-      this.menuService.setSelectedTab(this.menuService.getTabs()[next]);
+      this.menuService.setSelectedTab(this.menuService.getTabs()[0]);
     }, 100);
   }
 }
