@@ -29,7 +29,7 @@ export const handleRequestSearchTab = async function (
   });
 
   if (content === "") {
-    return tabs.map((tab, ind) => Tab.from(tab, ind));
+    return tabs.map(Tab.from);
   }
 
   const options = {
@@ -60,17 +60,12 @@ export const handleToggleMenu = async function () {
       currentWindow: true,
     })
     .then((browserTabs) => {
-      const tabs: Tab[] = browserTabs.map((tab, index) => {
+      const tabs: Tab[] = browserTabs.map((tab) => {
         if (tab.active) {
           activeTabId = tab.id || 0;
         }
-        return {
-          title: tab.title || "",
-          id: tab.id || 0,
-          key: index + 1,
-          idx: index,
-          favIconUrl: tab.favIconUrl || "",
-        };
+
+        return Tab.from(tab);
       });
       return tabs;
     });

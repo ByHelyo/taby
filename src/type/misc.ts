@@ -42,12 +42,12 @@ export class Tab {
     this.favIconUrl = favIconUrl;
   }
 
-  static from(tab: browser.Tabs.Tab, idx: number): Tab {
+  static from(tab: browser.Tabs.Tab): Tab {
     return {
       title: tab.title || "",
       id: tab.index,
       key: tab.index + 1,
-      idx: idx,
+      idx: tab.index,
       favIconUrl: tab.favIconUrl || "",
     };
   }
