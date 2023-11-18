@@ -37,12 +37,12 @@ export const handleRequestSearchTab = async function (
   };
   const fuse = new Fuse(tabs, options);
 
-  return fuse.search(content).map((tab, ind) => {
+  return fuse.search(content).map((tab) => {
     return {
       title: tab.item.title || "",
       id: tab.item.id || 0,
-      key: ind + 1,
-      idx: ind,
+      key: tab.item.index + 1,
+      idx: tab.item.index,
       favIconUrl: tab.item.favIconUrl || "",
     };
   });
