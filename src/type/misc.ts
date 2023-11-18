@@ -45,7 +45,7 @@ export class Tab {
   static from(tab: browser.Tabs.Tab): Tab {
     return {
       title: tab.title || "",
-      id: tab.index,
+      id: tab.id || 0,
       key: tab.index + 1,
       idx: tab.index,
       favIconUrl: tab.favIconUrl || "",
