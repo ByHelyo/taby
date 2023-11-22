@@ -3,6 +3,7 @@ import Fuse from "fuse.js";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
+  SearchableTab,
   Tab,
 } from "../type/misc.ts";
 
@@ -35,15 +36,15 @@ export const handleRequestSearchTab = async function (
   const options = {
     keys: ["title", "url", "key"],
   };
-  const fuse = new Fuse(tabs, options);
+  const fuse = new Fuse(tabs.map(SearchableTab.from), options);
 
   return fuse.search(content).map((tab) => {
     return {
-      title: tab.item.title || "",
-      id: tab.item.id || 0,
-      key: tab.item.index + 1,
-      idx: tab.item.index,
-      favIconUrl: tab.item.favIconUrl || "",
+      title: tab.item.title,
+      id: tab.item.id,
+      key: tab.item.key,
+      idx: tab.item.idx,
+      favIconUrl: tab.item.favIconUrl,
     };
   });
 };
