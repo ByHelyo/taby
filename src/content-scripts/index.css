@@ -13,11 +13,14 @@
   left: 25%;
   z-index: 100000;
   border-radius: 6px;
-  background-color: #f2f3f4;
+  background-color: #ffffff80;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
+  backdrop-filter: blur(33px);
+  background-blend-mode: overlay;
+
 
   /* Children elements */
   font-family: sans-serif;
