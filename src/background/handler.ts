@@ -38,12 +38,12 @@ export const handleRequestSearchTab = async function (
   };
   const fuse = new Fuse(tabs.map(SearchableTab.from), options);
 
-  return fuse.search(content).map((tab) => {
+  return fuse.search(content).map((tab, idx) => {
     return {
       title: tab.item.title,
       id: tab.item.id,
       key: tab.item.key,
-      idx: tab.item.idx,
+      idx: idx,
       favIconUrl: tab.item.favIconUrl,
     };
   });
