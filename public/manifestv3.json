@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Taby",
   "description": "Quickly move between tabs",
-  "version": "1.9",
+  "version": "1.10",
   "author": "Franck Hu",
   "permissions": ["tabs"],
   "action": {
