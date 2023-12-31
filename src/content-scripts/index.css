@@ -13,13 +13,11 @@
   left: 25%;
   z-index: 100000;
   border-radius: 6px;
-  background-color: #ffffff80;
+  background-color: #ffffff;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
-  backdrop-filter: blur(33px);
-  background-blend-mode: overlay;
+  box-shadow: 0 16px 70px rgb(0 0 0 / 40%);
 
   /* Children elements */
   font-family: sans-serif;
@@ -56,7 +54,6 @@
   color: inherit !important;
   font-family: inherit !important;
   background-color: inherit !important;
-  font-weight: bold !important;
 }
 
 .taby-searchInput:focus {
@@ -110,6 +107,5 @@
 }
 
 .taby-active {
-  background: #0950c3;
-  color: white;
+  background: #f2f2f2;
 }
