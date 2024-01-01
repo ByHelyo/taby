@@ -19,7 +19,7 @@
 `Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience. Taby offers users an
 efficient way to navigate between tabs.
 
-`Taby` provides an intuitive search menu that lets you quickly switch to other open tabs using only the keyboard.
+`Taby` offers an intuitive command search palette, enabling swift switching to other open tabs simply by typing on the keyboard
 
 ### Supports:
 
