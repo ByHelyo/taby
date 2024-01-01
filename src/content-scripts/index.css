@@ -6,7 +6,8 @@
 }
 
 .taby-menu {
-  display: none; /* Do not display menu by default */
+  display: flex;
+  flex-direction: column;
   position: fixed;
   width: 60%;
   top: 25%;
@@ -18,6 +19,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-shadow: 0 16px 70px rgb(0 0 0 / 40%);
+  opacity: 1;
 
   /* Children elements */
   font-family: sans-serif;
@@ -25,10 +27,9 @@
   line-height: 1.5;
 }
 
-.taby-display {
-  /* Display menu */
-  display: flex;
-  flex-direction: column;
+.hidden {
+  display: none !important;
+  opacity: 0;
 }
 
 .taby-search {
@@ -113,4 +114,19 @@
 
 .taby-active {
   background: #f2f2f2;
+}
+
+.fade-enter,
+.fade-leave {
+  transition: all 0.2s ease !important;
+}
+
+.fade-enter-leave,
+.fade-leave-start {
+  opacity: 1 !important;
+}
+
+.fade-enter-start,
+.fade-leave-end {
+  opacity: 0 !important;
 }

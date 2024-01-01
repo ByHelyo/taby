@@ -15,9 +15,7 @@ export const eventBackground = function (menuService: MenuService) {
   browser.runtime.onMessage.addListener(
     async (request: MessageFromBackground) => {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
-        if (menuService.isDisplayed()) {
-          menuService.close();
-        } else {
+        if (!menuService.isDisplayed()) {
           const tabs = request.tabs || [];
           menuService.open();
           menuService.setTabs(tabs);
