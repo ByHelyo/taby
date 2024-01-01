@@ -64,6 +64,7 @@
 .taby-searchList {
   border-block-start: 2px solid #f3f4f6;
   list-style-type: none; /* Remove bullets */
+  scrollbar-width: none;
 
   display: flex;
   flex-direction: column;
@@ -118,7 +119,7 @@
 
 .taby-fade-enter,
 .taby-fade-leave {
-  transition: all 0.2s ease !important;
+  transition: all 0.05s ease !important;
 }
 
 .taby-fade-enter-leave,
