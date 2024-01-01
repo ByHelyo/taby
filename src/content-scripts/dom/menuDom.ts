@@ -6,6 +6,7 @@ import {
   buildSearchList,
 } from "./build.ts";
 import { Tab } from "../../type/misc.ts";
+import { enter, leave } from "../misc/animation.ts";
 
 export class MenuDom {
   menu: HTMLDivElement;
@@ -24,10 +25,12 @@ export class MenuDom {
     this.searchInput.focus();
   }
 
-  displays(show: boolean) {
-    show
-      ? this.menu.classList.add("taby-display")
-      : this.menu.classList.remove("taby-display");
+  async displays(show: boolean) {
+    if (show) {
+      await enter(this.menu, "fade");
+    } else {
+      await leave(this.menu, "fade");
+    }
   }
 
   clearList() {
