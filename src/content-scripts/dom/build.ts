@@ -6,7 +6,7 @@ export const buildMenu = function (
 ): HTMLDivElement {
   const menu = document.createElement("div");
   menu.classList.add("taby-menu");
-  menu.classList.add("hidden");
+  menu.classList.add("taby-hidden");
   menu.append(search);
   menu.appendChild(searchList);
 

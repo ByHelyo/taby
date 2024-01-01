@@ -1,35 +1,35 @@
 export async function enter(element: HTMLElement, transition: string) {
-  element.classList.remove("hidden");
+  element.classList.remove("taby-hidden");
 
-  element.classList.add(`${transition}-enter`);
-  element.classList.add(`${transition}-enter-start`);
+  element.classList.add(`taby-${transition}-enter`);
+  element.classList.add(`taby-${transition}-enter-start`);
 
   await nextFrame();
 
-  element.classList.remove(`${transition}-enter-start`);
-  element.classList.add(`${transition}-enter-end`);
+  element.classList.remove(`taby-${transition}-enter-start`);
+  element.classList.add(`taby-${transition}-enter-end`);
 
   await afterTransition(element);
 
-  element.classList.remove(`${transition}-enter-end`);
-  element.classList.remove(`${transition}-enter`);
+  element.classList.remove(`taby-${transition}-enter-end`);
+  element.classList.remove(`taby-${transition}-enter`);
 }
 
 export async function leave(element: HTMLElement, transition: string) {
-  element.classList.add(`${transition}-leave`);
-  element.classList.add(`${transition}-leave-start`);
+  element.classList.add(`taby-${transition}-leave`);
+  element.classList.add(`taby-${transition}-leave-start`);
 
   await nextFrame();
 
-  element.classList.remove(`${transition}-leave-start`);
-  element.classList.add(`${transition}-leave-end`);
+  element.classList.remove(`taby-${transition}-leave-start`);
+  element.classList.add(`taby-${transition}-leave-end`);
 
   await afterTransition(element);
 
-  element.classList.remove(`${transition}-leave-end`);
-  element.classList.remove(`${transition}-leave`);
+  element.classList.remove(`taby-${transition}-leave-end`);
+  element.classList.remove(`taby-${transition}-leave`);
 
-  element.classList.add("hidden");
+  element.classList.add("taby-hidden");
 }
 
 export async function nextFrame() {
