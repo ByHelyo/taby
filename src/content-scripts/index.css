@@ -61,6 +61,7 @@
 }
 
 .taby-searchList {
+  border-block-start: 2px solid #f3f4f6;
   list-style-type: none; /* Remove bullets */
 
   display: flex;
@@ -71,6 +72,10 @@
 
   /* Children */
   font-size: 14px;
+}
+
+.taby-searchListEmpty {
+  display: none;
 }
 
 /* Remove scroll bar */

@@ -36,7 +36,7 @@ const buildGlassImage = function (): HTMLImageElement {
 export const buildSearchInput = function (): HTMLInputElement {
   const searchInput = document.createElement("input");
   searchInput.classList.add("taby-searchInput");
-  searchInput.placeholder = "Search";
+  searchInput.placeholder = "Search...";
 
   return searchInput;
 };
