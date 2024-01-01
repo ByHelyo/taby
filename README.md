@@ -9,7 +9,6 @@
 ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
 
 </div>
-![2024-01-01_13-08]()
 
 <div align=center>
   <img width="600" alt="Taby" src="https://github.com/ByHelyo/taby/assets/70762494/d3836640-7db0-4961-97ac-3e3a89c0ac42" />
