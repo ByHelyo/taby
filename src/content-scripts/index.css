@@ -8,9 +8,9 @@
 .taby-menu {
   display: none; /* Do not display menu by default */
   position: fixed;
-  width: 50%;
-  top: 30%;
-  left: 25%;
+  width: 60%;
+  top: 25%;
+  left: 20%;
   z-index: 100000;
   border-radius: 6px;
   background-color: #ffffff;
@@ -35,12 +35,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 8px 8px 10px;
+  padding: 18px;
 }
 
 .taby-glass {
-  width: 36px;
-  height: 36px;
+  width: 22px;
+  height: 22px;
 }
 
 .taby-searchInput {
@@ -48,7 +48,7 @@
   display: flex !important;
   width: 100% !important;
 
-  font-size: 24px !important;
+  font-size: 18px !important;
 
   /* Remove default input bar properties */
   color: inherit !important;
@@ -70,7 +70,7 @@
   padding: 8px;
 
   /* Children */
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* Remove scroll bar */
@@ -92,18 +92,18 @@
 .taby-searchImg {
   display: flex;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 .taby-searchKey {
   flex-shrink: 0;
-  width: 24px;
+  width: 18px;
   display: flex;
   justify-content: right;
   align-items: center;
-  font-size: 16px;
-  font-weight: bolder;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .taby-active {
