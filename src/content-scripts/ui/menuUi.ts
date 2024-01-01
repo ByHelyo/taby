@@ -25,6 +25,14 @@ export class MenuUi {
     this.window.setSize(tabs.length);
 
     this.dom.clearList();
+
+    if (tabs.length === 0) {
+      this.dom.hideResults();
+      return;
+    }
+
+    this.dom.displayResults();
+
     if (start && end) {
       this.dom.addItems(tabs.slice(start, end), (idx: number) => {
         this.handleOnClick(idx);

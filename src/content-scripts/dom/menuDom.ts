@@ -92,4 +92,12 @@ export class MenuDom {
       buildSearchItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback),
     );
   }
+
+  hideResults() {
+    this.searchList.classList.add("taby-searchListEmpty");
+  }
+
+  displayResults() {
+    this.searchList.classList.remove("taby-searchListEmpty");
+  }
 }
