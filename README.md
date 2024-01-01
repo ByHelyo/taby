@@ -30,7 +30,7 @@ efficient way to navigate between tabs.
 
 <h3>Usage</h3>
 
-- `Alt+C` to open/close the menu.
+- `Alt+C` to open the menu.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.

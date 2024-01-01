@@ -27,9 +27,8 @@
   line-height: 1.5;
 }
 
-.hidden {
+.taby-hidden {
   display: none !important;
-  opacity: 0;
 }
 
 .taby-search {
@@ -48,6 +47,7 @@
   all: unset !important;
   display: flex !important;
   width: 100% !important;
+  text-align: left !important;
 
   font-size: 18px !important;
 
@@ -116,17 +116,17 @@
   background: #f2f2f2;
 }
 
-.fade-enter,
-.fade-leave {
+.taby-fade-enter,
+.taby-fade-leave {
   transition: all 0.2s ease !important;
 }
 
-.fade-enter-leave,
-.fade-leave-start {
+.taby-fade-enter-leave,
+.taby-fade-leave-start {
   opacity: 1 !important;
 }
 
-.fade-enter-start,
-.fade-leave-end {
+.taby-fade-enter-start,
+.taby-fade-leave-end {
   opacity: 0 !important;
 }
