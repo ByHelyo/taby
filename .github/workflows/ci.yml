@@ -38,7 +38,7 @@ jobs:
       - name: Run lint
         run: pnpm run lint
 
-  publish:release:
+  publish-release:
     if: github.ref == 'refs/heads/main'
     needs: checks
     environment:
@@ -82,7 +82,7 @@ jobs:
           draft: false
           prerelease: false
 
-  publish:chrome:
+  publish-chrome:
     if: github.ref == 'refs/heads/main'
     needs: checks
     environment:
@@ -122,7 +122,7 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
 
-  publish:firefox:
+  publish-firefox:
     if: github.ref == 'refs/heads/main'
     needs: checks
     environment:
