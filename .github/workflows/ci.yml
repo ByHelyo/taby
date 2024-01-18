@@ -38,7 +38,7 @@ jobs:
       - name: Run lint
         run: pnpm run lint
 
-  publish:
+  publish:release:
     if: github.ref == 'refs/heads/main'
     needs: checks
     environment:
@@ -82,12 +82,72 @@ jobs:
           draft: false
           prerelease: false
 
+  publish:chrome:
+    if: github.ref == 'refs/heads/main'
+    needs: checks
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build for chrome
+        run: pnpm run build:chrome
+
+      - name: Zip for chrome
+        run: zip -r taby.zip dist
+
       - name: Publish to chrome web store
         run: pnpm run publish:chrome
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+
+  publish:firefox:
+    if: github.ref == 'refs/heads/main'
+    needs: checks
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Build for firefox
         run: pnpm run build:firefox
