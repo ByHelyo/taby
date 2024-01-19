@@ -40,7 +40,7 @@ efficient way to navigate between tabs.
 Requirements:
 
 - pnpm 8
-- Node 18
+- Node 20
 
 Once you've met the requirements and cloned the project, download the dependencies with `pnpm install`.
 
