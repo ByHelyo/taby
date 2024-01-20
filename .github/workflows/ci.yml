@@ -59,22 +59,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
-
       - name: Build for chrome
         run: pnpm run build:chrome
 
       - name: Zip for chrome
         if: github.ref == 'refs/heads/main'
-        run: zip -r byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip dist/
+        run: zip -r taby.zip dist/
 
       - name: Upload chrome zip artifact
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: chrome
-          path: byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
+          path: taby.zip
 
   build-firefox:
     needs: checks
@@ -96,9 +93,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
 
       - name: Build for firefox
         run: pnpm run build:firefox
@@ -143,7 +137,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: chrome
-          path: byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
+          path: taby.zip
+
+      - name: Rename chrome zip artifact
+        run: mv taby.zip byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
 
       - name: Download firefox dist artifact
         uses: actions/download-artifact@v4
@@ -191,11 +188,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
       - name: Download chrome zip artifact
         uses: actions/download-artifact@v4
         with:
           name: chrome
-          path: taby-chrome.zip
+          path: taby.zip
 
       - name: Publish to chrome web store
         run: pnpm run publish:chrome
