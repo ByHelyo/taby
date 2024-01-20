@@ -7,7 +7,7 @@ on:
     types: [opened, reopened, synchronize]
 
 env:
-  node-version: 18
+  node-version: 20
   pnpm-version: 8
   EXTENSION_ID: "phfppmfanjkdnnbjipmgjbfeijhfeobi"
 
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup pnpm ${{ env.pnpm-version }}
         uses: pnpm/action-setup@v2
@@ -24,7 +24,7 @@ jobs:
           version: ${{ env.pnpm-version }}
 
       - name: Setup Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.node-version }}
           cache: "pnpm"
@@ -38,9 +38,78 @@ jobs:
       - name: Run lint
         run: pnpm run lint
 
+  build-chrome:
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
+
+      - name: Build for chrome
+        run: pnpm run build:chrome
+
+      - name: Zip for chrome
+        run: zip -r byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip dist/
+
+      - name: Upload chrome zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome
+          path: byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
+
+  build-firefox:
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
+
+      - name: Build for firefox
+        run: pnpm run build:firefox
+
+      - name: Upload firefox dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox
+          path: dist/
+
   publish-release:
     if: github.ref == 'refs/heads/main'
-    needs: checks
+    needs: [build-firefox, build-chrome]
     environment:
       name: production
     permissions:
@@ -48,35 +117,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup pnpm ${{ env.pnpm-version }}
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.pnpm-version }}
-
-      - name: Setup Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.node-version }}
-          cache: "pnpm"
+        uses: actions/checkout@v4
 
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: actions/download-artifact@v4
+        with:
+          name: chrome
+          path: byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
 
-      - name: Build for chrome
-        run: pnpm run build:chrome
+      - name: actions/download-artifact@v4
+        with:
+          name: firefox
+          path: dist/
 
-      - name: Zip for chrome
-        run: zip -r taby.zip dist
+      - name: Sign firefox EXTENSION_ID
+        run: pnpm run sign:firefox
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
-          files: taby.zip
+          files: |
+            byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
+            byhelyo_taby-${{ env.PACKAGE_VERSION }}.xpi
           tag_name: ${{ env.PACKAGE_VERSION }}
           body: "Take a look at the assets to download and install this app."
           draft: false
@@ -84,36 +151,15 @@ jobs:
 
   publish-chrome:
     if: github.ref == 'refs/heads/main'
-    needs: checks
+    needs: [build-firefox, build-chrome]
     environment:
       name: production
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup pnpm ${{ env.pnpm-version }}
-        uses: pnpm/action-setup@v2
+      - name: actions/download-artifact@v4
         with:
-          version: ${{ env.pnpm-version }}
-
-      - name: Setup Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.node-version }}
-          cache: "pnpm"
-
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build for chrome
-        run: pnpm run build:chrome
-
-      - name: Zip for chrome
-        run: zip -r taby.zip dist
+          name: chrome
+          path: taby-chrome.zip
 
       - name: Publish to chrome web store
         run: pnpm run publish:chrome
@@ -124,33 +170,15 @@ jobs:
 
   publish-firefox:
     if: github.ref == 'refs/heads/main'
-    needs: checks
+    needs: [build-firefox, build-chrome]
     environment:
       name: production
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup pnpm ${{ env.pnpm-version }}
-        uses: pnpm/action-setup@v2
+      - name: actions/download-artifact@v4
         with:
-          version: ${{ env.pnpm-version }}
-
-      - name: Setup Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.node-version }}
-          cache: "pnpm"
-
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build for firefox
-        run: pnpm run build:firefox
+          name: firefox
+          path: dist/
 
       - name: Publish to firefox
         run: pnpm run publish:firefox
