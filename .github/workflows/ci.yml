@@ -122,6 +122,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
 
@@ -161,6 +175,22 @@ jobs:
       name: production
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
       - name: Download chrome zip artifact
         uses: actions/download-artifact@v4
         with:
@@ -181,6 +211,22 @@ jobs:
       name: production
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
       - name: Download firefox dist artifact
         uses: actions/download-artifact@v4
         with:
