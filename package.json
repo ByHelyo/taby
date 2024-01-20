@@ -14,9 +14,9 @@
     "build:web": "tsc && vite build",
     "build:firefox": "NODE_ENV=production run-s build:js build:web",
     "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
-    "sign:firefox": "web-ext sign --use-submission-api --channel unlisted --source-dir dist/ --artifacts-dir .",
+    "sign:firefox": "web-ext sign --use-submission-api --channel unlisted --source-dir firefox-dist/ --artifacts-dir .",
     "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
-    "publish:firefox": "web-ext sign --use-submission-api --channel listed --source-dir dist/"
+    "publish:firefox": "web-ext sign --use-submission-api --channel listed --source-dir firefox-dist/"
   },
   "repository": {
     "type": "git",
