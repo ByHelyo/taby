@@ -156,7 +156,8 @@ jobs:
       name: production
     runs-on: ubuntu-latest
     steps:
-      - name: actions/download-artifact@v4
+      - name: Download chrome zip artifact
+        uses: actions/download-artifact@v4
         with:
           name: chrome
           path: taby-chrome.zip
@@ -175,7 +176,8 @@ jobs:
       name: production
     runs-on: ubuntu-latest
     steps:
-      - name: actions/download-artifact@v4
+      - name: Download firefox dist artifact
+        uses: actions/download-artifact@v4
         with:
           name: firefox
           path: dist/
