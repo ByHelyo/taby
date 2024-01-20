@@ -76,7 +76,12 @@ jobs:
         with:
           name: chrome
           path: taby.zip
-
+      - run: rm taby.zip
+      - name: Download chrome zip artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chrome
+          path: taby.zip
       - run: ls
 
   build-firefox:
@@ -109,13 +114,6 @@ jobs:
         with:
           name: firefox
           path: dist/
-      - run: rm taby.zip
-      - name: Download chrome zip artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: chrome
-          path: taby.zip
-      - run: ls
 
   publish-release:
     if: github.ref == 'refs/heads/main'
