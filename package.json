@@ -4,18 +4,19 @@
   "version": "1.0.0",
   "description": "Quickly move between tabs",
   "scripts": {
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "check": "prettier --check .",
+    "format": "prettier --write .",
+    "prepare": "husky install",
     "build:manifest:chrome": "mv dist/manifestv3.json dist/manifest.json",
     "build:background:chrome": "vite build --config vite.chrome.background.config.ts",
     "build:js": "vite build --config vite.content.config.ts",
     "build:web": "tsc && vite build",
     "build:firefox": "NODE_ENV=production run-s build:js build:web",
     "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "check": "prettier --check .",
-    "format": "prettier --write .",
-    "prepare": "husky install",
+    "sign:firefox": "web-ext sign --use-submission-api --channel unlisted --source-dir dist/ --artifacts-dir .",
     "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
-    "publish:firefox": "cd dist/ && web-ext sign --use-submission-api --channel listed"
+    "publish:firefox": "web-ext sign --use-submission-api --channel listed --source-dir dist/"
   },
   "repository": {
     "type": "git",
