@@ -63,15 +63,21 @@ jobs:
         run: pnpm run build:chrome
 
       - name: Zip for chrome
-        if: github.ref == 'refs/heads/main'
         run: zip -r taby.zip dist/
 
       - name: Upload chrome zip artifact
-        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: chrome
           path: taby.zip
+
+      - name: Download chrome zip artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chrome
+          path: taby.zip
+
+      - run: ls
 
   build-firefox:
     needs: checks
@@ -103,6 +109,13 @@ jobs:
         with:
           name: firefox
           path: dist/
+      - run: rm taby.zip
+      - name: Download chrome zip artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chrome
+          path: taby.zip
+      - run: ls
 
   publish-release:
     if: github.ref == 'refs/heads/main'
