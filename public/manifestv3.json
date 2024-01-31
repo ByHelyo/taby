@@ -32,11 +32,14 @@
   "commands": {
     "TOGGLE_MENU": {
       "suggested_key": {
-        "default": "Alt+Q"
+        "default": "Ctrl+Q"
       },
       "description": "Toggle Taby menu"
     },
     "DUPLICATE_TAB": {
+      "suggested_key": {
+        "default": "Ctrl+W"
+      },
       "description": "Duplicate current tab"
     }
   }
