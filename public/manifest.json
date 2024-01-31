@@ -28,7 +28,7 @@
   "commands": {
     "TOGGLE_MENU": {
       "suggested_key": {
-        "default": "Alt+C"
+        "default": "Alt+A"
       },
       "description": "Toggle Taby menu"
     }

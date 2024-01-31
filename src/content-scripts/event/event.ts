@@ -20,6 +20,8 @@ export const eventBackground = function (menuService: MenuService) {
           menuService.open();
           menuService.setTabs(tabs);
           menuService.setSelectedTab(tabs[0]);
+        } else {
+          menuService.close();
         }
       } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
         menuService.isDisplayed() && menuService.close();

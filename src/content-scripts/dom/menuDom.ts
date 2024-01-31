@@ -6,7 +6,6 @@ import {
   buildSearchList,
 } from "./build.ts";
 import { Tab } from "../../type/misc.ts";
-import { enter, leave } from "../misc/animation.ts";
 
 export class MenuDom {
   menu: HTMLDivElement;
@@ -27,9 +26,9 @@ export class MenuDom {
 
   async displays(show: boolean) {
     if (show) {
-      await enter(this.menu, "fade");
+      this.menu.classList.remove("taby-hidden");
     } else {
-      await leave(this.menu, "fade");
+      this.menu.classList.add("taby-hidden");
     }
   }
 

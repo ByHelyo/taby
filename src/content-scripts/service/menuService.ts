@@ -5,7 +5,6 @@ import {
 } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
-import { nextFrame } from "../misc/animation.ts";
 
 export class MenuService {
   selectedTab: Tab | null;
@@ -71,7 +70,6 @@ export class MenuService {
     };
 
     this.close();
-    await nextFrame();
     browser.runtime.sendMessage(message);
   }
 
