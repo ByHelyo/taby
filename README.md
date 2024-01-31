@@ -27,8 +27,8 @@
 
 <h3>Usage</h3>
 
-- `Ctrl+Q` to open the menu.
-- `Ctrl+W` to duplicate current tab.
+- `Alt+Q` to open the menu.
+- `Alt+W` to duplicate current tab.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.
