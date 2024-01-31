@@ -28,9 +28,12 @@
   "commands": {
     "TOGGLE_MENU": {
       "suggested_key": {
-        "default": "Alt+A"
+        "default": "Alt+Q"
       },
       "description": "Toggle Taby menu"
+    },
+    "DUPLICATE_TAB": {
+      "description": "Duplicate current tab"
     }
   },
   "browser_specific_settings": {

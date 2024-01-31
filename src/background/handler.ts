@@ -78,3 +78,8 @@ export const handleToggleMenu = async function () {
 
   await browser.tabs.sendMessage(activeTabId, message);
 };
+
+export const handleDuplicateTab = async function () {
+  const currentTab = await browser.tabs.query({ active: true });
+  await browser.tabs.create({ url: currentTab[0].url });
+};

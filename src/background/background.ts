@@ -7,6 +7,7 @@ import {
   MessageFromScriptType,
 } from "../type/misc.ts";
 import {
+  handleDuplicateTab,
   handleRequestSearchTab,
   handleRequestSwitchTab,
   handleToggleMenu,
@@ -20,6 +21,10 @@ browser.commands.onCommand.addListener(async function (command: string) {
   switch (command) {
     case "TOGGLE_MENU":
       await handleToggleMenu();
+      break;
+    case "DUPLICATE_TAB":
+      await handleDuplicateTab();
+      break;
   }
 });
 
