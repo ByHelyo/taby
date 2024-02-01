@@ -12,8 +12,8 @@
     "build:background:chrome": "vite build --config vite.chrome.background.config.ts",
     "build:js": "vite build --config vite.content.config.ts",
     "build:web": "tsc && vite build",
-    "build:firefox": "NODE_ENV=production run-s build:js build:web",
-    "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
+    "build:firefox": "cross-env NODE_ENV=production run-s build:js build:web",
+    "build:chrome": "cross-env NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
     "sign:firefox": "web-ext sign --use-submission-api --channel unlisted --source-dir firefox-dist/ --artifacts-dir .",
     "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
     "publish:firefox": "web-ext sign --use-submission-api --channel listed --source-dir firefox-dist/"
@@ -29,10 +29,14 @@
   },
   "homepage": "https://github.com/ByHelyo/taby#readme",
   "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "@types/webextension-polyfill": "^0.10.7",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "chrome-webstore-upload-cli": "^3.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "husky": "^9.0.7",
     "npm-run-all": "^4.1.5",
@@ -43,7 +47,9 @@
     "webextension-polyfill": "^0.10.0"
   },
   "dependencies": {
-    "fuse.js": "^7.0.0"
+    "fuse.js": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "type": "module"
 }
