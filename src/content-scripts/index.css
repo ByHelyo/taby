@@ -65,8 +65,6 @@
 }
 
 .taby-searchItem {
-  display: flex;
-  gap: 16px;
   align-items: center;
   white-space: nowrap;
   overflow-x: clip;
@@ -81,15 +79,6 @@
 }
 
 .taby-searchKey {
-  flex-shrink: 0;
-  width: 18px;
-  display: flex;
-  justify-content: right;
   align-items: center;
   font-size: 14px;
-  font-weight: bold;
-}
-
-.taby-active {
-  background: #f2f2f2;
 }

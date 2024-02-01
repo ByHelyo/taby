@@ -61,14 +61,13 @@ export const handleToggleMenu = async function () {
       currentWindow: true,
     })
     .then((browserTabs) => {
-      const tabs: Tab[] = browserTabs.map((tab) => {
+      return browserTabs.map((tab) => {
         if (tab.active) {
           activeTabId = tab.id || 0;
         }
 
         return Tab.from(tab);
       });
-      return tabs;
     });
 
   const message: MessageFromBackground = {
