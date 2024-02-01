@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./index.css";
 
 const index = document.createElement("div");
 index.id = "extension-root";
@@ -15,5 +16,3 @@ ReactDOM.createRoot(index).render(
     <App />
   </React.StrictMode>,
 );
-
-import "./index.css";

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 [class^="taby-"],
 [class^="taby-"]::after,
 [class^="taby-"]::after {
@@ -8,13 +12,6 @@
 .taby-menu {
   display: flex;
   flex-direction: column;
-  position: fixed;
-  width: 60%;
-  top: 25%;
-  left: 20%;
-  z-index: 100000;
-  border-radius: 6px;
-  background-color: #ffffff;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -31,25 +28,10 @@
   display: none !important;
 }
 
-.taby-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px;
-}
-
-.taby-glass {
-  width: 22px;
-  height: 22px;
-}
-
 .taby-searchInput {
   all: unset !important;
   display: flex !important;
-  width: 100% !important;
   text-align: left !important;
-
-  font-size: 18px !important;
 
   /* Remove default input bar properties */
   color: inherit !important;
@@ -71,9 +53,6 @@
   height: 100%;
   overflow: scroll;
   padding: 8px;
-
-  /* Children */
-  font-size: 14px;
 }
 
 .taby-searchListEmpty {
@@ -91,9 +70,7 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: clip;
-  padding: 6px;
   user-select: none;
-  border-radius: 4px;
 }
 
 .taby-searchImg {
@@ -115,19 +92,4 @@
 
 .taby-active {
   background: #f2f2f2;
-}
-
-.taby-fade-enter,
-.taby-fade-leave {
-  transition: all 0.05s ease !important;
-}
-
-.taby-fade-enter-leave,
-.taby-fade-leave-start {
-  opacity: 1 !important;
-}
-
-.taby-fade-enter-start,
-.taby-fade-leave-end {
-  opacity: 0 !important;
 }
