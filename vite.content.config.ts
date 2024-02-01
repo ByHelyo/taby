@@ -10,7 +10,7 @@ export default defineConfig({
     outDir: resolve(__dirname, "dist"),
     lib: {
       formats: ["iife"],
-      entry: resolve(__dirname, "./src/content-scripts/index.ts"),
+      entry: resolve(__dirname, "./src/content-scripts/index.tsx"),
       name: "Taby",
     },
     rollupOptions: {
