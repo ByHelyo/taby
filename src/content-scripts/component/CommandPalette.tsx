@@ -1,5 +1,5 @@
-import { Combobox, Dialog } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   MessageFromBackground,
@@ -11,17 +11,16 @@ import {
 import browser from "webextension-polyfill";
 
 function CommandPalette() {
-  const [urls, setUrls] = useState<Tab[]>([]);
+  const [tabs, setTabs] = useState<Tab[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function handleBackground(request: MessageFromBackground) {
-      console.log("asd");
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
         if (!isOpen) {
           setIsOpen(true);
-          setUrls(request.tabs || []);
+          setTabs(request.tabs || []);
         } else {
           setIsOpen(false);
         }
@@ -46,63 +45,90 @@ function CommandPalette() {
       return await browser.runtime.sendMessage(message);
     };
 
-    fetchUrls().then(setUrls);
+    fetchUrls().then(setTabs);
   }, [query]);
 
   return (
-    <div>
-      <Dialog
-        open={isOpen}
-        onClose={setIsOpen}
-        className="fixed inset-0 pt-[25svh] z-50"
-      >
-        <Dialog.Overlay className="fixed inset-0 bg-gray-500/20" />
-        <Combobox
-          as="div"
-          className="relative bg-white w-[60vw] mx-auto rounded-md shadow-2xl ring-1 ring-black/5 divide-y divide-gray-100"
-          onChange={() => {}}
+    <Transition.Root show={isOpen} as={Fragment}>
+      <Dialog onClose={setIsOpen} className="fixed inset-0 pt-[25svh] z-50">
+        <Transition.Child
+          enter="duration-100 ease-out"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="duration-100 ease-in"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <div className="flex items-center p-4 gap-2.5">
-            <MagnifyingGlassIcon className="h-6 w-6 text-gray-500" />
-            <Combobox.Input
-              className="w-full border-0 bg-transparent outline-none text-lg text-gray-800 placeholder:text-gray-400"
-              placeholder="Search ..."
-              onChange={(event) => {
-                setQuery(event.target.value);
-              }}
-            />
-          </div>
-          <Combobox.Options
-            static
-            className="max-h-[60svh] p-2 text-sm overflow-y-auto"
+          <Dialog.Overlay className="fixed inset-0 bg-gray-500/20" />
+        </Transition.Child>
+        <Transition.Child
+          enter="duration-100 ease-out"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="duration-100 ease-in"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <Combobox
+            as="div"
+            className="relative bg-white w-[60vw] mx-auto rounded-md shadow-2xl ring-1 ring-black/5 divide-y divide-gray-100"
+            onChange={async (tab: Tab) => {
+              const message: MessageFromScript = {
+                type: MessageFromScriptType.REQUEST_SWITCH_TAB,
+                tab: tab,
+              };
+
+              setIsOpen(false);
+              await browser.runtime.sendMessage(message);
+            }}
           >
-            {urls.map((url) => {
-              return (
-                <Combobox.Option value={url} key={url.key}>
-                  {({ active }) => {
-                    return (
-                      <div
-                        className={`flex p-1.5 gap-4 rounded ${active ? "bg-neutral-100" : "bg-white"}`}
-                      >
-                        <span className="flex-shrink-0 w-5 flex justify-end font-bold">
-                          {url.key}
-                        </span>
-                        <img
-                          className="w-5 h-5"
-                          src={url.favIconUrl}
-                          alt="icon"
-                        />
-                        <span>{url.title}</span>
-                      </div>
-                    );
-                  }}
-                </Combobox.Option>
-              );
-            })}
-          </Combobox.Options>
-        </Combobox>
+            <div className="flex items-center p-4 gap-2.5">
+              <MagnifyingGlassIcon className="h-6 w-6 text-gray-500" />
+              <Combobox.Input
+                className="w-full border-0 bg-transparent outline-none text-lg text-gray-800 placeholder:text-gray-400"
+                placeholder="Search ..."
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                }}
+              />
+            </div>
+
+            {tabs.length > 0 && (
+              <Combobox.Options
+                static
+                className="max-h-[60svh] p-2 text-sm overflow-y-auto"
+              >
+                {tabs.map((tab) => {
+                  return (
+                    <Combobox.Option value={tab} key={tab.key}>
+                      {({ active }) => {
+                        return (
+                          <div
+                            className={`flex p-1.5 items-center gap-4 rounded ${active ? "bg-neutral-100" : "bg-white"}`}
+                          >
+                            <span className="flex-shrink-0 w-5 flex items-center justify-end font-bold text-black">
+                              {tab.key}
+                            </span>
+                            <img
+                              className="w-5 h-5"
+                              src={tab.favIconUrl}
+                              alt="icon"
+                            />
+                            <span className="flex items-center text-gray-900">
+                              {tab.title}
+                            </span>
+                          </div>
+                        );
+                      }}
+                    </Combobox.Option>
+                  );
+                })}
+              </Combobox.Options>
+            )}
+          </Combobox>
+        </Transition.Child>
       </Dialog>
-    </div>
+    </Transition.Root>
   );
 }
 

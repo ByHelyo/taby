@@ -2,55 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-[class^="taby-"],
-[class^="taby-"]::after,
-[class^="taby-"]::after {
-  all: unset;
-  box-sizing: border-box;
-}
-
 .taby-menu {
-  display: flex;
-  flex-direction: column;
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow: 0 16px 70px rgb(0 0 0 / 40%);
-  opacity: 1;
 
   /* Children elements */
   font-family: sans-serif;
-  color: rgba(0, 0, 0, 0.8);
   line-height: 1.5;
 }
 
-.taby-hidden {
-  display: none !important;
-}
-
-.taby-searchInput {
-  all: unset !important;
-  display: flex !important;
-  text-align: left !important;
-
-  /* Remove default input bar properties */
-  color: inherit !important;
-  font-family: inherit !important;
-  background-color: inherit !important;
-}
-
-.taby-searchInput:focus {
-  outline: none;
-}
-
 .taby-searchList {
-  border-block-start: 2px solid #f3f4f6;
-  list-style-type: none; /* Remove bullets */
   scrollbar-width: none;
 
-  display: flex;
-  flex-direction: column;
-  height: 100%;
   overflow: scroll;
   padding: 8px;
 }
@@ -65,20 +29,7 @@
 }
 
 .taby-searchItem {
-  align-items: center;
   white-space: nowrap;
   overflow-x: clip;
   user-select: none;
-}
-
-.taby-searchImg {
-  display: flex;
-  align-items: center;
-  width: 18px;
-  height: 18px;
-}
-
-.taby-searchKey {
-  align-items: center;
-  font-size: 14px;
 }
