@@ -59,7 +59,7 @@ function CommandPalette() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500/20" />
+          <Dialog.Overlay className="fixed inset-0 bg-gray-500/40" />
         </Transition.Child>
         <Transition.Child
           enter="duration-100 ease-out"
@@ -82,10 +82,10 @@ function CommandPalette() {
               await browser.runtime.sendMessage(message);
             }}
           >
-            <div className="flex items-center p-4 gap-2.5">
-              <MagnifyingGlassIcon className="h-6 w-6 text-gray-500" />
+            <div className="flex items-center p-3.5 gap-4">
+              <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
               <Combobox.Input
-                className="w-full border-0 bg-transparent outline-none text-lg text-gray-800 placeholder:text-gray-400"
+                className="w-full outline-none text-lg text-gray-800 placeholder:text-gray-400"
                 placeholder="Search ..."
                 onChange={(event) => {
                   setQuery(event.target.value);
@@ -96,15 +96,15 @@ function CommandPalette() {
             {tabs.length > 0 && (
               <Combobox.Options
                 static
-                className="max-h-[60svh] p-2 text-sm overflow-y-auto"
+                className="max-h-[60svh] p-2 text-sm overflow-y-auto no-scrollbar"
               >
-                {tabs.map((tab) => {
+                {tabs.map((tab, idx) => {
                   return (
-                    <Combobox.Option value={tab} key={tab.key}>
+                    <Combobox.Option value={tab} key={idx}>
                       {({ active }) => {
                         return (
                           <div
-                            className={`flex p-1.5 items-center gap-4 rounded ${active ? "bg-neutral-100" : "bg-white"}`}
+                            className={`flex p-1.5 items-center gap-4 rounded whitespace-nowrap overflow-clip ${active ? "bg-neutral-100" : "bg-white"}`}
                           >
                             <span className="flex-shrink-0 w-5 flex items-center justify-end font-bold text-black">
                               {tab.key}

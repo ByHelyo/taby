@@ -25,20 +25,12 @@ export class Tab {
   title: string;
   id: number;
   key: number;
-  idx: number;
   favIconUrl: string;
 
-  constructor(
-    title: string,
-    id: number,
-    key: number,
-    idx: number,
-    favIconUrl: string,
-  ) {
+  constructor(title: string, id: number, key: number, favIconUrl: string) {
     this.title = title;
     this.id = id;
     this.key = key;
-    this.idx = idx;
     this.favIconUrl = favIconUrl;
   }
 
@@ -47,7 +39,6 @@ export class Tab {
       title: tab.title || "",
       id: tab.id || 0,
       key: tab.index + 1,
-      idx: tab.index,
       favIconUrl: tab.favIconUrl || "",
     };
   }
@@ -57,7 +48,6 @@ export class SearchableTab {
   title: string;
   id: number;
   key: number;
-  idx: number;
   favIconUrl: string;
   url: string;
 
@@ -65,14 +55,12 @@ export class SearchableTab {
     title: string,
     id: number,
     key: number,
-    idx: number,
     favIconUrl: string,
     url: string,
   ) {
     this.title = title;
     this.id = id;
     this.key = key;
-    this.idx = idx;
     this.favIconUrl = favIconUrl;
     this.url = url;
   }
@@ -82,7 +70,6 @@ export class SearchableTab {
       title: tab.title || "",
       id: tab.id || 0,
       key: tab.index + 1,
-      idx: tab.index,
       favIconUrl: tab.favIconUrl || "",
       url: tab.url || "",
     };

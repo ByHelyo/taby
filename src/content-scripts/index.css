@@ -2,34 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.taby-menu {
-  font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-
-  /* Children elements */
-  font-family: sans-serif;
-  line-height: 1.5;
-}
-
-.taby-searchList {
-  scrollbar-width: none;
-
-  overflow: scroll;
-  padding: 8px;
-}
-
-.taby-searchListEmpty {
-  display: none;
-}
-
-/* Remove scroll bar */
-.taby-searchList::-webkit-scrollbar {
-  display: none;
-}
-
-.taby-searchItem {
-  white-space: nowrap;
-  overflow-x: clip;
-  user-select: none;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
