@@ -1,5 +1,5 @@
 import { Combobox, Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   MessageFromBackground,
@@ -10,33 +10,37 @@ import {
 } from "../../type/misc.ts";
 import browser from "webextension-polyfill";
 
+enum Status {
+  Closed,
+  Opened,
+  Submitted,
+}
+
 function CommandPalette() {
+  const [status, setStatus] = useState(Status.Closed);
   const [tabs, setTabs] = useState<Tab[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function handleBackground(request: MessageFromBackground) {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
-        if (!isOpen) {
-          setIsOpen(true);
+        if (status === Status.Closed) {
+          setStatus(Status.Opened);
           setTabs(request.tabs || []);
         } else {
-          setIsOpen(false);
+          setStatus(Status.Closed);
         }
       } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
-        setIsOpen(false);
+        setStatus(Status.Closed);
       }
     }
     browser.runtime.onMessage.addListener(handleBackground);
-
     return () => {
       browser.runtime.onMessage.removeListener(handleBackground);
     };
   }, []);
 
-  useEffect(() => {
-    const fetchUrls = async () => {
+  const handleOnChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fetchUrls = async (query: string) => {
       const message: MessageFromScript = {
         type: MessageFromScriptType.REQUEST_SEARCH_TAB,
         search: query,
@@ -45,22 +49,27 @@ function CommandPalette() {
       return await browser.runtime.sendMessage(message);
     };
 
-    fetchUrls().then(setTabs);
-  }, [query]);
+    fetchUrls(event.target.value).then(setTabs);
+  };
+
+  const askSwitchTab = async () => {
+    const message: MessageFromScript = {
+      type: MessageFromScriptType.REQUEST_SWITCH_TAB,
+      tab: tabs[0],
+    };
+    await browser.runtime.sendMessage(message);
+  };
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog onClose={setIsOpen} className="fixed inset-0 pt-[25svh] z-50">
-        <Transition.Child
-          enter="duration-100 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500/40" />
-        </Transition.Child>
+    <Transition.Root
+      show={status === Status.Opened}
+      as={Fragment}
+      afterLeave={askSwitchTab}
+    >
+      <Dialog
+        onClose={() => setStatus(Status.Closed)}
+        className="fixed inset-0 pt-[25svh] z-[10000]"
+      >
         <Transition.Child
           enter="duration-100 ease-out"
           enterFrom="opacity-0 scale-95"
@@ -72,14 +81,8 @@ function CommandPalette() {
           <Combobox
             as="div"
             className="relative bg-white w-[60vw] mx-auto rounded-md shadow-2xl ring-1 ring-black/5 divide-y divide-gray-100"
-            onChange={async (tab: Tab) => {
-              const message: MessageFromScript = {
-                type: MessageFromScriptType.REQUEST_SWITCH_TAB,
-                tab: tab,
-              };
-
-              setIsOpen(false);
-              await browser.runtime.sendMessage(message);
+            onChange={async () => {
+              setStatus(Status.Submitted);
             }}
           >
             <div className="flex items-center p-3.5 gap-4">
@@ -87,9 +90,7 @@ function CommandPalette() {
               <Combobox.Input
                 className="w-full outline-none text-lg text-gray-800 placeholder:text-gray-400"
                 placeholder="Search ..."
-                onChange={(event) => {
-                  setQuery(event.target.value);
-                }}
+                onChange={handleOnChange}
               />
             </div>
 

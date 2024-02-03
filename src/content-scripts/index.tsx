@@ -4,7 +4,6 @@ import App from "./App";
 import "./index.css";
 
 const index = document.createElement("div");
-index.id = "extension-root";
 
 const body = document.querySelector("body");
 if (body) {
