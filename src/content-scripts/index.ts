@@ -7,7 +7,7 @@ const body = document.querySelector("body");
 const menuService = new MenuService();
 const menuUi = menuService.getMenuUi();
 
-menuUi.dom.menu.style.setProperty("--background", "red");
+//menuUi.dom.menu.style.setProperty("--background", "red");
 
 if (body) {
   body.appendChild(menuUi.dom.menu);
