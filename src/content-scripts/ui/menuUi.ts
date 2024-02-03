@@ -52,13 +52,13 @@ export class MenuUi {
     return this.dom.contains(elt);
   }
 
-  displays(val: boolean) {
+  async displays(val: boolean) {
     if (val) {
-      this.dom.displays(true);
+      await this.dom.displays(true);
       this.dom.clearInput();
       this.dom.focusInput();
     } else {
-      this.dom.displays(false);
+      await this.dom.displays(false);
     }
   }
 

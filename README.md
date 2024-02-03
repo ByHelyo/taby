@@ -18,6 +18,13 @@
 
 `Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience, available on Chrome and Firefox. Empowering users with efficient, mouse-free tab navigation through an intuitive command palette.
 
+<h2>Features<h2>
+
+Command palette:
+
+- List open tabs in current window.
+- Fuzzy search open tabs.
+
 ### Supports:
 
 ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
