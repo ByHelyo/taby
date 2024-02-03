@@ -61,14 +61,13 @@ export const handleToggleMenu = async function () {
       currentWindow: true,
     })
     .then((browserTabs) => {
-      const tabs: Tab[] = browserTabs.map((tab) => {
+      return browserTabs.map((tab) => {
         if (tab.active) {
           activeTabId = tab.id || 0;
         }
 
         return Tab.from(tab);
       });
-      return tabs;
     });
 
   const message: MessageFromBackground = {
@@ -77,4 +76,9 @@ export const handleToggleMenu = async function () {
   };
 
   await browser.tabs.sendMessage(activeTabId, message);
+};
+
+export const handleDuplicateTab = async function () {
+  const currentTab = await browser.tabs.query({ active: true });
+  await browser.tabs.create({ url: currentTab[0].url });
 };

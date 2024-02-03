@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Taby",
   "description": "Quickly move between tabs",
-  "version": "1.11.2",
+  "version": "1.12",
   "author": "Franck Hu",
   "permissions": ["tabs"],
   "optional_permissions": ["<all_urls>"],
@@ -28,9 +28,12 @@
   "commands": {
     "TOGGLE_MENU": {
       "suggested_key": {
-        "default": "Alt+C"
+        "default": "Alt+Q"
       },
       "description": "Toggle Taby menu"
+    },
+    "DUPLICATE_TAB": {
+      "description": "Duplicate current tab"
     }
   },
   "browser_specific_settings": {
