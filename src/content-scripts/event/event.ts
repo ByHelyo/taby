@@ -17,9 +17,10 @@ export const eventBackground = function (menuService: MenuService) {
       if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
         if (!menuService.isDisplayed()) {
           const tabs = request.tabs || [];
-          menuService.open();
+          const promise = menuService.open();
           menuService.setTabs(tabs);
           menuService.setSelectedTab(tabs[0]);
+          await promise;
         }
       } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
         menuService.isDisplayed() && menuService.close();

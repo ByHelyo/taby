@@ -32,7 +32,7 @@ export async function leave(element: HTMLElement, transition: string) {
   element.classList.add("taby-hidden");
 }
 
-export async function nextFrame() {
+async function nextFrame() {
   return new Promise((resolve) => {
     requestAnimationFrame(() => {
       requestAnimationFrame(resolve);

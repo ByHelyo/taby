@@ -5,7 +5,6 @@ import {
 } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
-import { nextFrame } from "../misc/animation.ts";
 
 export class MenuService {
   selectedTab: Tab | null;
@@ -49,13 +48,13 @@ export class MenuService {
     return this.selectedTab;
   }
 
-  open() {
+  async open() {
     this.display = true;
-    this.menuUi.displays(true);
+    await this.menuUi.displays(true);
   }
 
-  close() {
-    this.menuUi.displays(false);
+  async close() {
+    await this.menuUi.displays(false);
     this.display = false;
   }
 
@@ -70,9 +69,9 @@ export class MenuService {
       tab: selectedTab,
     };
 
-    this.close();
-    await nextFrame();
-    browser.runtime.sendMessage(message);
+    await this.close();
+
+    await browser.runtime.sendMessage(message);
   }
 
   async search(content: string): Promise<Tab[]> {
