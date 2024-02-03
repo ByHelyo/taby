@@ -16,10 +16,7 @@
 
 <h2>About</h2>
 
-`Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience. Taby offers users an
-efficient way to navigate between tabs.
-
-`Taby` offers an intuitive command search palette, enabling swift switching to other open tabs simply by typing on the keyboard
+`Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience, available on Chrome and Firefox. Empowering users with efficient, mouse-free tab navigation through an intuitive command palette.
 
 ### Supports:
 
@@ -30,7 +27,8 @@ efficient way to navigate between tabs.
 
 <h3>Usage</h3>
 
-- `Alt+C` to open the menu.
+- `Alt+Q` to open the menu.
+- `Alt+W` to duplicate current tab.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.

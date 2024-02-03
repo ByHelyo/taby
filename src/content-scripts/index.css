@@ -18,12 +18,13 @@
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow: 0 16px 70px rgb(0 0 0 / 40%);
+  box-shadow:
+    0 25px 50px -12px rgb(0 0 0 / 0.25),
+    0 0 0 1px rgb(0, 0, 0, 0.05);
   opacity: 1;
 
   /* Children elements */
   font-family: sans-serif;
-  color: rgba(0, 0, 0, 0.8);
   line-height: 1.5;
 }
 
@@ -34,13 +35,13 @@
 .taby-search {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 18px;
+  gap: 16px;
+  padding: 14px;
 }
 
 .taby-glass {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 .taby-searchInput {
@@ -52,9 +53,14 @@
   font-size: 18px !important;
 
   /* Remove default input bar properties */
-  color: inherit !important;
+  color: #1f2937 !important;
   font-family: inherit !important;
   background-color: inherit !important;
+}
+
+.taby-searchInput::placeholder,
+.taby-searchInput::-ms-input-placeholder {
+  color: #9ca3af;
 }
 
 .taby-searchInput:focus {
@@ -94,6 +100,7 @@
   padding: 6px;
   user-select: none;
   border-radius: 4px;
+  color: #111827;
 }
 
 .taby-searchImg {

@@ -12,8 +12,8 @@
     "build:background:chrome": "vite build --config vite.chrome.background.config.ts",
     "build:js": "vite build --config vite.content.config.ts",
     "build:web": "tsc && vite build",
-    "build:firefox": "NODE_ENV=production run-s build:js build:web",
-    "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
+    "build:firefox": "cross-env NODE_ENV=production run-s build:js build:web",
+    "build:chrome": "cross-env NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
     "sign:firefox": "web-ext sign --use-submission-api --channel unlisted --source-dir firefox-dist/ --artifacts-dir .",
     "publish:chrome": "chrome-webstore-upload upload --source taby.zip --auto-publish",
     "publish:firefox": "web-ext sign --use-submission-api --channel listed --source-dir firefox-dist/"
@@ -33,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "chrome-webstore-upload-cli": "^3.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "husky": "^8.0.3",
     "npm-run-all": "^4.1.5",
