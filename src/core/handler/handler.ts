@@ -1,5 +1,5 @@
 import { Appearance } from "../../type/misc.ts";
-import { MenuUi } from "../../core/ui/menuUi.ts";
+import { MenuUi } from "../ui/menuUi.ts";
 
 const light = [
   ["--item-color", "#000000"],

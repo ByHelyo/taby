@@ -33,20 +33,20 @@ export async function leave(element: HTMLElement, transition: string) {
 }
 
 async function nextFrame() {
-  return new Promise((resolve) => {
-    requestAnimationFrame(() => {
+  return new Promise(function (resolve) {
+    requestAnimationFrame(function () {
       requestAnimationFrame(resolve);
     });
   });
 }
 
 function afterTransition(element: HTMLElement): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise(function (resolve) {
     const duration =
       Number(getComputedStyle(element).transitionDuration.replace("s", "")) *
       1000;
 
-    setTimeout(() => {
+    setTimeout(function () {
       resolve();
     }, duration);
   });

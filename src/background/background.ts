@@ -14,7 +14,7 @@ import {
   handleToggleMenu,
 } from "./handler.ts";
 
-browser.runtime.onInstalled.addListener(async () => {
+browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local.set({ appearance: Appearance.Light });
 });
 
