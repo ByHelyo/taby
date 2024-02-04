@@ -1,5 +1,4 @@
 import { Appearance } from "../../type/misc.ts";
-import { MenuUi } from "../ui/menuUi.ts";
 
 const light = [
   ["--item-color", "#000000"],
@@ -10,6 +9,7 @@ const light = [
   ["--input-placeholder-color", "#56566A"],
   ["--icon-filter", "none"],
   ["--ring-color", "rgb(0, 0, 0, 0.25)"],
+  ["--icon-color", "#494949"],
 ];
 
 const dark = [
@@ -24,13 +24,14 @@ const dark = [
     "invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%)",
   ],
   ["--ring-color", "rgb(255, 255, 255, 0.25)"],
+  ["--icon-color", "#f3f4f6"],
 ];
 
 export const handleChangeAppearance = function (
-  menuUi: MenuUi,
+  root: HTMLDivElement,
   appearance: Appearance,
 ) {
-  const style = menuUi.dom.menu.style;
+  const style = root.style;
   let kit;
   if (appearance === Appearance.Light) {
     kit = light;

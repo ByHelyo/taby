@@ -1,3 +1,38 @@
+body {
+  margin: 0;
+  border: none;
+}
+
+.taby-root {
+  --item-color: #000000;
+  --background: #f9fafb;
+  --item-active: #eff0f1;
+  --hr-color: #f3f4f6;
+  --input-color: #191c18;
+  --input-placeholder-color: #56566a;
+  --icon-filter: none;
+  --ring-color: rgba(0, 0, 0, 0.25);
+  --icon-color: ffffff;
+  --background-2: white;
+
+  background: var(--background);
+  color: var(--item-color);
+  padding: 8px;
+}
+
+hr {
+  border: none;
+  border-block-start: 2px solid var(--hr-color);
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 14px;
+}
+
 .appearance-buttons {
   display: flex;
   gap: 16px;
@@ -56,7 +91,7 @@
   min-height: 7rem;
   border-radius: 0.5rem;
   border: 2px solid #b5bfd9;
-  background-color: #fff;
+  background-color: var(--background);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   transition: 0.15s ease;
   cursor: pointer;
@@ -69,7 +104,7 @@
   width: 1.25rem;
   height: 1.25rem;
   border: 2px solid #b5bfd9;
-  background-color: #fff;
+  background-color: var(--background);
   border-radius: 50%;
   top: 0.25rem;
   left: 0.25rem;
@@ -91,7 +126,7 @@
 
 .checkbox-wrapper-16 .checkbox-icon {
   transition: 0.375s ease;
-  color: #494949;
+  color: var(--icon-color);
 }
 .checkbox-wrapper-16 .checkbox-icon svg {
   width: 3rem;
@@ -99,7 +134,7 @@
 }
 
 .checkbox-wrapper-16 .checkbox-label {
-  color: #707070;
+  color: var(--item-color);
   transition: 0.375s ease;
   text-align: center;
 }

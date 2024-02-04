@@ -1,11 +1,14 @@
 import browser from "webextension-polyfill";
 import { Appearance } from "../../type/misc.ts";
+import { appearance_setup } from "../../core/setup/appearance.ts";
 
 const handleSelectAppearance = async function (theme: Appearance) {
   await browser.storage.local.set({ appearance: theme });
 };
 
-document.addEventListener("DOMContentLoaded", async function () {
+async function main() {
+  appearance_setup(document.querySelector("body > div")!);
+
   const storage = await browser.storage.local.get(["appearance"]);
   const lightButton = document.querySelector<HTMLInputElement>(
     "div:nth-child(1) input",
@@ -26,4 +29,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   darkButton.addEventListener("click", function () {
     handleSelectAppearance(Appearance.Dark);
   });
-});
+}
+
+main();

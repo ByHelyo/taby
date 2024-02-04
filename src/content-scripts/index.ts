@@ -6,17 +6,21 @@ import { WindowService } from "../core/service/window.ts";
 import { Context } from "../type/misc.ts";
 import { appearance_setup } from "../core/setup/appearance.ts";
 
-const body = document.querySelector("body");
-const window = new WindowService(Context.ContentScript);
-const menuService = new MenuService(window);
-const menuUi = menuService.getMenuUi();
+function main() {
+  const body = document.querySelector("body");
+  const window = new WindowService(Context.ContentScript);
+  const menuService = new MenuService(window);
+  const menuUi = menuService.getMenuUi();
 
-appearance_setup(menuUi);
+  appearance_setup(menuUi.dom.root);
 
-if (body) {
-  body.appendChild(menuUi.dom.menu);
+  if (body) {
+    body.appendChild(menuUi.dom.root);
+  }
+
+  eventBackground(menuService);
+  eventOutsideMenu(menuService, menuUi);
+  eventResize(menuUi);
 }
 
-eventBackground(menuService);
-eventOutsideMenu(menuService, menuUi);
-eventResize(menuUi);
+main();

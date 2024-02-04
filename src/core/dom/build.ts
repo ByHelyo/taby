@@ -1,5 +1,13 @@
 import browser from "webextension-polyfill";
 
+export const buildRoot = function (menu: HTMLDivElement): HTMLDivElement {
+  const root = document.createElement("div");
+  root.classList.add("taby-root");
+  root.append(menu);
+
+  return root;
+};
+
 export const buildMenu = function (
   search: HTMLDivElement,
   searchList: HTMLUListElement,

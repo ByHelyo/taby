@@ -4,7 +4,7 @@
   all: unset;
 }
 
-.taby-menu {
+.taby-root {
   --item-color: #000000;
   --background: #f9fafb;
   --item-active: #eff0f1;

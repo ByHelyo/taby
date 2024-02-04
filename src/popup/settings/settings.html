@@ -3,59 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <title>Taby</title>
-    <link href="../global.css" rel="stylesheet" type="text/css" />
     <link href="settings.css" rel="stylesheet" type="text/css" />
     <script type="module" src="settings.ts"></script>
   </head>
   <body>
-    <h1>Settings</h1>
-    <hr />
-    <h2>Appearance</h2>
-    <div class="appearance-buttons">
-      <div class="checkbox-wrapper-16">
-        <label class="checkbox-wrapper">
-          <input type="radio" class="checkbox-input" name="appearance" />
-          <span class="checkbox-tile">
-            <span class="checkbox-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 0 24 24"
-                width="24px"
-                fill="currentColor"
-              >
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path
-                  d="M6.05 4.14l-.39-.39c-.39-.39-1.02-.38-1.4 0l-.01.01c-.39.39-.39 1.02 0 1.4l.39.39c.39.39 1.01.39 1.4 0l.01-.01c.39-.38.39-1.02 0-1.4zM3.01 10.5H1.99c-.55 0-.99.44-.99.99v.01c0 .55.44.99.99.99H3c.56.01 1-.43 1-.98v-.01c0-.56-.44-1-.99-1zm9-9.95H12c-.56 0-1 .44-1 .99v.96c0 .55.44.99.99.99H12c.56.01 1-.43 1-.98v-.97c0-.55-.44-.99-.99-.99zm7.74 3.21c-.39-.39-1.02-.39-1.41-.01l-.39.39c-.39.39-.39 1.02 0 1.4l.01.01c.39.39 1.02.39 1.4 0l.39-.39c.39-.39.39-1.01 0-1.4zm-1.81 15.1l.39.39c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-.39-.39c-.39-.39-1.02-.38-1.4 0-.4.4-.4 1.02-.01 1.41zM20 11.49v.01c0 .55.44.99.99.99H22c.55 0 .99-.44.99-.99v-.01c0-.55-.44-.99-.99-.99h-1.01c-.55 0-.99.44-.99.99zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-.01 16.95H12c.55 0 .99-.44.99-.99v-.96c0-.55-.44-.99-.99-.99h-.01c-.55 0-.99.44-.99.99v.96c0 .55.44.99.99.99zm-7.74-3.21c.39.39 1.02.39 1.41 0l.39-.39c.39-.39.38-1.02 0-1.4l-.01-.01c-.39-.39-1.02-.39-1.41 0l-.39.39c-.38.4-.38 1.02.01 1.41z"
-                />
-              </svg>
+    <div class="taby-root">
+      <h1>Settings</h1>
+      <hr />
+      <h2>Appearance</h2>
+      <div class="appearance-buttons">
+        <div class="checkbox-wrapper-16">
+          <label class="checkbox-wrapper">
+            <input type="radio" class="checkbox-input" name="appearance" />
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="currentColor"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path
+                    d="M6.05 4.14l-.39-.39c-.39-.39-1.02-.38-1.4 0l-.01.01c-.39.39-.39 1.02 0 1.4l.39.39c.39.39 1.01.39 1.4 0l.01-.01c.39-.38.39-1.02 0-1.4zM3.01 10.5H1.99c-.55 0-.99.44-.99.99v.01c0 .55.44.99.99.99H3c.56.01 1-.43 1-.98v-.01c0-.56-.44-1-.99-1zm9-9.95H12c-.56 0-1 .44-1 .99v.96c0 .55.44.99.99.99H12c.56.01 1-.43 1-.98v-.97c0-.55-.44-.99-.99-.99zm7.74 3.21c-.39-.39-1.02-.39-1.41-.01l-.39.39c-.39.39-.39 1.02 0 1.4l.01.01c.39.39 1.02.39 1.4 0l.39-.39c.39-.39.39-1.01 0-1.4zm-1.81 15.1l.39.39c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-.39-.39c-.39-.39-1.02-.38-1.4 0-.4.4-.4 1.02-.01 1.41zM20 11.49v.01c0 .55.44.99.99.99H22c.55 0 .99-.44.99-.99v-.01c0-.55-.44-.99-.99-.99h-1.01c-.55 0-.99.44-.99.99zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-.01 16.95H12c.55 0 .99-.44.99-.99v-.96c0-.55-.44-.99-.99-.99h-.01c-.55 0-.99.44-.99.99v.96c0 .55.44.99.99.99zm-7.74-3.21c.39.39 1.02.39 1.41 0l.39-.39c.39-.39.38-1.02 0-1.4l-.01-.01c-.39-.39-1.02-.39-1.41 0l-.39.39c-.38.4-.38 1.02.01 1.41z"
+                  />
+                </svg>
+              </span>
+              <span class="checkbox-label">Light mode</span>
             </span>
-            <span class="checkbox-label">Light mode</span>
-          </span>
-        </label>
-      </div>
-      <div class="checkbox-wrapper-16">
-        <label class="checkbox-wrapper">
-          <input type="radio" class="checkbox-input" name="appearance" />
-          <span class="checkbox-tile">
-            <span class="checkbox-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                enable-background="new 0 0 24 24"
-                height="24px"
-                viewBox="0 0 24 24"
-                width="24px"
-                fill="currentColor"
-              >
-                <rect fill="none" height="24" width="24" />
-                <path
-                  d="M11.01,3.05C6.51,3.54,3,7.36,3,12c0,4.97,4.03,9,9,9c4.63,0,8.45-3.5,8.95-8c0.09-0.79-0.78-1.42-1.54-0.95 c-0.84,0.54-1.84,0.85-2.91,0.85c-2.98,0-5.4-2.42-5.4-5.4c0-1.06,0.31-2.06,0.84-2.89C12.39,3.94,11.9,2.98,11.01,3.05z"
-                />
-              </svg>
+          </label>
+        </div>
+        <div class="checkbox-wrapper-16">
+          <label class="checkbox-wrapper">
+            <input type="radio" class="checkbox-input" name="appearance" />
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  enable-background="new 0 0 24 24"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="currentColor"
+                >
+                  <rect fill-opacity="0" height="24" width="24" />
+                  <path
+                    d="M11.01,3.05C6.51,3.54,3,7.36,3,12c0,4.97,4.03,9,9,9c4.63,0,8.45-3.5,8.95-8c0.09-0.79-0.78-1.42-1.54-0.95 c-0.84,0.54-1.84,0.85-2.91,0.85c-2.98,0-5.4-2.42-5.4-5.4c0-1.06,0.31-2.06,0.84-2.89C12.39,3.94,11.9,2.98,11.01,3.05z"
+                  />
+                </svg>
+              </span>
+              <span class="checkbox-label">Dark mode</span>
             </span>
-            <span class="checkbox-label">Dark mode</span>
-          </span>
-        </label>
+          </label>
+        </div>
       </div>
     </div>
   </body>
