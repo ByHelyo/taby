@@ -9,17 +9,6 @@ body {
   all: unset;
 }
 
-.taby-root {
-  --item-color: #000000;
-  --background: #f9fafb;
-  --item-active: #eff0f1;
-  --hr-color: #f3f4f6;
-  --input-color: #191c18;
-  --input-placeholder-color: #56566a;
-  --icon-filter: none;
-  --ring-color: rgba(0, 0, 0, 0.25);
-}
-
 .taby-menu {
   display: flex;
   flex-direction: column;
