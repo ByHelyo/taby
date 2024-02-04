@@ -12,6 +12,7 @@
   --hr-color: #f3f4f6;
   --item-color: #111827;
   --item-active: #f2f2f2;
+  --icon-filter: none;
 }
 
 .taby-menu {
@@ -51,6 +52,7 @@
 .taby-glass {
   width: 18px;
   height: 18px;
+  filter: var(--icon-filter);
 }
 
 .taby-searchInput {

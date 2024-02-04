@@ -1,6 +1,7 @@
 import browser from "webextension-polyfill";
 
 import {
+  Appearance,
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
@@ -12,6 +13,10 @@ import {
   handleRequestSwitchTab,
   handleToggleMenu,
 } from "./handler.ts";
+
+browser.runtime.onInstalled.addListener(async () => {
+  await browser.storage.local.set({ appearance: Appearance.Light });
+});
 
 /**
  * Listens for shortcuts.
