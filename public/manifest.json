@@ -26,7 +26,7 @@
     "128": "icon-128.png"
   },
   "commands": {
-    "_execute_action": {
+    "_execute_browser_action": {
       "suggested_key": {
         "default": "Alt+Q"
       }
