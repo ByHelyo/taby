@@ -1,5 +1,10 @@
 import browser from "webextension-polyfill";
 
+export enum Appearance {
+  Light = "light",
+  Dark = "dark",
+}
+
 export enum MessageFromScriptType {
   REQUEST_SWITCH_TAB,
   REQUEST_SEARCH_TAB,
