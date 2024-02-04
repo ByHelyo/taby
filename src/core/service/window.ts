@@ -1,3 +1,5 @@
+import { Context } from "../../type/misc.ts";
+
 const SEARCH_INPUT_SIZE: number = 60;
 const PADDINGS_SEARCH_LIST: number = 16;
 const SEARCH_ITEM_SIZE: number = 36;
@@ -22,8 +24,10 @@ export class WindowService {
   end: number;
   capacity: number;
   size: number;
+  context: Context;
 
-  constructor() {
+  constructor(context: Context) {
+    this.context = context;
     this.capacity = this.computeCapacity();
     this.start = 0;
     this.end = this.capacity;
@@ -45,8 +49,11 @@ export class WindowService {
   }
 
   computeCapacity() {
+    const window_size =
+      this.context === Context.ContentScript ? window.innerHeight : 759;
+
     const menu_size =
-      window.innerHeight * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
+      window_size * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
     return Math.floor(menu_size / SEARCH_ITEM_SIZE);
   }
 

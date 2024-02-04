@@ -2,9 +2,9 @@ import {
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../../type/misc";
-import { MenuService } from "../service/menuService.ts";
+import { MenuService } from "../../core/service/menuService.ts";
 import browser from "webextension-polyfill";
-import { MenuUi } from "../ui/menuUi.ts";
+import { MenuUi } from "../../core/ui/menuUi.ts";
 
 /**
  * Listens for messages from background.
