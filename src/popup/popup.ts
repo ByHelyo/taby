@@ -14,7 +14,9 @@ async function main() {
   if (body) {
     body.appendChild(menuUi.dom.root);
   }
+
   menuService.open();
+  menuService.setup();
 }
 
 main();

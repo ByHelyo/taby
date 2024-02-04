@@ -80,4 +80,15 @@ export class MenuService {
 
     return await browser.runtime.sendMessage(message);
   }
+
+  async setup() {
+    const message: MessageFromScript = {
+      type: MessageFromScriptType.REQUEST_SEARCH_TAB,
+      search: "",
+    };
+
+    const tabs = await browser.runtime.sendMessage(message);
+    this.setTabs(tabs);
+    this.setSelectedTab(tabs[0]);
+  }
 }
