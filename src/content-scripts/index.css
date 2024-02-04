@@ -6,13 +6,14 @@
 }
 
 .taby-menu {
-  --background: #ffffff;
-  --input-color: #1f2937;
-  --input-placeholder-color: #9ca3af;
+  --item-color: #000000;
+  --background: #f9fafb;
+  --item-active: #eff0f1;
   --hr-color: #f3f4f6;
-  --item-color: #111827;
-  --item-active: #f2f2f2;
+  --input-color: #191c18;
+  --input-placeholder-color: #56566a;
   --icon-filter: none;
+  --ring-color: rgba(0, 0, 0, 0.25);
 }
 
 .taby-menu {
@@ -28,9 +29,7 @@
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow:
-    0 25px 50px -12px rgb(0 0 0 / 0.25),
-    0 0 0 1px rgb(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 1px var(--ring-color);
   opacity: 1;
 
   /* Children elements */
