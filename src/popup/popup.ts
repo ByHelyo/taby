@@ -4,15 +4,15 @@ import { Context } from "../type/misc.ts";
 import { appearance_setup } from "../core/setup/appearance.ts";
 
 async function main() {
-  const body = document.querySelector("body");
+  const root = document.querySelector<HTMLDivElement>("body > div")!;
   const window = new WindowService(Context.Popup);
   const menuService = new MenuService(window);
   const menuUi = menuService.getMenuUi();
 
-  appearance_setup(menuUi.dom.root);
+  appearance_setup(root);
 
-  if (body) {
-    body.appendChild(menuUi.dom.root);
+  if (root) {
+    root.prepend(menuUi.dom.root);
   }
 
   menuService.open();

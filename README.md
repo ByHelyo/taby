@@ -25,6 +25,16 @@ Command palette:
 - List open tabs in current window.
 - Fuzzy search open tabs.
 
+Popup:
+
+- List open tabs in current window.
+- Fuzzy search open tabs.
+- Ability to change appearance.
+
+Others:
+
+- Duplicate tabs (optionnal)
+
 ### Supports:
 
 ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)

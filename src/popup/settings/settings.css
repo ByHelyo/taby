@@ -1,12 +1,12 @@
 body {
+  width: 800px;
   margin: 0;
-  border: none;
+  border: 0;
 }
 
 .taby-root {
   background: var(--background);
   color: var(--item-color);
-  padding: 8px;
 }
 
 hr {
@@ -16,10 +16,16 @@ hr {
 
 h1 {
   font-size: 18px;
+  padding-block: 12px;
+  margin: 0;
 }
 
 h2 {
   font-size: 14px;
+}
+
+.settings {
+  padding: 8px;
 }
 
 .appearance-buttons {
@@ -126,4 +132,18 @@ h2 {
   color: var(--item-color);
   transition: 0.375s ease;
   text-align: center;
+}
+
+nav {
+  background: var(--background);
+  display: flex;
+}
+
+nav a {
+  background: red;
+  display: inline-block;
+  padding: 8px 24px;
+  color: var(--item-color);
+  background: var(--item-active);
+  text-decoration: none;
 }

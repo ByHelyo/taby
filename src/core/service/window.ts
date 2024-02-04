@@ -1,8 +1,9 @@
 import { Context } from "../../type/misc.ts";
 
-const SEARCH_INPUT_SIZE: number = 60;
+const SEARCH_INPUT_SIZE: number = 55;
+const BORDER_SIZE: number = 2;
 const PADDINGS_SEARCH_LIST: number = 16;
-const SEARCH_ITEM_SIZE: number = 36;
+const SEARCH_ITEM_SIZE: number = 33;
 
 export enum Action {
   MovedUp,
@@ -50,10 +51,10 @@ export class WindowService {
 
   computeCapacity() {
     const window_size =
-      this.context === Context.ContentScript ? window.innerHeight : 759;
+      this.context === Context.ContentScript ? window.innerHeight * 0.7 : 600;
 
     const menu_size =
-      window_size * 0.7 - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST;
+      window_size - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST - BORDER_SIZE;
     return Math.floor(menu_size / SEARCH_ITEM_SIZE);
   }
 
