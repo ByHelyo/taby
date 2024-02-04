@@ -1,5 +1,6 @@
 import {
   buildMenu,
+  buildRoot,
   buildSearch,
   buildSearchInput,
   buildSearchItem,
@@ -9,6 +10,7 @@ import { enter, leave } from "../misc/animation.ts";
 import { Tab } from "../../type/tab.ts";
 
 export class MenuDom {
+  root: HTMLDivElement;
   menu: HTMLDivElement;
   search: HTMLDivElement;
   searchInput: HTMLInputElement;
@@ -19,6 +21,7 @@ export class MenuDom {
     this.searchInput = buildSearchInput();
     this.search = buildSearch(this.searchInput);
     this.menu = buildMenu(this.search, this.searchList);
+    this.root = buildRoot(this.menu);
   }
 
   focusInput() {

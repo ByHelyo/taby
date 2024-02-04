@@ -1,10 +1,15 @@
+body {
+  width: 769px;
+  margin: 0;
+}
+
 [class^="taby-"],
 [class^="taby-"]::after,
 [class^="taby-"]::after {
   all: unset;
 }
 
-.taby-menu {
+.taby-root {
   --item-color: #000000;
   --background: #f9fafb;
   --item-active: #eff0f1;
