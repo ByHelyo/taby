@@ -12,21 +12,21 @@ import { MenuUi } from "../../core/ui/menuUi.ts";
  * @param menuService
  */
 export const eventBackground = function (menuService: MenuService) {
-  browser.runtime.onMessage.addListener(
-    async (request: MessageFromBackground) => {
-      if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
-        if (!menuService.isDisplayed()) {
-          const tabs = request.tabs || [];
-          const promise = menuService.open();
-          menuService.setTabs(tabs);
-          menuService.setSelectedTab(tabs[0]);
-          await promise;
-        }
-      } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
-        menuService.isDisplayed() && menuService.close();
+  browser.runtime.onMessage.addListener(async function (
+    request: MessageFromBackground,
+  ) {
+    if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
+      if (!menuService.isDisplayed()) {
+        const tabs = request.tabs || [];
+        const promise = menuService.open();
+        menuService.setTabs(tabs);
+        menuService.setSelectedTab(tabs[0]);
+        await promise;
       }
-    },
-  );
+    } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
+      menuService.isDisplayed() && menuService.close();
+    }
+  });
 };
 
 /**
