@@ -1,5 +1,5 @@
 import browser from "webextension-polyfill";
-import { Appearance } from "../type/misc.ts";
+import { Appearance } from "../../type/misc.ts";
 
 const handleSelectAppearance = async (theme: Appearance) => {
   await browser.storage.local.set({ appearance: theme });

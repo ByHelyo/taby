@@ -1,7 +1,7 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
-import { Tab } from "../../type/misc.ts";
 import { Action, WindowService } from "../service/window.ts";
+import { Tab } from "../../type/tab.ts";
 
 export class MenuUi {
   dom: MenuDom;
@@ -9,10 +9,10 @@ export class MenuUi {
   window: WindowService;
   timeout: number | undefined;
 
-  constructor(menuService: MenuService) {
+  constructor(menuService: MenuService, window: WindowService) {
     this.menuService = menuService;
     this.dom = new MenuDom();
-    this.window = new WindowService();
+    this.window = window;
     this.dom.onInput(async (e) => {
       await this.handleOnInput(e);
     });

@@ -1,10 +1,8 @@
-import {
-  MessageFromScript,
-  MessageFromScriptType,
-  Tab,
-} from "../../type/misc.ts";
+import { MessageFromScript, MessageFromScriptType } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
+import { WindowService } from "./window.ts";
+import { Tab } from "../../type/tab.ts";
 
 export class MenuService {
   selectedTab: Tab | null;
@@ -12,11 +10,11 @@ export class MenuService {
   display: boolean;
   menuUi: MenuUi;
 
-  constructor() {
+  constructor(window: WindowService) {
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.menuUi = new MenuUi(this);
+    this.menuUi = new MenuUi(this, window);
   }
 
   getMenuUi() {

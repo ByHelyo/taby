@@ -7,6 +7,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: new URL("./src/popup/popup.html", import.meta.url).pathname,
+        settings: new URL("./src/popup/settings/settings.html", import.meta.url)
+          .pathname,
         background: new URL("./src/background/background.html", import.meta.url)
           .pathname,
       },

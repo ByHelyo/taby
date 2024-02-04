@@ -3,9 +3,8 @@ import Fuse from "fuse.js";
 import {
   MessageFromBackground,
   MessageFromBackgroundType,
-  SearchableTab,
-  Tab,
 } from "../type/misc.ts";
+import { SearchableTab, Tab } from "../type/tab.ts";
 
 /**
  * Switches to the specified tab.

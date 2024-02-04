@@ -18,25 +18,13 @@
 .taby-menu {
   display: flex;
   flex-direction: column;
-  position: fixed;
-  width: 60%;
-  top: 25%;
-  left: 20%;
-  z-index: 100000;
-  border-radius: 6px;
   background-color: var(--background);
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow: 0 0 0 1px var(--ring-color);
-  opacity: 1;
 
   font-family: sans-serif;
   line-height: 1.5;
-}
-
-.taby-hidden {
-  display: none !important;
 }
 
 .taby-search {
@@ -53,17 +41,13 @@
 }
 
 .taby-searchInput {
-  all: unset !important;
-  display: flex !important;
-  width: 100% !important;
-  text-align: left !important;
+  all: unset;
+  display: flex;
+  width: 100%;
+  text-align: left;
 
-  font-size: 18px !important;
-  color: var(--input-color) !important;
-
-  /* Remove default input bar properties */
-  font-family: inherit !important;
-  background-color: inherit !important;
+  font-size: 18px;
+  color: var(--input-color);
 }
 
 .taby-searchInput::placeholder,
@@ -128,19 +112,4 @@
 
 .taby-active {
   background: var(--item-active);
-}
-
-.taby-fade-enter,
-.taby-fade-leave {
-  transition: all 0.1s ease !important;
-}
-
-.taby-fade-leave-end,
-.taby-fade-enter-start {
-  transform: scale(0.99) !important;
-}
-
-.taby-fade-leave-start,
-.taby-fade-enter-leave {
-  transform: scale(1) !important;
 }

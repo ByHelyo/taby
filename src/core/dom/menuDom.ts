@@ -5,8 +5,8 @@ import {
   buildSearchItem,
   buildSearchList,
 } from "./build.ts";
-import { Tab } from "../../type/misc.ts";
 import { enter, leave } from "../misc/animation.ts";
+import { Tab } from "../../type/tab.ts";
 
 export class MenuDom {
   menu: HTMLDivElement;

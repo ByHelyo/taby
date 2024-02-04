@@ -1,16 +1,3 @@
-body {
-  width: 769px;
-  height: 569px;
-}
-
-h1 {
-  font-size: 18px;
-}
-
-h2 {
-  font-size: 14px;
-}
-
 .appearance-buttons {
   display: flex;
   gap: 16px;
@@ -32,11 +19,13 @@ h2 {
   white-space: nowrap;
   width: 1px;
 }
+
 .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
   border-color: #2260ff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #2260ff;
 }
+
 .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
   transform: scale(1);
   opacity: 1;
