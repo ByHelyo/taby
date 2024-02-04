@@ -30,16 +30,18 @@
     "128": "icon-128.png"
   },
   "commands": {
-    "TOGGLE_MENU": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Alt+Q"
+      }
+    },
+    "TOGGLE_MENU": {
+      "suggested_key": {
+        "default": "Alt+W"
       },
       "description": "Toggle Taby menu"
     },
     "DUPLICATE_TAB": {
-      "suggested_key": {
-        "default": "Alt+W"
-      },
       "description": "Duplicate current tab"
     }
   }
