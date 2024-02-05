@@ -18,22 +18,18 @@
 
 `Taby` is a simple, lightweight tab switcher extension designed to optimize your browsing experience, available on Chrome and Firefox. Empowering users with efficient, mouse-free tab navigation through an intuitive command palette.
 
-<h2>Features<h2>
+<h2>Features</h2>
 
-Command palette:
-
-- List open tabs in current window.
-- Fuzzy search open tabs.
-
-Popup:
-
-- List open tabs in current window.
-- Fuzzy search open tabs.
-- Ability to change appearance.
-
-Others:
-
-- Duplicate tabs (optionnal)
+- Display all open tabs in current window via a convenient command palette or popup.
+- Efficient tab filtering options
+  - Search by title, URL, or index in the current window
+  - Ability to fuzzy search open tabs.
+  - Powered by a fuzzy search filtering.
+  - Navigate between tabs using arrow keys
+  - Switch to tab with 'Enter' or by clicking it.
+  - Switch to a tab with 'Enter' or a simple click
+- Customize the appearance with options for light and dark modes
+- Shortcut for duplicate tab.
 
 ### Supports:
 
@@ -46,10 +42,10 @@ Others:
 
 - `Alt+Q` to open the popup.
 - `Alt+W` to open the command palette.
-- Optional shortcut to duplicate current tab.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.
+- Optional shortcut to duplicate current tab.
 
 <h2>Build</h2>
 
