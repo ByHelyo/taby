@@ -15,17 +15,18 @@ export const eventBackground = function (menuService: MenuService) {
   browser.runtime.onMessage.addListener(async function (
     request: MessageFromBackground,
   ) {
+    const promises: Promise<void>[] = [];
+
     if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
       if (!menuService.isDisplayed()) {
-        const tabs = request.tabs || [];
-        const promise = menuService.open();
-        menuService.setTabs(tabs);
-        menuService.setSelectedTab(tabs[0]);
-        await promise;
+        promises.push(menuService.open());
+        promises.push(menuService.setupTabs());
       }
     } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
-      menuService.isDisplayed() && menuService.close();
+      menuService.isDisplayed() && promises.push(menuService.close());
     }
+
+    return Promise.all(promises);
   });
 };
 
@@ -39,9 +40,9 @@ export const eventOutsideMenu = function (
   menuService: MenuService,
   menuUi: MenuUi,
 ) {
-  window.addEventListener("click", function (e) {
+  window.addEventListener("click", async function (e) {
     if (!menuUi.contains(e.target as HTMLElement)) {
-      menuService.close();
+      await menuService.close();
     }
   });
 };

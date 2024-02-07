@@ -5,10 +5,10 @@ import { WindowService } from "./window.ts";
 import { Tab } from "../../type/tab.ts";
 
 export class MenuService {
-  selectedTab: Tab | null;
-  tabs: Tab[];
-  display: boolean;
-  menuUi: MenuUi;
+  private selectedTab: Tab | null;
+  private tabs: Tab[];
+  private display: boolean;
+  private readonly menuUi: MenuUi;
 
   constructor(window: WindowService) {
     this.selectedTab = null;
@@ -25,9 +25,9 @@ export class MenuService {
     return this.display;
   }
 
-  setTabs(tabs: Tab[]) {
+  async setTabs(tabs: Tab[]) {
     this.tabs = tabs;
-    this.menuUi.setTabs(tabs);
+    await this.menuUi.setTabs(tabs);
   }
 
   getTabs() {
@@ -81,14 +81,14 @@ export class MenuService {
     return await browser.runtime.sendMessage(message);
   }
 
-  async setup() {
+  async setupTabs() {
     const message: MessageFromScript = {
       type: MessageFromScriptType.REQUEST_SEARCH_TAB,
       search: "",
     };
 
     const tabs = await browser.runtime.sendMessage(message);
-    this.setTabs(tabs);
+    await this.setTabs(tabs);
     this.setSelectedTab(tabs[0]);
   }
 }

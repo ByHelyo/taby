@@ -12,11 +12,11 @@ async function main() {
   appearance_setup(root);
 
   if (root) {
-    root.prepend(menuUi.dom.root);
+    root.prepend(menuUi.getMenuDom().getRoot());
   }
 
   menuService.open();
-  menuService.setup();
+  menuService.setupTabs();
 }
 
 main();

@@ -43,7 +43,7 @@ browser.runtime.onMessage.addListener(async function (
   switch (request.type) {
     case MessageFromScriptType.REQUEST_SWITCH_TAB:
       if (request.tab) {
-        handleRequestSwitchTab(request.tab);
+        await handleRequestSwitchTab(request.tab);
       }
       break;
     case MessageFromScriptType.REQUEST_SEARCH_TAB:

@@ -12,10 +12,10 @@ function main() {
   const menuService = new MenuService(window);
   const menuUi = menuService.getMenuUi();
 
-  appearance_setup(menuUi.dom.root);
+  appearance_setup(menuUi.getMenuDom().getRoot());
 
   if (body) {
-    body.appendChild(menuUi.dom.root);
+    body.appendChild(menuUi.getMenuDom().getRoot());
   }
 
   eventBackground(menuService);

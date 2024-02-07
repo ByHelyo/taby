@@ -1,10 +1,10 @@
 import { Context } from "../../type/misc.ts";
 
-const SEARCH_INPUT_SIZE: number = 55;
-const BORDER_SIZE: number = 2;
-const PADDINGS_SEARCH_LIST: number = 16;
-const SEARCH_ITEM_SIZE: number = 33;
-const NAV_POPUP: number = 30;
+const SEARCH_INPUT_SIZE: number = 55,
+  BORDER_SIZE: number = 2,
+  PADDINGS_SEARCH_LIST: number = 16,
+  SEARCH_ITEM_SIZE: number = 33,
+  NAV_POPUP: number = 30;
 
 export enum Action {
   MovedUp,
@@ -16,17 +16,17 @@ export enum Action {
 
 export interface WindowResult {
   action: Action;
-  start: number;
   end: number;
   next: number;
+  start: number;
 }
 
 export class WindowService {
-  start: number;
-  end: number;
-  capacity: number;
-  size: number;
-  context: Context;
+  private start: number;
+  private end: number;
+  private capacity: number;
+  private size: number;
+  private readonly context: Context;
 
   constructor(context: Context) {
     this.context = context;
@@ -83,7 +83,7 @@ export class WindowService {
           action: Action.MovedToEnd,
           start: this.start,
           end: this.end,
-          next: next,
+          next,
         };
       } else {
         --this.start;
@@ -92,7 +92,7 @@ export class WindowService {
           action: Action.MovedUp,
           start: this.start,
           end: this.end,
-          next: next,
+          next,
         };
       }
     }
@@ -101,7 +101,7 @@ export class WindowService {
       action: Action.Unchanged,
       start: this.start,
       end: this.end,
-      next: next,
+      next,
     };
   }
 
