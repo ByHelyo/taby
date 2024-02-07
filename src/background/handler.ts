@@ -11,8 +11,8 @@ import { SearchableTab, Tab } from "../type/tab.ts";
  *
  * @param tab The tab to switch to.
  */
-export const handleRequestSwitchTab = function (tab: Tab) {
-  browser.tabs.update(tab.id, { active: true });
+export const handleRequestSwitchTab = async function (tab: Tab) {
+  await browser.tabs.update(tab.id, { active: true });
 };
 
 /**
@@ -49,35 +49,25 @@ export const handleRequestSearchTab = async function (
 };
 
 /**
- * Toggles the visibility state of the menu by requesting all tabs in the current window and sending a message to the content script.
+ * Toggles the visibility state of the menu by sending a message to the content script.
  *
  */
 export const handleToggleMenu = async function () {
-  let activeTabId = 0;
-
-  const tabs: Tab[] = await browser.tabs
-    .query({
-      currentWindow: true,
-    })
-    .then(function (browserTabs) {
-      return browserTabs.map(function (tab) {
-        if (tab.active) {
-          activeTabId = tab.id || 0;
-        }
-
-        return Tab.from(tab);
-      });
-    });
+  const [currentTab] = await browser.tabs.query({
+    active: true,
+    lastFocusedWindow: true,
+  });
 
   const message: MessageFromBackground = {
     type: MessageFromBackgroundType.TOGGLE_MENU,
-    tabs,
   };
 
-  await browser.tabs.sendMessage(activeTabId, message);
+  if (currentTab.id) {
+    await browser.tabs.sendMessage(currentTab.id, message);
+  }
 };
 
 export const handleDuplicateTab = async function () {
-  const currentTab = await browser.tabs.query({ active: true });
-  await browser.tabs.create({ url: currentTab[0].url });
+  const [currentTab] = await browser.tabs.query({ active: true });
+  await browser.tabs.create({ url: currentTab.url });
 };

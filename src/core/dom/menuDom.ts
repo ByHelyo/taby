@@ -10,11 +10,11 @@ import { enter, leave } from "../misc/animation.ts";
 import { Tab } from "../../type/tab.ts";
 
 export class MenuDom {
-  root: HTMLDivElement;
-  menu: HTMLDivElement;
-  search: HTMLDivElement;
-  searchInput: HTMLInputElement;
-  searchList: HTMLUListElement;
+  private readonly root: HTMLDivElement;
+  private readonly menu: HTMLDivElement;
+  private readonly search: HTMLDivElement;
+  private readonly searchInput: HTMLInputElement;
+  private readonly searchList: HTMLUListElement;
 
   constructor() {
     this.searchList = buildSearchList();
@@ -22,6 +22,10 @@ export class MenuDom {
     this.search = buildSearch(this.searchInput);
     this.menu = buildMenu(this.search, this.searchList);
     this.root = buildRoot(this.menu);
+  }
+
+  getRoot() {
+    return this.root;
   }
 
   focusInput() {
