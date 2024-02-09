@@ -137,33 +137,33 @@ jobs:
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./public/manifest.json').version")" >> $GITHUB_ENV
 
-      - name: Download chrome zip artifact
+      - name: Download chrome dist artifact
         uses: actions/download-artifact@v4
         with:
           name: chrome
           path: chrome-dist/
 
-      - name: Zip forme extension
+      - name: Zip chrome extension
         run: zip -r byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip chrome-dist/
 
-      - name: Download firefox dist artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: firefox
-          path: firefox-dist/
-
-      - name: Sign firefox EXTENSION_ID
-        run: pnpm run sign:firefox
-        env:
-          WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
-          WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
+      #      - name: Download firefox dist artifact
+      #        uses: actions/download-artifact@v4
+      #        with:
+      #          name: firefox
+      #          path: firefox-dist/
+      #
+      #      - name: Sign firefox EXTENSION_ID
+      #        run: pnpm run sign:firefox
+      #        env:
+      #          WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
+      #          WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
+          files:
             byhelyo_taby-${{ env.PACKAGE_VERSION }}.zip
-            byhelyo_taby-${{ env.PACKAGE_VERSION }}.xpi
+            # byhelyo_taby-${{ env.PACKAGE_VERSION }}.xpi
           tag_name: ${{ env.PACKAGE_VERSION }}
           body: "Take a look at the assets to download and install this app."
           draft: false
@@ -232,6 +232,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
       - name: Download firefox dist artifact
         uses: actions/download-artifact@v4
         with:
