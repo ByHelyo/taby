@@ -1,4 +1,8 @@
-import { MessageFromScript, MessageFromScriptType } from "../../type/misc.ts";
+import {
+  Context,
+  MessageFromScript,
+  MessageFromScriptType,
+} from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
 import { WindowService } from "./window.ts";
@@ -9,12 +13,17 @@ export class MenuService {
   private tabs: Tab[];
   private display: boolean;
   private readonly menuUi: MenuUi;
+  private readonly context: Context;
 
-  constructor(window: WindowService) {
+  constructor(context: Context) {
+    const windowService = new WindowService(context);
+
+    this.context = context;
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.menuUi = new MenuUi(this, window);
+    this.menuUi = new MenuUi(this, windowService);
+    this.context = context;
   }
 
   getMenuUi() {
@@ -67,7 +76,11 @@ export class MenuService {
       tab: selectedTab,
     };
 
-    await this.close();
+    if (this.context === Context.Popup) {
+      window.close();
+    } else {
+      await this.close();
+    }
 
     await browser.runtime.sendMessage(message);
   }
