@@ -7,7 +7,7 @@ const handleSelectAppearance = async function (theme: Appearance) {
 };
 
 async function main() {
-  appearance_setup(document.querySelector("body > div")!);
+  const promise = appearance_setup(document.querySelector("body > div")!);
 
   const storage = await browser.storage.local.get(["appearance"]);
   const lightButton = document.querySelector<HTMLInputElement>(
@@ -29,6 +29,8 @@ async function main() {
   darkButton.addEventListener("click", function () {
     handleSelectAppearance(Appearance.Dark);
   });
+
+  await promise;
 }
 
 main();

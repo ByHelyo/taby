@@ -2,6 +2,7 @@ import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Action, WindowService } from "../service/window.ts";
 import { Tab } from "../../type/tab.ts";
+import { Context } from "../../type/misc.ts";
 
 export class MenuUi {
   dom: MenuDom;
@@ -9,16 +10,24 @@ export class MenuUi {
   window: WindowService;
   timeout: number | undefined;
 
-  constructor(menuService: MenuService, window: WindowService) {
+  constructor(
+    menuService: MenuService,
+    window: WindowService,
+    context: Context,
+  ) {
     this.menuService = menuService;
     this.dom = new MenuDom();
     this.window = window;
+
     this.dom.onInput(async (e) => {
       await this.handleOnInput(e);
     });
-    this.dom.onKeyDown(async (e) => {
-      await this.handleOnKeyDown(e);
-    });
+
+    if (context === Context.ContentScript) {
+      this.dom.onKeyDown(async (e) => {
+        await this.handleOnKeyDown(e);
+      });
+    }
   }
 
   async setTabs(tabs: Tab[], start?: number, end?: number) {

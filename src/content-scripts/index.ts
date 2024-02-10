@@ -5,12 +5,12 @@ import { eventBackground, eventOutsideMenu, eventResize } from "./event/event";
 import { Context } from "../type/misc.ts";
 import { appearance_setup } from "../core/setup/appearance.ts";
 
-function main() {
+async function main() {
   const body = document.querySelector("body");
   const menuService = new MenuService(Context.ContentScript);
   const menuUi = menuService.getMenuUi();
 
-  appearance_setup(menuUi.getMenuDom().getRoot());
+  const promise = appearance_setup(menuUi.getMenuDom().getRoot());
 
   if (body) {
     body.appendChild(menuUi.getMenuDom().getRoot());
@@ -19,6 +19,8 @@ function main() {
   eventBackground(menuService);
   eventOutsideMenu(menuService, menuUi);
   eventResize(menuUi);
+
+  await promise;
 }
 
 main();
