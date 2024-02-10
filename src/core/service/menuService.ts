@@ -22,7 +22,7 @@ export class MenuService {
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.menuUi = new MenuUi(this, windowService);
+    this.menuUi = new MenuUi(this, windowService, context);
     this.context = context;
   }
 
@@ -76,13 +76,15 @@ export class MenuService {
       tab: selectedTab,
     };
 
-    if (this.context === Context.Popup) {
-      window.close();
-    } else {
+    if (this.context === Context.ContentScript) {
       await this.close();
     }
 
     await browser.runtime.sendMessage(message);
+
+    if (this.context === Context.Popup) {
+      window.close();
+    }
   }
 
   async search(content: string): Promise<Tab[]> {
@@ -100,8 +102,11 @@ export class MenuService {
       search: "",
     };
 
+    const promise = this.open();
     const tabs = await browser.runtime.sendMessage(message);
     await this.setTabs(tabs);
     this.setSelectedTab(tabs[0]);
+
+    await promise;
   }
 }

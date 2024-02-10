@@ -15,18 +15,13 @@ export const eventBackground = function (menuService: MenuService) {
   browser.runtime.onMessage.addListener(async function (
     request: MessageFromBackground,
   ) {
-    const promises: Promise<void>[] = [];
-
     if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
       if (!menuService.isDisplayed()) {
-        promises.push(menuService.open());
-        promises.push(menuService.setupTabs());
+        await menuService.setupTabs();
       }
     } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
-      menuService.isDisplayed() && promises.push(menuService.close());
+      menuService.isDisplayed() && (await menuService.close());
     }
-
-    return Promise.all(promises);
   });
 };
 
