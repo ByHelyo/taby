@@ -1,9 +1,3 @@
-body {
-  width: 800px;
-  margin: 0;
-  border: 0;
-}
-
 [class^="taby-"],
 [class^="taby-"]::after,
 [class^="taby-"]::after {
@@ -107,18 +101,4 @@ body {
 
 .taby-active {
   background: var(--item-active);
-}
-
-nav {
-  background: var(--background);
-  display: flex;
-}
-
-nav a {
-  background: red;
-  display: inline-block;
-  padding: 8px 24px;
-  color: var(--item-color);
-  background: var(--item-active);
-  text-decoration: none;
 }
