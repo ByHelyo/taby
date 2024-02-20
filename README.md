@@ -37,8 +37,8 @@
 
 <h3>Usage</h3>
 
-- `Alt+Q` to open the popup.
-- `Alt+W` to open the command palette.
+- `Alt+Q` to open/close the popup.
+- `Alt+W` to open/close the command palette.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.
