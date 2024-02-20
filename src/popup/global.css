@@ -1,0 +1,19 @@
+body {
+  width: 800px;
+  margin: 0;
+  border: 0;
+}
+
+nav {
+  background: var(--background);
+  display: flex;
+}
+
+nav a {
+  background: red;
+  display: inline-block;
+  padding: 8px 24px;
+  color: var(--item-color);
+  background: var(--item-active);
+  text-decoration: none;
+}
