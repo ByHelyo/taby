@@ -62,9 +62,6 @@ h2 {
 }
 .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
   border-color: #2260ff;
-  box-shadow:
-    0 5px 10px rgba(0, 0, 0, 0.1),
-    0 0 0 4px #b5c9fc;
 }
 .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile:before {
   transform: scale(1);
@@ -79,7 +76,7 @@ h2 {
   width: 7rem;
   min-height: 7rem;
   border-radius: 0.5rem;
-  border: 2px solid #b5bfd9;
+  border: 2px solid var(--border-color);
   background-color: var(--background);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   transition: 0.15s ease;
@@ -92,7 +89,7 @@ h2 {
   display: block;
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid #b5bfd9;
+  border: 2px solid var(--border-color);
   background-color: var(--background);
   border-radius: 50%;
   top: 0.25rem;

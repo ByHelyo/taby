@@ -10,6 +10,7 @@ const light = [
   ["--icon-filter", "none"],
   ["--ring-color", "rgb(0, 0, 0, 0.25)"],
   ["--icon-color", "#494949"],
+  ["--border-color", "#b5bfd9"],
 ];
 
 const dark = [
@@ -25,6 +26,7 @@ const dark = [
   ],
   ["--ring-color", "rgb(255, 255, 255, 0.25)"],
   ["--icon-color", "#f3f4f6"],
+  ["--border-color", "#364469"],
 ];
 
 export const handleChangeAppearance = function (
