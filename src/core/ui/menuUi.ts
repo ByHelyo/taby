@@ -67,8 +67,8 @@ export class MenuUi {
 
   async displays(val: boolean) {
     if (val) {
-      await this.dom.displays(true);
       this.dom.clearInput();
+      await this.dom.displays(true);
       this.dom.focusInput();
     } else {
       await this.dom.displays(false);
