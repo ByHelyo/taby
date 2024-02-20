@@ -18,6 +18,8 @@ export const eventBackground = function (menuService: MenuService) {
     if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
       if (!menuService.isDisplayed()) {
         await menuService.setupTabs();
+      } else {
+        await menuService.close();
       }
     } else if (request.type === MessageFromBackgroundType.USER_SWITCHES_TAB) {
       menuService.isDisplayed() && (await menuService.close());

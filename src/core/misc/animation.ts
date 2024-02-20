@@ -30,6 +30,8 @@ export async function leave(element: HTMLElement, transition: string) {
   element.classList.remove(`taby-${transition}-leave`);
 
   element.classList.add("taby-hidden");
+
+  await nextFrame();
 }
 
 async function nextFrame() {
