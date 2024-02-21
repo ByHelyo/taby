@@ -1,5 +1,9 @@
 import { Tab } from "./tab.ts";
 
+export interface MenuServiceOption {
+  context: Context;
+}
+
 export enum Context {
   ContentScript,
   Popup,

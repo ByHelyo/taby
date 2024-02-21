@@ -1,4 +1,5 @@
 import { Context } from "../../type/misc.ts";
+import { MenuService } from "./menuService.ts";
 
 const SEARCH_INPUT_SIZE: number = 55,
   BORDER_SIZE: number = 2,
@@ -26,10 +27,10 @@ export class WindowService {
   private end: number;
   private capacity: number;
   private size: number;
-  private readonly context: Context;
+  private readonly menuService: MenuService;
 
-  constructor(context: Context) {
-    this.context = context;
+  constructor(menuService: MenuService) {
+    this.menuService = menuService;
     this.capacity = this.computeCapacity();
     this.start = 0;
     this.end = this.capacity;
@@ -52,7 +53,7 @@ export class WindowService {
 
   computeCapacity() {
     const window_size =
-      this.context === Context.ContentScript
+      this.menuService.getContext() === Context.ContentScript
         ? window.innerHeight * 0.75
         : 600 - NAV_POPUP;
 

@@ -10,11 +10,7 @@ export class MenuUi {
   window: WindowService;
   timeout: number | undefined;
 
-  constructor(
-    menuService: MenuService,
-    window: WindowService,
-    context: Context,
-  ) {
+  constructor(menuService: MenuService, window: WindowService) {
     this.menuService = menuService;
     this.dom = new MenuDom();
     this.window = window;
@@ -23,7 +19,7 @@ export class MenuUi {
       await this.handleOnInput(e);
     });
 
-    if (context === Context.ContentScript) {
+    if (menuService.getContext() === Context.ContentScript) {
       this.dom.onKeyDown(async (e) => {
         await this.handleOnKeyDown(e);
       });

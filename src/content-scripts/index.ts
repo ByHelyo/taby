@@ -6,8 +6,9 @@ import { Context } from "../type/misc.ts";
 import { appearance_setup } from "../core/setup/appearance.ts";
 
 async function main() {
+  const opts = { context: Context.ContentScript };
   const body = document.querySelector("body");
-  const menuService = new MenuService(Context.ContentScript);
+  const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
 
   const promise = appearance_setup(menuUi.getMenuDom().getRoot());

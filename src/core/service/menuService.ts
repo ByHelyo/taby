@@ -1,5 +1,6 @@
 import {
   Context,
+  MenuServiceOption,
   MessageFromScript,
   MessageFromScriptType,
 } from "../../type/misc.ts";
@@ -13,21 +14,23 @@ export class MenuService {
   private tabs: Tab[];
   private display: boolean;
   private readonly menuUi: MenuUi;
-  private readonly context: Context;
+  private readonly options: MenuServiceOption;
 
-  constructor(context: Context) {
-    const windowService = new WindowService(context);
-
-    this.context = context;
+  constructor(options: MenuServiceOption) {
+    this.options = options;
     this.selectedTab = null;
     this.tabs = [];
     this.display = false;
-    this.menuUi = new MenuUi(this, windowService, context);
-    this.context = context;
+    const windowService = new WindowService(this);
+    this.menuUi = new MenuUi(this, windowService);
   }
 
   getMenuUi() {
     return this.menuUi;
+  }
+
+  getContext() {
+    return this.options.context;
   }
 
   isDisplayed() {
@@ -76,13 +79,13 @@ export class MenuService {
       tab: selectedTab,
     };
 
-    if (this.context === Context.ContentScript) {
+    if (this.options.context === Context.ContentScript) {
       await this.close();
     }
 
     await browser.runtime.sendMessage(message);
 
-    if (this.context === Context.Popup) {
+    if (this.options.context === Context.Popup) {
       window.close();
     }
   }
