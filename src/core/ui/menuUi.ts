@@ -12,7 +12,7 @@ export class MenuUi {
 
   constructor(menuService: MenuService, window: WindowService) {
     this.menuService = menuService;
-    this.dom = new MenuDom();
+    this.dom = new MenuDom(menuService);
     this.window = window;
 
     this.dom.onInput(async (e) => {
@@ -50,7 +50,7 @@ export class MenuUi {
   }
 
   setSelectedTab(tab: Tab) {
-    this.dom.selectItem(tab.idx);
+    this.dom.selectItem(tab.id);
   }
 
   getMenuDom() {
@@ -84,7 +84,7 @@ export class MenuUi {
   async handleOnInput(e: Event) {
     const searchInput = (<HTMLInputElement>e.target).value;
 
-    const matched = await this.menuService.search(searchInput);
+    const matched = await this.menuService.getOptions().search(searchInput);
 
     await this.menuService.setTabs(matched);
 

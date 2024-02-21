@@ -33,6 +33,10 @@ export class MenuService {
     return this.options.context;
   }
 
+  getOptions() {
+    return this.options;
+  }
+
   isDisplayed() {
     return this.display;
   }
@@ -90,23 +94,9 @@ export class MenuService {
     }
   }
 
-  async search(content: string): Promise<Tab[]> {
-    const message: MessageFromScript = {
-      type: MessageFromScriptType.REQUEST_SEARCH_TAB,
-      search: content,
-    };
-
-    return await browser.runtime.sendMessage(message);
-  }
-
   async setupTabs() {
-    const message: MessageFromScript = {
-      type: MessageFromScriptType.REQUEST_SEARCH_TAB,
-      search: "",
-    };
-
     const promise = this.open();
-    const tabs = await browser.runtime.sendMessage(message);
+    const tabs = await this.options.search("");
     await this.setTabs(tabs);
     this.setSelectedTab(tabs[0]);
 

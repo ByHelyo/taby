@@ -2,6 +2,8 @@ import { Tab } from "./tab.ts";
 
 export interface MenuServiceOption {
   context: Context;
+  search: (content: string) => Promise<Tab[]>;
+  buildElement: (tab: Tab, callback: (id: number) => void) => HTMLLIElement;
 }
 
 export enum Context {
@@ -16,7 +18,7 @@ export enum Appearance {
 
 export enum MessageFromScriptType {
   REQUEST_SWITCH_TAB,
-  REQUEST_SEARCH_TAB,
+  REQUEST_SEARCH_OPEN_TAB,
 }
 
 export interface MessageFromScript {
