@@ -3,20 +3,22 @@ import {
   buildRoot,
   buildSearch,
   buildSearchInput,
-  buildSearchItem,
   buildSearchList,
 } from "./build.ts";
 import { enter, leave } from "../misc/animation.ts";
 import { Tab } from "../../type/tab.ts";
+import { MenuService } from "../service/menuService.ts";
 
 export class MenuDom {
+  private readonly menuService: MenuService;
   private readonly root: HTMLDivElement;
   private readonly menu: HTMLDivElement;
   private readonly search: HTMLDivElement;
   private readonly searchInput: HTMLInputElement;
   private readonly searchList: HTMLUListElement;
 
-  constructor() {
+  constructor(menuService: MenuService) {
+    this.menuService = menuService;
     this.searchList = buildSearchList();
     this.searchInput = buildSearchInput();
     this.search = buildSearch(this.searchInput);
@@ -44,15 +46,15 @@ export class MenuDom {
     this.searchList.innerHTML = "";
   }
 
-  addItems(tabs: Tab[], callback: (idx: number) => void) {
+  addItems(tabs: Tab[], callback: (id: number) => void) {
     tabs.forEach((tab: Tab) => {
       this.addItem(tab, callback);
     });
   }
 
-  addItem(tab: Tab, callback: (idx: number) => void) {
+  addItem(tab: Tab, callback: (id: number) => void) {
     this.searchList.appendChild(
-      buildSearchItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback),
+      this.menuService.getOptions().buildElement(tab, callback),
     );
   }
 
@@ -61,18 +63,18 @@ export class MenuDom {
   }
 
   /**
-   * Removes the currently selected tab and selects the idx tab.
+   * Removes the currently selected tab and selects the id tab.
    *
-   * @param idx The idx of the tab to be selected
+   * @param id The id of the tab to be selected
    */
-  selectItem(idx: number) {
+  selectItem(id: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
     if (previousSelectedTab) {
       previousSelectedTab.classList.remove("taby-active");
     }
 
     const newSelectedTab = this.searchList.querySelector(
-      `li[class~="taby-${idx}"]`,
+      `li[class~="taby-${id}"]`,
     );
 
     newSelectedTab?.classList.add("taby-active");
@@ -90,16 +92,16 @@ export class MenuDom {
     this.searchInput.addEventListener("keydown", callback);
   }
 
-  removeItem(idx: number) {
-    const tab = this.searchList.querySelector(`li[class~="taby-${idx}"]`);
+  removeItem(id: number) {
+    const tab = this.searchList.querySelector(`li[class~="taby-${id}"]`);
     if (tab) {
       tab.remove();
     }
   }
 
-  pushItem(tab: Tab, callback: (idx: number) => void) {
+  pushItem(tab: Tab, callback: (id: number) => void) {
     this.searchList.prepend(
-      buildSearchItem(tab.key, tab.idx, tab.title, tab.favIconUrl, callback),
+      this.menuService.getOptions().buildElement(tab, callback),
     );
   }
 

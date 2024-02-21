@@ -1,4 +1,5 @@
 import browser from "webextension-polyfill";
+import { Tab } from "../../type/tab.ts";
 
 export const buildRoot = function (menu: HTMLDivElement): HTMLDivElement {
   const root = document.createElement("div");
@@ -56,21 +57,18 @@ export const buildSearchList = function (): HTMLUListElement {
   return searchList;
 };
 
-export const buildSearchItem = function (
-  key: number,
-  idx: number,
-  title: string,
-  favIconUrl: string,
-  callback: (idx: number) => void,
+export const buildOpenTab = function (
+  tab: Tab,
+  callback: (id: number) => void,
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
-  searchItem.classList.add(`taby-${idx}`);
+  searchItem.classList.add(`taby-${tab.id}`);
 
-  searchItem.appendChild(buildItemKey(key));
-  searchItem.appendChild(buildItemImg(favIconUrl));
-  searchItem.append(buildItemTitle(title));
-  searchItem.addEventListener("click", () => callback(idx));
+  searchItem.appendChild(buildItemKey(tab.key));
+  searchItem.appendChild(buildItemImg(tab.favIconUrl));
+  searchItem.append(buildItemTitle(tab.title));
+  searchItem.addEventListener("click", () => callback(tab.id));
   return searchItem;
 };
 

@@ -46,7 +46,7 @@ browser.runtime.onMessage.addListener(async function (
         await handleRequestSwitchTab(request.tab);
       }
       break;
-    case MessageFromScriptType.REQUEST_SEARCH_TAB:
+    case MessageFromScriptType.REQUEST_SEARCH_OPEN_TAB:
       if (request.search !== undefined) {
         return await handleRequestSearchTab(request.search);
       }
