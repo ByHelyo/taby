@@ -6,18 +6,18 @@ import {
   buildSearchList,
 } from "./build.ts";
 import { enter, leave } from "../misc/animation.ts";
-import { Tab } from "../../type/tab.ts";
 import { MenuService } from "../service/menuService.ts";
+import { Idx } from "../../type/misc.ts";
 
-export class MenuDom {
-  private readonly menuService: MenuService;
+export class MenuDom<T extends Idx> {
+  private readonly menuService: MenuService<T>;
   private readonly root: HTMLDivElement;
   private readonly menu: HTMLDivElement;
   private readonly search: HTMLDivElement;
   private readonly searchInput: HTMLInputElement;
   private readonly searchList: HTMLUListElement;
 
-  constructor(menuService: MenuService) {
+  constructor(menuService: MenuService<T>) {
     this.menuService = menuService;
     this.searchList = buildSearchList();
     this.searchInput = buildSearchInput();
@@ -46,13 +46,13 @@ export class MenuDom {
     this.searchList.innerHTML = "";
   }
 
-  addItems(tabs: Tab[], callback: (id: number) => void) {
-    tabs.forEach((tab: Tab) => {
+  addItems(tabs: T[], callback: (idx: number) => void) {
+    tabs.forEach((tab: T) => {
       this.addItem(tab, callback);
     });
   }
 
-  addItem(tab: Tab, callback: (id: number) => void) {
+  addItem(tab: T, callback: (idx: number) => void) {
     this.searchList.appendChild(
       this.menuService.getOptions().buildElement(tab, callback),
     );
@@ -92,14 +92,14 @@ export class MenuDom {
     this.searchInput.addEventListener("keydown", callback);
   }
 
-  removeItem(id: number) {
-    const tab = this.searchList.querySelector(`li[class~="taby-${id}"]`);
+  removeItem(idx: number) {
+    const tab = this.searchList.querySelector(`li[class~="taby-${idx}"]`);
     if (tab) {
       tab.remove();
     }
   }
 
-  pushItem(tab: Tab, callback: (id: number) => void) {
+  pushItem(tab: T, callback: (idx: number) => void) {
     this.searchList.prepend(
       this.menuService.getOptions().buildElement(tab, callback),
     );

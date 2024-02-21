@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 import { Tab } from "../../type/tab.ts";
+import { Bookmark } from "../../type/bookmark.ts";
 
 export const buildRoot = function (menu: HTMLDivElement): HTMLDivElement {
   const root = document.createElement("div");
@@ -59,16 +60,29 @@ export const buildSearchList = function (): HTMLUListElement {
 
 export const buildOpenTab = function (
   tab: Tab,
-  callback: (id: number) => void,
+  callback: (idx: number) => void,
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
-  searchItem.classList.add(`taby-${tab.id}`);
+  searchItem.classList.add(`taby-${tab.idx}`);
 
   searchItem.appendChild(buildItemKey(tab.key));
   searchItem.appendChild(buildItemImg(tab.favIconUrl));
   searchItem.append(buildItemTitle(tab.title));
-  searchItem.addEventListener("click", () => callback(tab.id));
+  searchItem.addEventListener("click", () => callback(tab.idx));
+  return searchItem;
+};
+
+export const buildBookmark = function (
+  tab: Bookmark,
+  callback: (idx: number) => void,
+) {
+  const searchItem = document.createElement("li");
+  searchItem.classList.add("taby-searchItem");
+  searchItem.classList.add(`taby-${tab.idx}`);
+
+  searchItem.append(buildItemTitle(tab.title));
+  searchItem.addEventListener("click", () => callback(tab.idx));
   return searchItem;
 };
 

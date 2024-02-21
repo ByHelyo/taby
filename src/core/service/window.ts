@@ -1,4 +1,4 @@
-import { Context } from "../../type/misc.ts";
+import { Context, Idx } from "../../type/misc.ts";
 import { MenuService } from "./menuService.ts";
 
 const SEARCH_INPUT_SIZE: number = 55,
@@ -22,14 +22,14 @@ export interface WindowResult {
   start: number;
 }
 
-export class WindowService {
+export class WindowService<T extends Idx> {
   private start: number;
   private end: number;
   private capacity: number;
   private size: number;
-  private readonly menuService: MenuService;
+  private readonly menuService: MenuService<T>;
 
-  constructor(menuService: MenuService) {
+  constructor(menuService: MenuService<T>) {
     this.menuService = menuService;
     this.capacity = this.computeCapacity();
     this.start = 0;

@@ -1,17 +1,20 @@
-import browser from "webextension-polyfill";
+import browser, { Bookmarks } from "webextension-polyfill";
 import Fuse from "fuse.js";
 import {
+  Id,
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../type/misc.ts";
 import { SearchableTab, Tab } from "../type/tab.ts";
+import { Bookmark } from "../type/bookmark.ts";
+import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
 
 /**
  * Switches to the specified tab.
  *
  * @param tab The tab to switch to.
  */
-export const handleRequestSwitchTab = async function (tab: Tab) {
+export const handleRequestSwitchTab = async function <T extends Id>(tab: T) {
   await browser.tabs.update(tab.id, { active: true });
 };
 
@@ -21,7 +24,7 @@ export const handleRequestSwitchTab = async function (tab: Tab) {
  * @param content The content to filter tabs by.
  * @returns {Promise<Tab[]>} Array of tabs matching the search criteria
  */
-export const handleRequestSearchTab = async function (
+export const handleRequestSearchTabs = async function (
   content: string,
 ): Promise<Tab[]> {
   const tabs = await browser.tabs.query({
@@ -71,3 +74,47 @@ export const handleDuplicateTab = async function () {
   const [currentTab] = await browser.tabs.query({ active: true });
   await browser.tabs.create({ url: currentTab.url });
 };
+
+export const handleRequestSearchBookmarks = async function (
+  content: string,
+): Promise<Bookmark[]> {
+  const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
+
+  if (content === "") {
+    return bookmarks.map((bookmark, idx) => Bookmark.from(bookmark, idx));
+  }
+
+  const options = {
+    keys: ["title", "url"],
+  };
+  const fuse = new Fuse(bookmarks, options);
+
+  return fuse.search(content).map(function (tab, idx): Bookmark {
+    return Bookmark.from(tab.item, idx);
+  });
+};
+
+function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
+  const q = root;
+  const bookmarks: BookmarkTreeNode[] = [];
+
+  while (q.length > 0) {
+    const node = q.pop();
+
+    if (!node) {
+      continue;
+    }
+
+    if (node.url) {
+      bookmarks.push(node);
+    }
+
+    if (node.children) {
+      for (const child of node.children) {
+        q.push(child);
+      }
+    }
+  }
+
+  return bookmarks;
+}

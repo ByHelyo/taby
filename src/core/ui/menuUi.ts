@@ -1,16 +1,15 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Action, WindowService } from "../service/window.ts";
-import { Tab } from "../../type/tab.ts";
-import { Context } from "../../type/misc.ts";
+import { Context, Idx } from "../../type/misc.ts";
 
-export class MenuUi {
-  dom: MenuDom;
-  menuService: MenuService;
-  window: WindowService;
+export class MenuUi<T extends Idx> {
+  dom: MenuDom<T>;
+  menuService: MenuService<T>;
+  window: WindowService<T>;
   timeout: number | undefined;
 
-  constructor(menuService: MenuService, window: WindowService) {
+  constructor(menuService: MenuService<T>, window: WindowService<T>) {
     this.menuService = menuService;
     this.dom = new MenuDom(menuService);
     this.window = window;
@@ -26,7 +25,7 @@ export class MenuUi {
     }
   }
 
-  async setTabs(tabs: Tab[], start?: number, end?: number) {
+  async setTabs(tabs: T[], start?: number, end?: number) {
     this.window.setSize(tabs.length);
 
     this.dom.clearList();
@@ -49,8 +48,8 @@ export class MenuUi {
     }
   }
 
-  setSelectedTab(tab: Tab) {
-    this.dom.selectItem(tab.id);
+  setSelectedTab(tab: T) {
+    this.dom.selectItem(tab.idx);
   }
 
   getMenuDom() {

@@ -1,9 +1,17 @@
 import { Tab } from "./tab.ts";
 
-export interface MenuServiceOption {
+export interface Id {
+  id: number;
+}
+
+export interface Idx {
+  idx: number;
+}
+
+export interface MenuServiceOption<T extends Idx> {
   context: Context;
-  search: (content: string) => Promise<Tab[]>;
-  buildElement: (tab: Tab, callback: (id: number) => void) => HTMLLIElement;
+  search: (content: string) => Promise<T[]>;
+  buildElement: (tab: T, callback: (idx: number) => void) => HTMLLIElement;
 }
 
 export enum Context {
@@ -18,12 +26,13 @@ export enum Appearance {
 
 export enum MessageFromScriptType {
   REQUEST_SWITCH_TAB,
-  REQUEST_SEARCH_OPEN_TAB,
+  REQUEST_SEARCH_OPEN_TABS,
+  REQUEST_SEARCH_BOOKMARKS,
 }
 
-export interface MessageFromScript {
+export interface MessageFromScript<T> {
   type: MessageFromScriptType;
-  tab?: Tab;
+  tab?: T;
   search?: string;
 }
 

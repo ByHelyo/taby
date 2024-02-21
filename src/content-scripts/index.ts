@@ -2,13 +2,14 @@ import "./index.css";
 import { MenuService } from "../core/service/menuService.ts";
 import "./event/event";
 import { eventBackground, eventOutsideMenu, eventResize } from "./event/event";
-import { Context } from "../type/misc.ts";
+import { Context, MenuServiceOption } from "../type/misc.ts";
 import { appearance_setup } from "../core/setup/appearance.ts";
 import { search_open_tabs } from "../core/service/search.ts";
 import { buildOpenTab } from "../core/dom/build.ts";
+import { Tab } from "../type/tab.ts";
 
 async function main() {
-  const opts = {
+  const opts: MenuServiceOption<Tab> = {
     context: Context.ContentScript,
     search: search_open_tabs,
     buildElement: buildOpenTab,

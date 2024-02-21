@@ -1,4 +1,5 @@
 import {
+  Idx,
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../../type/misc";
@@ -11,7 +12,9 @@ import { MenuUi } from "../../core/ui/menuUi.ts";
  *
  * @param menuService
  */
-export const eventBackground = function (menuService: MenuService) {
+export const eventBackground = function <T extends Idx>(
+  menuService: MenuService<T>,
+) {
   browser.runtime.onMessage.addListener(async function (
     request: MessageFromBackground,
   ) {
@@ -33,9 +36,9 @@ export const eventBackground = function (menuService: MenuService) {
  * @param menuService
  * @param menuUi
  */
-export const eventOutsideMenu = function (
-  menuService: MenuService,
-  menuUi: MenuUi,
+export const eventOutsideMenu = function <T extends Idx>(
+  menuService: MenuService<T>,
+  menuUi: MenuUi<T>,
 ) {
   window.addEventListener("click", async function (e) {
     if (!menuUi.contains(e.target as HTMLElement)) {
@@ -49,7 +52,7 @@ export const eventOutsideMenu = function (
  *
  * @param menuUi
  */
-export const eventResize = function (menuUi: MenuUi) {
+export const eventResize = function <T extends Idx>(menuUi: MenuUi<T>) {
   window.addEventListener("resize", function () {
     menuUi.handleResize();
   });
