@@ -5,8 +5,11 @@ import { eventKeydown } from "./event.ts";
 
 async function main() {
   const promises: Promise<void>[] = [];
+  const opts = {
+    context: Context.Popup,
+  };
   const root = document.querySelector<HTMLDivElement>("body > div")!;
-  const menuService = new MenuService(Context.Popup);
+  const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
 
   promises.push(appearance_setup(root));

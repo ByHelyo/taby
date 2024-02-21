@@ -4,7 +4,7 @@
   "description": "Quickly move between tabs",
   "version": "1.16.0",
   "author": "Franck Hu",
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "bookmarks"],
   "optional_permissions": ["<all_urls>"],
   "browser_action": {
     "default_popup": "./src/popup/popup.html",
