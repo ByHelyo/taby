@@ -1,5 +1,6 @@
 import {
   Context,
+  Idx,
   MenuServiceOption,
   MessageFromScript,
   MessageFromScriptType,
@@ -7,16 +8,15 @@ import {
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
 import { WindowService } from "./window.ts";
-import { Tab } from "../../type/tab.ts";
 
-export class MenuService {
-  private selectedTab: Tab | null;
-  private tabs: Tab[];
+export class MenuService<T extends Idx> {
+  private selectedTab: T | null;
+  private tabs: T[];
   private display: boolean;
-  private readonly menuUi: MenuUi;
-  private readonly options: MenuServiceOption;
+  private readonly menuUi: MenuUi<T>;
+  private readonly options: MenuServiceOption<T>;
 
-  constructor(options: MenuServiceOption) {
+  constructor(options: MenuServiceOption<T>) {
     this.options = options;
     this.selectedTab = null;
     this.tabs = [];
@@ -41,7 +41,7 @@ export class MenuService {
     return this.display;
   }
 
-  async setTabs(tabs: Tab[]) {
+  async setTabs(tabs: T[]) {
     this.tabs = tabs;
     await this.menuUi.setTabs(tabs);
   }
@@ -50,7 +50,7 @@ export class MenuService {
     return this.tabs;
   }
 
-  setSelectedTab(tab: Tab | null) {
+  setSelectedTab(tab: T | null) {
     this.selectedTab = tab;
 
     if (tab) {
@@ -78,7 +78,7 @@ export class MenuService {
       return;
     }
 
-    const message: MessageFromScript = {
+    const message: MessageFromScript<T> = {
       type: MessageFromScriptType.REQUEST_SWITCH_TAB,
       tab: selectedTab,
     };

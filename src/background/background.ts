@@ -2,6 +2,7 @@ import browser from "webextension-polyfill";
 
 import {
   Appearance,
+  Id,
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
@@ -9,7 +10,8 @@ import {
 } from "../type/misc.ts";
 import {
   handleDuplicateTab,
-  handleRequestSearchTab,
+  handleRequestSearchBookmarks,
+  handleRequestSearchTabs,
   handleRequestSwitchTab,
   handleToggleMenu,
 } from "./handler.ts";
@@ -37,8 +39,8 @@ browser.commands.onCommand.addListener(async function (command: string) {
  * Listens for messages from content script.
  *
  */
-browser.runtime.onMessage.addListener(async function (
-  request: MessageFromScript,
+browser.runtime.onMessage.addListener(async function <T extends Id>(
+  request: MessageFromScript<T>,
 ) {
   switch (request.type) {
     case MessageFromScriptType.REQUEST_SWITCH_TAB:
@@ -46,9 +48,14 @@ browser.runtime.onMessage.addListener(async function (
         await handleRequestSwitchTab(request.tab);
       }
       break;
-    case MessageFromScriptType.REQUEST_SEARCH_OPEN_TAB:
+    case MessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
       if (request.search !== undefined) {
-        return await handleRequestSearchTab(request.search);
+        return await handleRequestSearchTabs(request.search);
+      }
+      break;
+    case MessageFromScriptType.REQUEST_SEARCH_BOOKMARKS:
+      if (request.search !== undefined) {
+        return await handleRequestSearchBookmarks(request.search);
       }
       break;
   }
