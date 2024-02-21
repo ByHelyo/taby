@@ -1,8 +1,9 @@
-import { Context, Idx, MenuServiceOption } from "../../type/misc.ts";
+import { Context, MenuServiceOption } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import { WindowService } from "./window.ts";
+import { Resource } from "../../type/resource.ts";
 
-export class MenuService<T extends Idx> {
+export class MenuService<T extends Resource> {
   private selectedElement: T | null;
   private elements: T[];
   private display: boolean;

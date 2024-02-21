@@ -1,4 +1,3 @@
-import { Idx } from "../../type/misc";
 import { MenuService } from "../../core/service/menuService.ts";
 import browser from "webextension-polyfill";
 import { MenuUi } from "../../core/ui/menuUi.ts";
@@ -6,13 +5,14 @@ import {
   MessageFromBackground,
   MessageFromBackgroundType,
 } from "../../type/message.ts";
+import { Resource } from "../../type/resource.ts";
 
 /**
  * Listens for messages from background.
  *
  * @param menuService
  */
-export const eventBackground = function <T extends Idx>(
+export const eventBackground = function <T extends Resource>(
   menuService: MenuService<T>,
 ) {
   browser.runtime.onMessage.addListener(async function (
@@ -36,7 +36,7 @@ export const eventBackground = function <T extends Idx>(
  * @param menuService
  * @param menuUi
  */
-export const eventOutsideMenu = function <T extends Idx>(
+export const eventOutsideMenu = function <T extends Resource>(
   menuService: MenuService<T>,
   menuUi: MenuUi<T>,
 ) {
@@ -52,7 +52,7 @@ export const eventOutsideMenu = function <T extends Idx>(
  *
  * @param menuUi
  */
-export const eventResize = function <T extends Idx>(menuUi: MenuUi<T>) {
+export const eventResize = function <T extends Resource>(menuUi: MenuUi<T>) {
   window.addEventListener("resize", function () {
     menuUi.handleResize();
   });

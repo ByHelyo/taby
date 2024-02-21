@@ -7,9 +7,9 @@ import {
 } from "./build.ts";
 import { enter, leave } from "../misc/animation.ts";
 import { MenuService } from "../service/menuService.ts";
-import { Idx } from "../../type/misc.ts";
+import { Resource } from "../../type/resource.ts";
 
-export class MenuDom<T extends Idx> {
+export class MenuDom<T extends Resource> {
   private readonly menuService: MenuService<T>;
   private readonly root: HTMLDivElement;
   private readonly menu: HTMLDivElement;

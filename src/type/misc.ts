@@ -1,13 +1,6 @@
-export interface Url {
-  id: number;
-  url: string;
-}
+import { Resource } from "./resource.ts";
 
-export interface Idx {
-  idx: number;
-}
-
-export interface MenuServiceOption<T extends Idx> {
+export interface MenuServiceOption<T extends Resource> {
   context: Context;
   search: (content: string) => Promise<T[]>;
   buildElement: (element: T, callback: (idx: number) => void) => HTMLLIElement;
