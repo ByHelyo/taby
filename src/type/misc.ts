@@ -1,5 +1,6 @@
-export interface Id {
+export interface Url {
   id: number;
+  url: string;
 }
 
 export interface Idx {
@@ -9,7 +10,8 @@ export interface Idx {
 export interface MenuServiceOption<T extends Idx> {
   context: Context;
   search: (content: string) => Promise<T[]>;
-  buildElement: (tab: T, callback: (idx: number) => void) => HTMLLIElement;
+  buildElement: (element: T, callback: (idx: number) => void) => HTMLLIElement;
+  goTo: (element: T) => Promise<void>;
 }
 
 export enum Context {

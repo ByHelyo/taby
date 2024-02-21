@@ -2,6 +2,7 @@ import { Tab } from "./tab.ts";
 
 export enum MessageFromScriptType {
   REQUEST_SWITCH_TAB,
+  REQUEST_UPDATE_CURRENT_TAB,
   REQUEST_SEARCH_OPEN_TABS,
   REQUEST_SEARCH_BOOKMARKS,
 }

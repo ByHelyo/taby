@@ -7,12 +7,14 @@ import { appearance_setup } from "../core/setup/appearance.ts";
 import { search_open_tabs } from "../core/service/search.ts";
 import { buildOpenTab } from "../core/dom/build.ts";
 import { Tab } from "../type/tab.ts";
+import { goToTab } from "../core/service/goto.ts";
 
 async function main() {
   const opts: MenuServiceOption<Tab> = {
     context: Context.ContentScript,
     search: search_open_tabs,
     buildElement: buildOpenTab,
+    goTo: goToTab,
   };
   const body = document.querySelector("body");
   const menuService = new MenuService(opts);
