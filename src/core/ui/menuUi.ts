@@ -1,9 +1,10 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Action, WindowService } from "../service/window.ts";
-import { Context, Idx } from "../../type/misc.ts";
+import { Context } from "../../type/misc.ts";
+import { Resource } from "../../type/resource.ts";
 
-export class MenuUi<T extends Idx> {
+export class MenuUi<T extends Resource> {
   dom: MenuDom<T>;
   menuService: MenuService<T>;
   window: WindowService<T>;

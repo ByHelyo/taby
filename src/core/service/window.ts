@@ -1,5 +1,6 @@
-import { Context, Idx } from "../../type/misc.ts";
+import { Context } from "../../type/misc.ts";
 import { MenuService } from "./menuService.ts";
+import { Resource } from "../../type/resource.ts";
 
 const SEARCH_INPUT_SIZE: number = 55,
   BORDER_SIZE: number = 2,
@@ -22,7 +23,7 @@ export interface WindowResult {
   start: number;
 }
 
-export class WindowService<T extends Idx> {
+export class WindowService<T extends Resource> {
   private start: number;
   private end: number;
   private capacity: number;

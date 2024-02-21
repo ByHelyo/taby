@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import { Appearance, Url } from "../type/misc.ts";
+import { Appearance } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
@@ -15,6 +15,7 @@ import {
   MessageFromScript,
   MessageFromScriptType,
 } from "../type/message.ts";
+import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local.set({ appearance: Appearance.Light });
@@ -39,7 +40,7 @@ browser.commands.onCommand.addListener(async function (command: string) {
  * Listens for messages from content script.
  *
  */
-browser.runtime.onMessage.addListener(async function <T extends Url>(
+browser.runtime.onMessage.addListener(async function <T extends Resource>(
   request: MessageFromScript<T>,
 ) {
   switch (request.type) {
