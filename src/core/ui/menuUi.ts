@@ -25,12 +25,12 @@ export class MenuUi<T extends Idx> {
     }
   }
 
-  async setTabs(tabs: T[], start?: number, end?: number) {
-    this.window.setSize(tabs.length);
+  async setElements(elements: T[], start?: number, end?: number) {
+    this.window.setSize(elements.length);
 
     this.dom.clearList();
 
-    if (tabs.length === 0) {
+    if (elements.length === 0) {
       this.dom.hideResults();
       return;
     }
@@ -38,18 +38,21 @@ export class MenuUi<T extends Idx> {
     this.dom.displayResults();
 
     if (start && end) {
-      this.dom.addItems(tabs.slice(start, end), (idx: number) => {
+      this.dom.addItems(elements.slice(start, end), (idx: number) => {
         this.handleOnClick(idx);
       });
     } else {
-      this.dom.addItems(tabs.slice(0, this.window.getEnd()), (idx: number) => {
-        this.handleOnClick(idx);
-      });
+      this.dom.addItems(
+        elements.slice(0, this.window.getEnd()),
+        (idx: number) => {
+          this.handleOnClick(idx);
+        },
+      );
     }
   }
 
-  setSelectedTab(tab: T) {
-    this.dom.selectItem(tab.idx);
+  setSelectedElement(element: T) {
+    this.dom.selectItem(element.idx);
   }
 
   getMenuDom() {
@@ -71,12 +74,12 @@ export class MenuUi<T extends Idx> {
   }
 
   async handleOnClick(idx: number) {
-    const selectedTab = this.menuService.getSelectedTab();
+    const selectedTab = this.menuService.getSelectedElement();
 
-    if (selectedTab && selectedTab === this.menuService.getTabs()[idx]) {
+    if (selectedTab && selectedTab === this.menuService.getElements()[idx]) {
       await this.menuService.goTo();
     } else {
-      this.menuService.setSelectedTab(this.menuService.getTabs()[idx]);
+      this.menuService.setSelectedElement(this.menuService.getElements()[idx]);
     }
   }
 
@@ -85,17 +88,17 @@ export class MenuUi<T extends Idx> {
 
     const matched = await this.menuService.getOptions().search(searchInput);
 
-    await this.menuService.setTabs(matched);
+    await this.menuService.setElements(matched);
 
     if (matched.length > 0) {
-      this.menuService.setSelectedTab(matched[0]);
+      this.menuService.setSelectedElement(matched[0]);
     } else {
-      this.menuService.setSelectedTab(null);
+      this.menuService.setSelectedElement(null);
     }
   }
 
   async handleOnKeyDown(e: KeyboardEvent) {
-    const selectedTab = this.menuService.getSelectedTab();
+    const selectedTab = this.menuService.getSelectedElement();
 
     switch (e.key) {
       case "Enter":
@@ -116,50 +119,66 @@ export class MenuUi<T extends Idx> {
   }
 
   async moveUp() {
-    const selectedTab = this.menuService.getSelectedTab();
+    const selectedTab = this.menuService.getSelectedElement();
     if (!selectedTab) {
       return;
     }
 
-    const tabs = this.menuService.getTabs();
+    const elements = this.menuService.getElements();
     const next = this.window.moveUp(selectedTab.idx);
 
     switch (next.action) {
       case Action.MovedToEnd:
-        await this.setTabs(this.menuService.getTabs(), next.start, next.end);
+        await this.setElements(
+          this.menuService.getElements(),
+          next.start,
+          next.end,
+        );
         break;
       case Action.MovedUp:
         if (this.window.getCapacity() > 0) {
-          this.dom.removeItem(tabs[next.end].idx);
-          this.dom.pushItem(tabs[next.start], (idx) => this.handleOnClick(idx));
+          this.dom.removeItem(elements[next.end].idx);
+          this.dom.pushItem(elements[next.start], (idx) =>
+            this.handleOnClick(idx),
+          );
         }
         break;
     }
 
-    this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
+    this.menuService.setSelectedElement(
+      this.menuService.getElements()[next.next],
+    );
   }
 
   async moveDown() {
-    const selectedTab = this.menuService.getSelectedTab();
+    const selectedTab = this.menuService.getSelectedElement();
     if (!selectedTab) {
       return;
     }
-    const tabs = this.menuService.getTabs();
+    const elements = this.menuService.getElements();
     const next = this.window.moveDown(selectedTab.idx);
 
     switch (next.action) {
       case Action.MovedToStart:
-        await this.setTabs(this.menuService.getTabs(), next.start, next.end);
+        await this.setElements(
+          this.menuService.getElements(),
+          next.start,
+          next.end,
+        );
         break;
       case Action.MovedDown:
         if (this.window.getCapacity() > 0) {
-          this.dom.removeItem(tabs[next.start].idx);
-          this.dom.addItem(tabs[next.end], (idx) => this.handleOnClick(idx));
+          this.dom.removeItem(elements[next.start].idx);
+          this.dom.addItem(elements[next.end], (idx) =>
+            this.handleOnClick(idx),
+          );
         }
         break;
     }
 
-    this.menuService.setSelectedTab(this.menuService.getTabs()[next.next]);
+    this.menuService.setSelectedElement(
+      this.menuService.getElements()[next.next],
+    );
   }
 
   handleResize() {
@@ -167,19 +186,19 @@ export class MenuUi<T extends Idx> {
     this.timeout = setTimeout(async () => {
       this.window.resize();
 
-      await this.setTabs(
-        this.menuService.getTabs(),
+      await this.setElements(
+        this.menuService.getElements(),
         this.window.getStart(),
         this.window.getEnd(),
       );
 
-      const selectedTab = this.menuService.getSelectedTab();
+      const selectedTab = this.menuService.getSelectedElement();
 
       if (!selectedTab) {
         return;
       }
 
-      this.menuService.setSelectedTab(this.menuService.getTabs()[0]);
+      this.menuService.setSelectedElement(this.menuService.getElements()[0]);
     }, 100);
   }
 }

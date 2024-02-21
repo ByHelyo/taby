@@ -1,11 +1,11 @@
-import {
-  Idx,
-  MessageFromBackground,
-  MessageFromBackgroundType,
-} from "../../type/misc";
+import { Idx } from "../../type/misc";
 import { MenuService } from "../../core/service/menuService.ts";
 import browser from "webextension-polyfill";
 import { MenuUi } from "../../core/ui/menuUi.ts";
+import {
+  MessageFromBackground,
+  MessageFromBackgroundType,
+} from "../../type/message.ts";
 
 /**
  * Listens for messages from background.
@@ -20,7 +20,7 @@ export const eventBackground = function <T extends Idx>(
   ) {
     if (request.type === MessageFromBackgroundType.TOGGLE_MENU) {
       if (!menuService.isDisplayed()) {
-        await menuService.setupTabs();
+        await menuService.setupElements();
       } else {
         await menuService.close();
       }

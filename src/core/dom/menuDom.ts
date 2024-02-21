@@ -46,15 +46,15 @@ export class MenuDom<T extends Idx> {
     this.searchList.innerHTML = "";
   }
 
-  addItems(tabs: T[], callback: (idx: number) => void) {
-    tabs.forEach((tab: T) => {
-      this.addItem(tab, callback);
+  addItems(elements: T[], callback: (idx: number) => void) {
+    elements.forEach((element: T) => {
+      this.addItem(element, callback);
     });
   }
 
-  addItem(tab: T, callback: (idx: number) => void) {
+  addItem(element: T, callback: (idx: number) => void) {
     this.searchList.appendChild(
-      this.menuService.getOptions().buildElement(tab, callback),
+      this.menuService.getOptions().buildElement(element, callback),
     );
   }
 
@@ -63,9 +63,9 @@ export class MenuDom<T extends Idx> {
   }
 
   /**
-   * Removes the currently selected tab and selects the id tab.
+   * Removes the currently selected element and selects the id element.
    *
-   * @param id The id of the tab to be selected
+   * @param id The id of the element to be selected
    */
   selectItem(id: number) {
     const previousSelectedTab = this.searchList.querySelector(".taby-active");
@@ -93,15 +93,15 @@ export class MenuDom<T extends Idx> {
   }
 
   removeItem(idx: number) {
-    const tab = this.searchList.querySelector(`li[class~="taby-${idx}"]`);
-    if (tab) {
-      tab.remove();
+    const element = this.searchList.querySelector(`li[class~="taby-${idx}"]`);
+    if (element) {
+      element.remove();
     }
   }
 
-  pushItem(tab: T, callback: (idx: number) => void) {
+  pushItem(element: T, callback: (idx: number) => void) {
     this.searchList.prepend(
-      this.menuService.getOptions().buildElement(tab, callback),
+      this.menuService.getOptions().buildElement(element, callback),
     );
   }
 

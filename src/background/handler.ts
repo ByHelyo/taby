@@ -1,13 +1,13 @@
 import browser, { Bookmarks } from "webextension-polyfill";
 import Fuse from "fuse.js";
-import {
-  Id,
-  MessageFromBackground,
-  MessageFromBackgroundType,
-} from "../type/misc.ts";
+import { Id } from "../type/misc.ts";
 import { SearchableTab, Tab } from "../type/tab.ts";
 import { Bookmark } from "../type/bookmark.ts";
 import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
+import {
+  MessageFromBackground,
+  MessageFromBackgroundType,
+} from "../type/message.ts";
 
 /**
  * Switches to the specified tab.
@@ -24,7 +24,7 @@ export const handleRequestSwitchTab = async function <T extends Id>(tab: T) {
  * @param content The content to filter tabs by.
  * @returns {Promise<Tab[]>} Array of tabs matching the search criteria
  */
-export const handleRequestSearchTabs = async function (
+export const handleRequestSearchOpenTabs = async function (
   content: string,
 ): Promise<Tab[]> {
   const tabs = await browser.tabs.query({
@@ -89,8 +89,8 @@ export const handleRequestSearchBookmarks = async function (
   };
   const fuse = new Fuse(bookmarks, options);
 
-  return fuse.search(content).map(function (tab, idx): Bookmark {
-    return Bookmark.from(tab.item, idx);
+  return fuse.search(content).map(function (bookmark, idx): Bookmark {
+    return Bookmark.from(bookmark.item, idx);
   });
 };
 

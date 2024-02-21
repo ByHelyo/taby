@@ -1,25 +1,23 @@
-import {
-  Context,
-  Idx,
-  MenuServiceOption,
-  MessageFromScript,
-  MessageFromScriptType,
-} from "../../type/misc.ts";
+import { Context, Idx, MenuServiceOption } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
 import browser from "webextension-polyfill";
 import { WindowService } from "./window.ts";
+import {
+  MessageFromScript,
+  MessageFromScriptType,
+} from "../../type/message.ts";
 
 export class MenuService<T extends Idx> {
-  private selectedTab: T | null;
-  private tabs: T[];
+  private selectedElement: T | null;
+  private elements: T[];
   private display: boolean;
   private readonly menuUi: MenuUi<T>;
   private readonly options: MenuServiceOption<T>;
 
   constructor(options: MenuServiceOption<T>) {
     this.options = options;
-    this.selectedTab = null;
-    this.tabs = [];
+    this.selectedElement = null;
+    this.elements = [];
     this.display = false;
     const windowService = new WindowService(this);
     this.menuUi = new MenuUi(this, windowService);
@@ -41,25 +39,25 @@ export class MenuService<T extends Idx> {
     return this.display;
   }
 
-  async setTabs(tabs: T[]) {
-    this.tabs = tabs;
-    await this.menuUi.setTabs(tabs);
+  async setElements(elements: T[]) {
+    this.elements = elements;
+    await this.menuUi.setElements(elements);
   }
 
-  getTabs() {
-    return this.tabs;
+  getElements() {
+    return this.elements;
   }
 
-  setSelectedTab(tab: T | null) {
-    this.selectedTab = tab;
+  setSelectedElement(element: T | null) {
+    this.selectedElement = element;
 
-    if (tab) {
-      this.menuUi.setSelectedTab(tab);
+    if (element) {
+      this.menuUi.setSelectedElement(element);
     }
   }
 
-  getSelectedTab() {
-    return this.selectedTab;
+  getSelectedElement() {
+    return this.selectedElement;
   }
 
   async open() {
@@ -73,14 +71,14 @@ export class MenuService<T extends Idx> {
   }
 
   async goTo() {
-    const selectedTab = this.selectedTab;
-    if (!selectedTab) {
+    const selectedElement = this.selectedElement;
+    if (!selectedElement) {
       return;
     }
 
     const message: MessageFromScript<T> = {
       type: MessageFromScriptType.REQUEST_SWITCH_TAB,
-      tab: selectedTab,
+      element: selectedElement,
     };
 
     if (this.options.context === Context.ContentScript) {
@@ -94,11 +92,11 @@ export class MenuService<T extends Idx> {
     }
   }
 
-  async setupTabs() {
+  async setupElements() {
     const promise = this.open();
-    const tabs = await this.options.search("");
-    await this.setTabs(tabs);
-    this.setSelectedTab(tabs[0]);
+    const elements = await this.options.search("");
+    await this.setElements(elements);
+    this.setSelectedElement(elements[0]);
 
     await promise;
   }
