@@ -1,5 +1,9 @@
 import browser from "webextension-polyfill";
-import { MessageFromScript, MessageFromScriptType } from "../../type/misc.ts";
+
+import {
+  MessageFromScript,
+  MessageFromScriptType,
+} from "../../type/message.ts";
 
 export async function search_open_tabs<T>(content: string): Promise<T[]> {
   const message: MessageFromScript<T> = {

@@ -23,7 +23,7 @@ async function main() {
     root.prepend(menuUi.getMenuDom().getRoot());
   }
 
-  promises.push(menuService.setupTabs());
+  promises.push(menuService.setupElements());
 
   eventKeydown(menuUi);
 

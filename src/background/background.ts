@@ -1,20 +1,19 @@
 import browser from "webextension-polyfill";
 
+import { Appearance, Id } from "../type/misc.ts";
 import {
-  Appearance,
-  Id,
+  handleDuplicateTab,
+  handleRequestSearchBookmarks,
+  handleRequestSearchOpenTabs,
+  handleRequestSwitchTab,
+  handleToggleMenu,
+} from "./handler.ts";
+import {
   MessageFromBackground,
   MessageFromBackgroundType,
   MessageFromScript,
   MessageFromScriptType,
-} from "../type/misc.ts";
-import {
-  handleDuplicateTab,
-  handleRequestSearchBookmarks,
-  handleRequestSearchTabs,
-  handleRequestSwitchTab,
-  handleToggleMenu,
-} from "./handler.ts";
+} from "../type/message.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local.set({ appearance: Appearance.Light });
@@ -44,13 +43,13 @@ browser.runtime.onMessage.addListener(async function <T extends Id>(
 ) {
   switch (request.type) {
     case MessageFromScriptType.REQUEST_SWITCH_TAB:
-      if (request.tab) {
-        await handleRequestSwitchTab(request.tab);
+      if (request.element) {
+        await handleRequestSwitchTab(request.element);
       }
       break;
     case MessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
       if (request.search !== undefined) {
-        return await handleRequestSearchTabs(request.search);
+        return await handleRequestSearchOpenTabs(request.search);
       }
       break;
     case MessageFromScriptType.REQUEST_SEARCH_BOOKMARKS:

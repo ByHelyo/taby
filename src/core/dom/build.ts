@@ -74,15 +74,15 @@ export const buildOpenTab = function (
 };
 
 export const buildBookmark = function (
-  tab: Bookmark,
+  bookmark: Bookmark,
   callback: (idx: number) => void,
 ) {
   const searchItem = document.createElement("li");
   searchItem.classList.add("taby-searchItem");
-  searchItem.classList.add(`taby-${tab.idx}`);
+  searchItem.classList.add(`taby-${bookmark.idx}`);
 
-  searchItem.append(buildItemTitle(tab.title));
-  searchItem.addEventListener("click", () => callback(tab.idx));
+  searchItem.append(buildItemTitle(bookmark.title));
+  searchItem.addEventListener("click", () => callback(bookmark.idx));
   return searchItem;
 };
 
