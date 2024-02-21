@@ -1,6 +1,6 @@
 import browser, { Bookmarks } from "webextension-polyfill";
 import Fuse from "fuse.js";
-import { Id } from "../type/misc.ts";
+import { Url } from "../type/misc.ts";
 import { SearchableTab, Tab } from "../type/tab.ts";
 import { Bookmark } from "../type/bookmark.ts";
 import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
@@ -10,12 +10,18 @@ import {
 } from "../type/message.ts";
 
 /**
- * Switches to the specified tab.
+ * Switches to the specified url.
  *
- * @param tab The tab to switch to.
+ * @param url The url to switch to.
  */
-export const handleRequestSwitchTab = async function <T extends Id>(tab: T) {
-  await browser.tabs.update(tab.id, { active: true });
+export const handleRequestSwitchTab = async function <T extends Url>(url: T) {
+  await browser.tabs.update(url.id, { active: true });
+};
+
+export const handleRequestUpdateCurrentTab = async function <T extends Url>(
+  url: T,
+) {
+  await browser.tabs.update(url.id, { url: url.url });
 };
 
 /**

@@ -1,11 +1,6 @@
 import { Context, Idx, MenuServiceOption } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
-import browser from "webextension-polyfill";
 import { WindowService } from "./window.ts";
-import {
-  MessageFromScript,
-  MessageFromScriptType,
-} from "../../type/message.ts";
 
 export class MenuService<T extends Idx> {
   private selectedElement: T | null;
@@ -76,16 +71,11 @@ export class MenuService<T extends Idx> {
       return;
     }
 
-    const message: MessageFromScript<T> = {
-      type: MessageFromScriptType.REQUEST_SWITCH_TAB,
-      element: selectedElement,
-    };
-
     if (this.options.context === Context.ContentScript) {
       await this.close();
     }
 
-    await browser.runtime.sendMessage(message);
+    await this.options.goTo(selectedElement);
 
     if (this.options.context === Context.Popup) {
       window.close();
