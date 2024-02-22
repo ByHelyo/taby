@@ -88,6 +88,19 @@ export const buildBookmark = function (
   return searchItem;
 };
 
+export const buildHistory = function (
+  bookmark: Bookmark,
+  callback: (idx: number) => void,
+) {
+  const searchItem = document.createElement("li");
+  searchItem.classList.add("taby-searchItem");
+  searchItem.classList.add(`taby-${bookmark.idx}`);
+
+  searchItem.append(buildItemTitle(bookmark.title));
+  searchItem.addEventListener("click", () => callback(bookmark.idx));
+  return searchItem;
+};
+
 const buildItemKey = function (key: number) {
   const keyElt = document.createElement("span");
   keyElt.innerText = String(key);

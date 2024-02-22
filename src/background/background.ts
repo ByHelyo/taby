@@ -4,6 +4,7 @@ import { Appearance } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
+  handleRequestSearchHistory,
   handleRequestSearchOpenTabs,
   handleRequestSwitchTab,
   handleRequestUpdateCurrentTab,
@@ -62,6 +63,11 @@ browser.runtime.onMessage.addListener(async function <T extends Resource>(
     case MessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
       if (request.element) {
         await handleRequestUpdateCurrentTab(request.element);
+      }
+      break;
+    case MessageFromScriptType.REQUEST_SEARCH_HISTORY:
+      if (request.search != undefined) {
+        return await handleRequestSearchHistory(request.search);
       }
       break;
   }

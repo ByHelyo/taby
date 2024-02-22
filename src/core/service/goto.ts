@@ -12,7 +12,7 @@ export async function goToTab<T>(element: T) {
   await browser.runtime.sendMessage(message);
 }
 
-export async function goToBookmark<T>(element: T) {
+export async function goToUrl<T>(element: T) {
   const message: MessageFromScript<T> = {
     type: MessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB,
     element: element,

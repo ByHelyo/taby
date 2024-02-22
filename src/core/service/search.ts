@@ -22,3 +22,12 @@ export async function search_bookmarks<T>(content: string): Promise<T[]> {
 
   return await browser.runtime.sendMessage(message);
 }
+
+export async function search_history<T>(content: string): Promise<T[]> {
+  const message: MessageFromScript<T> = {
+    type: MessageFromScriptType.REQUEST_SEARCH_HISTORY,
+    search: content,
+  };
+
+  return await browser.runtime.sendMessage(message);
+}

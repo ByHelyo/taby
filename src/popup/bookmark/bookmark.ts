@@ -5,7 +5,7 @@ import { MenuService } from "../../core/service/menuService.ts";
 import { appearance_setup } from "../../core/setup/appearance.ts";
 import { eventKeydown } from "../event.ts";
 import { Bookmark } from "../../type/bookmark.ts";
-import { goToBookmark } from "../../core/service/goto.ts";
+import { goToUrl } from "../../core/service/goto.ts";
 
 async function main() {
   const promises: Promise<void>[] = [];
@@ -13,7 +13,7 @@ async function main() {
     context: Context.Popup,
     search: search_bookmarks,
     buildElement: buildBookmark,
-    goTo: goToBookmark,
+    goTo: goToUrl,
     placeholder: "Search bookmark...",
   };
   const root = document.querySelector<HTMLDivElement>("body > div")!;
