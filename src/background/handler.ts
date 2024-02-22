@@ -86,7 +86,6 @@ export const handleRequestSearchBookmarks = async function (
   content: string,
 ): Promise<Bookmark[]> {
   const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
-  console.log(bookmarks);
 
   if (content === "") {
     return bookmarks.map((bookmark, idx) => Bookmark.from(bookmark, idx));
