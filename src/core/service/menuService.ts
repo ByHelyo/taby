@@ -1,6 +1,5 @@
 import { Context, MenuServiceOption } from "../../type/misc.ts";
 import { MenuUi } from "../ui/menuUi.ts";
-import { WindowService } from "./window.ts";
 import { Resource } from "../../type/resource.ts";
 
 export class MenuService<T extends Resource> {
@@ -15,8 +14,7 @@ export class MenuService<T extends Resource> {
     this.selectedElement = null;
     this.elements = [];
     this.display = false;
-    const windowService = new WindowService(this);
-    this.menuUi = new MenuUi(this, windowService);
+    this.menuUi = new MenuUi(this);
   }
 
   getMenuUi() {
@@ -37,7 +35,7 @@ export class MenuService<T extends Resource> {
 
   async setElements(elements: T[]) {
     this.elements = elements;
-    await this.menuUi.setElements(elements);
+    await this.menuUi.setElements();
   }
 
   getElements() {
@@ -62,8 +60,8 @@ export class MenuService<T extends Resource> {
   }
 
   async close() {
-    await this.menuUi.displays(false);
     this.display = false;
+    await this.menuUi.displays(false);
   }
 
   async goTo() {
