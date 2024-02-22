@@ -83,7 +83,7 @@ export const buildBookmark = function (
   searchItem.classList.add("taby-searchItem");
   searchItem.classList.add(`taby-${bookmark.idx}`);
 
-  searchItem.append(buildItemTitle(bookmark.title));
+  searchItem.append(buildItemTitle(bookmark.title || bookmark.url));
   searchItem.addEventListener("click", () => callback(bookmark.idx));
   return searchItem;
 };
@@ -96,7 +96,7 @@ export const buildHistory = function (
   searchItem.classList.add("taby-searchItem");
   searchItem.classList.add(`taby-${bookmark.idx}`);
 
-  searchItem.append(buildItemTitle(bookmark.title));
+  searchItem.append(buildItemTitle(bookmark.title || bookmark.url));
   searchItem.addEventListener("click", () => callback(bookmark.idx));
   return searchItem;
 };
