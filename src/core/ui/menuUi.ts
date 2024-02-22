@@ -3,6 +3,7 @@ import { MenuService } from "../service/menuService.ts";
 import { Action, WindowService } from "../service/window.ts";
 import { Context } from "../../type/misc.ts";
 import { Resource } from "../../type/resource.ts";
+import { next_location } from "../misc/location.ts";
 
 export class MenuUi<T extends Resource> {
   dom: MenuDom<T>;
@@ -116,6 +117,11 @@ export class MenuUi<T extends Resource> {
       case "ArrowDown":
         await this.moveDown();
         break;
+      case "Tab":
+        if (this.menuService.getOptions().context === Context.Popup) {
+          e.preventDefault();
+          next_location(e.ctrlKey ? -1 : 1);
+        }
     }
   }
 
