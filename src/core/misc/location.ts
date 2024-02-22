@@ -1,4 +1,8 @@
-const PATHS = ["/src/popup/popup.html", "/src/popup/bookmark/bookmark.html"];
+const PATHS = [
+  "/src/popup/popup.html",
+  "/src/popup/bookmark/bookmark.html",
+  "/src/popup/history/history.html",
+];
 
 export function next_location(steps: number) {
   const index =

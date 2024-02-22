@@ -14,7 +14,7 @@ async function main() {
     search: search_bookmarks,
     buildElement: buildBookmark,
     goTo: goToBookmark,
-    placeholder: "Search bookmark...",
+    placeholder: "Search history...",
   };
   const root = document.querySelector<HTMLDivElement>("body > div")!;
   const menuService = new MenuService(opts);

@@ -20,7 +20,7 @@ export class MenuDom<T extends Resource> {
   constructor(menuService: MenuService<T>) {
     this.menuService = menuService;
     this.searchList = buildSearchList();
-    this.searchInput = buildSearchInput();
+    this.searchInput = buildSearchInput(menuService.getOptions().placeholder);
     this.search = buildSearch(this.searchInput);
     this.menu = buildMenu(this.search, this.searchList);
     this.root = buildRoot(this.menu);
