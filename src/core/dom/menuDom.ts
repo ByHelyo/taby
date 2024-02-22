@@ -34,6 +34,14 @@ export class MenuDom<T extends Resource> {
     this.searchInput.focus();
   }
 
+  displayResults() {
+    this.searchList.classList.remove("taby-searchListEmpty");
+  }
+
+  hideResults() {
+    this.searchList.classList.add("taby-searchListEmpty");
+  }
+
   async displays(show: boolean) {
     if (show) {
       await enter(this.menu, "fade");
@@ -46,20 +54,12 @@ export class MenuDom<T extends Resource> {
     this.searchList.innerHTML = "";
   }
 
-  addItems(elements: T[], callback: (idx: number) => void) {
-    elements.forEach((element: T) => {
-      this.addItem(element, callback);
-    });
-  }
-
-  addItem(element: T, callback: (idx: number) => void) {
-    this.searchList.appendChild(
-      this.menuService.getOptions().buildElement(element, callback),
-    );
-  }
-
   clearInput() {
     this.searchInput.value = "";
+  }
+
+  contains(elt: HTMLElement): boolean {
+    return this.menu.contains(elt);
   }
 
   /**
@@ -78,10 +78,6 @@ export class MenuDom<T extends Resource> {
     );
 
     newSelectedTab?.classList.add("taby-active");
-  }
-
-  contains(elt: HTMLElement): boolean {
-    return this.menu.contains(elt);
   }
 
   onInput(callback: (event: Event) => void) {
@@ -105,11 +101,15 @@ export class MenuDom<T extends Resource> {
     );
   }
 
-  hideResults() {
-    this.searchList.classList.add("taby-searchListEmpty");
+  addItems(elements: T[], callback: (idx: number) => void) {
+    elements.forEach((element: T) => {
+      this.addItem(element, callback);
+    });
   }
 
-  displayResults() {
-    this.searchList.classList.remove("taby-searchListEmpty");
+  addItem(element: T, callback: (idx: number) => void) {
+    this.searchList.appendChild(
+      this.menuService.getOptions().buildElement(element, callback),
+    );
   }
 }
