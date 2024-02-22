@@ -16,6 +16,7 @@ header {
   align-items: center;
   background: var(--item-active);
   color: var(--item-color);
+  font-size: 11px;
 }
 
 nav a {
