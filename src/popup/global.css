@@ -9,6 +9,13 @@ nav {
   display: flex;
 }
 
+header {
+  padding-right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 nav a {
   background: red;
   display: inline-block;
