@@ -120,7 +120,7 @@ export class MenuUi<T extends Resource> {
       case "Tab":
         if (this.menuService.getOptions().context === Context.Popup) {
           e.preventDefault();
-          next_location(e.ctrlKey ? -1 : 1);
+          next_location(e.shiftKey ? -1 : 1);
         }
     }
   }

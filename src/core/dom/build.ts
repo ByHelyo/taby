@@ -44,10 +44,12 @@ const buildGlassImage = function (): HTMLImageElement {
   return image;
 };
 
-export const buildSearchInput = function (): HTMLInputElement {
+export const buildSearchInput = function (
+  placeholder: string,
+): HTMLInputElement {
   const searchInput = document.createElement("input");
   searchInput.classList.add("taby-searchInput");
-  searchInput.placeholder = "Search...";
+  searchInput.placeholder = placeholder;
 
   return searchInput;
 };

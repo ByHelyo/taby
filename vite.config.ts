@@ -11,6 +11,8 @@ export default defineConfig({
           .pathname,
         bookmark: new URL("./src/popup/bookmark/bookmark.html", import.meta.url)
           .pathname,
+        history: new URL("./src/popup/history/history.html", import.meta.url)
+          .pathname,
         background: new URL("./src/background/background.html", import.meta.url)
           .pathname,
       },

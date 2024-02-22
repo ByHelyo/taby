@@ -14,13 +14,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: var(--item-active);
+  color: var(--item-color);
 }
 
 nav a {
-  background: red;
   display: inline-block;
   padding: 8px 24px;
-  color: var(--item-color);
-  background: var(--item-active);
   text-decoration: none;
+  color: inherit;
 }

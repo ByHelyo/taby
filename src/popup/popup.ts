@@ -14,6 +14,7 @@ async function main() {
     search: search_open_tabs,
     buildElement: buildOpenTab,
     goTo: goToTab,
+    placeholder: "Search open tab...",
   };
   const root = document.querySelector<HTMLDivElement>("body > div")!;
   const menuService = new MenuService(opts);
