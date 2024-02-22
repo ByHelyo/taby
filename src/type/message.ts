@@ -5,6 +5,7 @@ export enum MessageFromScriptType {
   REQUEST_UPDATE_CURRENT_TAB,
   REQUEST_SEARCH_OPEN_TABS,
   REQUEST_SEARCH_BOOKMARKS,
+  REQUEST_SEARCH_HISTORY,
 }
 
 export interface MessageFromScript<T> {

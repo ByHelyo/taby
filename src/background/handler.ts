@@ -8,6 +8,7 @@ import {
   MessageFromBackgroundType,
 } from "../type/message.ts";
 import { Resource } from "../type/resource.ts";
+import { HistoryUrl } from "../type/history.ts";
 
 /**
  * Switches to the specified url.
@@ -24,40 +25,6 @@ export const handleRequestUpdateCurrentTab = async function <
   T extends Resource,
 >(url: T) {
   await browser.tabs.update(url.id, { url: url.url });
-};
-
-/**
- * Requests all open tabs in the current window and filters them based on the provided content.
- *
- * @param content The content to filter tabs by.
- * @returns {Promise<Tab[]>} Array of tabs matching the search criteria
- */
-export const handleRequestSearchOpenTabs = async function (
-  content: string,
-): Promise<Tab[]> {
-  const tabs = await browser.tabs.query({});
-  console.log(tabs);
-  console.log(await browser.tabs.query({ lastFocusedWindow: true }));
-  console.log(await browser.tabs.query({ currentWindow: true }));
-
-  if (content === "") {
-    return tabs.map(Tab.from);
-  }
-
-  const options = {
-    keys: ["title", "url", "key"],
-  };
-  const fuse = new Fuse(tabs.map(SearchableTab.from), options);
-
-  return fuse.search(content).map(function (tab, idx) {
-    return {
-      title: tab.item.title,
-      id: tab.item.id,
-      key: tab.item.key,
-      idx: idx,
-      favIconUrl: tab.item.favIconUrl,
-    };
-  });
 };
 
 /**
@@ -84,10 +51,42 @@ export const handleDuplicateTab = async function () {
   await browser.tabs.create({ url: currentTab.url });
 };
 
+/**
+ * Requests all open tabs in the current window and filters them based on the provided content.
+ *
+ * @param content The content to filter tabs by.
+ * @returns {Promise<Tab[]>} Array of tabs matching the search criteria
+ */
+export const handleRequestSearchOpenTabs = async function (
+  content: string,
+): Promise<Tab[]> {
+  const tabs = await browser.tabs.query({ lastFocusedWindow: true });
+
+  if (content === "") {
+    return tabs.map(Tab.from);
+  }
+
+  const options = {
+    keys: ["title", "url", "key"],
+  };
+  const fuse = new Fuse(tabs.map(SearchableTab.from), options);
+
+  return fuse.search(content).map(function (tab, idx) {
+    return {
+      title: tab.item.title,
+      id: tab.item.id,
+      key: tab.item.key,
+      idx: idx,
+      favIconUrl: tab.item.favIconUrl,
+    };
+  });
+};
+
 export const handleRequestSearchBookmarks = async function (
   content: string,
 ): Promise<Bookmark[]> {
   const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
+  console.log(bookmarks);
 
   if (content === "") {
     return bookmarks.map((bookmark, idx) => Bookmark.from(bookmark, idx));
@@ -127,3 +126,22 @@ function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
 
   return bookmarks;
 }
+
+export const handleRequestSearchHistory = async function (
+  content: string,
+): Promise<HistoryUrl[]> {
+  const history = await browser.history.search({ text: "" });
+
+  if (content === "") {
+    return history.map((history, idx) => HistoryUrl.from(history, idx));
+  }
+
+  const options = {
+    keys: ["title", "url"],
+  };
+  const fuse = new Fuse(history, options);
+
+  return fuse.search(content).map(function (history, idx): Bookmark {
+    return HistoryUrl.from(history.item, idx);
+  });
+};
