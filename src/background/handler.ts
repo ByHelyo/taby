@@ -35,9 +35,10 @@ export const handleRequestUpdateCurrentTab = async function <
 export const handleRequestSearchOpenTabs = async function (
   content: string,
 ): Promise<Tab[]> {
-  const tabs = await browser.tabs.query({
-    currentWindow: true,
-  });
+  const tabs = await browser.tabs.query({});
+  console.log(tabs);
+  console.log(await browser.tabs.query({ lastFocusedWindow: true }));
+  console.log(await browser.tabs.query({ currentWindow: true }));
 
   if (content === "") {
     return tabs.map(Tab.from);
