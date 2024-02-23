@@ -129,7 +129,11 @@ function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
 export const handleRequestSearchHistory = async function (
   content: string,
 ): Promise<HistoryUrl[]> {
-  const history = await browser.history.search({ text: "", maxResults: 1000 });
+  const history = await browser.history.search({
+    text: "",
+    maxResults: 10000,
+    startTime: 0,
+  });
 
   if (content === "") {
     return history.map((history, idx) => HistoryUrl.from(history, idx));
