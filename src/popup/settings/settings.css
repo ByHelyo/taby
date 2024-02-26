@@ -1,6 +1,6 @@
 .taby-root {
   background: var(--background);
-  color: var(--item-color);
+  color: var(--text-color);
 }
 
 hr {
@@ -120,7 +120,7 @@ h2 {
 }
 
 .checkbox-wrapper-16 .checkbox-label {
-  color: var(--item-color);
+  color: var(--text-color);
   transition: 0.375s ease;
   text-align: center;
 }

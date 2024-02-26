@@ -12,12 +12,14 @@
   top: 25%;
   left: 20%;
   z-index: 100000;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: var(--background);
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  box-shadow: 0 0 0 1px var(--ring-color);
+  box-shadow:
+    0 0 0 1px var(--ring-color),
+    rgba(0, 0, 0, 0.5) 0px 16px 70px;
   opacity: 1;
 
   font-family: sans-serif;
@@ -95,7 +97,7 @@
   padding: 6px;
   user-select: none;
   border-radius: 4px;
-  color: var(--item-color);
+  color: var(--text-color);
 }
 
 .taby-searchImg {
@@ -116,7 +118,7 @@
 }
 
 .taby-active {
-  background: var(--item-active);
+  background: var(--background-active);
 }
 
 .taby-fade-enter,

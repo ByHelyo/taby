@@ -14,8 +14,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--item-active);
-  color: var(--item-color);
+  background: var(--background-active);
+  color: var(--text-color);
   font-size: 11px;
 }
 
