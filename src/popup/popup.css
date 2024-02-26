@@ -79,7 +79,7 @@
   padding: 6px;
   user-select: none;
   border-radius: 4px;
-  color: var(--item-color);
+  color: var(--text-color);
 }
 
 .taby-searchImg {
@@ -100,5 +100,5 @@
 }
 
 .taby-active {
-  background: var(--item-active);
+  background: var(--background-active);
 }

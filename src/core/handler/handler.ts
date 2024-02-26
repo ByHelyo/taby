@@ -1,9 +1,9 @@
 import { Appearance } from "../../type/misc.ts";
 
 const light = [
-  ["--item-color", "#000000"],
+  ["--text-color", "#000000"],
   ["--background", "#F9FaFB"],
-  ["--item-active", "#EFF0F1"],
+  ["--background-active", "#EFF0F1"],
   ["--hr-color", "#F3F4F6"],
   ["--input-color", "#191C18"],
   ["--input-placeholder-color", "#56566A"],
@@ -14,9 +14,9 @@ const light = [
 ];
 
 const dark = [
-  ["--item-color", "#FEFFFE"],
+  ["--text-color", "#FEFFFE"],
   ["--background", "#262733"],
-  ["--item-active", "#313240"],
+  ["--background-active", "#313240"],
   ["--input-color", "#E4E5F1"],
   ["--input-placeholder-color", "#D1D1D1"],
   ["--hr-color", "#313141"],
