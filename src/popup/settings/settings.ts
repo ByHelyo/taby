@@ -7,7 +7,7 @@ const handleSelectAppearance = async function (theme: Appearance) {
 };
 
 async function main() {
-  const promise = appearance_setup(document.querySelector("body > div")!);
+  const promise = appearance_setup(document.querySelector(".taby-root")!);
 
   const storage = await browser.storage.local.get(["appearance"]);
   const lightButton = document.querySelector<HTMLInputElement>(
