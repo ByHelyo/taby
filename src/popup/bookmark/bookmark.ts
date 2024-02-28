@@ -16,7 +16,7 @@ async function main() {
     goTo: goToUrl,
     placeholder: "Search bookmark...",
   };
-  const root = document.querySelector<HTMLDivElement>("body > div")!;
+  const root = document.querySelector<HTMLDivElement>(".taby-root")!;
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
 
