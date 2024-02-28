@@ -2,21 +2,21 @@ import { Appearance } from "../../type/misc.ts";
 
 const light = [
   ["--text-color", "#000000"],
-  ["--background", "#F9FaFB"],
-  ["--background-active", "#EFF0F1"],
+  ["--background", "#FCFCFC"],
+  ["--background-active", "#F2F2F2"],
   ["--hr-color", "#F3F4F6"],
   ["--input-color", "#191C18"],
   ["--input-placeholder-color", "#56566A"],
   ["--icon-filter", "none"],
-  ["--ring-color", "rgb(0, 0, 0, 0.25)"],
+  ["--ring-color", "rgb(216, 216, 216)"],
   ["--icon-color", "#494949"],
   ["--border-color", "#b5bfd9"],
 ];
 
 const dark = [
   ["--text-color", "#FEFFFE"],
-  ["--background", "#262733"],
-  ["--background-active", "#313240"],
+  ["--background", "#2C2C30"],
+  ["--background-active", "#393A3D"],
   ["--input-color", "#E4E5F1"],
   ["--input-placeholder-color", "#D1D1D1"],
   ["--hr-color", "#313141"],
@@ -24,7 +24,7 @@ const dark = [
     "--icon-filter",
     "invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%)",
   ],
-  ["--ring-color", "rgb(255, 255, 255, 0.25)"],
+  ["--ring-color", "rgba(73, 75, 83, 0.898"],
   ["--icon-color", "#f3f4f6"],
   ["--border-color", "#364469"],
 ];
