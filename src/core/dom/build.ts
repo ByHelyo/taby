@@ -2,10 +2,9 @@ import browser from "webextension-polyfill";
 import { Tab } from "../../type/tab.ts";
 import { Bookmark } from "../../type/bookmark.ts";
 
-export const buildRoot = function (menu: HTMLDivElement): HTMLDivElement {
+export const buildRoot = function (): HTMLDivElement {
   const root = document.createElement("div");
   root.classList.add("taby-root");
-  root.append(menu);
 
   return root;
 };
