@@ -1,6 +1,5 @@
 import {
   buildMenu,
-  buildRoot,
   buildSearch,
   buildSearchInput,
   buildSearchList,
@@ -11,7 +10,6 @@ import { Resource } from "../../type/resource.ts";
 
 export class MenuDom<T extends Resource> {
   private readonly menuService: MenuService<T>;
-  private readonly root: HTMLDivElement;
   private readonly menu: HTMLDivElement;
   private readonly search: HTMLDivElement;
   private readonly searchInput: HTMLInputElement;
@@ -23,11 +21,10 @@ export class MenuDom<T extends Resource> {
     this.searchInput = buildSearchInput(menuService.getOptions().placeholder);
     this.search = buildSearch(this.searchInput);
     this.menu = buildMenu(this.search, this.searchList);
-    this.root = buildRoot(this.menu);
   }
 
-  getRoot() {
-    return this.root;
+  getDom() {
+    return this.menu;
   }
 
   focusInput() {

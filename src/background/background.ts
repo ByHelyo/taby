@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import { Appearance } from "../type/misc.ts";
+import { Appearance, PopupWindow } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
@@ -20,6 +20,7 @@ import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local.set({ appearance: Appearance.Light });
+  await browser.storage.local.set({ popup_window: PopupWindow.UnFixed });
 });
 
 /**

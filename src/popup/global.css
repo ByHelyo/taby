@@ -4,6 +4,11 @@ body {
   border: 0;
 }
 
+.taby-root {
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   background: var(--background);
   display: flex;

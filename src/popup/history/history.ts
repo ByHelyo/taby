@@ -2,7 +2,7 @@ import { Context, MenuServiceOption } from "../../type/misc.ts";
 import { search_history } from "../../core/service/search.ts";
 import { buildHistory } from "../../core/dom/build.ts";
 import { MenuService } from "../../core/service/menuService.ts";
-import { appearance_setup } from "../../core/setup/appearance.ts";
+import { popup_setup } from "../../core/setup/popup.ts";
 import { eventKeydown } from "../event.ts";
 import { goToUrl } from "../../core/service/goto.ts";
 import { HistoryUrl } from "../../type/history.ts";
@@ -20,10 +20,10 @@ async function main() {
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
 
-  promises.push(appearance_setup(root));
+  promises.push(popup_setup(root));
 
   if (root) {
-    root.prepend(menuUi.getMenuDom().getRoot());
+    root.prepend(menuUi.getMenuDom().getDom());
   }
 
   promises.push(menuService.setupElements());

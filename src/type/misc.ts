@@ -17,3 +17,8 @@ export enum Appearance {
   Light = "light",
   Dark = "dark",
 }
+
+export enum PopupWindow {
+  Fixed = "fixed",
+  UnFixed = "unfixed",
+}
