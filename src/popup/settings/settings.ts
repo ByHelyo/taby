@@ -25,7 +25,6 @@ async function main() {
   )!;
   const popup_window =
     document.querySelector<HTMLInputElement>(".toggle input")!;
-  console.log(popup_window);
 
   if (storage_appearance.appearance === Appearance.Light) {
     lightButton.checked = true;
