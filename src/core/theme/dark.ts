@@ -12,4 +12,5 @@ export const dark = [
     "--icon-filter",
     "invert(94%) sepia(0%) saturate(40%) hue-rotate(189deg) brightness(94%) contrast(83%)",
   ],
+  ["--checked", "#2260ff"],
 ];
