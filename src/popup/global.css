@@ -10,7 +10,6 @@ body {
 }
 
 nav {
-  background: var(--background);
   display: flex;
 }
 
@@ -29,4 +28,9 @@ nav a {
   padding: 8px 24px;
   text-decoration: none;
   color: inherit;
+}
+
+.nav-active {
+  background: var(--background-2);
+  color: var(--text-color-2);
 }
