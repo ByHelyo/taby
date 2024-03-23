@@ -1,6 +1,8 @@
 export const dark = [
   ["--text-color", "#FEFFFE"],
   ["--background", "#2C2C30"],
+  ["--text-color-2", "#000000"],
+  ["--background-2", "#FCFCFC"],
   ["--background-active", "#393A3D"],
   ["--input-color", "#E4E5F1"],
   ["--input-placeholder-color", "#D1D1D1"],
