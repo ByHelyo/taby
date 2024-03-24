@@ -31,6 +31,6 @@ nav a {
 }
 
 .nav-active {
-  background: var(--background-2);
-  color: var(--text-color-2);
+  background: var(--background-inverted);
+  color: var(--text-color-inverted);
 }
