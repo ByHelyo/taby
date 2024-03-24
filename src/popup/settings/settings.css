@@ -6,6 +6,7 @@
 .toggle {
   display: flex;
   justify-content: space-between;
+  padding-block: 12px;
   align-items: center;
   gap: 16px;
 }
