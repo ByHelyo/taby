@@ -1,8 +1,8 @@
 export const light = [
   ["--text-color", "#000000"],
   ["--background", "#FCFCFC"],
-  ["--text-color-2", "#FEFFFE"],
-  ["--background-2", "#2C2C30"],
+  ["--text-color-inverted", "#FEFFFE"],
+  ["--background-inverted", "#2C2C30"],
   ["--background-active", "#F2F2F2"],
   ["--hr-color", "#F3F4F6"],
   ["--input-color", "#191C18"],
