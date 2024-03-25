@@ -6,6 +6,10 @@
 
 - `command palette` `popup` enable scrolling
 
+### Changed
+
+- `popup` increase space around toggle button
+
 ## [1.22.0] - 2024/03/23
 
 ### Added
