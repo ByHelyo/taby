@@ -10,7 +10,7 @@ const SEARCH_INPUT_SIZE: number = 55,
   SEARCH_ITEM_SIZE: number = 33,
   NAV_POPUP: number = 30;
 
-export class WindowResultUi<T extends Resource> {
+export class WindowUi<T extends Resource> {
   private start: number;
   private end: number;
   private capacity: number;
@@ -29,6 +29,8 @@ export class WindowResultUi<T extends Resource> {
     this.capacity = this.computeCapacity();
     this.start = 0;
     this.end = this.capacity;
+
+    this.handleOnWheel();
   }
 
   async resize() {
@@ -116,5 +118,15 @@ export class WindowResultUi<T extends Resource> {
         await this.menuUi.handleOnClick(idx);
       },
     );
+  }
+
+  handleOnWheel() {
+    this.dom.getDom().addEventListener("wheel", (e) => {
+      if (e.deltaY < 0) {
+        this.moveUp();
+      } else if (e.deltaY > 0) {
+        this.moveDown();
+      }
+    });
   }
 }

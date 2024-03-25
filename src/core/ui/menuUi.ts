@@ -1,6 +1,6 @@
 import { MenuDom } from "../dom/menuDom.ts";
 import { MenuService } from "../service/menuService.ts";
-import { WindowResultUi } from "./window.ts";
+import { WindowUi } from "./window.ts";
 import { Context } from "../../type/misc.ts";
 import { Resource } from "../../type/resource.ts";
 import { next_location } from "../misc/location.ts";
@@ -8,13 +8,13 @@ import { next_location } from "../misc/location.ts";
 export class MenuUi<T extends Resource> {
   dom: MenuDom<T>;
   menuService: MenuService<T>;
-  window: WindowResultUi<T>;
+  window: WindowUi<T>;
   timeout: number | undefined;
 
   constructor(menuService: MenuService<T>) {
     this.menuService = menuService;
     this.dom = new MenuDom(menuService);
-    this.window = new WindowResultUi(menuService, this, this.dom);
+    this.window = new WindowUi(menuService, this, this.dom);
 
     this.dom.onInput(async (e) => {
       await this.handleOnInput(e);
