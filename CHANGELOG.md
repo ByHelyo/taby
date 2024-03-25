@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.24.0] - 2024/03/25
+
+### Fixed
+
+- `command palette` prevent default scrolling
+
 ## [1.23.0] - 2024/03/25
 
 ### Added
@@ -40,7 +46,8 @@
 
 - `popup` History fetches 10 000 latest results
 
-[1.23.0]: https://github.com/olivierlacan/compare/1.22.0...1.23.0
+[1.24.0]: https://github.com/ByHelyo/taby/compare/1.23.0...1.24.0
+[1.23.0]: https://github.com/ByHelyo/taby/compare/1.22.0...1.23.0
 [1.22.0]: https://github.com/ByHelyo/taby/compare/1.21.0...1.22.0
 [1.21.0]: https://github.com/ByHelyo/taby/compare/1.20.0...1.21.0
 [1.20.0]: https://github.com/ByHelyo/taby/compare/1.19.0...1.20.0

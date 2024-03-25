@@ -122,6 +122,7 @@ export class WindowUi<T extends Resource> {
 
   handleOnWheel() {
     this.dom.getDom().addEventListener("wheel", (e) => {
+      e.preventDefault();
       if (e.deltaY < 0) {
         this.moveUp();
       } else if (e.deltaY > 0) {
