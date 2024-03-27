@@ -56,6 +56,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.25.0]: https://github.com/ByHelyo/taby/compare/1.24.0...1.25.0
 [1.24.0]: https://github.com/ByHelyo/taby/compare/1.23.0...1.24.0
 [1.23.0]: https://github.com/ByHelyo/taby/compare/1.22.0...1.23.0
 [1.22.0]: https://github.com/ByHelyo/taby/compare/1.21.0...1.22.0
