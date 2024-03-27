@@ -19,8 +19,23 @@ import {
 import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
-  await browser.storage.local.set({ appearance: Appearance.Light });
-  await browser.storage.local.set({ popup_window: PopupWindow.UnFixed });
+  await browser.storage.local
+    .get(["appearance", "popup_window"])
+    .then(async function (storage) {
+      const promises = [];
+      if (!storage.appereance) {
+        promises.push(
+          browser.storage.local.set({ appearance: Appearance.Light }),
+        );
+      }
+      if (!storage.popup_window) {
+        promises.push(
+          browser.storage.local.set({ popup_window: PopupWindow.UnFixed }),
+        );
+      }
+
+      await Promise.all(promises);
+    });
 });
 
 /**
