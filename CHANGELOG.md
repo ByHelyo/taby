@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.25.0] - 2024/03/27
+
+### Added
+
+- `popup` keep settings between updates
+
+### Fixed
+
+- `command palette` broken command palette on few websites
+
 ## [1.24.0] - 2024/03/25
 
 ### Fixed
