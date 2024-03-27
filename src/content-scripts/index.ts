@@ -20,7 +20,7 @@ async function main() {
   const body = document.querySelector("body");
   const root = buildRoot();
 
-  const promise = popup_setup(root);
+  const promise = popup_setup(root, opts.context);
 
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();

@@ -1,5 +1,5 @@
 import browser from "webextension-polyfill";
-import { Appearance, PopupWindow } from "../../type/misc.ts";
+import { Appearance, Context, PopupWindow } from "../../type/misc.ts";
 import { popup_setup } from "../../core/setup/popup.ts";
 
 const handleSelectAppearance = async function (theme: Appearance) {
@@ -11,7 +11,10 @@ const handleSelectPopupWindow = async function (variant: PopupWindow) {
 };
 
 async function main() {
-  const promise = popup_setup(document.querySelector(".taby-root")!);
+  const promise = popup_setup(
+    document.querySelector(".taby-root")!,
+    Context.Popup,
+  );
 
   const storage_appearance = await browser.storage.local.get(["appearance"]);
   const storage_popup_window = await browser.storage.local.get([

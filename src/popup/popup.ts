@@ -20,7 +20,7 @@ async function main() {
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
 
-  promises.push(popup_setup(root));
+  promises.push(popup_setup(root, opts.context));
 
   if (root) {
     root.prepend(menuUi.getMenuDom().getDom());
