@@ -46,7 +46,7 @@ export class WindowUi<T extends Resource> {
 
     const menu_size =
       window_size - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST - BORDER_SIZE;
-    return Math.floor(menu_size / SEARCH_ITEM_SIZE);
+    return Math.max(Math.floor(menu_size / SEARCH_ITEM_SIZE) - 1, 0);
   }
 
   moveUp() {
