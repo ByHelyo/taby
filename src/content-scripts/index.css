@@ -9,8 +9,8 @@
   flex-direction: column;
   position: fixed;
   width: 60%;
-  top: 25%;
-  left: 20%;
+  top: var(--position-block);
+  left: var(--position-inline);
   z-index: 100000;
   border-radius: 8px;
   background-color: var(--background);

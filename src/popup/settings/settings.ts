@@ -1,5 +1,5 @@
 import browser from "webextension-polyfill";
-import { Appearance, Context, PopupWindow } from "../../type/misc.ts";
+import { Appearance, Context, PopupWindow, Storage } from "../../type/misc.ts";
 import { popup_setup } from "../../core/setup/popup.ts";
 
 const handleSelectAppearance = async function (theme: Appearance) {
@@ -16,9 +16,9 @@ async function main() {
     Context.Popup,
   );
 
-  const storage_appearance = await browser.storage.local.get(["appearance"]);
-  const storage_popup_window = await browser.storage.local.get([
-    "popup_window",
+  const storage = await browser.storage.local.get([
+    Storage.Appearance,
+    Storage.PopupWindow,
   ]);
   const lightButton = document.querySelector<HTMLInputElement>(
     "div:nth-child(1) input",
@@ -27,15 +27,15 @@ async function main() {
     "div:nth-child(2) input",
   )!;
   const popup_window =
-    document.querySelector<HTMLInputElement>(".toggle input")!;
+    document.querySelector<HTMLInputElement>(".option input")!;
 
-  if (storage_appearance.appearance === Appearance.Light) {
+  if (storage[Storage.Appearance] === Appearance.Light) {
     lightButton.checked = true;
   } else {
     darkButton.checked = true;
   }
 
-  if (storage_popup_window.popup_window == PopupWindow.Fixed) {
+  if (storage[Storage.PopupWindow] == PopupWindow.Fixed) {
     popup_window.checked = true;
   }
 

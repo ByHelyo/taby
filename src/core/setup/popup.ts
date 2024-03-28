@@ -2,32 +2,54 @@ import browser from "webextension-polyfill";
 import {
   handleChangeAppearance,
   handleChangePopupWindow,
+  handlePosition,
 } from "../handler/handler.ts";
-import { Context } from "../../type/misc.ts";
+import { Context, Storage } from "../../type/misc.ts";
 
 export const popup_setup = async function (
   root: HTMLDivElement,
   context: Context,
 ) {
   await browser.storage.local
-    .get(["appearance", "popup_window"])
+    .get([
+      Storage.Appearance,
+      Storage.PopupWindow,
+      Storage.PositionInline,
+      Storage.PositionBlock,
+    ])
     .then(function (storage) {
-      const popup_window = storage.popup_window;
-      const theme = storage.appearance;
+      const popup_window = storage[Storage.Appearance];
+      const theme = storage[Storage.PopupWindow];
+      const position_inline = storage[Storage.PositionInline];
+      const position_block = storage[Storage.PositionBlock];
 
       handleChangeAppearance(root, theme);
 
       if (context == Context.Popup) {
         handleChangePopupWindow(root, popup_window);
       }
+
+      if (context == Context.ContentScript) {
+        handlePosition(root, position_inline, position_block);
+      }
     });
 
   browser.storage.onChanged.addListener(function (changes) {
     for (const [key, { newValue }] of Object.entries(changes)) {
-      if (key === "appearance") {
+      if (key === Storage.Appearance) {
         handleChangeAppearance(root, newValue);
-      } else if (key == "popup_window" && context === Context.Popup) {
+      } else if (key === Storage.PopupWindow && context === Context.Popup) {
         handleChangePopupWindow(root, newValue);
+      } else if (
+        key === Storage.PositionInline &&
+        context === Context.ContentScript
+      ) {
+        handlePosition(root, newValue, null);
+      } else if (
+        key === Storage.PositionBlock &&
+        context === Context.ContentScript
+      ) {
+        handlePosition(root, null, newValue);
       }
     }
   });
