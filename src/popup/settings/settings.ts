@@ -30,6 +30,7 @@ async function main() {
     Storage.PositionInline,
     Storage.PositionBlock,
   ]);
+
   const light_button = document.querySelector<HTMLInputElement>(
     "div:nth-child(1) input",
   )!;
@@ -58,7 +59,7 @@ async function main() {
     dark_button.checked = true;
   }
 
-  if (storage[Storage.PopupWindow] == PopupWindow.Fixed) {
+  if (storage[Storage.PopupWindow] === PopupWindow.Fixed) {
     popup_window.checked = true;
   }
 

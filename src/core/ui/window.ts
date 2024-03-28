@@ -46,7 +46,11 @@ export class WindowUi<T extends Resource> {
 
     const menu_size =
       window_size - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST - BORDER_SIZE;
-    return Math.max(Math.floor(menu_size / SEARCH_ITEM_SIZE) - 1, 0);
+    const capacity = Math.max(Math.floor(menu_size / SEARCH_ITEM_SIZE) - 1, 0);
+
+    return this.menuService.getContext() == Context.ContentScript
+      ? Math.min(15, capacity)
+      : capacity;
   }
 
   moveUp() {
