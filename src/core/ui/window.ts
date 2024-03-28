@@ -58,7 +58,7 @@ export class WindowUi<T extends Resource> {
     const capacity = Math.floor(menu_size / SEARCH_ITEM_SIZE);
 
     return this.menuService.getContext() == Context.ContentScript
-      ? Math.min(10, Math.max(capacity - 1, 0))
+      ? Math.min(10, capacity)
       : capacity;
   }
 
