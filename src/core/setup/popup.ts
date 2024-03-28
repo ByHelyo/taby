@@ -30,7 +30,7 @@ export const popup_setup = async function (
       }
 
       if (context == Context.ContentScript) {
-        handlePosition(root, position_inline, position_block);
+        handlePosition(root, position_block, position_inline);
       }
     });
 
