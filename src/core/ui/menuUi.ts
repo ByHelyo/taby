@@ -27,6 +27,10 @@ export class MenuUi<T extends Resource> {
     }
   }
 
+  async initialize() {
+    await this.window.initialize();
+  }
+
   async setElements() {
     const elements = this.menuService.getElements();
 
@@ -48,6 +52,10 @@ export class MenuUi<T extends Resource> {
 
   getMenuDom() {
     return this.dom;
+  }
+
+  getWindow() {
+    return this.window;
   }
 
   contains(elt: HTMLElement): boolean {
