@@ -2,6 +2,12 @@
 
 ## [1.25.0] - 2024/03/27
 
+### Fixed
+
+- `command palette` adjust command palette height to avoid reaching the bottom of the window
+
+## [1.25.0] - 2024/03/27
+
 ### Added
 
 - `popup` keep settings between updates

@@ -3,7 +3,7 @@
   color: var(--text-color);
 }
 
-.toggle {
+.option {
   display: flex;
   justify-content: space-between;
   padding-block: 12px;

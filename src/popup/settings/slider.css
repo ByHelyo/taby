@@ -1,0 +1,16 @@
+.range-wrapper {
+  flex: 1 1 0;
+}
+
+.range-wrapper label {
+  display: flex;
+  gap: 12px;
+}
+
+.range-wrapper input {
+  flex: 1 1 0;
+}
+
+.label {
+  width: 240px;
+}

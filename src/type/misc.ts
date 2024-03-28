@@ -22,3 +22,10 @@ export enum PopupWindow {
   Fixed = "fixed",
   UnFixed = "unfixed",
 }
+
+export enum Storage {
+  Appearance = "appearance",
+  PopupWindow = "popup_window",
+  PositionInline = "position_inline",
+  PositionBlock = "position_block",
+}
