@@ -43,14 +43,14 @@ browser.runtime.onInstalled.addListener(async function () {
       if (!storage[Storage.PositionInline]) {
         promises.push(
           browser.storage.local.set({
-            [Storage.PositionInline]: "10",
+            [Storage.PositionInline]: "20",
           }),
         );
       }
       if (!storage[Storage.PositionBlock]) {
         promises.push(
           browser.storage.local.set({
-            [Storage.PositionBlock]: "20",
+            [Storage.PositionBlock]: "10",
           }),
         );
       }

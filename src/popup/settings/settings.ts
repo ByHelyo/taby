@@ -40,16 +40,16 @@ async function main() {
   const popup_window = document.querySelector<HTMLInputElement>(
     ".option:nth-of-type(2) input",
   )!;
-  const position_inline = document.querySelector<HTMLInputElement>(
+  const position_block = document.querySelector<HTMLInputElement>(
     ".option:nth-of-type(3) input",
   )!;
-  const position_inline_label = document.querySelector<HTMLSpanElement>(
+  const position_block_label = document.querySelector<HTMLSpanElement>(
     ".option:nth-of-type(3) span",
   )!;
-  const position_block = document.querySelector<HTMLInputElement>(
+  const position_inline = document.querySelector<HTMLInputElement>(
     ".option:nth-of-type(4) input",
   )!;
-  const position_block_label = document.querySelector<HTMLSpanElement>(
+  const position_inline_label = document.querySelector<HTMLSpanElement>(
     ".option:nth-of-type(4) span",
   )!;
 
@@ -63,10 +63,10 @@ async function main() {
     popup_window.checked = true;
   }
 
-  position_inline.value = storage[Storage.PositionInline];
-  position_inline_label.textContent = storage[Storage.PositionInline] + "%";
   position_block.value = storage[Storage.PositionBlock];
   position_block_label.textContent = storage[Storage.PositionBlock] + "%";
+  position_inline.value = storage[Storage.PositionInline];
+  position_inline_label.textContent = storage[Storage.PositionInline] + "%";
 
   light_button.addEventListener("click", function () {
     handleSelectAppearance(Appearance.Light);
@@ -79,13 +79,13 @@ async function main() {
       ? handleSelectPopupWindow(PopupWindow.Fixed)
       : handleSelectPopupWindow(PopupWindow.UnFixed);
   });
-  position_inline.addEventListener("input", function () {
-    handleSelectPositionInline(position_inline.value);
-    position_inline_label.textContent = position_inline.value + "%";
-  });
   position_block.addEventListener("input", function () {
     handleSelectPositionBlock(position_block.value);
     position_block_label.textContent = position_block.value + "%";
+  });
+  position_inline.addEventListener("input", function () {
+    handleSelectPositionInline(position_inline.value);
+    position_inline_label.textContent = position_inline.value + "%";
   });
 
   await promise;
