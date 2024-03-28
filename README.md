@@ -26,6 +26,7 @@
   - Navigate between tabs using arrow keys
   - Switch to a tab with 'Enter' or a simple click
 - Customize the appearance with options for light and dark modes
+- Move the position of the command palette
 - Shortcut for duplicate tab.
 
 ### Supports:
