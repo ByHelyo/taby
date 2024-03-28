@@ -24,3 +24,14 @@ export const handleChangePopupWindow = function (
 
   style.setProperty("height", value);
 };
+
+export const handlePosition = function (
+  root: HTMLDivElement,
+  block: string | null,
+  inline: string | null,
+) {
+  const style = root.style;
+
+  block && style.setProperty("--position-block", block);
+  inline && style.setProperty("--position-inline", inline);
+};

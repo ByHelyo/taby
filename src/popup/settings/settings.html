@@ -6,6 +6,7 @@
     <link href="./../global.css" rel="stylesheet" type="text/css" />
     <link href="./checkbox-16.css" rel="stylesheet" type="text/css" />
     <link href="./checkbox-64.css" rel="stylesheet" type="text/css" />
+    <link href="./slider.css" rel="stylesheet" type="text/css" />
     <link href="./settings.css" rel="stylesheet" type="text/css" />
     <script type="module" src="./settings.ts"></script>
   </head>
@@ -63,7 +64,7 @@
           </div>
         </div>
         <h2>Preference</h2>
-        <div class="toggle">
+        <div class="option">
           <div>Fixed popup height</div>
           <div class="checkbox-wrapper-64">
             <label class="switch">
@@ -72,7 +73,26 @@
             </label>
           </div>
         </div>
+        <div class="option">
+          <div class="label">Position command palette from left</div>
+          <div class="range-wrapper">
+            <label>
+              <input type="range" min="0" max="100" />
+              <span>10%</span>
+            </label>
+          </div>
+        </div>
+        <div class="option">
+          <div class="label">Position command palette from top</div>
+          <div class="range-wrapper">
+            <label>
+              <input type="range" min="0" max="100" />
+              <span>10%</span>
+            </label>
+          </div>
+        </div>
       </div>
+
       <header>
         <nav>
           <a href="../popup.html">Tab</a>

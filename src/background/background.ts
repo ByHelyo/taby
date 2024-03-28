@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 
-import { Appearance, PopupWindow } from "../type/misc.ts";
+import { Appearance, PopupWindow, Storage } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
@@ -20,17 +20,33 @@ import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local
-    .get(["appearance", "popup_window"])
+    .get([Storage.Appearance, Storage.PopupWindow])
     .then(async function (storage) {
       const promises = [];
-      if (!storage.appereance) {
+      if (!storage[Storage.Appearance]) {
         promises.push(
-          browser.storage.local.set({ appearance: Appearance.Light }),
+          browser.storage.local.set({ [Storage.Appearance]: Appearance.Light }),
         );
       }
-      if (!storage.popup_window) {
+      if (!storage[Storage.PopupWindow]) {
         promises.push(
-          browser.storage.local.set({ popup_window: PopupWindow.UnFixed }),
+          browser.storage.local.set({
+            [Storage.PopupWindow]: PopupWindow.UnFixed,
+          }),
+        );
+      }
+      if (!storage[Storage.PositionInline]) {
+        promises.push(
+          browser.storage.local.set({
+            [Storage.PositionInline]: "10%",
+          }),
+        );
+      }
+      if (!storage[Storage.PositionBlock]) {
+        promises.push(
+          browser.storage.local.set({
+            [Storage.PositionBlock]: "20%",
+          }),
         );
       }
 
