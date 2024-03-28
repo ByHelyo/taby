@@ -1,10 +1,16 @@
 # Changelog
 
-## [1.25.0] - 2024/03/27
+## [1.26.0] - 2024/03/28
 
-### Fixed
+### Added
 
-- `command palette` adjust command palette height to avoid reaching the bottom of the window
+- `command palette` support for moving the command palette across the page
+- `command palette` limit the command palette to display a maximum of 10 results
+- `command palette` resize the command palette when adjusting its position
+
+### Changed
+
+- `command palette` change default command palette position
 
 ## [1.25.0] - 2024/03/27
 
@@ -62,6 +68,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.26.0]: https://github.com/ByHelyo/taby/compare/1.25.0...1.26.0
 [1.25.0]: https://github.com/ByHelyo/taby/compare/1.24.0...1.25.0
 [1.24.0]: https://github.com/ByHelyo/taby/compare/1.23.0...1.24.0
 [1.23.0]: https://github.com/ByHelyo/taby/compare/1.22.0...1.23.0
