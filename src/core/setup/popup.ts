@@ -5,10 +5,13 @@ import {
   handlePosition,
 } from "../handler/handler.ts";
 import { Context, Storage } from "../../type/misc.ts";
+import { WindowUi } from "../ui/window.ts";
+import { Resource } from "../../type/resource.ts";
 
-export const popup_setup = async function (
+export const popup_setup = async function <T extends Resource>(
   root: HTMLDivElement,
   context: Context,
+  window?: WindowUi<T>,
 ) {
   await browser.storage.local
     .get([
@@ -17,7 +20,7 @@ export const popup_setup = async function (
       Storage.PositionInline,
       Storage.PositionBlock,
     ])
-    .then(function (storage) {
+    .then(async function (storage) {
       const theme = storage[Storage.Appearance];
       const popup_window = storage[Storage.PopupWindow];
       const position_inline = storage[Storage.PositionInline];
@@ -31,10 +34,11 @@ export const popup_setup = async function (
 
       if (context == Context.ContentScript) {
         handlePosition(root, position_block, position_inline);
+        await window?.resize();
       }
     });
 
-  browser.storage.onChanged.addListener(function (changes) {
+  browser.storage.onChanged.addListener(async function (changes) {
     for (const [key, { newValue }] of Object.entries(changes)) {
       if (key === Storage.Appearance) {
         handleChangeAppearance(root, newValue);
@@ -50,6 +54,7 @@ export const popup_setup = async function (
         context === Context.ContentScript
       ) {
         handlePosition(root, newValue, null);
+        await window?.resize();
       }
     }
   });

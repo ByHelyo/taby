@@ -10,6 +10,7 @@ import { Tab } from "../type/tab.ts";
 import { goToTab } from "../core/service/goto.ts";
 
 async function main() {
+  const promises = [];
   const opts: MenuServiceOption<Tab> = {
     context: Context.ContentScript,
     search: search_open_tabs,
@@ -20,10 +21,12 @@ async function main() {
   const body = document.querySelector("body");
   const root = buildRoot();
 
-  const promise = popup_setup(root, opts.context);
-
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
+  promises.push(menuUi.initialize());
+  const window = menuUi.getWindow();
+
+  promises.push(popup_setup(root, opts.context, window));
 
   if (body) {
     body.appendChild(root);
@@ -34,7 +37,7 @@ async function main() {
   eventOutsideMenu(menuService, menuUi);
   eventResize(menuUi);
 
-  await promise;
+  await Promise.all(promises);
 }
 
 main();

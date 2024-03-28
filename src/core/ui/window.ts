@@ -1,8 +1,9 @@
-import { Context } from "../../type/misc.ts";
+import { Context, Storage } from "../../type/misc.ts";
 import { MenuService } from "../service/menuService.ts";
 import { Resource } from "../../type/resource.ts";
 import { MenuUi } from "./menuUi.ts";
 import { MenuDom } from "../dom/menuDom.ts";
+import browser from "webextension-polyfill";
 
 const SEARCH_INPUT_SIZE: number = 55,
   BORDER_SIZE: number = 2,
@@ -25,31 +26,39 @@ export class WindowUi<T extends Resource> {
   ) {
     this.dom = menuDom;
     this.menuUi = menuUi;
+    this.capacity = -1;
+    this.end = -1;
     this.menuService = menuService;
-    this.capacity = this.computeCapacity();
     this.start = 0;
-    this.end = this.capacity;
 
     this.handleOnWheel();
   }
 
+  async initialize() {
+    this.capacity = await this.computeCapacity();
+    this.end = this.capacity;
+  }
+
   async resize() {
-    this.capacity = this.computeCapacity();
+    this.capacity = await this.computeCapacity();
     await this.menuUi.setElements();
   }
 
-  computeCapacity() {
+  async computeCapacity() {
+    const storage = await browser.storage.local.get([Storage.PositionBlock]);
+    const position_block = 1 - Number(storage[Storage.PositionBlock]) * 0.01;
+
     const window_size =
       this.menuService.getContext() === Context.ContentScript
-        ? window.innerHeight * 0.75
+        ? window.innerHeight * position_block
         : 600 - NAV_POPUP;
 
     const menu_size =
       window_size - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST - BORDER_SIZE;
-    const capacity = Math.max(Math.floor(menu_size / SEARCH_ITEM_SIZE) - 1, 0);
+    const capacity = Math.floor(menu_size / SEARCH_ITEM_SIZE);
 
     return this.menuService.getContext() == Context.ContentScript
-      ? Math.min(15, capacity)
+      ? Math.min(10, Math.max(capacity - 1, 0))
       : capacity;
   }
 

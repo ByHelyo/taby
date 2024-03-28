@@ -19,8 +19,10 @@ async function main() {
   const root = document.querySelector<HTMLDivElement>(".taby-root")!;
   const menuService = new MenuService(opts);
   const menuUi = menuService.getMenuUi();
+  promises.push(menuUi.initialize());
+  const window = menuUi.getWindow();
 
-  promises.push(popup_setup(root, opts.context));
+  promises.push(popup_setup(root, opts.context, window));
 
   if (root) {
     root.prepend(menuUi.getMenuDom().getDom());
