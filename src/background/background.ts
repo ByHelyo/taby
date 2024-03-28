@@ -20,7 +20,12 @@ import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local
-    .get([Storage.Appearance, Storage.PopupWindow])
+    .get([
+      Storage.Appearance,
+      Storage.PopupWindow,
+      Storage.PositionBlock,
+      Storage.PositionInline,
+    ])
     .then(async function (storage) {
       const promises = [];
       if (!storage[Storage.Appearance]) {

@@ -18,8 +18,8 @@ export const popup_setup = async function (
       Storage.PositionBlock,
     ])
     .then(function (storage) {
-      const popup_window = storage[Storage.Appearance];
-      const theme = storage[Storage.PopupWindow];
+      const theme = storage[Storage.Appearance];
+      const popup_window = storage[Storage.PopupWindow];
       const position_inline = storage[Storage.PositionInline];
       const position_block = storage[Storage.PositionBlock];
 
@@ -44,12 +44,12 @@ export const popup_setup = async function (
         key === Storage.PositionInline &&
         context === Context.ContentScript
       ) {
-        handlePosition(root, newValue, null);
+        handlePosition(root, null, newValue);
       } else if (
         key === Storage.PositionBlock &&
         context === Context.ContentScript
       ) {
-        handlePosition(root, null, newValue);
+        handlePosition(root, newValue, null);
       }
     }
   });
