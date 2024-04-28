@@ -21,7 +21,7 @@
   border: 1px solid var(--ring-color);
   opacity: 1;
 
-  font-family: sans-serif;
+  font-family: sans-serif !important;
   line-height: 1.5;
 }
 
@@ -96,7 +96,10 @@
   padding: 6px;
   user-select: none;
   border-radius: 4px;
-  color: var(--text-color);
+}
+
+.taby-searchTitle {
+  color: var(--text-color) !important;
 }
 
 .taby-searchImg {
@@ -114,6 +117,7 @@
   align-items: center;
   font-size: 14px;
   font-weight: bold;
+  color: var(--text-color) !important;
 }
 
 .taby-active {
