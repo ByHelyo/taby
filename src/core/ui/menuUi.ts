@@ -114,6 +114,19 @@ export class MenuUi<T extends Resource> {
       case "ArrowDown":
         this.window.moveDown();
         break;
+      case "ArrowLeft":
+        if (this.menuService.getOptions().context === Context.Popup) {
+          e.preventDefault();
+          next_location(-1);
+        }
+        break;
+      case "ArrowRight":
+        if (this.menuService.getOptions().context === Context.Popup) {
+          e.preventDefault();
+          next_location(1);
+        }
+        break;
+
       case "Tab":
         if (this.menuService.getOptions().context === Context.Popup) {
           e.preventDefault();
