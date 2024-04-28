@@ -4,6 +4,8 @@
 
 ### Added
 
+- `popup` enable cycling between groups with arrow keys
+
 ### Fixed
 
 - `command palette` broken police
