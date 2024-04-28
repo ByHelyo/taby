@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.27.0] - 2024/04/28
+
+### Added
+
+### Fixed
+
+- `command palette` broken police
+- `command palette` broken text color
+
 ## [1.26.0] - 2024/03/28
 
 ### Added
@@ -68,6 +77,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
 [1.26.0]: https://github.com/ByHelyo/taby/compare/1.25.0...1.26.0
 [1.25.0]: https://github.com/ByHelyo/taby/compare/1.24.0...1.25.0
 [1.24.0]: https://github.com/ByHelyo/taby/compare/1.23.0...1.24.0
