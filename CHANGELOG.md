@@ -8,7 +8,7 @@
 
 ### Fixed
 
-- `command palette`: `popup` defaulted to dark theme
+- `command palette` `popup` defaulted to dark theme
 
 ## [1.27.0] - 2024/04/28
 
