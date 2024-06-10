@@ -13,7 +13,7 @@ export const popup_setup = async function <T extends Resource>(
   context: Context,
   window?: WindowUi<T>,
 ) {
-  await browser.storage.local
+  await browser.storage.sync
     .get([
       Storage.Appearance,
       Storage.PopupWindow,

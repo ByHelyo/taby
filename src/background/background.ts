@@ -19,7 +19,7 @@ import {
 import { Resource } from "../type/resource.ts";
 
 browser.runtime.onInstalled.addListener(async function () {
-  await browser.storage.local
+  await browser.storage.sync
     .get([
       Storage.Appearance,
       Storage.PopupWindow,
@@ -30,26 +30,26 @@ browser.runtime.onInstalled.addListener(async function () {
       const promises = [];
       if (!storage[Storage.Appearance]) {
         promises.push(
-          browser.storage.local.set({ [Storage.Appearance]: Appearance.Light }),
+          browser.storage.sync.set({ [Storage.Appearance]: Appearance.Dark }),
         );
       }
       if (!storage[Storage.PopupWindow]) {
         promises.push(
-          browser.storage.local.set({
+          browser.storage.sync.set({
             [Storage.PopupWindow]: PopupWindow.UnFixed,
           }),
         );
       }
       if (!storage[Storage.PositionInline]) {
         promises.push(
-          browser.storage.local.set({
+          browser.storage.sync.set({
             [Storage.PositionInline]: "20",
           }),
         );
       }
       if (!storage[Storage.PositionBlock]) {
         promises.push(
-          browser.storage.local.set({
+          browser.storage.sync.set({
             [Storage.PositionBlock]: "10",
           }),
         );

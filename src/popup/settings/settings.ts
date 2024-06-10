@@ -3,19 +3,19 @@ import { Appearance, Context, PopupWindow, Storage } from "../../type/misc.ts";
 import { popup_setup } from "../../core/setup/popup.ts";
 
 const handleSelectAppearance = async function (theme: Appearance) {
-  await browser.storage.local.set({ [Storage.Appearance]: theme });
+  await browser.storage.sync.set({ [Storage.Appearance]: theme });
 };
 
 const handleSelectPopupWindow = async function (variant: PopupWindow) {
-  await browser.storage.local.set({ [Storage.PopupWindow]: variant });
+  await browser.storage.sync.set({ [Storage.PopupWindow]: variant });
 };
 
 const handleSelectPositionInline = async function (value: string) {
-  await browser.storage.local.set({ [Storage.PositionInline]: value });
+  await browser.storage.sync.set({ [Storage.PositionInline]: value });
 };
 
 const handleSelectPositionBlock = async function (value: string) {
-  await browser.storage.local.set({ [Storage.PositionBlock]: value });
+  await browser.storage.sync.set({ [Storage.PositionBlock]: value });
 };
 
 async function main() {
@@ -24,7 +24,7 @@ async function main() {
     Context.Popup,
   );
 
-  const storage = await browser.storage.local.get([
+  const storage = await browser.storage.sync.get([
     Storage.Appearance,
     Storage.PopupWindow,
     Storage.PositionInline,

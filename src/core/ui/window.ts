@@ -45,7 +45,7 @@ export class WindowUi<T extends Resource> {
   }
 
   async computeCapacity() {
-    const storage = await browser.storage.local.get([Storage.PositionBlock]);
+    const storage = await browser.storage.sync.get([Storage.PositionBlock]);
     const position_block = 1 - Number(storage[Storage.PositionBlock]) * 0.01;
 
     const window_size =
