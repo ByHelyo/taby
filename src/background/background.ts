@@ -30,7 +30,7 @@ browser.runtime.onInstalled.addListener(async function () {
       const promises = [];
       if (!storage[Storage.Appearance]) {
         promises.push(
-          browser.storage.sync.set({ [Storage.Appearance]: Appearance.Dark }),
+          browser.storage.sync.set({ [Storage.Appearance]: Appearance.Light }),
         );
       }
       if (!storage[Storage.PopupWindow]) {
