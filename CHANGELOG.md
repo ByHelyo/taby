@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.28.0] - 2024/06/10
+
+### Add
+
+- `settings` migrate from local storage to sync storage
+
+### Fixed
+
+- `command palette`: `popup` defaulted to dark theme
+
 ## [1.27.0] - 2024/04/28
 
 ### Added
@@ -79,6 +89,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
 [1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
 [1.26.0]: https://github.com/ByHelyo/taby/compare/1.25.0...1.26.0
 [1.25.0]: https://github.com/ByHelyo/taby/compare/1.24.0...1.25.0
