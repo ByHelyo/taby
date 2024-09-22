@@ -1,44 +1,22 @@
-import browser, { Bookmarks } from "webextension-polyfill";
-import Fuse from "fuse.js";
-import { SearchableTab, Tab } from "../type/tab.ts";
-import { Bookmark } from "../type/bookmark.ts";
-import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
+import browser from "webextension-polyfill";
 import {
-  MessageFromBackground,
-  MessageFromBackgroundType,
-} from "../type/message.ts";
-import { Resource } from "../type/resource.ts";
-import { HistoryUrl } from "../type/history.ts";
+  TMessageFromBackground,
+  EMessageFromBackgroundType,
+} from "../type/message";
+import { TTab } from "../type/tab.tsx";
+import Fuse from "fuse.js";
+import { THistory } from "~/type/history.ts";
+import { bfs_bookmark } from "./misc.ts";
+import { TBookmark } from "~/type/bookmark.ts";
 
-/**
- * Switches to the specified url.
- *
- * @param url The url to switch to.
- */
-export const handleRequestSwitchTab = async function <T extends Resource>(
-  url: T,
-) {
-  await browser.tabs.update(url.id, { active: true });
-};
-
-export const handleRequestUpdateCurrentTab = async function <
-  T extends Resource,
->(url: T) {
-  await browser.tabs.update(url.id, { url: url.url });
-};
-
-/**
- * Toggles the visibility state of the menu by sending a message to the content script.
- *
- */
 export const handleToggleMenu = async function () {
   const [currentTab] = await browser.tabs.query({
     active: true,
     lastFocusedWindow: true,
   });
 
-  const message: MessageFromBackground = {
-    type: MessageFromBackgroundType.TOGGLE_MENU,
+  const message: TMessageFromBackground = {
+    type: EMessageFromBackgroundType.TOGGLE_MENU,
   };
 
   if (currentTab.id) {
@@ -51,44 +29,44 @@ export const handleDuplicateTab = async function () {
   await browser.tabs.create({ url: currentTab.url });
 };
 
-/**
- * Requests all open tabs in the current window and filters them based on the provided content.
- *
- * @param content The content to filter tabs by.
- * @returns {Promise<Tab[]>} Array of tabs matching the search criteria
- */
+export const handleRequestSwitchTab = async function (tab: TTab) {
+  await browser.tabs.update(tab.id, { active: true });
+};
+
+export const handleRequestUpdateCurrentTab = async function (url: TTab) {
+  await browser.tabs.update(url.id, { url: url.url });
+};
+
 export const handleRequestSearchOpenTabs = async function (
   content: string,
-): Promise<Tab[]> {
+): Promise<TTab[]> {
   const tabs = await browser.tabs.query({ lastFocusedWindow: true });
 
   if (content === "") {
-    return tabs.map(Tab.from);
+    console.log(tabs.map(TTab.from));
+    return tabs.map(TTab.from);
   }
 
   const options = {
     keys: ["title", "url", "key"],
   };
-  const fuse = new Fuse(tabs.map(SearchableTab.from), options);
+  const fuse = new Fuse(tabs.map(TTab.from), options);
 
   return fuse.search(content).map(function (tab, idx) {
     return {
-      title: tab.item.title,
-      id: tab.item.id,
-      key: tab.item.key,
-      idx: idx,
-      favIconUrl: tab.item.favIconUrl,
+      ...tab.item,
+      idx,
     };
   });
 };
 
 export const handleRequestSearchBookmarks = async function (
   content: string,
-): Promise<Bookmark[]> {
+): Promise<TBookmark[]> {
   const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
 
   if (content === "") {
-    return bookmarks.map((bookmark, idx) => Bookmark.from(bookmark, idx));
+    return bookmarks.map((bookmark, idx) => TBookmark.from(bookmark, idx));
   }
 
   const options = {
@@ -96,39 +74,14 @@ export const handleRequestSearchBookmarks = async function (
   };
   const fuse = new Fuse(bookmarks, options);
 
-  return fuse.search(content).map(function (bookmark, idx): Bookmark {
-    return Bookmark.from(bookmark.item, idx);
+  return fuse.search(content).map(function (bookmark, idx): TBookmark {
+    return TBookmark.from(bookmark.item, idx);
   });
 };
 
-function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
-  const q = root;
-  const bookmarks: BookmarkTreeNode[] = [];
-
-  while (q.length > 0) {
-    const node = q.pop();
-
-    if (!node) {
-      continue;
-    }
-
-    if (node.url) {
-      bookmarks.push(node);
-    }
-
-    if (node.children) {
-      for (const child of node.children) {
-        q.push(child);
-      }
-    }
-  }
-
-  return bookmarks;
-}
-
 export const handleRequestSearchHistory = async function (
   content: string,
-): Promise<HistoryUrl[]> {
+): Promise<THistory[]> {
   const history = await browser.history.search({
     text: "",
     maxResults: 10000,
@@ -136,7 +89,7 @@ export const handleRequestSearchHistory = async function (
   });
 
   if (content === "") {
-    return history.map((history, idx) => HistoryUrl.from(history, idx));
+    return history.map((history, idx) => THistory.from(history, idx));
   }
 
   const options = {
@@ -144,7 +97,7 @@ export const handleRequestSearchHistory = async function (
   };
   const fuse = new Fuse(history, options);
 
-  return fuse.search(content).map(function (history, idx): Bookmark {
-    return HistoryUrl.from(history.item, idx);
+  return fuse.search(content).map(function (history, idx): THistory {
+    return THistory.from(history.item, idx);
   });
 };

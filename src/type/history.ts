@@ -1,7 +1,7 @@
 import { History } from "webextension-polyfill";
 import HistoryItem = History.HistoryItem;
 
-export class HistoryUrl {
+export class THistory {
   title: string;
   url: string;
   idx: number;
@@ -12,7 +12,7 @@ export class HistoryUrl {
     this.idx = idx;
   }
 
-  static from(tab: HistoryItem, idx: number): HistoryUrl {
+  static from(tab: HistoryItem, idx: number): THistory {
     return {
       title: tab.title || "",
       url: tab.url || "",

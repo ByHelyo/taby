@@ -3,21 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <title>Taby</title>
-    <link href="./global.css" rel="stylesheet" type="text/css" />
-    <link href="./popup.css" rel="stylesheet" type="text/css" />
-    <script type="module" src="popup.ts"></script>
   </head>
   <body>
-    <div class="taby-root">
-      <header>
-        <nav>
-          <a class="nav-active" href="./popup.html">Tab</a>
-          <a href="./bookmark/bookmark.html">Bookmark</a>
-          <a href="./history/history.html">History</a>
-          <a href="./settings/settings.html">Settings</a>
-        </nav>
-        <div>Use Shift+Tab/Tab or Left/Right arrows to move left/right</div>
-      </header>
-    </div>
+    <div id="root"></div>
+    <script type="module" src="./popup.tsx"></script>
   </body>
 </html>

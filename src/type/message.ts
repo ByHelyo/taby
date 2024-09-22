@@ -1,6 +1,6 @@
-import { Tab } from "./tab.ts";
+import { TTab } from "./tab.tsx";
 
-export enum MessageFromScriptType {
+export enum EMessageFromScriptType {
   REQUEST_SWITCH_TAB,
   REQUEST_UPDATE_CURRENT_TAB,
   REQUEST_SEARCH_OPEN_TABS,
@@ -8,18 +8,18 @@ export enum MessageFromScriptType {
   REQUEST_SEARCH_HISTORY,
 }
 
-export interface MessageFromScript<T> {
-  type: MessageFromScriptType;
-  element?: T;
-  search?: string;
-}
-
-export enum MessageFromBackgroundType {
+export enum EMessageFromBackgroundType {
   TOGGLE_MENU,
   USER_SWITCHES_TAB,
 }
 
-export interface MessageFromBackground {
-  type: MessageFromBackgroundType;
-  tabs?: Tab[];
+export interface TMessageFromBackground {
+  type: EMessageFromBackgroundType;
+  tabs?: TTab[];
+}
+
+export interface TMessageFromScript<T> {
+  type: EMessageFromScriptType;
+  element?: T;
+  search?: string;
 }

@@ -1,6 +1,4 @@
 import browser from "webextension-polyfill";
-
-import { Appearance, PopupWindow, Storage } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
@@ -11,58 +9,71 @@ import {
   handleToggleMenu,
 } from "./handler.ts";
 import {
-  MessageFromBackground,
-  MessageFromBackgroundType,
-  MessageFromScript,
-  MessageFromScriptType,
+  TMessageFromBackground,
+  EMessageFromBackgroundType,
+  TMessageFromScript,
+  EMessageFromScriptType,
 } from "../type/message.ts";
-import { Resource } from "../type/resource.ts";
+import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
+import { TTab } from "~/type/tab.tsx";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local
     .get([
-      Storage.Appearance,
-      Storage.PopupWindow,
-      Storage.PositionBlock,
-      Storage.PositionInline,
+      EStorage.Appearance,
+      EStorage.PopupWindow,
+      EStorage.PositionBlock,
+      EStorage.PositionInline,
+      EStorage.Scroll,
+      EStorage.CommandPaletteWidth,
     ])
     .then(async function (storage) {
       const promises = [];
-      if (!storage[Storage.Appearance]) {
-        promises.push(
-          browser.storage.local.set({ [Storage.Appearance]: Appearance.Light }),
-        );
-      }
-      if (!storage[Storage.PopupWindow]) {
+      if (!storage[EStorage.Appearance]) {
         promises.push(
           browser.storage.local.set({
-            [Storage.PopupWindow]: PopupWindow.UnFixed,
+            [EStorage.Appearance]: EAppearance.Light,
           }),
         );
       }
-      if (!storage[Storage.PositionInline]) {
+      if (!storage[EStorage.PopupWindow]) {
         promises.push(
           browser.storage.local.set({
-            [Storage.PositionInline]: "20",
+            [EStorage.PopupWindow]: EPopupWindow.Fixed,
           }),
         );
       }
-      if (!storage[Storage.PositionBlock]) {
+      if (!storage[EStorage.PositionInline]) {
         promises.push(
           browser.storage.local.set({
-            [Storage.PositionBlock]: "10",
+            [EStorage.PositionInline]: "20",
           }),
         );
       }
+      if (!storage[EStorage.PositionBlock]) {
+        promises.push(
+          browser.storage.local.set({
+            [EStorage.PositionBlock]: "10",
+          }),
+        );
+      }
+      if (!storage[EStorage.Scroll]) {
+        promises.push(
+          browser.storage.local.set({
+            [EStorage.Scroll]: EScroll.Default,
+          }),
+        );
+      }
+      promises.push(
+        browser.storage.local.set({
+          [EStorage.CommandPaletteWidth]: "60",
+        }),
+      );
 
       await Promise.all(promises);
     });
 });
 
-/**
- * Listens for shortcuts.
- *
- */
 browser.commands.onCommand.addListener(async function (command: string) {
   switch (command) {
     case "TOGGLE_MENU":
@@ -74,54 +85,45 @@ browser.commands.onCommand.addListener(async function (command: string) {
   }
 });
 
-/**
- * Listens for messages from content script.
- *
- */
-browser.runtime.onMessage.addListener(async function <T extends Resource>(
-  request: MessageFromScript<T>,
-) {
-  switch (request.type) {
-    case MessageFromScriptType.REQUEST_SWITCH_TAB:
-      if (request.element) {
-        await handleRequestSwitchTab(request.element);
+browser.runtime.onMessage.addListener(async function (request: any) {
+  const message = request as TMessageFromScript<unknown>;
+  switch (message.type) {
+    case EMessageFromScriptType.REQUEST_SWITCH_TAB:
+      if (message.element) {
+        await handleRequestSwitchTab(message.element as TTab);
       }
       break;
-    case MessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
-      if (request.search !== undefined) {
-        return await handleRequestSearchOpenTabs(request.search);
+    case EMessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
+      if (message.search !== undefined) {
+        return await handleRequestSearchOpenTabs(message.search);
       }
       break;
-    case MessageFromScriptType.REQUEST_SEARCH_BOOKMARKS:
-      if (request.search !== undefined) {
-        return await handleRequestSearchBookmarks(request.search);
+    case EMessageFromScriptType.REQUEST_SEARCH_BOOKMARKS:
+      if (message.search !== undefined) {
+        return await handleRequestSearchBookmarks(message.search as string);
       }
       break;
-    case MessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
-      if (request.element) {
-        await handleRequestUpdateCurrentTab(request.element);
+    case EMessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
+      if (message.element) {
+        await handleRequestUpdateCurrentTab(message.element as TTab);
       }
       break;
-    case MessageFromScriptType.REQUEST_SEARCH_HISTORY:
-      if (request.search != undefined) {
-        return await handleRequestSearchHistory(request.search);
+    case EMessageFromScriptType.REQUEST_SEARCH_HISTORY:
+      if (message.search != undefined) {
+        return await handleRequestSearchHistory(message.search);
       }
       break;
   }
 });
 
-/**
- * Listens for events when the active tab changes within the current window.
- *
- */
 browser.tabs.onActivated.addListener(async function () {
   const [currentTab] = await browser.tabs.query({
     active: true,
     lastFocusedWindow: true,
   });
 
-  const message: MessageFromBackground = {
-    type: MessageFromBackgroundType.USER_SWITCHES_TAB,
+  const message: TMessageFromBackground = {
+    type: EMessageFromBackgroundType.USER_SWITCHES_TAB,
   };
 
   if (currentTab.id) {

@@ -1,31 +1,35 @@
-import { Resource } from "./resource.ts";
-
-export interface MenuServiceOption<T extends Resource> {
-  context: Context;
-  search: (content: string) => Promise<T[]>;
-  buildElement: (element: T, callback: (idx: number) => void) => HTMLLIElement;
-  goTo: (element: T) => Promise<void>;
-  placeholder: string;
+export const enum ESelectedGroup {
+  Tab,
+  Bookmarks,
+  History,
+  Settings,
 }
 
-export enum Context {
-  ContentScript,
-  Popup,
-}
-
-export enum Appearance {
-  Light = "light",
-  Dark = "dark",
-}
-
-export enum PopupWindow {
-  Fixed = "fixed",
-  UnFixed = "unfixed",
-}
-
-export enum Storage {
+export enum EStorage {
   Appearance = "appearance",
   PopupWindow = "popup_window",
   PositionInline = "position_inline",
   PositionBlock = "position_block",
+  Scroll = "scroll",
+  CommandPaletteWidth = "command_palette_width",
+}
+
+export enum EPopupWindow {
+  Fixed = "fixed",
+  UnFixed = "unfixed",
+}
+
+export enum EAppearance {
+  Light = "light",
+  Dark = "dark",
+}
+
+export enum EScroll {
+  Default = "default",
+  Reversed = "reversed",
+}
+
+export enum EContext {
+  ContentScript,
+  Popup,
 }
