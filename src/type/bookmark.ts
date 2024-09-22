@@ -1,7 +1,7 @@
 import { Bookmarks } from "webextension-polyfill";
 import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
 
-export class Bookmark {
+export class TBookmark {
   title: string;
   url: string;
   idx: number;
@@ -12,7 +12,7 @@ export class Bookmark {
     this.idx = idx;
   }
 
-  static from(tab: BookmarkTreeNode, idx: number): Bookmark {
+  static from(tab: BookmarkTreeNode, idx: number): TBookmark {
     return {
       title: tab.title || "",
       url: tab.url || "",

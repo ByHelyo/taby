@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.0] -
+
+### Changed
+
+- `command palette` allows scrolling of command palette results outside its area
+-
+
 ## [1.27.0] - 2024/04/28
 
 ### Added

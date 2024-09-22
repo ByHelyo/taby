@@ -1,19 +1,22 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
 
+// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "~": path.resolve(__dirname, "./src"),
+    },
+  },
   build: {
     outDir: "dist",
     emptyOutDir: false,
     rollupOptions: {
       input: {
         index: new URL("./src/popup/popup.html", import.meta.url).pathname,
-        settings: new URL("./src/popup/settings/settings.html", import.meta.url)
-          .pathname,
-        bookmark: new URL("./src/popup/bookmark/bookmark.html", import.meta.url)
-          .pathname,
-        history: new URL("./src/popup/history/history.html", import.meta.url)
-          .pathname,
-        background: new URL("./src/background/background.html", import.meta.url)
+        background: new URL("./src/background/background.ts", import.meta.url)
           .pathname,
       },
     },
