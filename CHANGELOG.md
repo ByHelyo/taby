@@ -4,14 +4,18 @@
 
 ## Added
 
-- Enable reverse scrolling
-- `command palette` Enable bookmark palette and history palette
-- `command palette` Enable command palette width setting
+- `command palette` `popup` Enable reverse scrolling
+- `command palette` Enable custom command palette width setting
+- `command palette` `popup` Display the total count of matching elements adjacent to the search input field
 
 ### Changed
 
 - `command palette` allows scrolling of command palette results outside its area
-- Redesign settings page
+- `popup` Redesign settings page
+
+### Removed
+
+- `command palette` `popup` Removed magnifying glass icon next to input field in command palette
 
 ## [1.27.0] - 2024/04/28
 

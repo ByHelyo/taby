@@ -1,5 +1,6 @@
 import { cn } from "~/lib/utils.ts";
 import { ESelectedGroup } from "~/type/misc.ts";
+import { Kbd } from "./ui/kbd";
 
 interface NavigationProps {
   group: ESelectedGroup;
@@ -55,7 +56,10 @@ export function Navigation({ group, setGroup }: NavigationProps) {
           Settings
         </button>
       </div>
-      <div>Use Shift+Tab/Tab or Left/Right arrows to move left/right</div>
+      <div className="flex items-center space-x-1">
+        Use <Kbd>Shift</Kbd>+<Kbd>Tab</Kbd> / <Kbd>Tab</Kbd> or <Kbd>←</Kbd> /{" "}
+        <Kbd>→</Kbd> to move
+      </div>
     </nav>
   );
 }
