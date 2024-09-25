@@ -148,7 +148,7 @@ function TabCommand({
   return (
     <div
       ref={menuRef}
-      className="taby-menu bg-background text-foreground"
+      className="taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input"
       style={{
         width:
           context === EContext.ContentScript
@@ -159,7 +159,7 @@ function TabCommand({
         display: context === EContext.Popup || isOpen ? "flex" : "none",
       }}
     >
-      <div className="taby-search">
+      <div className="taby-search flex items-center justify-between">
         <img
           className="taby-glass"
           src={browser.runtime.getURL("image/glass.svg")}
@@ -172,6 +172,7 @@ function TabCommand({
           value={inputValue}
           onChange={handleOnChange}
         />
+        <span className="text-muted-foreground">{elements.current.length}</span>
       </div>
       <TabResults
         context={context}
