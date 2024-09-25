@@ -85,32 +85,33 @@ browser.commands.onCommand.addListener(async function (command: string) {
   }
 });
 
-browser.runtime.onMessage.addListener(async function (request: any) {
-  const message = request as TMessageFromScript<unknown>;
-  switch (message.type) {
+browser.runtime.onMessage.addListener(async function (
+  request: TMessageFromScript<unknown>,
+) {
+  switch (request.type) {
     case EMessageFromScriptType.REQUEST_SWITCH_TAB:
-      if (message.element) {
-        await handleRequestSwitchTab(message.element as TTab);
+      if (request.element) {
+        await handleRequestSwitchTab(request.element as TTab);
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
-      if (message.search !== undefined) {
-        return await handleRequestSearchOpenTabs(message.search);
+      if (request.search !== undefined) {
+        return await handleRequestSearchOpenTabs(request.search);
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_BOOKMARKS:
-      if (message.search !== undefined) {
-        return await handleRequestSearchBookmarks(message.search as string);
+      if (request.search !== undefined) {
+        return await handleRequestSearchBookmarks(request.search as string);
       }
       break;
     case EMessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
-      if (message.element) {
-        await handleRequestUpdateCurrentTab(message.element as TTab);
+      if (request.element) {
+        await handleRequestUpdateCurrentTab(request.element as TTab);
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_HISTORY:
-      if (message.search != undefined) {
-        return await handleRequestSearchHistory(message.search);
+      if (request.search != undefined) {
+        return await handleRequestSearchHistory(request.search);
       }
       break;
   }

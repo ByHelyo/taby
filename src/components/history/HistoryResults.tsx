@@ -126,7 +126,7 @@ function HistoryResults({
   return (
     <>
       {elements.current.length > 0 && (
-        <ul className="taby-searchList">
+        <ul className="taby-searchList border-0 border-t-2 border-input/50 border-solid">
           {elements.current.slice(start.current, end.current).map((element) => (
             <div
               key={element.idx}
