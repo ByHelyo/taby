@@ -159,12 +159,7 @@ function HistoryCommand({
         display: context === EContext.Popup || isOpen ? "flex" : "none",
       }}
     >
-      <div className="taby-search flex items-center justify-between">
-        <img
-          className="taby-glass"
-          src={browser.runtime.getURL("image/glass.svg")}
-          alt="glass"
-        />
+      <div className="pl-[48px] taby-search flex items-center justify-between">
         <input
           className="taby-searchInput placeholder-muted-foreground"
           placeholder={placeholder}
