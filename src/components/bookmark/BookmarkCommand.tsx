@@ -148,7 +148,7 @@ function BookmarkCommand({
   return (
     <div
       ref={menuRef}
-      className="taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input"
+      className="taby-menu bg-background text-foreground shadow-2xl ring-2 ring-input"
       style={{
         width:
           context === EContext.ContentScript
@@ -159,12 +159,7 @@ function BookmarkCommand({
         display: context === EContext.Popup || isOpen ? "flex" : "none",
       }}
     >
-      <div className="taby-search flex items-center justify-between">
-        <img
-          className="taby-glass"
-          src={browser.runtime.getURL("image/glass.svg")}
-          alt="glass"
-        />
+      <div className="pl-[48px] taby-search flex items-center justify-between">
         <input
           className="taby-searchInput placeholder-muted-foreground"
           placeholder={placeholder}

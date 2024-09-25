@@ -24,13 +24,6 @@
   padding: 14px;
 }
 
-.taby-glass {
-  width: 18px;
-  height: 18px;
-  filter: invert(32%) sepia(9%) saturate(951%) hue-rotate(202deg)
-    brightness(97%) contrast(86%);
-}
-
 .taby-searchInput {
   all: unset !important;
   display: flex !important;
