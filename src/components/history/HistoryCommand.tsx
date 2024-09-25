@@ -18,6 +18,7 @@ interface HistoryCommandProps {
   positionBlock: string;
   positionInline: string;
   scroll: EScroll;
+  commandPaletteWidth: string;
 }
 
 function HistoryCommand({

@@ -2,10 +2,16 @@
 
 ## [1.28.0] -
 
+## Added
+
+- Enable reverse scrolling
+- `command palette` Enable bookmark palette and history palette
+- `command palette` Enable command palette width setting
+
 ### Changed
 
 - `command palette` allows scrolling of command palette results outside its area
--
+- Redesign settings page
 
 ## [1.27.0] - 2024/04/28
 
