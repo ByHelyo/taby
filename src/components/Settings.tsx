@@ -63,7 +63,6 @@ function Settings() {
   };
 
   const updatePositionInline = async (value: number) => {
-    console.log("updatePositionInline", value);
     setPositionInline(value);
     await handleSelectPositionInline(value.toString());
   };

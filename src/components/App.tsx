@@ -26,39 +26,38 @@ function App({ context }: AppProps) {
   );
 
   useEffect(() => {
+    const handleKeyDown = async (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          if (context === EContext.Popup) {
+            e.preventDefault();
+            prevGroup();
+          }
+          break;
+        case "ArrowRight":
+          if (context === EContext.Popup) {
+            e.preventDefault();
+            nextGroup();
+          }
+          break;
+        case "Tab":
+          if (context === EContext.Popup) {
+            e.preventDefault();
+            if (e.shiftKey) {
+              prevGroup();
+            } else {
+              nextGroup();
+            }
+          }
+          break;
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-  const handleKeyDown = async (e: KeyboardEvent) => {
-    switch (e.key) {
-      case "ArrowLeft":
-        if (context === EContext.Popup) {
-          e.preventDefault();
-          prevGroup();
-        }
-        break;
-      case "ArrowRight":
-        if (context === EContext.Popup) {
-          e.preventDefault();
-          nextGroup();
-        }
-        break;
-      case "Tab":
-        if (context === EContext.Popup) {
-          e.preventDefault();
-          if (e.shiftKey) {
-            prevGroup();
-          } else {
-            nextGroup();
-          }
-        }
-        break;
-    }
-  };
-
+  }, [context, nextGroup, prevGroup]);
   return (
     <div className="taby-theme" data-theme={theme}>
       <div
