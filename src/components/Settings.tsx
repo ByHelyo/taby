@@ -105,6 +105,15 @@ function Settings() {
               <SelectContent>
                 <SelectItem value={EAppearance.Light}>Light</SelectItem>
                 <SelectItem value={EAppearance.Dark}>Dark</SelectItem>
+                <SelectItem value={EAppearance.DeepCharcoal}>
+                  Deep Charcoal
+                </SelectItem>
+                <SelectItem value={EAppearance.MidnightBlue}>
+                  Midnight Blue
+                </SelectItem>
+                <SelectItem value={EAppearance.VioletAbyss}>
+                  Violet Abyss
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

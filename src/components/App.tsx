@@ -60,7 +60,7 @@ function App({ context }: AppProps) {
   };
 
   return (
-    <div className={theme}>
+    <div className="taby-theme" data-theme={theme}>
       <div
         className="flex flex-col text-foreground bg-background"
         style={{

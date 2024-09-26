@@ -22,6 +22,9 @@ export enum EPopupWindow {
 export enum EAppearance {
   Light = "light",
   Dark = "dark",
+  MidnightBlue = "midnight-blue",
+  VioletAbyss = "violet-abyss",
+  DeepCharcoal = "deep-charcoal",
 }
 
 export enum EScroll {

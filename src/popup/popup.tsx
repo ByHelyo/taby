@@ -5,7 +5,7 @@ import "../index.css";
 import { EContext } from "~/type/misc";
 import App from "~/components/App";
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("taby-root")!).render(
   <StrictMode>
     <App context={EContext.Popup} />
   </StrictMode>,
