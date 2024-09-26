@@ -1,12 +1,17 @@
 # Changelog
 
-## [1.28.0] -
+## [2.0.0]
 
 ## Added
 
 - `command palette` `popup` Enable reverse scrolling
-- `command palette` Enable custom command palette width setting
+- `command palette` `popup` Enable custom command palette width setting
 - `command palette` `popup` Display the total count of matching elements adjacent to the search input field
+- New theme -- Deep Charcoal, Violet Abyss, Midnight Blue (names probably has to change)
+
+### Fixed
+
+- `popup` flickering when moving between groups
 
 ### Changed
 
@@ -22,6 +27,7 @@
 ### Added
 
 - `popup` enable cycling between groups with arrow keys
+- new themes available -- Deep Charcoal, Violet abyss, Midnight blue (names probably has to change)
 
 ### Fixed
 

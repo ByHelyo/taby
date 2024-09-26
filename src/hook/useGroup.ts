@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { ESelectedGroup } from "../type/misc";
 
 export function useGroup(initialGroup: ESelectedGroup = ESelectedGroup.Tab) {
@@ -25,15 +25,15 @@ export function useGroup(initialGroup: ESelectedGroup = ESelectedGroup.Tab) {
     }
   };
 
-  const prevGroup = () => {
+  const prevGroup = useCallback(() => {
     setCurrentGroupIndex(
       (prevIndex) => (prevIndex - 1 + cyclingGroupLength) % cyclingGroupLength,
     );
-  };
+  }, [cyclingGroupLength]);
 
-  const nextGroup = () => {
+  const nextGroup = useCallback(() => {
     setCurrentGroupIndex((prevIndex) => (prevIndex + 1) % cyclingGroupLength);
-  };
+  }, [cyclingGroupLength]);
 
   return {
     group: groups[currentGroupIndex],

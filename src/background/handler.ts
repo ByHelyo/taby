@@ -43,7 +43,6 @@ export const handleRequestSearchOpenTabs = async function (
   const tabs = await browser.tabs.query({ lastFocusedWindow: true });
 
   if (content === "") {
-    console.log(tabs.map(TTab.from));
     return tabs.map(TTab.from);
   }
 

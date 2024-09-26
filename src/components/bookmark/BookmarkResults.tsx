@@ -97,8 +97,7 @@ function BookmarkResults({
 
   const handleOnWheel = (e: WheelEvent) => {
     e.preventDefault();
-    console.log(scroll);
-    if (selectedElement.current != null) {
+    if (selectedElement.current !== null) {
       if (
         (scroll === EScroll.Default && e.deltaY < 0) ||
         (scroll === EScroll.Reversed && e.deltaY > 0)
