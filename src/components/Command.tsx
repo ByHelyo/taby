@@ -1,98 +1,53 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import browser from "webextension-polyfill";
-import {
-  EMessageFromBackgroundType,
-  EMessageFromScriptType,
-  TMessageFromBackground,
-  TMessageFromScript,
-} from "~/type/message.ts";
+import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
 import { TTab } from "~/type/tab.tsx";
-import { search_open_tabs } from "~/lib/search.ts";
 import { EContext, EScroll } from "~/type/misc.ts";
 import useRefState from "~/hook/useRefState.ts";
-import TabResults from "./TabResults.tsx";
+import CommandResults from "./CommandResults.tsx";
 
-interface TabCommandProps {
+interface CommandProps {
   placeholder: string;
   context: EContext;
   positionBlock: string;
   positionInline: string;
   scroll: EScroll;
   commandPaletteWidth: string;
+  searchFunction: (query: string) => Promise<TTab[]>;
+  messageType: EMessageFromScriptType;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-function TabCommand({
+function Command({
   placeholder,
   context,
   positionBlock,
   positionInline,
   scroll,
   commandPaletteWidth,
-}: TabCommandProps) {
+  searchFunction,
+  messageType,
+  setIsOpen,
+}: CommandProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedElement, setSelectedElement] = useRefState<number | null>(
-    null,
-  );
+  const [selectedElement, setSelectedElement] = useRefState<number | null>(0);
   const [elements, setElements] = useRefState<TTab[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    if (context === EContext.Popup) {
-      search_open_tabs("").then(setElements);
-      setSelectedElement(0);
-    }
-  }, [context]);
+    searchFunction("").then(setElements);
+    inputRef.current?.focus();
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOutsideClick);
 
-  useEffect(() => {
-    const handleBackground = async (request: unknown) => {
-      const message = request as TMessageFromBackground;
-      if (message.type === EMessageFromBackgroundType.TOGGLE_MENU) {
-        if (isOpen) {
-          setIsOpen(false);
-          setInputValue("");
-        } else {
-          setIsOpen(true);
-          setElements(await search_open_tabs(""));
-          setSelectedElement(0);
-        }
-      } else if (
-        message.type === EMessageFromBackgroundType.USER_SWITCHES_TAB
-      ) {
-        if (isOpen) {
-          setIsOpen(false);
-        }
-      }
-    };
-
-    if (context === EContext.ContentScript) {
-      browser.runtime.onMessage.addListener(handleBackground);
-    }
     return () => {
-      if (context === EContext.ContentScript) {
-        browser.runtime.onMessage.removeListener(handleBackground);
-      }
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen || context === EContext.Popup) {
-      inputRef.current?.focus();
-      document.addEventListener("keydown", handleKeyDown);
-      window.addEventListener("click", handleOutsideClick);
-    } else {
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("click", handleOutsideClick);
-    }
-    return () => {
-      if (isOpen || context === EContext.Popup) {
-        document.removeEventListener("keydown", handleKeyDown);
-        window.removeEventListener("click", handleOutsideClick);
-      }
     };
-  }, [isOpen]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleKeyDown = async (e: KeyboardEvent) => {
     switch (e.key) {
@@ -116,7 +71,7 @@ function TabCommand({
   const handleOnChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
 
-    const matched = await search_open_tabs(e.target.value);
+    const matched = await searchFunction(e.target.value);
     setElements(matched);
     if (elements.current.length > 0) {
       setSelectedElement(0);
@@ -133,8 +88,8 @@ function TabCommand({
 
   const goTo = async (tab: TTab) => {
     setIsOpen(false);
-    const message: TMessageFromScript<TTab> = {
-      type: EMessageFromScriptType.REQUEST_SWITCH_TAB,
+    const message: TMessageFromScript = {
+      type: messageType,
       element: tab,
     };
 
@@ -148,7 +103,7 @@ function TabCommand({
   return (
     <div
       ref={menuRef}
-      className="taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input"
+      className="taby-menu flex bg-background text-foreground shadow-2xl ring-1 ring-input"
       style={{
         width:
           context === EContext.ContentScript
@@ -156,7 +111,6 @@ function TabCommand({
             : "auto",
         top: positionBlock + "%",
         left: positionInline + "%",
-        display: context === EContext.Popup || isOpen ? "flex" : "none",
       }}
     >
       <div className="pl-[48px] taby-search flex items-center justify-between">
@@ -169,11 +123,10 @@ function TabCommand({
         />
         <span className="text-muted-foreground">{elements.current.length}</span>
       </div>
-      <TabResults
+      <CommandResults
         context={context}
         elements={elements}
         setSelectedElement={setSelectedElement}
-        setIsOpen={setIsOpen}
         selectedElement={selectedElement}
         goTo={goTo}
         scroll={scroll}
@@ -182,4 +135,4 @@ function TabCommand({
   );
 }
 
-export default TabCommand;
+export default Command;

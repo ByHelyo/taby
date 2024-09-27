@@ -1,19 +1,16 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { ESelectedGroup } from "../type/misc";
 
+const groups = [
+  ESelectedGroup.Tab,
+  ESelectedGroup.Bookmarks,
+  ESelectedGroup.History,
+  ESelectedGroup.Settings,
+];
+
+const cyclingGroupLength = groups.length - 1;
+
 export function useGroup(initialGroup: ESelectedGroup = ESelectedGroup.Tab) {
-  const groups = useMemo(
-    () => [
-      ESelectedGroup.Tab,
-      ESelectedGroup.Bookmarks,
-      ESelectedGroup.History,
-      ESelectedGroup.Settings,
-    ],
-    [],
-  );
-
-  const cyclingGroupLength = groups.length - 1;
-
   const [currentGroupIndex, setCurrentGroupIndex] = useState(
     groups.indexOf(initialGroup),
   );
@@ -29,11 +26,11 @@ export function useGroup(initialGroup: ESelectedGroup = ESelectedGroup.Tab) {
     setCurrentGroupIndex(
       (prevIndex) => (prevIndex - 1 + cyclingGroupLength) % cyclingGroupLength,
     );
-  }, [cyclingGroupLength]);
+  }, []);
 
   const nextGroup = useCallback(() => {
     setCurrentGroupIndex((prevIndex) => (prevIndex + 1) % cyclingGroupLength);
-  }, [cyclingGroupLength]);
+  }, []);
 
   return {
     group: groups[currentGroupIndex],

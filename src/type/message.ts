@@ -18,8 +18,8 @@ export interface TMessageFromBackground {
   tabs?: TTab[];
 }
 
-export interface TMessageFromScript<T> {
+export interface TMessageFromScript {
   type: EMessageFromScriptType;
-  element?: T;
+  element?: TTab;
   search?: string;
 }

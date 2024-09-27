@@ -1,9 +1,7 @@
 import * as React from "react";
 import { cn } from "~/lib/utils";
 
-export interface KbdProps extends React.HTMLAttributes<HTMLElement> {}
-
-const Kbd = React.forwardRef<HTMLElement, KbdProps>(
+const Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
   ({ className, ...props }, ref) => {
     return (
       <kbd

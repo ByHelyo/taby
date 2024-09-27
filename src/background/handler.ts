@@ -5,9 +5,7 @@ import {
 } from "../type/message";
 import { TTab } from "../type/tab.tsx";
 import Fuse from "fuse.js";
-import { THistory } from "~/type/history.ts";
 import { bfs_bookmark } from "./misc.ts";
-import { TBookmark } from "~/type/bookmark.ts";
 
 export const handleToggleMenu = async function () {
   const [currentTab] = await browser.tabs.query({
@@ -30,11 +28,11 @@ export const handleDuplicateTab = async function () {
 };
 
 export const handleRequestSwitchTab = async function (tab: TTab) {
-  await browser.tabs.update(tab.id, { active: true });
+  await browser.tabs.update(tab.id || undefined, { active: true });
 };
 
-export const handleRequestUpdateCurrentTab = async function (url: TTab) {
-  await browser.tabs.update(url.id, { url: url.url });
+export const handleRequestUpdateCurrentTab = async function (tab: TTab) {
+  await browser.tabs.update(tab.id || undefined, { url: tab.url });
 };
 
 export const handleRequestSearchOpenTabs = async function (
@@ -43,13 +41,13 @@ export const handleRequestSearchOpenTabs = async function (
   const tabs = await browser.tabs.query({ lastFocusedWindow: true });
 
   if (content === "") {
-    return tabs.map(TTab.from);
+    return tabs.map(TTab.fromTab);
   }
 
   const options = {
     keys: ["title", "url", "key"],
   };
-  const fuse = new Fuse(tabs.map(TTab.from), options);
+  const fuse = new Fuse(tabs.map(TTab.fromTab), options);
 
   return fuse.search(content).map(function (tab, idx) {
     return {
@@ -61,11 +59,11 @@ export const handleRequestSearchOpenTabs = async function (
 
 export const handleRequestSearchBookmarks = async function (
   content: string,
-): Promise<TBookmark[]> {
+): Promise<TTab[]> {
   const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
 
   if (content === "") {
-    return bookmarks.map((bookmark, idx) => TBookmark.from(bookmark, idx));
+    return bookmarks.map((bookmark, idx) => TTab.fromBookmark(bookmark, idx));
   }
 
   const options = {
@@ -73,14 +71,14 @@ export const handleRequestSearchBookmarks = async function (
   };
   const fuse = new Fuse(bookmarks, options);
 
-  return fuse.search(content).map(function (bookmark, idx): TBookmark {
-    return TBookmark.from(bookmark.item, idx);
+  return fuse.search(content).map(function (bookmark, idx): TTab {
+    return TTab.fromBookmark(bookmark.item, idx);
   });
 };
 
 export const handleRequestSearchHistory = async function (
   content: string,
-): Promise<THistory[]> {
+): Promise<TTab[]> {
   const history = await browser.history.search({
     text: "",
     maxResults: 10000,
@@ -88,7 +86,7 @@ export const handleRequestSearchHistory = async function (
   });
 
   if (content === "") {
-    return history.map((history, idx) => THistory.from(history, idx));
+    return history.map((history, idx) => TTab.fromHistory(history, idx));
   }
 
   const options = {
@@ -96,7 +94,7 @@ export const handleRequestSearchHistory = async function (
   };
   const fuse = new Fuse(history, options);
 
-  return fuse.search(content).map(function (history, idx): THistory {
-    return THistory.from(history.item, idx);
+  return fuse.search(content).map(function (history, idx): TTab {
+    return TTab.fromHistory(history.item, idx);
   });
 };
