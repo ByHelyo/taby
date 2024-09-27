@@ -15,7 +15,6 @@ import {
   EMessageFromScriptType,
 } from "../type/message.ts";
 import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
-import { TTab } from "~/type/tab.tsx";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local
@@ -86,12 +85,12 @@ browser.commands.onCommand.addListener(async function (command: string) {
 });
 
 browser.runtime.onMessage.addListener(async function (
-  request: TMessageFromScript<unknown>,
+  request: TMessageFromScript,
 ) {
   switch (request.type) {
     case EMessageFromScriptType.REQUEST_SWITCH_TAB:
       if (request.element) {
-        await handleRequestSwitchTab(request.element as TTab);
+        await handleRequestSwitchTab(request.element);
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_OPEN_TABS:
@@ -106,7 +105,7 @@ browser.runtime.onMessage.addListener(async function (
       break;
     case EMessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
       if (request.element) {
-        await handleRequestUpdateCurrentTab(request.element as TTab);
+        await handleRequestUpdateCurrentTab(request.element);
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_HISTORY:
