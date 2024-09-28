@@ -1,4 +1,5 @@
 import { Bookmarks } from "webextension-polyfill";
+
 import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
 
 export function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {

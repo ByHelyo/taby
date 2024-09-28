@@ -1,8 +1,8 @@
-import browser from "webextension-polyfill";
-import { TTab } from "../type/tab.tsx";
 import { TMessageFromScript, EMessageFromScriptType } from "../type/message.ts";
-import { THistory } from "~/type/history.ts";
+import { TTab } from "../type/tab.tsx";
+import browser from "webextension-polyfill";
 import { TBookmark } from "~/type/bookmark.ts";
+import { THistory } from "~/type/history.ts";
 
 export async function search_open_tabs(content: string): Promise<TTab[]> {
   const message: TMessageFromScript<TTab> = {

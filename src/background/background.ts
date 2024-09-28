@@ -1,4 +1,10 @@
-import browser from "webextension-polyfill";
+import {
+  TMessageFromBackground,
+  EMessageFromBackgroundType,
+  TMessageFromScript,
+  EMessageFromScriptType,
+} from "../type/message.ts";
+import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
 import {
   handleDuplicateTab,
   handleRequestSearchBookmarks,
@@ -8,13 +14,7 @@ import {
   handleRequestUpdateCurrentTab,
   handleToggleMenu,
 } from "./handler.ts";
-import {
-  TMessageFromBackground,
-  EMessageFromBackgroundType,
-  TMessageFromScript,
-  EMessageFromScriptType,
-} from "../type/message.ts";
-import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
+import browser from "webextension-polyfill";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local

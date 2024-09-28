@@ -1,5 +1,8 @@
+import { Separator } from "./ui/separator";
 import { useEffect, useState } from "react";
 import browser from "webextension-polyfill";
+import { Label } from "~/components/ui/label";
+import { ScrollArea } from "~/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -9,8 +12,6 @@ import {
 } from "~/components/ui/select";
 import { Slider } from "~/components/ui/slider";
 import { Switch } from "~/components/ui/switch";
-import { Label } from "~/components/ui/label";
-import { EAppearance, EPopupWindow, EStorage, EScroll } from "~/type/misc";
 import {
   handleSelectAppearance,
   handleSelectCommandPaletteWidth,
@@ -19,8 +20,7 @@ import {
   handleSelectPositionInline,
   handleSelectScroll,
 } from "~/lib/storage";
-import { Separator } from "./ui/separator";
-import { ScrollArea } from "~/components/ui/scroll-area";
+import { EAppearance, EPopupWindow, EStorage, EScroll } from "~/type/misc";
 
 function Settings() {
   const [theme, setTheme] = useState<EAppearance>(EAppearance.Light);

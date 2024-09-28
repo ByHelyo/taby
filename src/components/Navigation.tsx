@@ -1,6 +1,6 @@
+import { Kbd } from "./ui/kbd";
 import { cn } from "~/lib/utils.ts";
 import { ESelectedGroup } from "~/type/misc.ts";
-import { Kbd } from "./ui/kbd";
 
 interface NavigationProps {
   group: ESelectedGroup;
@@ -13,12 +13,12 @@ export function Navigation({ group, setGroup }: NavigationProps) {
   };
 
   return (
-    <nav className="pr-4 flex justify-between items-center text-[11px] bg-secondary">
+    <nav className="flex items-center justify-between bg-secondary pr-4 text-[11px]">
       <div className="flex">
         <button
           onClick={() => onClick(ESelectedGroup.Tab)}
           className={cn(
-            "inline-block py-2 px-6",
+            "inline-block px-6 py-2",
             group === ESelectedGroup.Tab &&
               "bg-primary text-primary-foreground",
           )}
@@ -28,7 +28,7 @@ export function Navigation({ group, setGroup }: NavigationProps) {
         <button
           onClick={() => onClick(ESelectedGroup.Bookmarks)}
           className={cn(
-            "inline-block py-2 px-6",
+            "inline-block px-6 py-2",
             group === ESelectedGroup.Bookmarks &&
               "bg-primary text-primary-foreground",
           )}
@@ -38,7 +38,7 @@ export function Navigation({ group, setGroup }: NavigationProps) {
         <button
           onClick={() => onClick(ESelectedGroup.History)}
           className={cn(
-            "inline-block py-2 px-6",
+            "inline-block px-6 py-2",
             group === ESelectedGroup.History &&
               "bg-primary text-primary-foreground",
           )}
@@ -48,7 +48,7 @@ export function Navigation({ group, setGroup }: NavigationProps) {
         <button
           onClick={() => onClick(ESelectedGroup.Settings)}
           className={cn(
-            "inline-block py-2 px-6",
+            "inline-block px-6 py-2",
             group === ESelectedGroup.Settings &&
               "bg-primary text-primary-foreground",
           )}
