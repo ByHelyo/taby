@@ -14,6 +14,7 @@
 
 - `command palette` allows scrolling of command palette results outside its area
 - `popup` Redesign settings page
+- `command palette` Change animation when command palette appears
 
 ### Removed
 
