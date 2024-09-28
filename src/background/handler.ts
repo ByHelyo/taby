@@ -1,11 +1,11 @@
-import browser from "webextension-polyfill";
 import {
   TMessageFromBackground,
   EMessageFromBackgroundType,
 } from "../type/message";
 import { TTab } from "../type/tab.tsx";
-import Fuse from "fuse.js";
 import { bfs_bookmark } from "./misc.ts";
+import Fuse from "fuse.js";
+import browser from "webextension-polyfill";
 
 export const handleToggleMenu = async function () {
   const [currentTab] = await browser.tabs.query({

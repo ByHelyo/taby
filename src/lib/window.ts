@@ -1,6 +1,6 @@
-import browser from "webextension-polyfill";
 import { EContext, EStorage } from "../type/misc.ts";
 import { MutableRefObject } from "react";
+import browser from "webextension-polyfill";
 
 const SEARCH_INPUT_SIZE: number = 55,
   BORDER_SIZE: number = 2,

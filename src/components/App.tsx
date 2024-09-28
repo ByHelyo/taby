@@ -1,21 +1,21 @@
 import { EContext, EPopupWindow, ESelectedGroup } from "../type/misc.ts";
-import Navigation from "./Navigation.tsx";
-import useSettings from "~/hook/useSettings.ts";
-import { useEffect, useState } from "react";
-import { useGroup } from "~/hook/useGroup.ts";
-import Settings from "./Settings.tsx";
 import Command from "./Command.tsx";
-import {
-  EMessageFromBackgroundType,
-  EMessageFromScriptType,
-  TMessageFromBackground,
-} from "~/type/message.ts";
+import Navigation from "./Navigation.tsx";
+import Settings from "./Settings.tsx";
+import { useEffect, useState } from "react";
+import browser from "webextension-polyfill";
+import { useGroup } from "~/hook/useGroup.ts";
+import useSettings from "~/hook/useSettings.ts";
 import {
   search_bookmarks,
   search_history,
   search_open_tabs,
 } from "~/lib/search.ts";
-import browser from "webextension-polyfill";
+import {
+  EMessageFromBackgroundType,
+  EMessageFromScriptType,
+  TMessageFromBackground,
+} from "~/type/message.ts";
 
 interface AppProps {
   context: EContext;
@@ -89,7 +89,7 @@ function App({ context }: AppProps) {
   return (
     <div className="taby-theme" data-theme={theme}>
       <div
-        className="flex flex-col text-foreground bg-background"
+        className="flex flex-col bg-background text-foreground"
         style={{
           height:
             (context === EContext.Popup && popupFixed === EPopupWindow.Fixed) ||

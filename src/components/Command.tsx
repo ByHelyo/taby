@@ -1,11 +1,10 @@
+import CommandResults from "./CommandResults.tsx";
 import { ChangeEvent, useEffect, useRef } from "react";
 import browser from "webextension-polyfill";
-import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
-import { TTab } from "~/type/tab.tsx";
-import { EContext, EScroll } from "~/type/misc.ts";
 import useRefState from "~/hook/useRefState.ts";
-import CommandResults from "./CommandResults.tsx";
-import { cn } from "~/lib/utils.ts";
+import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
+import { EContext, EScroll } from "~/type/misc.ts";
+import { TTab } from "~/type/tab.tsx";
 
 interface CommandProps {
   placeholder: string;
@@ -106,10 +105,7 @@ function Command({
   return (
     <div
       ref={menuRef}
-      className={cn(
-        "taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input",
-        context === EContext.ContentScript && "animate-scaleIn",
-      )}
+      className="taby-menu flex animate-commandPaletteIn bg-background text-foreground shadow-2xl ring-1 ring-input"
       style={{
         width:
           context === EContext.ContentScript
@@ -119,7 +115,7 @@ function Command({
         left: positionInline + "%",
       }}
     >
-      <div className="pl-[48px] taby-search flex items-center justify-between">
+      <div className="taby-search flex items-center justify-between pl-[48px]">
         <input
           className="taby-searchInput placeholder-muted-foreground"
           placeholder={placeholder}

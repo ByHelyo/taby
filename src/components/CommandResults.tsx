@@ -1,6 +1,6 @@
+import { computeWindowSize, moveDown, moveUp } from "../lib/window.ts";
 import { TTab } from "../type/tab.tsx";
 import { MutableRefObject, useEffect, useRef } from "react";
-import { computeWindowSize, moveDown, moveUp } from "../lib/window.ts";
 import useRefState from "~/hook/useRefState.ts";
 import { cn } from "~/lib/utils.ts";
 import { EContext, EScroll } from "~/type/misc.ts";
@@ -128,7 +128,7 @@ function CommandResults({
   return (
     <>
       {elements.current.length > 0 && (
-        <ul className="taby-searchList border-0 border-t-2 border-input/50 border-solid">
+        <ul className="taby-searchList border-0 border-t-2 border-solid border-input/50">
           {elements.current.slice(start.current, end.current).map((element) => (
             <div
               key={element.idx}

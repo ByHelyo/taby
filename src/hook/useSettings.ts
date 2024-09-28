@@ -1,6 +1,6 @@
-import browser from "webextension-polyfill";
 import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
 import { useEffect, useState } from "react";
+import browser from "webextension-polyfill";
 
 function useSettings() {
   const [theme, setTheme] = useState(EAppearance.Light);
