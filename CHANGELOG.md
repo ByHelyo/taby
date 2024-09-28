@@ -9,12 +9,13 @@
 - `command palette` `popup` Display the total count of matching elements adjacent to the search input field
 - `command palette` `popup` Apply debounce to the search input to reduce the number of times the search function is called
 - New theme -- Deep Charcoal, Violet Abyss, Midnight Blue (names probably has to change)
+- `popup` new animation fade in when popup appears
 
 ### Changed
 
 - `command palette` allows scrolling of command palette results outside its area
 - `popup` Redesign settings page
-- `command palette` Change animation when command palette appears
+- `command palette` Change animation when command palette -- from fade in to slide
 
 ### Removed
 
@@ -100,6 +101,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
 [1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
 [1.26.0]: https://github.com/ByHelyo/taby/compare/1.25.0...1.26.0
 [1.25.0]: https://github.com/ByHelyo/taby/compare/1.24.0...1.25.0

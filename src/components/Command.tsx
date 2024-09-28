@@ -107,8 +107,9 @@ function Command({
     <div
       ref={menuRef}
       className={cn(
-        "taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input",
-        context === EContext.ContentScript && "animate-commandPaletteIn",
+        "taby-menu flex bg-background text-foreground shadow-2xl ring-1 ring-input",
+        context === EContext.ContentScript && "animate-translateYIn",
+        context === EContext.Popup && "animate-fadeIn",
       )}
       style={{
         width:
