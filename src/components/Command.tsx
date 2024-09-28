@@ -2,6 +2,7 @@ import CommandResults from "./CommandResults.tsx";
 import { ChangeEvent, useEffect, useRef } from "react";
 import browser from "webextension-polyfill";
 import useRefState from "~/hook/useRefState.ts";
+import { cn } from "~/lib/utils.ts";
 import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
 import { EContext, EScroll } from "~/type/misc.ts";
 import { TTab } from "~/type/tab.tsx";
@@ -105,7 +106,10 @@ function Command({
   return (
     <div
       ref={menuRef}
-      className="taby-menu flex animate-commandPaletteIn bg-background text-foreground shadow-2xl ring-1 ring-input"
+      className={cn(
+        "taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input",
+        context === EContext.ContentScript && "animate-commandPaletteIn",
+      )}
       style={{
         width:
           context === EContext.ContentScript

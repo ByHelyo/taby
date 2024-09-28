@@ -59,7 +59,6 @@ export default {
         },
       },
       animation: {
-        scaleIn: "scaleIn 0.1s ease",
         commandPaletteIn: "commandPaletteIn 0.2s ease-out",
       },
     },
