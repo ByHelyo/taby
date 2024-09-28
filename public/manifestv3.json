@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Taby",
   "description": "Quickly move between tabs, bookmarks and history",
-  "version": "1.28.0",
+  "version": "1.29.0",
   "author": "Franck Hu",
   "permissions": ["tabs", "storage", "bookmarks", "history"],
   "action": {
