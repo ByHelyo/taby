@@ -5,6 +5,7 @@ import { TTab } from "~/type/tab.tsx";
 import { EContext, EScroll } from "~/type/misc.ts";
 import useRefState from "~/hook/useRefState.ts";
 import CommandResults from "./CommandResults.tsx";
+import { cn } from "~/lib/utils.ts";
 
 interface CommandProps {
   placeholder: string;
@@ -105,7 +106,10 @@ function Command({
   return (
     <div
       ref={menuRef}
-      className="taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input"
+      className={cn(
+        "taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input",
+        context === EContext.ContentScript && "animate-scaleIn",
+      )}
       style={{
         width:
           context === EContext.ContentScript

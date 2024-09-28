@@ -51,6 +51,16 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+
+      keyframes: {
+        scaleIn: {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+      },
+      animation: {
+        scaleIn: "scaleIn 0.1s ease",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
