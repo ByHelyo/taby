@@ -105,7 +105,7 @@ function Command({
   return (
     <div
       ref={menuRef}
-      className="taby-menu flex bg-background text-foreground shadow-2xl ring-1 ring-input"
+      className="taby-menu bg-background text-foreground shadow-2xl ring-1 ring-input"
       style={{
         width:
           context === EContext.ContentScript
