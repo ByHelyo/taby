@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import browser from "webextension-polyfill";
 import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
 import { TTab } from "~/type/tab.tsx";
@@ -34,7 +34,7 @@ function Command({
 
   const [selectedElement, setSelectedElement] = useRefState<number | null>(0);
   const [elements, setElements] = useRefState<TTab[]>([]);
-  const [inputValue, setInputValue] = useState("");
+  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>();
 
   useEffect(() => {
     searchFunction("").then(setElements);
@@ -68,16 +68,18 @@ function Command({
     }
   };
 
-  const handleOnChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    clearTimeout(debounceTimerRef.current);
 
-    const matched = await searchFunction(e.target.value);
-    setElements(matched);
-    if (elements.current.length > 0) {
-      setSelectedElement(0);
-    } else {
-      setSelectedElement(null);
-    }
+    debounceTimerRef.current = setTimeout(async () => {
+      const matched = await searchFunction(e.target.value);
+      setElements(matched);
+      if (matched.length > 0) {
+        setSelectedElement(0);
+      } else {
+        setSelectedElement(null);
+      }
+    }, 200);
   };
 
   const handleOutsideClick = async (e: MouseEvent) => {
@@ -118,7 +120,6 @@ function Command({
           className="taby-searchInput placeholder-muted-foreground"
           placeholder={placeholder}
           ref={inputRef}
-          value={inputValue}
           onChange={handleOnChange}
         />
         <span className="text-muted-foreground">{elements.current.length}</span>

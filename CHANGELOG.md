@@ -7,11 +7,8 @@
 - `command palette` `popup` Enable reverse scrolling
 - `command palette` `popup` Enable custom command palette width setting
 - `command palette` `popup` Display the total count of matching elements adjacent to the search input field
+- `command palette` `popup` Apply debounce to the search input to reduce the number of times the search function is called
 - New theme -- Deep Charcoal, Violet Abyss, Midnight Blue (names probably has to change)
-
-### Fixed
-
-- `popup` flickering when moving between groups
 
 ### Changed
 
