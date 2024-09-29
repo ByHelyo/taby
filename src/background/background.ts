@@ -63,11 +63,13 @@ browser.runtime.onInstalled.addListener(async function () {
           }),
         );
       }
-      promises.push(
-        browser.storage.local.set({
-          [EStorage.CommandPaletteWidth]: "60",
-        }),
-      );
+      if (!storage[EStorage.CommandPaletteWidth]) {
+        promises.push(
+          browser.storage.local.set({
+            [EStorage.CommandPaletteWidth]: "60",
+          }),
+        );
+      }
 
       await Promise.all(promises);
     });
