@@ -23,14 +23,23 @@ export function useGroup(initialGroup: ESelectedGroup = ESelectedGroup.Tab) {
   };
 
   const prevGroup = useCallback(() => {
-    setCurrentGroupIndex(
-      (prevIndex) => (prevIndex - 1 + cyclingGroupLength) % cyclingGroupLength,
-    );
-  }, []);
+    if (groups[currentGroupIndex] === ESelectedGroup.Settings) {
+      setCurrentGroupIndex(groups.indexOf(ESelectedGroup.History));
+    } else {
+      setCurrentGroupIndex(
+        (prevIndex) =>
+          (prevIndex - 1 + cyclingGroupLength) % cyclingGroupLength,
+      );
+    }
+  }, [currentGroupIndex]);
 
   const nextGroup = useCallback(() => {
-    setCurrentGroupIndex((prevIndex) => (prevIndex + 1) % cyclingGroupLength);
-  }, []);
+    if (groups[currentGroupIndex] === ESelectedGroup.Settings) {
+      setCurrentGroupIndex(groups.indexOf(ESelectedGroup.Tab));
+    } else {
+      setCurrentGroupIndex((prevIndex) => (prevIndex + 1) % cyclingGroupLength);
+    }
+  }, [currentGroupIndex]);
 
   return {
     group: groups[currentGroupIndex],
