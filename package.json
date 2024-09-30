@@ -2,7 +2,7 @@
   "name": "taby",
   "private": false,
   "version": "0.0.0",
-  "description": "Quickly move between tabs, bookmarks and history",
+  "description": "Quickly browser between tabs, bookmarks and history.",
   "type": "module",
   "scripts": {
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
