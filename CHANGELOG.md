@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0]
+## [1.30.0]
 
 ## Added
 
@@ -101,6 +101,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.30.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.30.0
 [1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
 [1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
 [1.26.0]: https://github.com/ByHelyo/taby/compare/1.25.0...1.26.0
