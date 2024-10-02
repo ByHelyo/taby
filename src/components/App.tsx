@@ -80,11 +80,17 @@ function App({ context }: AppProps) {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    } else {
       document.removeEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      if (isOpen) {
+        document.removeEventListener("keydown", handleKeyDown);
+      }
     };
-  }, [context, prevGroup, nextGroup]);
+  }, [isOpen, context, prevGroup, nextGroup]);
 
   return (
     <div className="taby-theme" data-theme={theme}>
