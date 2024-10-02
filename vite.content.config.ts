@@ -10,6 +10,9 @@ export default defineConfig({
       "~": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    "process.env": {},
+  },
   build: {
     emptyOutDir: true,
     outDir: resolve(__dirname, "dist"),

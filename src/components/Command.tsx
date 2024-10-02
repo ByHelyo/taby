@@ -80,7 +80,7 @@ function Command({
       } else {
         setSelectedElement(null);
       }
-    }, 200);
+    }, 150);
   };
 
   const handleOutsideClick = async (e: MouseEvent) => {

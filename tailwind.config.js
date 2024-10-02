@@ -59,7 +59,7 @@ export default {
         },
       },
       animation: {
-        translateYIn: "translateYIn 0.2s ease-out",
+        translateYIn: "translateYIn 0.1s ease-out",
       },
     },
   },
