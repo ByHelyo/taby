@@ -1,9 +1,17 @@
 # Changelog
 
+## [1.31.0]
+
+### Fixed
+
+- `popup` Broken resize on firefox
+- `popup` Unable to switch tabs
+
 ## [1.30.0]
 
-## Added
+### Added
 
+- Support Microsoft Edge
 - `command palette` `popup` Enable reverse scrolling
 - `command palette` `popup` Enable custom command palette width setting
 - `command palette` `popup` Display the total count of matching elements adjacent to the search input field
