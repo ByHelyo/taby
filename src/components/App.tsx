@@ -80,13 +80,13 @@ function App({ context }: AppProps) {
       }
     };
 
-    if (isOpen) {
+    if (isOpen || context === EContext.Popup) {
       document.addEventListener("keydown", handleKeyDown);
     } else {
       document.removeEventListener("keydown", handleKeyDown);
     }
     return () => {
-      if (isOpen) {
+      if (isOpen || context === EContext.Popup) {
         document.removeEventListener("keydown", handleKeyDown);
       }
     };
