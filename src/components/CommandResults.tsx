@@ -107,11 +107,13 @@ function CommandResults({
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("wheel", handleOnWheel, { passive: false });
-    window.addEventListener("resize", handleResize);
+    if (context === EContext.ContentScript)
+      window.addEventListener("resize", handleResize);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("wheel", handleOnWheel);
-      window.removeEventListener("resize", handleResize);
+      if (context === EContext.ContentScript)
+        window.removeEventListener("resize", handleResize);
       clearTimeout(timeout.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
