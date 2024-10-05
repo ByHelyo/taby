@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- `popup` Broken resize on firefox
+- `popup` Broken resize on Firefox
 - `popup` Unable to switch tabs
 
 ## [1.30.0]
@@ -109,6 +109,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.31.0]: https://github.com/ByHelyo/taby/compare/1.30.0...1.31.0
 [1.30.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.30.0
 [1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
 [1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
