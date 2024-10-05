@@ -37,6 +37,12 @@
 ![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
 ![Edge](https://img.shields.io/badge/Edge-0078D7?style=for-the-badge&logo=Microsoft-edge&logoColor=white)
 
+#### Links
+
+- https://chromewebstore.google.com/detail/taby/phfppmfanjkdnnbjipmgjbfeijhfeobi
+- https://addons.mozilla.org/en-US/firefox/addon/byhelyo-taby/
+- https://microsoftedge.microsoft.com/addons/detail/taby/flbcigpnfefmlnppmbpdcpjfhleidgmg
+
 <h2>Getting Started</h2>
 
 <h3>Usage</h3>
