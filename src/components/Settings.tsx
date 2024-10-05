@@ -3,13 +3,6 @@ import { useEffect, useState } from "react";
 import browser from "webextension-polyfill";
 import { Label } from "~/components/ui/label";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
 import { Slider } from "~/components/ui/slider";
 import { Switch } from "~/components/ui/switch";
 import {
@@ -93,28 +86,19 @@ function Settings() {
         <h1 className="text-xl font-bold">General</h1>
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between space-x-4">
-            <Label className="flex-shrink-0">Theme</Label>
-            <Select
+            <Label htmlFor="theme-select">Theme</Label>
+            <select
+              id="theme-select"
               value={theme}
-              onValueChange={(value: EAppearance) => updateTheme(value)}
+              onChange={(e) => updateTheme(e.target.value as EAppearance)}
+              className="w-[180px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a theme" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={EAppearance.Light}>Light</SelectItem>
-                <SelectItem value={EAppearance.Dark}>Dark</SelectItem>
-                <SelectItem value={EAppearance.DeepCharcoal}>
-                  Deep Charcoal
-                </SelectItem>
-                <SelectItem value={EAppearance.MidnightBlue}>
-                  Midnight Blue
-                </SelectItem>
-                <SelectItem value={EAppearance.VioletAbyss}>
-                  Violet Abyss
-                </SelectItem>
-              </SelectContent>
-            </Select>
+              <option value={EAppearance.Light}>Light</option>
+              <option value={EAppearance.Dark}>Dark</option>
+              <option value={EAppearance.DeepCharcoal}>Deep Charcoal</option>
+              <option value={EAppearance.MidnightBlue}>Midnight Blue</option>
+              <option value={EAppearance.VioletAbyss}>Violet Abyss</option>
+            </select>
           </div>
           <p className="text-sm text-muted-foreground">
             Choose between light and dark mode for the application interface.
@@ -123,19 +107,16 @@ function Settings() {
 
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between space-x-4">
-            <Label className="flex-shrink-0">Scroll Behavior</Label>
-            <Select
+            <Label htmlFor="scroll-select">Scroll Behavior</Label>
+            <select
+              id="scroll-select"
               value={scroll}
-              onValueChange={(value: EScroll) => updateScroll(value)}
+              onChange={(e) => updateScroll(e.target.value as EScroll)}
+              className="w-[180px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
-              <SelectTrigger id="scroll" className="w-[180px]">
-                <SelectValue placeholder="Select scroll behavior" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={EScroll.Default}>Default</SelectItem>
-                <SelectItem value={EScroll.Reversed}>Reversed</SelectItem>
-              </SelectContent>
-            </Select>
+              <option value={EScroll.Default}>Default</option>
+              <option value={EScroll.Reversed}>Reversed</option>
+            </select>
           </div>
           <p className="text-sm text-muted-foreground">
             Choose the scrolling behavior for the application.

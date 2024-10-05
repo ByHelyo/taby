@@ -128,7 +128,7 @@
 }
 
 @layer base {
-  * {
+  #taby-root * {
     @apply border-border;
   }
 
