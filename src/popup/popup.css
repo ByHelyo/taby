@@ -1,11 +1,3 @@
-[class^="taby-"],
-[class^="taby-"]::after,
-[class^="taby-"]::after {
-  border: 0;
-  margin: 0;
-  border: none;
-}
-
 body {
   width: 800px;
   margin: 0;

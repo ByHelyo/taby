@@ -98,7 +98,7 @@ function Settings() {
               value={theme}
               onValueChange={(value: EAppearance) => updateTheme(value)}
             >
-              <SelectTrigger id="theme" className="w-[180px]">
+              <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a theme" />
               </SelectTrigger>
               <SelectContent>
