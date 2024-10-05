@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
+  important: "#taby-root",
+  corePlugins: {
+    preflight: false,
+  },
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
