@@ -107,7 +107,7 @@ function Command({
     <div
       ref={menuRef}
       className={cn(
-        "taby-menu flex bg-background text-foreground shadow-2xl ring-1 ring-input",
+        "taby-menu flex flex-col bg-background text-foreground antialiased shadow-2xl ring-1 ring-input",
         context === EContext.ContentScript && "animate-translateYIn",
       )}
       style={{
@@ -119,14 +119,14 @@ function Command({
         left: positionInline + "%",
       }}
     >
-      <div className="taby-search">
+      <div className="flex items-center justify-between gap-[16px] p-[14px]">
         <input
-          className="taby-searchInput placeholder-muted-foreground"
+          className="flex w-full border-0 bg-background p-0 text-left font-sans text-[18px] leading-[27px] text-foreground placeholder-muted-foreground focus:outline-none"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}
         />
-        <span className="taby-searchTotal text-muted-foreground">
+        <span className="font-sans text-[16px] leading-[21px] text-muted-foreground">
           {elements.current.length}
         </span>
       </div>

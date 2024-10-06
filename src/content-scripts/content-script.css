@@ -1,97 +1,13 @@
 .taby-menu {
-  flex-direction: column;
   position: fixed;
-  z-index: 100000;
+  z-index: 100000000;
   border-radius: 6px;
-  font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-
-  font-family: sans-serif !important;
-  line-height: 1.5;
-}
-
-.taby-search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px;
-}
-
-.taby-searchInput {
-  all: unset !important;
-  display: flex !important;
-  width: 100% !important;
-  text-align: left !important;
-
-  font-size: 18px !important;
-
-  /* Remove default input bar properties */
-  font-family: sans-serif !important;
-  background-color: inherit !important;
-  line-height: 27px !important;
-}
-
-.taby-searchInput:focus {
-  outline: none;
 }
 
 .taby-searchList {
-  border: 0;
-  margin: 0;
-  list-style-type: none;
   scrollbar-width: none;
-
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: scroll;
-  padding: 8px;
-
-  font-size: 14px;
 }
 
 .taby-searchList::-webkit-scrollbar {
   display: none;
-}
-
-.taby-searchItem {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  white-space: nowrap;
-  overflow-x: clip;
-  padding: 6px;
-  user-select: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: sans-serif;
-}
-
-.taby-searchImg {
-  display: flex;
-  align-items: center;
-  width: 18px;
-  height: 18px;
-}
-
-.taby-searchKey {
-  flex-shrink: 0;
-  width: 18px;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  font-weight: bold;
-  line-height: 21px;
-}
-
-.taby-searchTitle {
-  font-family: sans-serif !important;
-  font-size: 14px;
-  line-height: 21px;
-}
-
-.taby-searchTotal {
-  line-height: 21px;
 }
