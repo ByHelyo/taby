@@ -18,6 +18,7 @@ body {
 .taby-search {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   padding: 14px;
 }
@@ -29,6 +30,7 @@ body {
   text-align: left;
 
   font-size: 18px;
+  line-height: 27px;
 }
 
 .taby-searchInput:focus {
@@ -36,6 +38,8 @@ body {
 }
 
 .taby-searchList {
+  border: 0;
+  margin: 0;
   list-style-type: none;
   scrollbar-width: none;
 
@@ -61,6 +65,8 @@ body {
   padding: 6px;
   user-select: none;
   border-radius: 4px;
+  font-size: 14px;
+  font-family: sans-serif;
 }
 
 .taby-searchImg {
@@ -78,4 +84,15 @@ body {
   align-items: center;
   font-size: 14px;
   font-weight: bold;
+  line-height: 21px;
+}
+
+.taby-searchTitle {
+  font-family: sans-serif !important;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.taby-searchTotal {
+  line-height: 21px;
 }

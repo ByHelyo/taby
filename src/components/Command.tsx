@@ -119,14 +119,16 @@ function Command({
         left: positionInline + "%",
       }}
     >
-      <div className="taby-search flex items-center justify-between pl-[48px]">
+      <div className="taby-search">
         <input
           className="taby-searchInput placeholder-muted-foreground"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}
         />
-        <span className="text-muted-foreground">{elements.current.length}</span>
+        <span className="taby-searchTotal text-muted-foreground">
+          {elements.current.length}
+        </span>
       </div>
       <CommandResults
         context={context}
