@@ -138,7 +138,7 @@ function CommandResults({
                 "flex select-none items-center gap-[16px] overflow-x-clip whitespace-nowrap rounded p-[6px]",
                 selectedElement.current !== null &&
                   element.idx === selectedElement.current &&
-                  "bg-secondary",
+                  "!bg-secondary",
               )}
               onClick={() => handleOnClick(element.idx)}
             >
