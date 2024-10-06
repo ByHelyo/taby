@@ -24,7 +24,6 @@
   - Powered by a fuzzy search filtering
   - Navigate between tabs using arrow keys
   - Switch to a tab with 'Enter' or a simple click
-- Customize the appearance with options for light and dark modes
 - Move the position of the command palette
 - Shortcut for duplicate tab.
 - Choose from 5 different themes
