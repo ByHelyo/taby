@@ -130,12 +130,12 @@ function CommandResults({
   return (
     <>
       {elements.current.length > 0 && (
-        <ul className="taby-searchList border-0 border-t-2 border-solid border-input/50">
+        <ul className="taby-searchList m-0 flex h-full list-none flex-col overflow-scroll border-0 border-t-2 border-solid border-input/50 p-[8px]">
           {elements.current.slice(start.current, end.current).map((element) => (
             <div
               key={element.idx}
               className={cn(
-                "taby-searchItem",
+                "flex select-none items-center gap-[16px] overflow-x-clip whitespace-nowrap rounded p-[6px]",
                 selectedElement.current !== null &&
                   element.idx === selectedElement.current &&
                   "bg-secondary",
@@ -143,16 +143,32 @@ function CommandResults({
               onClick={() => handleOnClick(element.idx)}
             >
               {element.key != null && (
-                <span className="taby-searchKey">{element.key}</span>
+                <span
+                  className={cn(
+                    "flex w-[20px] shrink-0 items-center justify-end font-sans text-[14px] font-bold leading-[21px] text-foreground",
+                    element.idx === selectedElement.current &&
+                      "text-secondary-foreground",
+                  )}
+                >
+                  {element.key}
+                </span>
               )}
               {element.favIconUrl != null && (
                 <img
                   src={element.favIconUrl}
-                  className="taby-searchImg"
+                  className="flex h-[18px] w-[18px] items-center"
                   alt=""
                 />
               )}
-              <span className="taby-searchTitle">{element.title}</span>
+              <span
+                className={cn(
+                  "font-sans text-[14px] leading-[21px] text-foreground",
+                  element.idx === selectedElement.current &&
+                    "text-secondary-foreground",
+                )}
+              >
+                {element.title}
+              </span>
             </div>
           ))}
         </ul>
