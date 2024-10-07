@@ -6,6 +6,8 @@
 
 - `popup` Broken resize on Firefox
 - `popup` Unable to switch tabs
+- `command palette` Broken font family
+- `command palette` Broken input css default style
 
 ## [1.30.0]
 
