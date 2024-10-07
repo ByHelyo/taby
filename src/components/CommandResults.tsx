@@ -130,7 +130,7 @@ function CommandResults({
   return (
     <>
       {elements.current.length > 0 && (
-        <ul className="taby-searchList m-0 flex h-full list-none flex-col overflow-scroll border-0 border-t-2 border-solid border-input/50 p-[8px]">
+        <ul className="taby-searchList m-0 flex h-full list-none flex-col overflow-scroll border-0 !border-t-2 !border-solid !border-input/50 p-[8px]">
           {elements.current.slice(start.current, end.current).map((element) => (
             <div
               key={element.idx}
@@ -145,7 +145,7 @@ function CommandResults({
               {element.key != null && (
                 <span
                   className={cn(
-                    "flex w-[20px] shrink-0 items-center justify-end font-sans text-[14px] font-bold leading-[21px] text-foreground",
+                    "flex w-[20px] shrink-0 items-center justify-end !font-sans text-[14px] font-bold leading-[21px] text-foreground",
                     element.idx === selectedElement.current &&
                       "text-secondary-foreground",
                   )}
@@ -162,7 +162,7 @@ function CommandResults({
               )}
               <span
                 className={cn(
-                  "font-sans text-[14px] leading-[21px] text-foreground",
+                  "!font-sans text-[14px] leading-[21px] text-foreground",
                   element.idx === selectedElement.current &&
                     "text-secondary-foreground",
                 )}
