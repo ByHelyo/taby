@@ -156,13 +156,13 @@ function CommandResults({
               {element.favIconUrl != null && (
                 <img
                   src={element.favIconUrl}
-                  className="flex h-[18px] w-[18px] items-center"
+                  className="m-0 flex h-[18px] w-[18px] items-center"
                   alt=""
                 />
               )}
               <span
                 className={cn(
-                  "!font-sans text-[14px] leading-[21px] text-foreground",
+                  "!font-sans text-[14px] font-normal leading-[21px] text-foreground",
                   element.idx === selectedElement.current &&
                     "text-secondary-foreground",
                 )}
