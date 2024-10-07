@@ -121,12 +121,12 @@ function Command({
     >
       <div className="flex items-center justify-between gap-[16px] p-[14px]">
         <input
-          className="flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] font-normal leading-[27px] text-foreground !placeholder-muted-foreground outline-none focus:outline-none"
+          className="m-0 flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] font-normal leading-[27px] text-foreground !placeholder-muted-foreground outline-none focus:outline-none"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}
         />
-        <span className="!font-sans text-[16px] leading-[21px] text-muted-foreground">
+        <span className="!font-sans text-[16px] font-normal leading-[21px] text-muted-foreground">
           {elements.current.length}
         </span>
       </div>
