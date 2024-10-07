@@ -121,7 +121,7 @@ function Command({
     >
       <div className="flex items-center justify-between gap-[16px] p-[14px]">
         <input
-          className="flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] leading-[27px] text-foreground placeholder-muted-foreground outline-none focus:outline-none"
+          className="flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] font-normal leading-[27px] text-foreground placeholder-muted-foreground outline-none focus:outline-none"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}

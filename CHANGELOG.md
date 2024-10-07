@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.34.0]
+
+### Fixed
+
+- `content palette` Broken input font weight
+
 ## [1.33.0]
 
 ### Fixed
