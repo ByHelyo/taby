@@ -126,7 +126,7 @@ function Command({
           ref={inputRef}
           onChange={handleOnChange}
         />
-        <span className="!font-sans text-[16px] font-normal leading-[21px] text-muted-foreground">
+        <span className="shrink-0 !font-sans text-[16px] font-normal leading-[21px] text-muted-foreground">
           {elements.current.length}
         </span>
       </div>
