@@ -5,6 +5,7 @@
 ### Fixed
 
 - `content palette` Broken input font weight
+- `content palette` Broken input placeholder color
 
 ## [1.33.0]
 
