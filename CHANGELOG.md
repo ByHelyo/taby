@@ -8,6 +8,7 @@
 - `content palette` Broken input placeholder color
 - `content palette` Broken input and img margins
 - `content palette` Prevent div holding total number of elements shrinking
+- `popup` Reduce width to prevent overflow
 
 ## [1.33.0]
 
