@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.34.0]
+## [1.35.0]
 
 ### Fixed
 
@@ -9,6 +9,7 @@
 - `content palette` Broken input and img margins
 - `content palette` Prevent div holding total number of elements shrinking
 - `popup` Reduce width to prevent overflow
+- `content palette` Remove input shadow
 
 ## [1.33.0]
 
@@ -121,7 +122,7 @@
 
 - `popup` History fetches 10 000 latest results
 
-[1.31.0]: https://github.com/ByHelyo/taby/compare/1.30.0...1.33.0
+[1.35.0]: https://github.com/ByHelyo/taby/compare/1.30.0...1.35.0
 [1.30.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.30.0
 [1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
 [1.27.0]: https://github.com/ByHelyo/taby/compare/1.26.0...1.27.0
