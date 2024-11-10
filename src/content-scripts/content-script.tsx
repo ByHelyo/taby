@@ -10,7 +10,7 @@ root.id = "taby-root";
 
 const body = document.querySelector("body");
 if (body) {
-  body.prepend(root);
+  body.append(root);
 }
 
 createRoot(root).render(

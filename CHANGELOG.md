@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.36.0]
+
+### Fixed
+
+- `content script` menu broken on certain websites
+
 ## [1.35.0]
 
 ### Fixed
