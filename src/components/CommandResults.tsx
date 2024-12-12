@@ -1,16 +1,17 @@
 import { computeWindowSize, moveDown, moveUp } from "../lib/window.ts";
 import { TTab } from "../type/tab.tsx";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
+import { TGoToOptions } from "~/components/Command.tsx";
 import useRefState from "~/hook/useRefState.ts";
 import { cn } from "~/lib/utils.ts";
 import { EContext, EScroll } from "~/type/misc.ts";
 
-interface TabResultsProps {
-  elements: MutableRefObject<TTab[]>;
+interface TTabResultsProps {
+  elements: RefObject<TTab[]>;
   context: EContext;
-  selectedElement: MutableRefObject<number | null>;
+  selectedElement: RefObject<number | null>;
   setSelectedElement: (idx: number) => void;
-  goTo: (tab: TTab) => Promise<void>;
+  goTo: (tab: TTab, options: TGoToOptions) => Promise<void>;
   scroll: EScroll;
 }
 
@@ -21,7 +22,7 @@ function CommandResults({
   setSelectedElement,
   goTo,
   scroll,
-}: TabResultsProps) {
+}: TTabResultsProps) {
   const [capacity, setCapacity] = useRefState(0);
   const start = useRef(0);
   const end = useRef(0);
@@ -119,9 +120,11 @@ function CommandResults({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOnClick = async (idx: number) => {
+  const handleOnClick = async (idx: number, ctrlKey: boolean) => {
     if (selectedElement.current !== null && selectedElement.current === idx) {
-      await goTo(elements.current[selectedElement.current]);
+      await goTo(elements.current[selectedElement.current], {
+        newTab: ctrlKey,
+      });
     } else {
       setSelectedElement(idx);
     }
@@ -140,7 +143,7 @@ function CommandResults({
                   element.idx === selectedElement.current &&
                   "!bg-secondary",
               )}
-              onClick={() => handleOnClick(element.idx)}
+              onClick={(e) => handleOnClick(element.idx, e.ctrlKey)}
             >
               {element.key != null && (
                 <span
@@ -153,12 +156,14 @@ function CommandResults({
                   {element.key}
                 </span>
               )}
-              {element.favIconUrl != null && (
+              {element.favIconUrl != null && element.favIconUrl !== "" ? (
                 <img
                   src={element.favIconUrl}
                   className="m-0 flex h-[18px] w-[18px] items-center"
                   alt=""
                 />
+              ) : (
+                <div className="h-[18px] w-[18px] flex-shrink-0" />
               )}
               <span
                 className={cn(

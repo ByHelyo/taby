@@ -107,7 +107,9 @@ browser.runtime.onMessage.addListener(async function (
       break;
     case EMessageFromScriptType.REQUEST_UPDATE_CURRENT_TAB:
       if (request.element) {
-        await handleRequestUpdateCurrentTab(request.element);
+        await handleRequestUpdateCurrentTab(request.element, {
+          newTab: request.newTab || false,
+        });
       }
       break;
     case EMessageFromScriptType.REQUEST_SEARCH_HISTORY:

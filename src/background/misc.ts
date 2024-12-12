@@ -2,7 +2,9 @@ import { Bookmarks } from "webextension-polyfill";
 
 import BookmarkTreeNode = Bookmarks.BookmarkTreeNode;
 
-export function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
+export function flattenBookmarkTreeNode(
+  root: BookmarkTreeNode[],
+): BookmarkTreeNode[] {
   const q = root;
   const bookmarks: BookmarkTreeNode[] = [];
 
@@ -13,7 +15,7 @@ export function bfs_bookmark(root: BookmarkTreeNode[]): BookmarkTreeNode[] {
       continue;
     }
 
-    if (node.url) {
+    if (node.url && node.type !== "separator") {
       bookmarks.push(node);
     }
 

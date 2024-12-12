@@ -17,11 +17,11 @@ import {
   TMessageFromBackground,
 } from "~/type/message.ts";
 
-interface AppProps {
+interface TAppProps {
   context: EContext;
 }
 
-function App({ context }: AppProps) {
+function App({ context }: TAppProps) {
   const {
     theme,
     popupFixed,

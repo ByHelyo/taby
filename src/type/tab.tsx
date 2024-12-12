@@ -27,13 +27,13 @@ export class TTab {
     this.favIconUrl = favIconUrl;
   }
 
-  static fromTab(tab: browser.Tabs.Tab): TTab {
+  static fromTab(tab: browser.Tabs.Tab, index: number): TTab {
     return new TTab(
       tab.title || "",
       tab.url || "",
-      tab.index,
+      index,
       tab.id || 0,
-      tab.index + 1,
+      index + 1,
       tab.favIconUrl || "",
     );
   }

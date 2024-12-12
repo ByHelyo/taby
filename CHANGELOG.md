@@ -1,19 +1,31 @@
 # Changelog
 
+## [1.37.0]
+
+### Added
+
+- `command palette` `popup` Open new tab if **Ctrl** key is pressed on bookmarks and history.
+
+### Fixed
+
+- `firefox` Remove Firefox View in open tabs.
+- `firefox` Remove separators in bookmarks.
+- `command palette` Remove blue border on input focus
+
 ## [1.36.0]
 
 ### Fixed
 
-- `content script` menu broken on certain websites
+- `content script` Menu broken on certain websites
 
 ## [1.35.0]
 
 ### Fixed
 
-- `content palette` Broken font weight
-- `content palette` Broken input placeholder color
-- `content palette` Broken input and img margins
-- `content palette` Prevent div holding total number of elements shrinking
+- `command palette` Broken font weight
+- `command palette` Broken input placeholder color
+- `command palette` Broken input and img margins
+- `command palette` Prevent div holding total number of elements shrinking
 - `popup` Reduce width to prevent overflow
 - `content palette` Remove input shadow
 
@@ -128,6 +140,8 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.37.0]: https://github.com/ByHelyo/taby/compare/1.36.0...1.37.0
+[1.36.0]: https://github.com/ByHelyo/taby/compare/1.35.0...1.36.0
 [1.35.0]: https://github.com/ByHelyo/taby/compare/1.30.0...1.35.0
 [1.30.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.30.0
 [1.28.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.28.0
