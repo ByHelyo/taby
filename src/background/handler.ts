@@ -3,7 +3,7 @@ import {
   EMessageFromBackgroundType,
 } from "../type/message";
 import { TTab } from "../type/tab.tsx";
-import { bfs_bookmark } from "./misc.ts";
+import { flattenBookmarkTreeNode } from "./misc.ts";
 import Fuse from "fuse.js";
 import browser from "webextension-polyfill";
 
@@ -31,14 +31,29 @@ export const handleRequestSwitchTab = async function (tab: TTab) {
   await browser.tabs.update(tab.id || undefined, { active: true });
 };
 
-export const handleRequestUpdateCurrentTab = async function (tab: TTab) {
-  await browser.tabs.update(tab.id || undefined, { url: tab.url });
+export interface THandleRequestUpdateCurrentTab {
+  newTab: boolean;
+}
+
+export const handleRequestUpdateCurrentTab = async function (
+  tab: TTab,
+  options: THandleRequestUpdateCurrentTab,
+) {
+  if (options.newTab) {
+    await browser.tabs.create({
+      url: tab.url,
+    });
+  } else {
+    await browser.tabs.update(tab.id || undefined, { url: tab.url });
+  }
 };
 
 export const handleRequestSearchOpenTabs = async function (
   content: string,
 ): Promise<TTab[]> {
-  const tabs = await browser.tabs.query({ lastFocusedWindow: true });
+  const tabs = (await browser.tabs.query({ lastFocusedWindow: true })).filter(
+    (tab) => tab.url !== "about:firefoxview" && tab.title !== "Firefox View",
+  );
 
   if (content === "") {
     return tabs.map(TTab.fromTab);
@@ -60,7 +75,7 @@ export const handleRequestSearchOpenTabs = async function (
 export const handleRequestSearchBookmarks = async function (
   content: string,
 ): Promise<TTab[]> {
-  const bookmarks = bfs_bookmark(await browser.bookmarks.getTree());
+  const bookmarks = flattenBookmarkTreeNode(await browser.bookmarks.getTree());
 
   if (content === "") {
     return bookmarks.map((bookmark, idx) => TTab.fromBookmark(bookmark, idx));

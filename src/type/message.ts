@@ -22,4 +22,5 @@ export interface TMessageFromScript {
   type: EMessageFromScriptType;
   element?: TTab;
   search?: string;
+  newTab?: boolean;
 }

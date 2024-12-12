@@ -7,7 +7,7 @@ import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
 import { EContext, EScroll } from "~/type/misc.ts";
 import { TTab } from "~/type/tab.tsx";
 
-interface CommandProps {
+interface TCommandProps {
   placeholder: string;
   context: EContext;
   positionBlock: string;
@@ -17,6 +17,10 @@ interface CommandProps {
   searchFunction: (query: string) => Promise<TTab[]>;
   messageType: EMessageFromScriptType;
   setIsOpen: (isOpen: boolean) => void;
+}
+
+export interface TGoToOptions {
+  newTab: boolean;
 }
 
 function Command({
@@ -29,17 +33,18 @@ function Command({
   searchFunction,
   messageType,
   setIsOpen,
-}: CommandProps) {
+}: TCommandProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [selectedElement, setSelectedElement] = useRefState<number | null>(0);
   const [elements, setElements] = useRefState<TTab[]>([]);
-  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>();
+  const debounceTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     searchFunction("").then(setElements);
     inputRef.current?.focus();
+    inputRef.current?.style.setProperty("box-shadow", "none", "important");
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("click", handleOutsideClick);
 
@@ -55,7 +60,9 @@ function Command({
       case "Enter":
         if (selectedElement.current != null) {
           e.preventDefault();
-          await goTo(elements.current[selectedElement.current]);
+          await goTo(elements.current[selectedElement.current], {
+            newTab: e.ctrlKey,
+          });
         }
         break;
       case "Escape":
@@ -89,11 +96,12 @@ function Command({
     }
   };
 
-  const goTo = async (tab: TTab) => {
+  const goTo = async (tab: TTab, options: TGoToOptions) => {
     setIsOpen(false);
     const message: TMessageFromScript = {
       type: messageType,
       element: tab,
+      newTab: options.newTab,
     };
 
     await browser.runtime.sendMessage(message);
@@ -121,7 +129,7 @@ function Command({
     >
       <div className="flex items-center justify-between gap-[16px] p-[14px]">
         <input
-          className="m-0 flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] font-normal leading-[27px] text-foreground !placeholder-muted-foreground shadow-none outline-none focus:outline-none"
+          className="!focus:outline-none m-0 flex w-full border-0 bg-background p-0 text-left !font-sans text-[18px] font-normal leading-[27px] text-foreground !placeholder-muted-foreground shadow-none !outline-none"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}

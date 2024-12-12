@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Taby",
   "description": "Quickly move between tabs, bookmarks and history",
-  "version": "1.36.0",
+  "version": "1.37.0",
   "author": "Helyo",
   "permissions": ["tabs", "storage", "bookmarks", "history"],
   "action": {
@@ -14,7 +14,7 @@
       "matches": ["<all_urls>"],
       "run_at": "document_end",
       "js": ["./index.global.js"],
-      "css": ["./style.css"]
+      "css": ["./taby.css"]
     }
   ],
   "background": {

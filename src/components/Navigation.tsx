@@ -2,12 +2,12 @@ import { Kbd } from "./ui/kbd";
 import { cn } from "~/lib/utils.ts";
 import { ESelectedGroup } from "~/type/misc.ts";
 
-interface NavigationProps {
+interface TNavigationProps {
   group: ESelectedGroup;
   setGroup: (group: ESelectedGroup) => void;
 }
 
-export function Navigation({ group, setGroup }: NavigationProps) {
+export function Navigation({ group, setGroup }: TNavigationProps) {
   const onClick = (group: ESelectedGroup) => {
     setGroup(group);
   };
