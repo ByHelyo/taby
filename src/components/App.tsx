@@ -95,7 +95,7 @@ function App({ context }: TAppProps) {
   return (
     <div className="taby-theme" data-theme={theme}>
       <div
-        className="bg-background text-foreground flex flex-col"
+        className="bg-background! text-foreground! flex! flex-col!"
         style={{
           height:
             (context === EContext.Popup && popupFixed === EPopupWindow.Fixed) ||

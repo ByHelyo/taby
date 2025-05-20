@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.39.0]
+
+### Fixed
+
+- `command palette` Broken styles in certain websites
+
 ## [1.38.0]
 
 ### Fixed
@@ -150,6 +156,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.39.0]: https://github.com/byhelyo/taby/compare/1.38.0...1.39.0
 [1.38.0]: https://github.com/byhelyo/taby/compare/1.37.0...1.38.0
 [1.37.0]: https://github.com/byhelyo/taby/compare/1.36.0...1.37.0
 [1.36.0]: https://github.com/ByHelyo/taby/compare/1.35.0...1.36.0
