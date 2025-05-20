@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.38.0]
+
+### Fixed
+
+- `command palette` Issue where the command palette caused website dialogs to appear off-center
+
+### Changed
+
+- Upgraded Tailwind CSS from version 3.x to 4.x.
+
 ## [1.37.0]
 
 ### Added
@@ -140,7 +150,8 @@
 
 - `popup` History fetches 10 000 latest results
 
-[1.37.0]: https://github.com/ByHelyo/taby/compare/1.36.0...1.37.0
+[1.38.0]: https://github.com/byhelyo/taby/compare/1.37.0...1.38.0
+[1.37.0]: https://github.com/byhelyo/taby/compare/1.36.0...1.37.0
 [1.36.0]: https://github.com/ByHelyo/taby/compare/1.35.0...1.36.0
 [1.35.0]: https://github.com/ByHelyo/taby/compare/1.30.0...1.35.0
 [1.30.0]: https://github.com/ByHelyo/taby/compare/1.27.0...1.30.0
