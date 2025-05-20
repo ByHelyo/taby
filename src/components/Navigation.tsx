@@ -13,7 +13,7 @@ export function Navigation({ group, setGroup }: TNavigationProps) {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-secondary pr-4 text-[11px]">
+    <nav className="bg-secondary flex items-center justify-between pr-4 text-[11px]">
       <div className="flex">
         <button
           onClick={() => onClick(ESelectedGroup.Tab)}

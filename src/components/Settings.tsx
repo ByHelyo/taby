@@ -91,7 +91,7 @@ function Settings() {
               id="theme-select"
               value={theme}
               onChange={(e) => updateTheme(e.target.value as EAppearance)}
-              className="w-[180px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="border-input bg-background ring-offset-background focus:ring-ring w-[180px] rounded-md border px-3 py-2 text-sm focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             >
               <option value={EAppearance.Light}>Light</option>
               <option value={EAppearance.Dark}>Dark</option>
@@ -100,7 +100,7 @@ function Settings() {
               <option value={EAppearance.VioletAbyss}>Violet Abyss</option>
             </select>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Choose between light and dark mode for the application interface.
           </p>
         </div>
@@ -112,13 +112,13 @@ function Settings() {
               id="scroll-select"
               value={scroll}
               onChange={(e) => updateScroll(e.target.value as EScroll)}
-              className="w-[180px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              className="border-input bg-background ring-offset-background focus:ring-ring w-[180px] rounded-md border px-3 py-2 text-sm focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             >
               <option value={EScroll.Default}>Default</option>
               <option value={EScroll.Reversed}>Reversed</option>
             </select>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Choose the scrolling behavior for the application.
           </p>
         </div>
@@ -139,7 +139,7 @@ function Settings() {
             value={[commandPaletteWidth]}
             onValueChange={(value) => updateCommandPaletteWidth(value[0])}
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Adjust the width of the command palette. 20% is the minimum width,
             100% is full width.
           </p>
@@ -157,7 +157,7 @@ function Settings() {
             value={[positionInline]}
             onValueChange={(value) => updatePositionInline(value[0])}
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Adjust the horizontal position of the command palette. 0% is
             left-aligned, 100% is right-aligned.
           </p>
@@ -175,7 +175,7 @@ function Settings() {
             value={[positionBlock]}
             onValueChange={(value) => updatePositionBlock(value[0])}
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Adjust the vertical position of the command palette. 0% is
             top-aligned, 100% is bottom-aligned.
           </p>
@@ -198,7 +198,7 @@ function Settings() {
               }}
             />
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Fixed displays the popup at its maximum size. Floating displays the
             popup at its minimum size.
           </p>
