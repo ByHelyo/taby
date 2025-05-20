@@ -133,22 +133,22 @@ function CommandResults({
   return (
     <>
       {elements.current.length > 0 && (
-        <ul className="taby-searchList m-0 flex h-full list-none flex-col overflow-scroll border-0 !border-t-2 !border-solid !border-input/50 p-[8px]">
+        <ul className="taby-searchList border-input/50! m-0 flex h-full list-none flex-col overflow-scroll border-0 border-t-2! border-solid! p-[8px]">
           {elements.current.slice(start.current, end.current).map((element) => (
             <div
               key={element.idx}
               className={cn(
-                "flex select-none items-center gap-[16px] overflow-x-clip whitespace-nowrap rounded p-[6px]",
+                "flex items-center gap-[16px] overflow-x-clip rounded p-[6px] whitespace-nowrap select-none",
                 selectedElement.current !== null &&
                   element.idx === selectedElement.current &&
-                  "!bg-secondary",
+                  "bg-secondary!",
               )}
               onClick={(e) => handleOnClick(element.idx, e.ctrlKey)}
             >
               {element.key != null && (
                 <span
                   className={cn(
-                    "flex w-[20px] shrink-0 items-center justify-end !font-sans text-[14px] font-bold leading-[21px] text-foreground",
+                    "text-foreground flex w-[20px] shrink-0 items-center justify-end font-sans! text-[14px] leading-[21px] font-bold",
                     element.idx === selectedElement.current &&
                       "text-secondary-foreground",
                   )}
@@ -163,11 +163,11 @@ function CommandResults({
                   alt=""
                 />
               ) : (
-                <div className="h-[18px] w-[18px] flex-shrink-0" />
+                <div className="h-[18px] w-[18px] shrink-0" />
               )}
               <span
                 className={cn(
-                  "!font-sans text-[14px] font-normal leading-[21px] text-foreground",
+                  "text-foreground font-sans! text-[14px] leading-[21px] font-normal",
                   element.idx === selectedElement.current &&
                     "text-secondary-foreground",
                 )}
