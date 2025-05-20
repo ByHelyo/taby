@@ -1,13 +1,13 @@
 .taby-menu {
   position: fixed;
   z-index: 100000000;
-  border-radius: 6px;
+  border-radius: 6px !important;
 }
 
 .taby-searchList {
-  scrollbar-width: none;
+  scrollbar-width: none !important;
 }
 
 .taby-searchList::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
