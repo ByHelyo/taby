@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- `popup` Disable Tailwind preflight
 - `command palette` Broken styles in certain websites
 
 ## [1.38.0]
