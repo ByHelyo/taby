@@ -2,21 +2,15 @@ import CommandResults from "./CommandResults.tsx";
 import { ChangeEvent, useEffect, useRef } from "react";
 import browser from "webextension-polyfill";
 import useRefState from "~/hook/useRefState.ts";
-import { cn } from "~/lib/utils.ts";
 import { EMessageFromScriptType, TMessageFromScript } from "~/type/message.ts";
-import { EContext, EScroll } from "~/type/misc.ts";
+import { EScroll } from "~/type/misc.ts";
 import { TTab } from "~/type/tab.tsx";
 
 interface TCommandProps {
   placeholder: string;
-  context: EContext;
-  positionBlock: string;
-  positionInline: string;
   scroll: EScroll;
-  commandPaletteWidth: string;
   searchFunction: (query: string) => Promise<TTab[]>;
   messageType: EMessageFromScriptType;
-  setIsOpen: (isOpen: boolean) => void;
 }
 
 export interface TGoToOptions {
@@ -25,14 +19,9 @@ export interface TGoToOptions {
 
 function Command({
   placeholder,
-  context,
-  positionBlock,
-  positionInline,
   scroll,
-  commandPaletteWidth,
   searchFunction,
   messageType,
-  setIsOpen,
 }: TCommandProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,15 +31,15 @@ function Command({
   const debounceTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
-    searchFunction("").then(setElements);
+    searchFunction("").then((matched) => {
+      console.log("searchFunction");
+      setElements(matched);
+    });
     inputRef.current?.focus();
-    inputRef.current?.style.setProperty("box-shadow", "none", "important");
     document.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("click", handleOutsideClick);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("click", handleOutsideClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -67,11 +56,7 @@ function Command({
         break;
       case "Escape":
         e.preventDefault();
-        if (context === EContext.Popup) {
-          window.close();
-        } else {
-          setIsOpen(false);
-        }
+        window.close();
         break;
     }
   };
@@ -90,14 +75,7 @@ function Command({
     }, 150);
   };
 
-  const handleOutsideClick = async (e: MouseEvent) => {
-    if (!menuRef.current?.contains(e.target as HTMLElement)) {
-      setIsOpen(false);
-    }
-  };
-
   const goTo = async (tab: TTab, options: TGoToOptions) => {
-    setIsOpen(false);
     const message: TMessageFromScript = {
       type: messageType,
       element: tab,
@@ -106,40 +84,26 @@ function Command({
 
     await browser.runtime.sendMessage(message);
 
-    if (EContext.Popup) {
-      window.close();
-    }
+    window.close();
   };
 
   return (
     <div
       ref={menuRef}
-      className={cn(
-        "taby-menu bg-background! text-foreground! ring-input! flex! flex-col! antialiased! shadow-2xl! ring-1!",
-        context === EContext.ContentScript && "animate-translateYIn",
-      )}
-      style={{
-        width:
-          context === EContext.ContentScript
-            ? commandPaletteWidth + "%"
-            : "auto",
-        top: positionBlock + "%",
-        left: positionInline + "%",
-      }}
+      className="taby-menu bg-background! text-foreground ring-input flex flex-col antialiased ring-1"
     >
-      <div className="flex! items-center! justify-between! gap-[16px]! p-[14px]!">
+      <div className="flex items-center justify-between! gap-[16px] p-[14px]">
         <input
-          className="!focus:outline-none bg-background! text-foreground! placeholder-muted-foreground! m-0! flex! w-full! border-0! p-0! text-left! font-sans! text-[18px]! leading-[27px]! font-normal! shadow-none! outline-hidden!"
+          className="bg-background text-foreground placeholder-muted-foreground m-0 flex w-full border-0 p-0 text-left font-sans text-[18px] leading-[27px] font-normal shadow-none outline-hidden focus:outline-none"
           placeholder={placeholder}
           ref={inputRef}
           onChange={handleOnChange}
         />
-        <span className="text-muted-foreground! shrink-0! font-sans! text-[16px]! leading-[21px]! font-normal!">
+        <span className="text-muted-foreground shrink-0 font-sans text-[16px] leading-[21px] font-normal">
           {elements.current.length}
         </span>
       </div>
       <CommandResults
-        context={context}
         elements={elements}
         setSelectedElement={setSelectedElement}
         selectedElement={selectedElement}

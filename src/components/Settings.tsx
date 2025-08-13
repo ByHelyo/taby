@@ -3,66 +3,37 @@ import { useEffect, useState } from "react";
 import browser from "webextension-polyfill";
 import { Label } from "~/components/ui/label";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { Slider } from "~/components/ui/slider";
 import { Switch } from "~/components/ui/switch";
 import {
   handleSelectAppearance,
-  handleSelectCommandPaletteWidth,
   handleSelectPopupWindow,
-  handleSelectPositionBlock,
-  handleSelectPositionInline,
   handleSelectScroll,
 } from "~/lib/storage";
 import { EAppearance, EPopupWindow, EStorage, EScroll } from "~/type/misc";
 
 function Settings() {
   const [theme, setTheme] = useState<EAppearance>(EAppearance.Light);
-  const [positionInline, setPositionInline] = useState(50);
-  const [positionBlock, setPositionBlock] = useState(50);
   const [isFixed, setIsFixed] = useState<EPopupWindow>(EPopupWindow.Fixed);
   const [scroll, setScroll] = useState<EScroll>(EScroll.Default);
-  const [commandPaletteWidth, setCommandPaletteWidth] = useState(60);
 
   useEffect(() => {
     browser.storage.local
-      .get([
-        EStorage.Appearance,
-        EStorage.PopupWindow,
-        EStorage.PositionInline,
-        EStorage.PositionBlock,
-        EStorage.Scroll,
-        EStorage.CommandPaletteWidth,
-      ])
+      .get([EStorage.Appearance, EStorage.PopupWindow, EStorage.Scroll])
       .then((storage) => {
         setTheme(
           (storage[EStorage.Appearance] as EAppearance) || EAppearance.Light,
         );
-        setPositionInline((storage[EStorage.PositionInline] as number) || 0);
-        setPositionBlock((storage[EStorage.PositionBlock] as number) || 0);
         setIsFixed(
           (storage[EStorage.PopupWindow] as EPopupWindow) ||
             EPopupWindow.UnFixed,
         );
         setScroll((storage[EStorage.Scroll] as EScroll) || EScroll.Default);
-        setCommandPaletteWidth(
-          (storage[EStorage.CommandPaletteWidth] as number) || 60,
-        );
       });
   }, []);
 
   const updateTheme = async (value: EAppearance) => {
     setTheme(value);
     await handleSelectAppearance(value);
-  };
-
-  const updatePositionInline = async (value: number) => {
-    setPositionInline(value);
-    await handleSelectPositionInline(value.toString());
-  };
-
-  const updatePositionBlock = async (value: number) => {
-    setPositionBlock(value);
-    await handleSelectPositionBlock(value.toString());
   };
 
   const updateIsFixed = async (value: EPopupWindow) => {
@@ -73,11 +44,6 @@ function Settings() {
   const updateScroll = async (value: EScroll) => {
     setScroll(value);
     await handleSelectScroll(value);
-  };
-
-  const updateCommandPaletteWidth = async (value: number) => {
-    setCommandPaletteWidth(value);
-    await handleSelectCommandPaletteWidth(value.toString());
   };
 
   return (
@@ -120,64 +86,6 @@ function Settings() {
           </div>
           <p className="text-muted-foreground text-sm">
             Choose the scrolling behavior for the application.
-          </p>
-        </div>
-
-        <Separator />
-
-        <h1 className="text-xl font-bold">Command Palette</h1>
-
-        <div className="space-y-2">
-          <Label htmlFor="command-palette-width">
-            Width: {commandPaletteWidth}%
-          </Label>
-          <Slider
-            id="command-palette-width"
-            min={20}
-            max={100}
-            step={1}
-            value={[commandPaletteWidth]}
-            onValueChange={(value) => updateCommandPaletteWidth(value[0])}
-          />
-          <p className="text-muted-foreground text-sm">
-            Adjust the width of the command palette. 20% is the minimum width,
-            100% is full width.
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="position-inline">
-            Horizontal Position: {positionInline}%
-          </Label>
-          <Slider
-            id="position-inline"
-            min={0}
-            max={100}
-            step={1}
-            value={[positionInline]}
-            onValueChange={(value) => updatePositionInline(value[0])}
-          />
-          <p className="text-muted-foreground text-sm">
-            Adjust the horizontal position of the command palette. 0% is
-            left-aligned, 100% is right-aligned.
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="position-block">
-            Vertical Position: {positionBlock}%
-          </Label>
-          <Slider
-            id="position-block"
-            min={0}
-            max={100}
-            step={1}
-            value={[positionBlock]}
-            onValueChange={(value) => updatePositionBlock(value[0])}
-          />
-          <p className="text-muted-foreground text-sm">
-            Adjust the vertical position of the command palette. 0% is
-            top-aligned, 100% is bottom-aligned.
           </p>
         </div>
 

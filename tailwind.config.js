@@ -1,9 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  important: "#taby-root",
-  corePlugins: {
-    preflight: false,
-  },
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -53,16 +49,6 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
-      },
-
-      keyframes: {
-        translateYIn: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-      },
-      animation: {
-        translateYIn: "translateYIn 0.1s ease-out",
       },
     },
   },

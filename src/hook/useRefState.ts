@@ -1,8 +1,6 @@
-import { MutableRefObject, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 
-function useRefState<T>(
-  initialValue: T,
-): [MutableRefObject<T>, (value: T) => void] {
+function useRefState<T>(initialValue: T): [RefObject<T>, (value: T) => void] {
   const [state, setState] = useState(initialValue);
   const ref = useRef(state);
   const setRefState = (value: T) => {

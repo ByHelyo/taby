@@ -1,40 +1,39 @@
-import { computeWindowSize, moveDown, moveUp } from "../lib/window.ts";
+import { moveDown, moveUp } from "../lib/window.ts";
 import { TTab } from "../type/tab.tsx";
 import { RefObject, useEffect, useRef } from "react";
 import { TGoToOptions } from "~/components/Command.tsx";
-import useRefState from "~/hook/useRefState.ts";
 import { cn } from "~/lib/utils.ts";
-import { EContext, EScroll } from "~/type/misc.ts";
+import { EScroll } from "~/type/misc.ts";
 
 interface TTabResultsProps {
   elements: RefObject<TTab[]>;
-  context: EContext;
   selectedElement: RefObject<number | null>;
   setSelectedElement: (idx: number) => void;
   goTo: (tab: TTab, options: TGoToOptions) => Promise<void>;
   scroll: EScroll;
 }
 
+const SEARCH_INPUT_SIZE: number = 55,
+  BORDER_SIZE: number = 2,
+  PADDINGS_SEARCH_LIST: number = 16,
+  SEARCH_ITEM_SIZE: number = 33,
+  NAV_POPUP: number = 30;
+const window_size = 600 - NAV_POPUP;
+const menu_size =
+  window_size - SEARCH_INPUT_SIZE - PADDINGS_SEARCH_LIST - BORDER_SIZE;
+const capacity = Math.floor(menu_size / SEARCH_ITEM_SIZE);
+
 function CommandResults({
-  context,
   elements,
   selectedElement,
   setSelectedElement,
   goTo,
   scroll,
 }: TTabResultsProps) {
-  const [capacity, setCapacity] = useRefState(0);
   const start = useRef(0);
-  const end = useRef(0);
-
-  const timeout = useRef<NodeJS.Timeout | undefined>(undefined);
+  const end = useRef(capacity);
 
   useEffect(() => {
-    computeWindowSize(context).then((computedCapacity) => {
-      setCapacity(computedCapacity);
-      end.current = computedCapacity;
-    });
-
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case "ArrowUp":
@@ -43,7 +42,7 @@ function CommandResults({
             moveUp(
               selectedElement.current,
               elements.current.length,
-              capacity.current,
+              capacity,
               start,
               end,
               setSelectedElement,
@@ -56,7 +55,7 @@ function CommandResults({
             moveDown(
               selectedElement.current,
               elements.current.length,
-              capacity.current,
+              capacity,
               start,
               end,
               setSelectedElement,
@@ -64,18 +63,6 @@ function CommandResults({
           }
           break;
       }
-    };
-
-    const handleResize = async () => {
-      clearTimeout(timeout.current);
-      timeout.current = setTimeout(async () => {
-        computeWindowSize(context).then((computedCapacity) => {
-          setCapacity(computedCapacity);
-          end.current = computedCapacity;
-          start.current = 0;
-        });
-        if (selectedElement.current != null) setSelectedElement(0);
-      }, 200);
     };
 
     const handleOnWheel = (e: WheelEvent) => {
@@ -88,7 +75,7 @@ function CommandResults({
           moveUp(
             selectedElement.current,
             elements.current.length,
-            capacity.current,
+            capacity,
             start,
             end,
             setSelectedElement,
@@ -97,7 +84,7 @@ function CommandResults({
           moveDown(
             selectedElement.current,
             elements.current.length,
-            capacity.current,
+            capacity,
             start,
             end,
             setSelectedElement,
@@ -108,14 +95,9 @@ function CommandResults({
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("wheel", handleOnWheel, { passive: false });
-    if (context === EContext.ContentScript)
-      window.addEventListener("resize", handleResize);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("wheel", handleOnWheel);
-      if (context === EContext.ContentScript)
-        window.removeEventListener("resize", handleResize);
-      clearTimeout(timeout.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
