@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.40.0]
+
+### Changed
+
+- `command palette` Disabled for now
+
 ## [1.39.0]
 
 ### Fixed
