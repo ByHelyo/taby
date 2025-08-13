@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.40.0]
+
+### Fixed
+
+- `content-script` disabled for now
+
 ## [1.39.0]
 
 ### Fixed
@@ -157,6 +163,7 @@
 
 - `popup` History fetches 10 000 latest results
 
+[1.40.0]: https://github.com/byhelyo/taby/compare/1.39.0...1.40.0
 [1.39.0]: https://github.com/byhelyo/taby/compare/1.38.0...1.39.0
 [1.38.0]: https://github.com/byhelyo/taby/compare/1.37.0...1.38.0
 [1.37.0]: https://github.com/byhelyo/taby/compare/1.36.0...1.37.0
