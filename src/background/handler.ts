@@ -1,26 +1,7 @@
-import {
-  TMessageFromBackground,
-  EMessageFromBackgroundType,
-} from "../type/message";
 import { TTab } from "../type/tab.tsx";
 import { flattenBookmarkTreeNode } from "./misc.ts";
 import Fuse from "fuse.js";
 import browser from "webextension-polyfill";
-
-export const handleToggleMenu = async function () {
-  const [currentTab] = await browser.tabs.query({
-    active: true,
-    lastFocusedWindow: true,
-  });
-
-  const message: TMessageFromBackground = {
-    type: EMessageFromBackgroundType.TOGGLE_MENU,
-  };
-
-  if (currentTab.id) {
-    await browser.tabs.sendMessage(currentTab.id, message);
-  }
-};
 
 export const handleDuplicateTab = async function () {
   const [currentTab] = await browser.tabs.query({ active: true });

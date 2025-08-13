@@ -8,16 +8,6 @@ export enum EMessageFromScriptType {
   REQUEST_SEARCH_HISTORY,
 }
 
-export enum EMessageFromBackgroundType {
-  TOGGLE_MENU,
-  USER_SWITCHES_TAB,
-}
-
-export interface TMessageFromBackground {
-  type: EMessageFromBackgroundType;
-  tabs?: TTab[];
-}
-
 export interface TMessageFromScript {
   type: EMessageFromScriptType;
   element?: TTab;

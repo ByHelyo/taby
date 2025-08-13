@@ -9,14 +9,6 @@
     "default_popup": "./src/popup/popup.html",
     "default_title": "Open the popup"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "run_at": "document_end",
-      "js": ["./index.global.js"],
-      "css": ["./taby.css"]
-    }
-  ],
   "background": {
     "service_worker": "./background.global.js"
   },
@@ -28,12 +20,6 @@
       "suggested_key": {
         "default": "Alt+Q"
       }
-    },
-    "TOGGLE_MENU": {
-      "suggested_key": {
-        "default": "Alt+W"
-      },
-      "description": "Toggle Taby menu"
     },
     "DUPLICATE_TAB": {
       "description": "Duplicate current tab"

@@ -8,10 +8,7 @@ export const enum ESelectedGroup {
 export enum EStorage {
   Appearance = "appearance",
   PopupWindow = "popup_window",
-  PositionInline = "position_inline",
-  PositionBlock = "position_block",
   Scroll = "scroll",
-  CommandPaletteWidth = "command_palette_width",
 }
 
 export enum EPopupWindow {
@@ -30,9 +27,4 @@ export enum EAppearance {
 export enum EScroll {
   Default = "default",
   Reversed = "reversed",
-}
-
-export enum EContext {
-  ContentScript,
-  Popup,
 }

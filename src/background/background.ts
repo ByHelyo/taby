@@ -1,9 +1,4 @@
-import {
-  TMessageFromBackground,
-  EMessageFromBackgroundType,
-  TMessageFromScript,
-  EMessageFromScriptType,
-} from "../type/message.ts";
+import { TMessageFromScript, EMessageFromScriptType } from "../type/message.ts";
 import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
 import {
   handleDuplicateTab,
@@ -12,20 +7,12 @@ import {
   handleRequestSearchOpenTabs,
   handleRequestSwitchTab,
   handleRequestUpdateCurrentTab,
-  handleToggleMenu,
 } from "./handler.ts";
 import browser from "webextension-polyfill";
 
 browser.runtime.onInstalled.addListener(async function () {
   await browser.storage.local
-    .get([
-      EStorage.Appearance,
-      EStorage.PopupWindow,
-      EStorage.PositionBlock,
-      EStorage.PositionInline,
-      EStorage.Scroll,
-      EStorage.CommandPaletteWidth,
-    ])
+    .get([EStorage.Appearance, EStorage.PopupWindow, EStorage.Scroll])
     .then(async function (storage) {
       const promises = [];
       if (!storage[EStorage.Appearance]) {
@@ -42,31 +29,10 @@ browser.runtime.onInstalled.addListener(async function () {
           }),
         );
       }
-      if (!storage[EStorage.PositionInline]) {
-        promises.push(
-          browser.storage.local.set({
-            [EStorage.PositionInline]: "20",
-          }),
-        );
-      }
-      if (!storage[EStorage.PositionBlock]) {
-        promises.push(
-          browser.storage.local.set({
-            [EStorage.PositionBlock]: "10",
-          }),
-        );
-      }
       if (!storage[EStorage.Scroll]) {
         promises.push(
           browser.storage.local.set({
             [EStorage.Scroll]: EScroll.Default,
-          }),
-        );
-      }
-      if (!storage[EStorage.CommandPaletteWidth]) {
-        promises.push(
-          browser.storage.local.set({
-            [EStorage.CommandPaletteWidth]: "60",
           }),
         );
       }
@@ -77,9 +43,6 @@ browser.runtime.onInstalled.addListener(async function () {
 
 browser.commands.onCommand.addListener(async function (command: string) {
   switch (command) {
-    case "TOGGLE_MENU":
-      await handleToggleMenu();
-      break;
     case "DUPLICATE_TAB":
       await handleDuplicateTab();
       break;
@@ -89,6 +52,7 @@ browser.commands.onCommand.addListener(async function (command: string) {
 browser.runtime.onMessage.addListener(async function (
   request: TMessageFromScript,
 ) {
+  console.log(request);
   switch (request.type) {
     case EMessageFromScriptType.REQUEST_SWITCH_TAB:
       if (request.element) {
@@ -117,20 +81,5 @@ browser.runtime.onMessage.addListener(async function (
         return await handleRequestSearchHistory(request.search);
       }
       break;
-  }
-});
-
-browser.tabs.onActivated.addListener(async function () {
-  const [currentTab] = await browser.tabs.query({
-    active: true,
-    lastFocusedWindow: true,
-  });
-
-  const message: TMessageFromBackground = {
-    type: EMessageFromBackgroundType.USER_SWITCHES_TAB,
-  };
-
-  if (currentTab.id) {
-    await browser.tabs.sendMessage(currentTab.id, message);
   }
 });
