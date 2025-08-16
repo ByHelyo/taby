@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="taby-theme" data-theme={theme}>
       <div
-        className="bg-background! text-foreground! flex! flex-col!"
+        className="bg-background text-foreground flex flex-col"
         style={{
           height:
             popupFixed === EPopupWindow.Fixed ||
