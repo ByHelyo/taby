@@ -90,9 +90,9 @@ function Command({
   return (
     <div
       ref={menuRef}
-      className="taby-menu bg-background! text-foreground ring-input flex flex-col antialiased ring-1"
+      className="taby-menu bg-background text-foreground ring-input flex flex-col antialiased ring-1"
     >
-      <div className="flex items-center justify-between! gap-[16px] p-[14px]">
+      <div className="flex items-center justify-between gap-[16px] p-[14px]">
         <input
           className="bg-background text-foreground placeholder-muted-foreground m-0 flex w-full border-0 p-0 text-left font-sans text-[18px] leading-[27px] font-normal shadow-none outline-hidden focus:outline-none"
           placeholder={placeholder}

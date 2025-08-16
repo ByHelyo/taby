@@ -244,3 +244,44 @@ jobs:
         env:
           WEB_EXT_API_KEY: ${{ secrets.JWT_ISSUER }}
           WEB_EXT_API_SECRET: ${{ secrets.JWT_SECRET }}
+
+  publish-edge:
+    if: github.ref == 'refs/heads/main'
+    needs: [build-firefox, build-chrome]
+    environment:
+      name: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm ${{ env.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.pnpm-version }}
+
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Download chrome dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chrome
+          path: chrome-dist/
+
+      - name: Zip forme extension
+        run: zip -r taby.zip chrome-dist/
+
+      - name: Publish to edge
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          zip-path: taby.zip
+          api-key: ${{ secrets.EDGE_CLIENT_SECRET }}
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
