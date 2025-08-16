@@ -281,7 +281,7 @@ jobs:
       - name: Publish to edge
         uses: wdzeng/edge-addon@v2
         with:
-          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          product-id: ${{ env.EDGE_PRODUCT_ID }}
           zip-path: taby.zip
           api-key: ${{ secrets.EDGE_CLIENT_SECRET }}
-          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          client-id: ${{ env.EDGE_CLIENT_ID }}
