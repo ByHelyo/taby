@@ -199,7 +199,7 @@ jobs:
           name: chrome
           path: chrome-dist/
 
-      - name: Zip forme extension
+      - name: Zip chrome extension
         run: zip -r taby.zip chrome-dist/
 
       - name: Publish to chrome web store
@@ -275,13 +275,13 @@ jobs:
           name: chrome
           path: chrome-dist/
 
-      - name: Zip forme extension
+      - name: Zip chrome extension
         run: zip -r taby.zip chrome-dist/
 
       - name: Publish to edge
         uses: wdzeng/edge-addon@v2
         with:
-          product-id: ${{ env.EDGE_PRODUCT_ID }}
           zip-path: taby.zip
+          client-id: ${{ vars.EDGE_CLIENT_ID }}
+          product-id: ${{ vars.EDGE_PRODUCT_ID }}
           api-key: ${{ secrets.EDGE_CLIENT_SECRET }}
-          client-id: ${{ env.EDGE_CLIENT_ID }}
