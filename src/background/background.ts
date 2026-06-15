@@ -2,6 +2,7 @@ import { TMessageFromScript, EMessageFromScriptType } from "../type/message.ts";
 import { EAppearance, EPopupWindow, EScroll, EStorage } from "../type/misc.ts";
 import {
   handleDuplicateTab,
+  handleRequestCloseTab,
   handleRequestSearchBookmarks,
   handleRequestSearchHistory,
   handleRequestSearchOpenTabs,
@@ -79,6 +80,11 @@ browser.runtime.onMessage.addListener(async function (
     case EMessageFromScriptType.REQUEST_SEARCH_HISTORY:
       if (request.search != undefined) {
         return await handleRequestSearchHistory(request.search);
+      }
+      break;
+    case EMessageFromScriptType.REQUEST_CLOSE_TAB:
+      if (request.element) {
+        await handleRequestCloseTab(request.element);
       }
       break;
   }

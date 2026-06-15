@@ -12,6 +12,12 @@ export const handleRequestSwitchTab = async function (tab: TTab) {
   await browser.tabs.update(tab.id || undefined, { active: true });
 };
 
+export const handleRequestCloseTab = async function (tab: TTab) {
+  if (tab.id != null) {
+    await browser.tabs.remove(tab.id);
+  }
+};
+
 export interface THandleRequestUpdateCurrentTab {
   newTab: boolean;
 }
