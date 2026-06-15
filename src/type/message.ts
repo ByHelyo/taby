@@ -6,6 +6,7 @@ export enum EMessageFromScriptType {
   REQUEST_SEARCH_OPEN_TABS,
   REQUEST_SEARCH_BOOKMARKS,
   REQUEST_SEARCH_HISTORY,
+  REQUEST_CLOSE_TAB,
 }
 
 export interface TMessageFromScript {

@@ -11,6 +11,7 @@ interface TCommandProps {
   scroll: EScroll;
   searchFunction: (query: string) => Promise<TTab[]>;
   messageType: EMessageFromScriptType;
+  closeTabs?: boolean;
 }
 
 export interface TGoToOptions {
@@ -22,9 +23,11 @@ function Command({
   scroll,
   searchFunction,
   messageType,
+  closeTabs = false,
 }: TCommandProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const queryRef = useRef("");
 
   const [selectedElement, setSelectedElement] = useRefState<number | null>(0);
   const [elements, setElements] = useRefState<TTab[]>([]);
@@ -58,21 +61,33 @@ function Command({
         e.preventDefault();
         window.close();
         break;
+      case "Delete":
+        if (closeTabs && selectedElement.current != null) {
+          e.preventDefault();
+          await closeSelectedTab();
+        }
+        break;
     }
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearTimeout(debounceTimerRef.current);
+    queryRef.current = e.target.value;
 
     debounceTimerRef.current = setTimeout(async () => {
-      const matched = await searchFunction(e.target.value);
-      setElements(matched);
-      if (matched.length > 0) {
-        setSelectedElement(0);
-      } else {
-        setSelectedElement(null);
-      }
+      await refreshElements(0);
     }, 150);
+  };
+
+  const refreshElements = async (selectedIdx: number | null) => {
+    const matched = await searchFunction(queryRef.current);
+    setElements(matched);
+
+    if (matched.length === 0 || selectedIdx === null) {
+      setSelectedElement(null);
+    } else {
+      setSelectedElement(Math.min(selectedIdx, matched.length - 1));
+    }
   };
 
   const goTo = async (tab: TTab, options: TGoToOptions) => {
@@ -85,6 +100,27 @@ function Command({
     await browser.runtime.sendMessage(message);
 
     window.close();
+  };
+
+  const closeSelectedTab = async () => {
+    if (selectedElement.current === null) {
+      return;
+    }
+
+    const selectedIdx = selectedElement.current;
+    const tab = elements.current[selectedIdx];
+
+    if (!tab) {
+      return;
+    }
+
+    const message: TMessageFromScript = {
+      type: EMessageFromScriptType.REQUEST_CLOSE_TAB,
+      element: tab,
+    };
+
+    await browser.runtime.sendMessage(message);
+    await refreshElements(selectedIdx);
   };
 
   return (

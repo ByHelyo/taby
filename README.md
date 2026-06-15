@@ -50,6 +50,7 @@
 - `Alt+W` to open/close the command palette.
 - `Escape` to close the menu.
 - `Enter` to switch to the selected tab.
+- `Delete` to close the selected open tab.
 - `↑` `↓` arrows to navigate and select tabs above and below the currently selected tab.
 - Optional shortcut to duplicate current tab.
 

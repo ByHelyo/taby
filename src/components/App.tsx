@@ -64,6 +64,7 @@ function App() {
             messageType={EMessageFromScriptType.REQUEST_SWITCH_TAB}
             placeholder="Search open tabs"
             scroll={scroll}
+            closeTabs
           />
         )}
         {group === ESelectedGroup.Bookmarks && (
