@@ -1,5 +1,8 @@
+packages:
+  - "."
+
 allowBuilds:
   "@swc/core": true
-  "@tailwindcss/oxide": set this to true or false
+  "@tailwindcss/oxide": true
   esbuild: true
   spawn-sync: true
